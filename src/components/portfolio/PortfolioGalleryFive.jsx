@@ -2,8 +2,8 @@ import React, {Fragment, useState} from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {Link} from 'react-router-dom';
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
+import Lightbox from 'react-lightbox-component';
+// import 'react-lightbox-component/style.css';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 const TabListContent = [
