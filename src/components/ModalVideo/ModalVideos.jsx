@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import ModalVideo from 'react-modal-video';
-import 'react-modal-video/css/modal-video.min.css';
+import ModalVideo from 'react-player';
+// import 'react-modal-video/css/modal-video.min.css';
 
 const ModalVideos = (props) => {
     const { isOpen, onClick } = props;
