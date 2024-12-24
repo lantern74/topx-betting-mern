@@ -1,6 +1,5 @@
 import React,{Fragment} from 'react';
 import {Helmet} from 'react-helmet';
-import {Link} from 'react-router-dom';
 
 
 import TopNavFour from '../../components/header/TopNavFour';
@@ -10,12 +9,7 @@ import About from '../../components/about/About';
 import FancyFeatureNineteen from '../../components/feature/FancyFeatureNineteen';
 import CounterOne from '../../components/counter/CounterOne';
 import DataScience from './DataScience';
-import TestimonialFive from '../../components/testimonial/TestimonialFive';
-import Faq from '../../components/faq/Faq';
-import Blog from '../../components/blog/Blog';
 import Contact from '../../components/contact/Contact';
-import CallToAction from '../../components/call-to-action/CallToAction';
-import BrandTwo from '../../components/brand/BrandTwo';
 import FooterFour from '../../components/footer/FooterFour';
 import CopyRightFour from '../../components/footer/CopyRightFour';
 
@@ -43,7 +37,7 @@ const UserAnalysis = () => {
                             <div className="col-xl-6 col-lg-5" data-aos="fade-right">
                                 <div className="title-style-three text-center text-lg-start">
                                     <h2 className="main-title">
-                                        <span>服务</span> 探索我們的核心技術和實際應用。</h2>
+                                        <span>探索</span> 我們的<br></br>核心技術和實際應用。</h2>
                                 </div>
                                 {/* /.title-style-three */}
                             </div>
@@ -113,25 +107,11 @@ const UserAnalysis = () => {
 
                 <Contact/> {/* /.Fancy Feature 21 end */}
 
-                <div className="partner-section-two mt-30 mb-130 lg-mb-80">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-12 m-auto">
-                                <BrandTwo/>
-                            </div>
-                        </div>
-                    </div>
-                    {/* /.container */}
-                </div>
-                {/* /.partner-section-two */}
+                
 
-                <div className="footer-style-four theme-basic-footer">
+                <div className="footer-style-four theme-basic-footer mt-100">
                     <div className="container">
                         <div className="inner-wrapper">
-                            <div className="subscribe-area">
-                                <CallToAction/>
-                            </div>
-                            {/* /.subscribe-area */}
 
                             <FooterFour/> {/* /.FooterFour End */}
 

@@ -35,7 +35,7 @@ const TopNavThree = () => {
                 <div className="inner-content">
                     <div className="container d-flex align-items-center justify-content-between">
                         <div className="logo order-lg-0">
-                            <Link to="/" className="d-block"><img src="images/logo/topx-logo.jpg" alt="" width={129}/></Link>
+                            <Link to="/" className="d-block"><img src="images/logo/topx-logo.png" alt="" width={129}/></Link>
                         </div>
                         <div
                             className="right-widget d-flex align-items-center ms-auto ms-lg-0 order-lg-3">

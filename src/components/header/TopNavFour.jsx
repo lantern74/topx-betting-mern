@@ -37,15 +37,15 @@ const TopNavFour = () => {
                 <div className="inner-content">
                     <div className="d-flex align-items-center">
                         <div className="logo order-lg-0">
-                            <Link to="/" className="d-block"><img src="images/logo/topx-logo.jpg" alt="" width={90}/></Link>
+                            <Link to="/" className="d-block"><img src="images/logo/topx-logo.png" alt="" width={90}/></Link>
                         </div>
                         <div className="right-widget d-flex align-items-center ms-auto order-lg-3">
                             <div className="call-button d-none d-xl-block me-5">Call us
                                 <a href="#">(+880) 321 782 110</a>
                             </div>
-                            <button
+                            {/* <button
                                 className="menu-search-btn tran3s"
-                                type="button" onClick={openModal}><i className="bi bi-search"/></button>
+                                type="button" onClick={openModal}><i className="bi bi-search"/></button> */}
                                 
                                 
                             <Link to="/contact" className="send-msg-btn tran3s d-none d-lg-block">登录</Link>

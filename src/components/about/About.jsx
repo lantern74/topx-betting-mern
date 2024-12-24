@@ -11,7 +11,7 @@ const About = () => {
                             <div className="block-style-two" data-aos="fade-left">
                                 <div className="title-style-three">
                                     <div className="sc-title">Over 150k+ Client</div>
-                                    <h2 className="main-title">AI 智能分析，提升 <span>投注</span> 精準度。</h2>
+                                    <h2 className="main-title"><span>AI 智能分析</span><br></br>提升投注精準度</h2>
                                 </div>
                                 {/* /.title-style-three */}
                                 <p className="pt-20 pb-25 lg-pb-20">TOP X 旨在為用戶提供最專業的分析工具。從龐大的數據庫到實時比賽推薦，我們幫助用戶快速掌握高勝率投注機會，讓勝率最大化。</p>
