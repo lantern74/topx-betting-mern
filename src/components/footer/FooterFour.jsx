@@ -71,7 +71,7 @@ const FooterFour = () => {
             <div className="row">
                 <div className="col-lg-4 footer-intro mb-40">
                     <div className="logo">
-                        <Link to="/"><img src="images/logo/logo_01.png" alt="" width={130}/></Link>
+                        <Link to="/"><img src="images/logo/topx-logo.png" alt="" width={130}/></Link>
                     </div>
                     <p>In this class, you will learn about the most effective machine learning
                         techniques, and gain practice implementing them.</p>

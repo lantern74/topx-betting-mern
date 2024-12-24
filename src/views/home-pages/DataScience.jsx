@@ -28,7 +28,7 @@ const DataScience = () => {
                         <div className="row align-items-center">
                             <div className="col-lg-5 col-md-7 col-sm-8">
                                 <div className="title-style-one text-center text-sm-start xs-pb-20">
-                                    <h2 className="main-title">多平台公開分析紀錄，實力見證效果</h2>
+                                    <h2 className="main-title"><span>多平台</span>公開分析紀錄<br></br>實力見證效果</h2>
                                 </div>
                                 {/* /.title-style-one */}
                             </div>

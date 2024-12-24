@@ -71,7 +71,7 @@ const TopNavTwo = () => {
                     {/* /.top-header */}
                     <div className="container d-flex align-items-center justify-content-between">
                         <div className="logo order-lg-0">
-                            <Link to="/" className="d-block"><img src="images/logo/topx-logo.jpg" alt="" width={130}/></Link>
+                            <Link to="/" className="d-block"><img src="images/logo/topx-logo.png" alt="" width={130}/></Link>
                         </div>
                         <a
                             href="contact-us.html"

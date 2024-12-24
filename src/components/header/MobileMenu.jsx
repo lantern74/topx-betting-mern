@@ -139,7 +139,7 @@ const MobileMenu = () => {
                     : 'mobile-menu'}>
                     <SidebarHeader>
                         <div className="mobile-logo">
-                            <Link to="/"><img src="images/logo/logo_02.png" alt=""/></Link>
+                            <Link to="/"><img src="images/logo/topx-logo.png" alt=""/></Link>
                         </div>
                        <div className="close-menu" onClick={handleClick}>
                         <i class="bi bi-x-lg"></i>

@@ -36,6 +36,7 @@
     --prime-three: white;
     --prime-four: #7736ff;
     --prime-five: #6b25ff;
+    --prime-six: #32cd32;
     --gr-one: linear-gradient(90.43deg, #ff8386 10.07%, #ff171d 99.78%);
 }
 ::selection {
@@ -275,7 +276,7 @@ h6 {
     font-size: 25px;
     cursor: pointer;
     border-radius: 50%;
-    background: var(--prime-four);
+    background: var(--prime-six);
     display: none;
     transition: all 0.3s ease-in-out;
 }
@@ -365,6 +366,11 @@ button.scroll-top {
 }
 .title-style-one .main-title.md {
     font-size: 39px;
+}
+.title-style-one .main-title span {
+    color: var(--prime-three);
+    text-decoration: underline;
+    text-decoration-thickness: 4px;
 }
 .title-style-two .sc-title {
     font-size: 15px;
@@ -1541,8 +1547,8 @@ input, input::placeholder {
     transform: scale(1);
 }
 .portfolio-gallery-one .slider-wrapper {
-    width: calc(1320px + 24vw);
-    margin: 85px -20px 0;
+    // width: calc(1320px + 24vw);
+    margin: 50px -20px 0;
 }
 .portfolio-block-one {
     position: relative;
@@ -3867,7 +3873,7 @@ input, input::placeholder {
 .hero-banner-five {
     position: relative;
     z-index: 2;
-    // padding: 220px 0 100px;
+    padding: 220px 0 100px;
     // background: linear-gradient(0deg, rgba(248, 253, 255, 0) 0%, rgba(241, 252, 255, 0.51782) 48.22%, #f6fdff 100%);
 }
 .hero-banner-five .hero-heading {

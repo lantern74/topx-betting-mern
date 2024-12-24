@@ -5,8 +5,8 @@ import VisibilitySensor from 'react-visibility-sensor';
 const CountContent = [
     {
         mark: '',
-        num: 20,
-        text: 'mil',
+        num: 200,
+        text: 'K',
         desc: '節省分析時間：20 萬小時+',
         // desc2: 'with help of AI',
     },
@@ -18,9 +18,9 @@ const CountContent = [
         // desc2: 'AI Solutions',
     },
     {
-        mark: '$',
-        num: 10,
-        text: 'mil+',
+        mark: '',
+        num: 100,
+        text: 'K',
         desc: '幫助用戶提升收益：$10 萬+',
         // desc2: 'due to AI',
     }

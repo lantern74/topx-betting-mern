@@ -11,34 +11,22 @@ import Lightbox from 'react-lightbox-component';
 const PortfolioContent = [
     {
         img:'image1',
-        tag: 'Data Research',
+        tag: '社群分享',
         pjname:'Product Analysis',
         plus: 'bi bi-plus',
     },
     {
         img:'image2',
-        tag: 'Design',
+        tag: '動態更新',
         pjname:'UI, UX Design',
         plus: 'bi bi-plus',
     },
     {
         img:'image3',
-        tag: 'Marketing',
+        tag: '分析紀錄',
         pjname:'Content Marketing',
         plus: 'bi bi-plus',
     },
-    {
-        img:'image1',
-        tag: 'Development',
-        pjname:'Market System',
-        plus: 'bi bi-plus',
-    },
-    // {
-    //     img:'image2',
-    //     tag: 'Marketing',
-    //     pjname:'Content Marketing',
-    //     plus: 'bi bi-plus',
-    // },
 ]
 
 const settings = {
@@ -47,7 +35,7 @@ const settings = {
     speed: 100,
     autoplay: true,
     autoplaySpeed: 2000,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
         {
@@ -87,41 +75,13 @@ const PortfolioGallery = () => {
     
     return (
         <Fragment>
-           
-      {!!isOpen && (
-        <Lightbox
-          mainSrc={images[photoIndex]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex((photoIndex + images.length - 1) % images.length)
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % images.length)
-          }
-        />
-      )}
             <Slider {...settings} className="portfolio_slider_one">
                 {PortfolioContent.map((val, i)=>(
                     <div key={i} className="item">
                     <div className="portfolio-block-one">
                         <div className="img-meta"><img src={`images/gallery/${val.img}.jpg`} alt="" className="w-100"/></div>
-                        {/* <Link
-                            to="/portfolio-details"
-                            className="title tran3s d-flex flex-column justify-content-center align-items-center">
-                            <span className="tag">{val.tag}</span>
-                            <span className="pj-name">{val.pjname}</span>
-                        </Link>
-                        <div className="hover-state tran3s">
-                            <a
-                            href="#"
-                             onClick={() => setIsOpen(!isOpen)}
-                                className="fancybox tran3s"
-                                title="Click for large view"><i className={val.plus}/></a>
-                        </div> */}
                     </div>
-                    {/* /.portfolio-block-one */}
+                    <div style={{textAlign:"center"}}>{val.tag}</div>
                 </div>
                 ))}
             </Slider>

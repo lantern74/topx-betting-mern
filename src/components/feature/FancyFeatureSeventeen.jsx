@@ -41,7 +41,7 @@ const FancyFeatureSeventeen = () => {
                           <Link to="/service-details">{val.title}</Link>
                       </h5>
                       <p>{val.desc}</p>
-                      <Link to="/service-details" className="tran3s more-btn"><img src="images/icon/icon_20.svg" alt=""/></Link>
+                      {/* <Link to="/service-details" className="tran3s more-btn"><img src="images/icon/icon_20.svg" alt=""/></Link> */}
                   </div>
                   {/* /.block-style-twelve */}
               </div>
