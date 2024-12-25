@@ -43,7 +43,7 @@ const LoginForm = () => {
                     <div className="col-12">
                         <div className="input-group-meta form-group mb-30">
                             <label>帳號*</label>
-                            <input type="text" placeholder="rshdkabir@gmail.com" name="email" {...register("email")}
+                            <input type="text" name="email" {...register("email")}
                         className={`${errors.email ? "is-invalid" : ""}`}
                         /> 
                         {errors.name && (

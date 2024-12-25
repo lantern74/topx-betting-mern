@@ -1,7 +1,5 @@
 import React,{Fragment} from 'react';
 import {Helmet} from 'react-helmet';
-
-
 import TopNav from '../../components/header/TopNav';
 import HeroBanner from '../../components/hero-banner/HeroBanner';
 import FancyFeatureSeventeen from '../../components/feature/FancyFeatureSeventeen';
@@ -11,8 +9,6 @@ import CounterOne from '../../components/counter/CounterOne';
 import DataScience from './DataScience';
 import Contact from '../../components/contact/Contact';
 import CopyRightFour from '../../components/footer/CopyRightFour';
-
-
 
 const UserAnalysis = () => {
     return (
@@ -84,12 +80,7 @@ const UserAnalysis = () => {
 
                 <CounterOne/> 
                 <DataScience />
-
-                
-
-                <Contact/> {/* /.Fancy Feature 21 end */}
-
-                
+                <Contact/>
 
                 <div className="footer-style-four theme-basic-footer mt-200 lg-mt-100">
                     <div className="container">
@@ -99,11 +90,8 @@ const UserAnalysis = () => {
                                 <CopyRightFour/>
                             </div>
                         </div>
-                        {/* /.inner-wrapper */}
                     </div>
                 </div>
-                {/* /.footer-style-four */}
-
             </div>
         </Fragment>
     )

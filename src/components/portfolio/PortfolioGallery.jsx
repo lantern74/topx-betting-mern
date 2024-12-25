@@ -32,6 +32,7 @@ const settings = {
     autoplaySpeed: 2000,
     slidesToShow: 3,
     slidesToScroll: 1,
+    arrows: false,
     responsive: [
         {
             breakpoint: 1024,
@@ -64,11 +65,11 @@ const PortfolioGallery = () => {
             <Slider {...settings} className="portfolio_slider_one">
                 {PortfolioContent.map((val, i)=>(
                     <div key={i} className="item">
-                    <a href={val.link} target='_blank' className="portfolio-block-one">
-                        <div className="img-meta"><img src={`images/gallery/${val.img}.jpg`} alt="" className="w-100"/></div>
-                    </a>
-                    <div style={{textAlign:"center"}}>{val.tag}</div>
-                </div>
+                        <a href={val.link} target='_blank' className="portfolio-block-one">
+                            <div className="img-meta"><img src={`images/gallery/${val.img}.jpg`} alt="" className="w-100"/></div>
+                        </a>
+                        <div style={{textAlign:"center"}}>{val.tag}</div>
+                    </div>
                 ))}
             </Slider>
         </Fragment>

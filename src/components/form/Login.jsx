@@ -23,7 +23,7 @@ const Login = () => {
                             <div className="row gx-xxl-5">
                                 <div className="col-lg-6 d-flex order-lg-last">
                                     <div className="form-style-one">
-                                        <h3 className="form-title pb-40 lg-pb-20">账户登录</h3>
+                                        <h3 className="form-title pb-40 lg-pb-20">帳戶登入</h3>
                                         <LoginForm/>
                                     </div>
                                     {/* /.form-style-one */}
