@@ -36,15 +36,15 @@ const TopNav = () => {
                             <Link to="/" className="d-block"><img className='responsive-logo' src="images/logo/topx-logo.png" alt=""/></Link>
                         </div>
                         <div className="right-widget d-flex align-items-center ms-auto order-lg-3">
-                            <div className="call-button d-none d-xl-block me-5">Call us
+                            {/* <div className="call-button d-none d-xl-block me-5">Call us
                                 <a href="#">(+880) 321 782 110</a>
-                            </div>
+                            </div> */}
                             {/* <button
                                 className="menu-search-btn tran3s"
                                 type="button" onClick={openModal}><i className="bi bi-search"/></button> */}
                                 
                                 
-                            <Link to="/login" className="send-msg-btn tran3s d-none d-lg-block">登录</Link>
+                            <Link to="/login" className="send-msg-btn tran3s d-none d-lg-block">登入</Link>
                         </div>
                         {/* /.right-widget */}
                         <nav className="navbar navbar-expand-lg order-lg-2">
