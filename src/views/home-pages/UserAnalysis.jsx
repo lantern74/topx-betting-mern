@@ -1,5 +1,7 @@
 import React,{Fragment} from 'react';
 import {Helmet} from 'react-helmet';
+
+
 import TopNav from '../../components/header/TopNav';
 import HeroBanner from '../../components/hero-banner/HeroBanner';
 import FancyFeatureSeventeen from '../../components/feature/FancyFeatureSeventeen';
@@ -9,6 +11,8 @@ import CounterOne from '../../components/counter/CounterOne';
 import DataScience from './DataScience';
 import Contact from '../../components/contact/Contact';
 import CopyRightFour from '../../components/footer/CopyRightFour';
+
+
 
 const UserAnalysis = () => {
     return (
@@ -44,13 +48,48 @@ const UserAnalysis = () => {
                             </div>
                         </div>
                     </div>
-                    
+                    <div className="illustration-holder" data-aos="fade-left">
+                        <img src="images/assets/ils_15.svg" alt="" className="w-100 main-illustration"/>
+                        <img src="images/assets/ils_15_1.svg" alt="" className="shapes shape-one"/>
+                        <img src="images/assets/ils_15_2.svg" alt="" className="shapes shape-two"/>
+                        <img src="images/assets/ils_15_3.svg" alt="" className="shapes shape-three"/>
+                        <img src="images/assets/ils_15_4.svg" alt="" className="shapes shape-four"/>
+                        <img
+                            src="images/assets/ils_15_5.svg"
+                            alt=""
+                            className="shapes shape-five"
+                            data-aos="fade-down"
+                            data-aos-delay={200}
+                            data-aos-duration={2000}/>
+                        <img
+                            src="images/assets/ils_15_6.svg"
+                            alt=""
+                            className="shapes shape-six"
+                            data-aos="fade-down"
+                            data-aos-delay={100}
+                            data-aos-duration={2000}/>
+                        <img
+                            src="images/assets/ils_15_7.svg"
+                            alt=""
+                            className="shapes shape-seven"
+                            data-aos="fade-down"
+                            data-aos-duration={2000}/>
+                    </div>
+                    {/* /.illustration-holder */}
+                    <div className="shapes oval-one"/>
+                    <div className="shapes oval-two"/>
+                    {/* <img src="images/shape/shape_35.svg" alt="" className="shapes bg-shape"/> */}
                 </div>
                 {/* /.fancy-feature-nineteen */}
 
                 <CounterOne/> 
                 <DataScience />
+
+                
+
                 <Contact/> {/* /.Fancy Feature 21 end */}
+
+                
 
                 <div className="footer-style-four theme-basic-footer mt-200 lg-mt-100">
                     <div className="container">
