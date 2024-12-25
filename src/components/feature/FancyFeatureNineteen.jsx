@@ -28,7 +28,7 @@ const FancyFeatureNineteen = () => {
             <div className="block-style-thirteen" data-aos="fade-right">
                 <div className="title-style-three pb-15">
                     <div className="sc-title">WORK PROCESS</div>
-                    <h2 className="main-title">TOP X 的運作原理</h2>
+                    <h2 className="main-title"><span>TOP X</span> 的運作原理</h2>
                 </div>
                 {/* /.title-style-three */}
                 <ul className="style-none list-item">

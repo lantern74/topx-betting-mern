@@ -8,21 +8,18 @@ const CountContent = [
         num: 200,
         text: 'K',
         desc: '節省分析時間：20 萬小時+',
-        // desc2: 'with help of AI',
     },
     {
         mark: '',
         num: 83.88,
         text: '%',
         desc: '平均準確率：83.88%',
-        // desc2: 'AI Solutions',
     },
     {
         mark: '',
         num: 100,
         text: 'K',
         desc: '幫助用戶提升收益：$10 萬+',
-        // desc2: 'due to AI',
     }
 ]
 
@@ -47,7 +44,7 @@ const CommonCounter = () => {
                                 )}
                             </CountUp>
                         </span>{val.text}</div>
-                    <p>{val.desc} <br/>{val.desc2}</p>
+                    <p>{val.desc}</p>
                 </div>
             </div>
             ))}

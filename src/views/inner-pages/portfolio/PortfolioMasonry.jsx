@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import PortfolioGalleryFive from '../../../components/portfolio/PortfolioGalleryFive';
 import BannerOne from '../../../components/short-banner/BannerOne';
 import FooterFour from '../../../components/footer/FooterFour';
@@ -19,7 +19,7 @@ const PortfolioMasonry = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> 
+                <TopNav/> 
                 {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">

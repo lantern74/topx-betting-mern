@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-const ContactForm = () => {
+const LoginForm = () => {
 
     //for validation
     const validationSchema = Yup
@@ -40,21 +40,9 @@ const ContactForm = () => {
         <Fragment>
             <form id="contact-form" action="#" onSubmit={handleSubmit(onSubmit)}>
                 <div className="row">
-                    {/* <div className="col-12">
-                        <div className="input-group-meta form-group mb-30">
-                            <label>姓名*</label>
-                            <input type="text" placeholder="Rashed Kabir" name="name"{...register("name")}
-                        className={`${errors.name ? "is-invalid" : ""}`}
-                        /> 
-                        {errors.name && (
-                        <div className="invalid-feedback">{errors.name
-                                ?.message}</div>
-                    )}
-                        </div>
-                    </div> */}
                     <div className="col-12">
                         <div className="input-group-meta form-group mb-30">
-                            <label>电子邮件*</label>
+                            <label>帳號*</label>
                             <input type="text" placeholder="rshdkabir@gmail.com" name="email" {...register("email")}
                         className={`${errors.email ? "is-invalid" : ""}`}
                         /> 
@@ -76,25 +64,9 @@ const ContactForm = () => {
                     )}
                         </div>
                     </div>
-
-                    <div className='contact-form-remember'>
-                        <input type='checkbox'></input>
-                        <label for="">记住我</label>
-                    </div>
-                    {/* <div className="col-12">
-                        <div className="input-group-meta form-group mb-30">
-                            <textarea placeholder="Your message*" name="sendMessage" {...register("message")}
-                        className={`${errors.sendMessage ? "is-invalid" : ""}`}
-                        /> 
-                        {errors.sendMessage && (
-                        <div className="invalid-feedback">{errors.sendMessage
-                                ?.message}</div>
-                    )}
-                        </div>
-                    </div> */}
                     <div className="col-12 mt-3 d-flex" style={{justifyContent:"space-between"}}>
                         <button className="btn-eight ripple-btn">提交</button>
-                        <button style={{color:"white"}}>重置密码</button>
+                        <a className='register-button' href="https://t.me/Systemtopxpro" target='_blank'>註冊帳號</a>
                     </div>
                 </div>
             </form>
@@ -102,4 +74,4 @@ const ContactForm = () => {
     )
 }
 
-export default ContactForm
+export default LoginForm

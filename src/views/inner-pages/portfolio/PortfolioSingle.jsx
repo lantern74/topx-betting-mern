@@ -4,7 +4,7 @@ import Lightbox from 'react-lightbox-component';
 // import 'react-lightbox-component/style.css';
 
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import BannerOne from '../../../components/short-banner/BannerOne';
 import NewsLetterForm from '../../../components/form/NewsLetterForm';
@@ -34,7 +34,7 @@ const PortfolioSingle = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Project Details" currpage="Single Project"/>

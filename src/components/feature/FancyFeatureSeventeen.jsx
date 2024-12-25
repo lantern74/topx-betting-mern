@@ -36,9 +36,9 @@ const FancyFeatureSeventeen = () => {
               <div key={i} className="col-lg-4 col-md-6" data-aos={val.dataAos} data-aos-delay={val.dataDelay}>
                   <div
                       className={`block-style-twelve block-space mt-30 ${val.className}`}>
-                      <div className="icon d-flex align-items-end"><img src={`images/icon/${val.icon}.svg`} alt=""/></div>
+                      <div className="icon d-flex align-items-end mb-20"><img src={`images/icon/${val.icon}.svg`} alt=""/></div>
                       <h5>
-                          <Link to="/service-details">{val.title}</Link>
+                          {val.title}
                       </h5>
                       <p>{val.desc}</p>
                       {/* <Link to="/service-details" className="tran3s more-btn"><img src="images/icon/icon_20.svg" alt=""/></Link> */}

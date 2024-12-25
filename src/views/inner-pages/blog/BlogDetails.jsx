@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import BlogDetailsForm from '../../../components/form/BlogDetailsForm';
 import SearchInput from '../../../components/form/SearchInput';
@@ -25,7 +25,7 @@ const BlogDetails = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Single Blog" currpage="Blog"/>

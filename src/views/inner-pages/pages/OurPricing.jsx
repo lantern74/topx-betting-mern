@@ -3,7 +3,7 @@ import {Helmet} from 'react-helmet';
 import CopyRightFour from '../../../components/footer/CopyRightFour';
 import FooterFour from '../../../components/footer/FooterFour';
 import NewsLetterForm from '../../../components/form/NewsLetterForm';
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import PricingTab from '../../../components/pricing/pricetab/PricingTab';
 import PriceTwo from '../../../components/pricing/PriceTwo';
@@ -18,7 +18,7 @@ const OurPricing = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Our Pricing" currpage="Pricing"/>

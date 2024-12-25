@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../../components/header/TopNavFour';
+import TopNav from '../../../../components/header/TopNav';
 import InnerBanner from '../../../../components/page-title/InnerBanner';
 import FancyFeature24 from '../../../../components/feature/FancyFeature24';
 import FancyFeatureNineteen from '../../../../components/feature/FancyFeatureNineteen';
@@ -20,7 +20,7 @@ const ServicesOne = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Our Services" currpage="Services"/>

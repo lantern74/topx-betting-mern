@@ -2,7 +2,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 
 const Error = () => {
     return (
@@ -12,7 +12,7 @@ const Error = () => {
             </Helmet>
             {/* helmet end */}
 
-            <TopNavFour/> 
+            <TopNav/> 
             {/* theme-menu-four */}
 
             <div

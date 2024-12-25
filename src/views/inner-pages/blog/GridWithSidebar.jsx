@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import BlogSidebarOne from '../../../components/blog/BlogSidebarOne';
 import Category from '../../../components/blog/Category';
@@ -23,7 +23,7 @@ const GridWithSidebar = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Blog Grid with Sidebar" currpage="Blog"/>

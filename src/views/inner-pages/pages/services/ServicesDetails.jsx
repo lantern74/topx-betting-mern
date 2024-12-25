@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 
-import TopNavFour from '../../../../components/header/TopNavFour';
+import TopNav from '../../../../components/header/TopNav';
 import CircularProgress from '../../../../components/skill/CircularProgress';
 import BlockStyle15 from '../../../../components/blockStyle/BlockStyle15';
 import BannerFive from '../../../../components/short-banner/BannerFive';
@@ -19,7 +19,7 @@ const ServicesDetails = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <div className="container">

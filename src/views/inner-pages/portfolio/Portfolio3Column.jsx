@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import BannerFive from '../../../components/short-banner/BannerFive';
 import NewsLetterForm from '../../../components/form/NewsLetterForm';
@@ -17,7 +17,7 @@ const Portfolio3Column = () => {
             </Helmet>
             {/* helmet end */}
 
-            <TopNavFour/> {/* theme-menu-four */}
+            <TopNav/> {/* theme-menu-four */}
 
             <div className="theme-inner-banner">
                 <InnerBanner intro="Work Gallery" currpage="Portfolio"/>

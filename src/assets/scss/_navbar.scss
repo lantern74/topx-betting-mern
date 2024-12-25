@@ -295,14 +295,14 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 310px;
-    min-width: 310px;
+    width: 250px;
+    min-width: 250px;
     // display: none;
 }
 
 .mobile-menu-wrapper .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-header {
     border: 0;
-    padding: 50px 20px 20px 020px;
+    padding: 20px;
 }
 .mobile-menu-wrapper .pro-sidebar .pro-menu {
     padding: 30px 20px;
@@ -341,7 +341,7 @@
     color: #fff;
     font-size: 22px;
     position: absolute;
-    top: 10px;
+    top: 25px;
     right: 22px;
     &:hover {
         color: red;
@@ -352,11 +352,11 @@
     position: fixed;
     right: 15px;
     margin-left: 0;
-    top: 27px;
+    top: 35px;
     z-index: 99999;
 }
 .theme-main-menu.sticky-menu.fixed .moblie-menu-toggler {
-    top: 12px;
+    top: 25px;
 }
 
 .mobile-menu {

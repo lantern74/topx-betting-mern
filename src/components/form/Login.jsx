@@ -1,25 +1,19 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../components/header/TopNavFour';
-import InnerBanner from '../../../components/page-title/InnerBanner';
-import NewsLetterForm from '../../../components/form/NewsLetterForm';
-import BannerFive from '../../../components/short-banner/BannerFive';
-import FooterFour from '../../../components/footer/FooterFour';
-import CopyRightFour from '../../../components/footer/CopyRightFour';
-import ContactThree from '../../../components/contact/ContactThree';
-import ContactForm from '../../../components/form/ContactForm';
+import TopNav from '../../components/header/TopNav';
+import LoginForm from './LoginForm';
 
-const Contact = () => {
+const Login = () => {
     return (
         <Fragment>
             <div className="main-page-wrapper">
                 <Helmet>
-                    <title>Contact us || Sinco - Data Science & Analytics React Template</title>
+                    <title>TOP X</title>
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
 
                 <div className="contact-section-one mb-170 lg-mb-120">
@@ -30,7 +24,7 @@ const Contact = () => {
                                 <div className="col-lg-6 d-flex order-lg-last">
                                     <div className="form-style-one">
                                         <h3 className="form-title pb-40 lg-pb-20">账户登录</h3>
-                                        <ContactForm/>
+                                        <LoginForm/>
                                     </div>
                                     {/* /.form-style-one */}
                                 </div>
@@ -48,4 +42,4 @@ const Contact = () => {
     )
 }
 
-export default Contact
+export default Login

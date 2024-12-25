@@ -4,7 +4,7 @@ import ModalVideos from '../../../../components/ModalVideo/ModalVideos';
 import Tilt from 'react-parallax-tilt';
 import { Link } from 'react-router-dom';
 
-import TopNavFour from '../../../../components/header/TopNavFour';
+import TopNav from '../../../../components/header/TopNav';
 import FancyFeatureTwentyThree from '../../../../components/feature/FancyFeatureTwentyThree';
 import CommonCounter from '../../../../components/counter/CommonCounter';
 import TestimonialOne from '../../../../components/testimonial/TestimonialOne';
@@ -29,7 +29,7 @@ const AboutUsTwo = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner space-fix-one">
                     <div className="container">

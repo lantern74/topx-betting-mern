@@ -902,6 +902,9 @@
         line-height: 38px;
         margin-bottom: 8px;
     }
+    .contact-section-one {
+        padding-top: 100px;
+    }
 }
 /*(max-width: 1199px)*/
 
@@ -1105,7 +1108,7 @@
         margin-bottom: 65px;
     }
     .footer-style-four {
-        padding-top: 60px;
+        padding-top: 0;
     }
     .footer-style-one {
         padding-top: 80px;
@@ -1216,6 +1219,10 @@
         font-size: 18px;
         padding-bottom: 5px;
     }
+    .responsive-logo {
+        width: 90px;
+    }
+    
 }
 /*(max-width: 991px)*/
 
@@ -1276,6 +1283,7 @@
     .fancy-feature-nineteen .bg-shape-two {
         width: 73%;
     }
+    
 }
 /*(min-width: 768px) and (max-width: 991px)*/
 
@@ -1490,5 +1498,9 @@
     .accordion-style-one .accordion-body p {
         font-size: 16px;
     }
+    .responsive-logo {
+        width: 80px;
+    }
+    
 }
 /*(max-width: 575px)*/

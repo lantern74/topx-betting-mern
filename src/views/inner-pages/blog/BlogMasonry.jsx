@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import BlogMasonryOne from '../../../components/blog/BlogMasonryOne';
 import Category from '../../../components/blog/Category';
@@ -24,7 +24,7 @@ const BlogMasonry = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Blog Masonary with Sidebar" currpage="Blog"/>

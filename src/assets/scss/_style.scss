@@ -294,6 +294,10 @@ h6 {
 button.scroll-top {
     display: inline-block;
 }
+// Logo
+.responsive-logo {
+    width: 120px;
+}
 /*^^^^^^^^^^^^^^^^^^^^ Section Title ^^^^^^^^^^^^^^^^^^^^^^*/
 .title-style-one .sc-title {
     display: inline-block;
@@ -658,10 +662,13 @@ body .btn-eight {
     transition: all 0.3s ease-in-out;
 }
 body .btn-eight:hover {
-    background: var(--prime-one);
+    background: var(--prime-six);
 }
 input, input::placeholder {
     color: #8ea2ab;
+}
+.register-button:hover {
+    color: var(--prime-six);
 }
 /*^^^^^^^^^^^^^^^^^^^^^^^ Pagination ^^^^^^^^^^^^^^^^^^^^^^*/
 .page-pagination-one ul {
@@ -916,7 +923,7 @@ input, input::placeholder {
     padding-right: 40px;
 }
 .theme-menu-four .navbar {
-    margin-left: 145px;
+    margin-left: 250px;
 }
 .theme-menu-four:before {
     content: "";
@@ -945,7 +952,7 @@ input, input::placeholder {
     transition: all 0.3s ease-in-out;
 }
 .theme-main-menu .send-msg-btn:hover {
-    background: var(--prime-one);
+    background: var(--prime-six);
 }
 .theme-main-menu.theme-menu-four .menu-search-btn {
     color: var(--prime-three);
@@ -1230,7 +1237,7 @@ input, input::placeholder {
     color: var(--prime-two);
 }
 .block-style-two ul.list-item.color-rev li:before {
-    color: var(--prime-one);
+    color: var(--prime-six);
 }
 .block-style-two .nav-tabs {
     border: none;
@@ -1370,7 +1377,7 @@ input, input::placeholder {
     box-shadow: none;
 }
 .counter-section-one .inner-container.bg-color {
-    background: var(--prime-four);
+    background: var(--prime-six);
 }
 
 .counter-block-one {
@@ -2159,7 +2166,6 @@ input, input::placeholder {
     border-top: 1px solid #e5ebf5;
 }
 .theme-basic-footer .bottom-footer {
-    border-top: 1px solid #f2f7ff;
     margin-top: 40px;
     padding: 22px 0 7px;
 }
@@ -3896,7 +3902,7 @@ input, input::placeholder {
     padding: 0 30px;
 }
 .hero-banner-five .demo-btn:hover {
-    background: var(--prime-one);
+    background: var(--prime-six);
     color: #fff;
 }
 .hero-banner-five .video-icon {
@@ -4136,8 +4142,8 @@ input, input::placeholder {
     left: 25px;
 }
 .block-style-thirteen .list-item li:hover .numb {
-    background: var(--prime-one);
-    border-color: var(--prime-one);
+    background: var(--prime-six);
+    border-color: var(--prime-six);
     color: #fff;
 }
 .fancy-feature-nineteen .illustration-holder {
@@ -4322,7 +4328,7 @@ input, input::placeholder {
 }
 /*^^^^^^^^^^^^^^^^^^^^^ Footer Four ^^^^^^^^^^^^^^^^^^^^^^^^*/
 .footer-style-four {
-    padding: 85px 0 0;
+    padding: 0;
     background: #262626;
 }
 .footer-style-four.space-fix-one {
@@ -5513,7 +5519,7 @@ input, input::placeholder {
 }
 
 .form-style-one form input:hover {
-    border: 1px solid var(--prime-one)
+    border: 1px solid var(--prime-six)
 }
 .contact-form-remember {
     display: flex;

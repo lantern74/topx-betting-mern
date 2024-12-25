@@ -1,30 +1,25 @@
-import React, {Fragment, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {Fragment} from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Lightbox from 'react-lightbox-component';
-// import 'react-lightbox-component/style.css';
-
-
 
 const PortfolioContent = [
     {
         img:'image1',
         tag: '社群分享',
-        pjname:'Product Analysis',
+        link:'https://t.me/topxrecords',
         plus: 'bi bi-plus',
     },
     {
         img:'image2',
         tag: '動態更新',
-        pjname:'UI, UX Design',
+        link:'https://www.instagram.com/topx_pro',
         plus: 'bi bi-plus',
     },
     {
         img:'image3',
         tag: '分析紀錄',
-        pjname:'Content Marketing',
+        link:'https://www.threads.net/@topx_pro',
         plus: 'bi bi-plus',
     },
 ]
@@ -62,25 +57,16 @@ const settings = {
     ]
 };
 
-const images = [
-    "/images/gallery/image1.jpg",
-    "/images/gallery/image2.jpg",
-    "/images/gallery/image3.jpg",
-  ];
-
 const PortfolioGallery = () => {
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [photoIndex, setPhotoIndex] = useState(0);
     
     return (
         <Fragment>
             <Slider {...settings} className="portfolio_slider_one">
                 {PortfolioContent.map((val, i)=>(
                     <div key={i} className="item">
-                    <div className="portfolio-block-one">
+                    <a href={val.link} target='_blank' className="portfolio-block-one">
                         <div className="img-meta"><img src={`images/gallery/${val.img}.jpg`} alt="" className="w-100"/></div>
-                    </div>
+                    </a>
                     <div style={{textAlign:"center"}}>{val.tag}</div>
                 </div>
                 ))}

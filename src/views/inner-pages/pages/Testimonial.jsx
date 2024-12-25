@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-import TopNavFour from '../../../components/header/TopNavFour';
+import TopNav from '../../../components/header/TopNav';
 import InnerBanner from '../../../components/page-title/InnerBanner';
 import TestimonialThree from '../../../components/testimonial/TestimonialThree';
 import TestimonialOne from '../../../components/testimonial/TestimonialOne';
@@ -18,7 +18,7 @@ const Testimonial = () => {
                 </Helmet>
                 {/* helmet end */}
 
-                <TopNavFour/> {/* theme-menu-four */}
+                <TopNav/> {/* theme-menu-four */}
 
                 <div className="theme-inner-banner">
                     <InnerBanner intro="Client Testimonials" currpage="Testimonial"/>
