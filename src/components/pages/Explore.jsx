@@ -28,7 +28,7 @@ const ServiceContent = [
         className: ''
     }
 ]
-const FancyFeatureSeventeen = () => {
+const Explore = () => {
     return ( 
     <Fragment> 
       <div className="row justify-content-center pt-30">
@@ -52,4 +52,4 @@ const FancyFeatureSeventeen = () => {
   )
 }
 
-export default FancyFeatureSeventeen
+export default Explore

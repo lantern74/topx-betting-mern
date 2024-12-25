@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 
-const CopyRightFour = () => {
+const Footer = () => {
     return (
         <Fragment>
             <div className="d-lg-flex justify-content-center align-items-center">
@@ -11,4 +11,4 @@ const CopyRightFour = () => {
     )
 }
 
-export default CopyRightFour
+export default Footer

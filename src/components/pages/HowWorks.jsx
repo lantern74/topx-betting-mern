@@ -22,7 +22,7 @@ const ProcessContent = [
     }
 ]
 
-const FancyFeatureNineteen = () => {
+const HowWorks = () => {
     return (
         <Fragment>
             <div className="block-style-thirteen" data-aos="fade-right">
@@ -46,4 +46,4 @@ const FancyFeatureNineteen = () => {
     )
 }
 
-export default FancyFeatureNineteen
+export default HowWorks

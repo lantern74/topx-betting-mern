@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 
-const About = () => {
+const Analysis = () => {
     return (
         <Fragment>
             <div
@@ -60,4 +60,4 @@ const About = () => {
     )
 }
 
-export default About
+export default Analysis

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Routes, Route } from "react-router-dom";
-import UserAnalysis from '../views/home-pages/UserAnalysis';
+import UserAnalysis from '../views/UserAnalysis';
 import Login from '../components/form/Login';
 import NotFound from "../views/NotFound";
 

@@ -11,13 +11,8 @@ const Login = () => {
                 <Helmet>
                     <title>TOP X</title>
                 </Helmet>
-                {/* helmet end */}
-
-                <TopNav/> {/* theme-menu-four */}
-
-
+                <TopNav/>
                 <div className="contact-section-one mb-170 lg-mb-120">
-                   
                     <div className="mt-200 lg-mt-70">
                         <div className="container">
                             <div className="row gx-xxl-5">
@@ -33,10 +28,6 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                {/* /.contact-section-one */}
-
-                
-
             </div>
         </Fragment>
     )

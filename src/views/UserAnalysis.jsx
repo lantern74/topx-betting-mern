@@ -1,14 +1,14 @@
 import React,{Fragment} from 'react';
 import {Helmet} from 'react-helmet';
-import TopNav from '../../components/header/TopNav';
-import HeroBanner from '../../components/hero-banner/HeroBanner';
-import FancyFeatureSeventeen from '../../components/feature/FancyFeatureSeventeen';
-import About from '../../components/about/About';
-import FancyFeatureNineteen from '../../components/feature/FancyFeatureNineteen';
-import CounterOne from '../../components/counter/CounterOne';
-import DataScience from './DataScience';
-import Contact from '../../components/contact/Contact';
-import CopyRightFour from '../../components/footer/CopyRightFour';
+import TopNav from '../components/header/TopNav';
+import HeroBanner from '../components/pages/HeroBanner';
+import Explore from '../components/pages/Explore';
+import Analysis from '../components/pages/Analysis';
+import HowWorks from '../components/pages/HowWorks';
+import CounterOne from '../components/pages/CounterOne';
+import MultiPlatform from '../components/pages/MultiPlatform';
+import Contact from '../components/pages/Contact';
+import Footer from '../components/footer/Footer';
 
 const UserAnalysis = () => {
     return (
@@ -29,18 +29,18 @@ const UserAnalysis = () => {
                                 </div>
                             </div>
                         </div>
-                        <FancyFeatureSeventeen/>
+                        <Explore/>
                     </div>
                     <div className="shapes shape-one"/>
                 </div>
 
-                <About/>
+                <Analysis/>
 
                 <div className="fancy-feature-nineteen position-relative pt-130 lg-pt-80">
                     <div className="container">
                         <div className="row">
                             <div className="col-xxl-5 col-lg-6 col-md-7">
-                                <FancyFeatureNineteen />
+                                <HowWorks />
                             </div>
                         </div>
                     </div>
@@ -71,15 +71,12 @@ const UserAnalysis = () => {
                             data-aos="fade-down"
                             data-aos-duration={2000}/>
                     </div>
-                    {/* /.illustration-holder */}
                     <div className="shapes oval-one"/>
                     <div className="shapes oval-two"/>
-                    {/* <img src="images/shape/shape_35.svg" alt="" className="shapes bg-shape"/> */}
                 </div>
-                {/* /.fancy-feature-nineteen */}
 
                 <CounterOne/> 
-                <DataScience />
+                <MultiPlatform />
                 <Contact/>
 
                 <div className="footer-style-four theme-basic-footer mt-200 lg-mt-100">
@@ -87,7 +84,7 @@ const UserAnalysis = () => {
                         <div className="inner-wrapper">
 
                             <div className="bottom-footer">
-                                <CopyRightFour/>
+                                <Footer/>
                             </div>
                         </div>
                     </div>

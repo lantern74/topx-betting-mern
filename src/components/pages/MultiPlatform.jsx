@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
-import PortfolioGallery from '../../components/portfolio/PortfolioGallery'
+import PortfolioGallery from './PortfolioGallery'
 
-const DataScience = () => {
+const MultiPlatform = () => {
     return (
         <Fragment>
             <div className="main-page-wrapper" id='raceRecords'>
@@ -24,4 +24,4 @@ const DataScience = () => {
     )
 }
 
-export default DataScience
+export default MultiPlatform
