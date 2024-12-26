@@ -1,0 +1,77 @@
+/* Container Styles */
+.match-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: black;
+    padding: 120px 15px 15px 15px;
+    min-height: 100vh;
+  }
+  
+  /* Date Tabs */
+  .date-tabs {
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    background: rgb(27, 31, 35);
+  }
+  
+  .date-tabs-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .date-button {
+    color: #8EA2AB;
+    background: #24292B;
+    padding: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: normal;
+    font-size: 16px;
+    height: 60px;
+    line-height: 1.2;
+  }
+  
+  .date-button.selected {
+    color: #FDCA40;
+    font-weight: bold;
+  }
+  
+  .date-button:hover {
+    background: black;
+  }
+  
+  /* Match Group */
+  .match-group {
+    margin-bottom: 20px;
+  }
+  
+  .match-group-header {
+    border-radius: 4px;
+    border: 1px solid white;
+    font-weight: bold;
+    padding: 0 10px;
+    color: white;
+  }
+  
+  /* Match List */
+  .match-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 30px 0;
+  }
+  
+  .match-item {
+    margin-bottom: 15px;
+  }
+  
+  .match-button {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }

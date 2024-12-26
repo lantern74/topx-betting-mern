@@ -1,0 +1,227 @@
+/* Loading Spinner Styles */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Make it take up the entire screen */
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3); /* White border */
+  border-top: 4px solid #3498db; /* Blue color */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Animation for the spinning effect */
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+/* Styling for each match item */
+.match-item {
+  width: 50%;
+  margin: 10px 0;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.match-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.match-button:hover {
+  background-color: #2980b9;
+}
+.match-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.match-result {
+  margin-top: 15px;
+  padding: 10px 30px;
+  background-color: #f8f8f8;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.match-result p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.match-result strong {
+  color: #3498db;
+}
+
+.match-button p{
+  margin: 5px 0;
+}
+
+h4, h5, h6{
+  font-family: "Montserrat", sans-serif !important;
+  line-height: 1.2 !important;
+  text-transform: capitalize;
+  font-weight: 900 !important;
+}
+ body {
+  font-family: "Montserrat", sans-serif;
+ }
+
+h3 {
+  margin: 0.4rem 0;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Adjust height to fit your design */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevents any overflow of the video */
+}
+
+.video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video covers the container */
+  position: relative;
+  z-index: 1; /* Ensures it's below the gradient */
+}
+
+.video-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Ensures it's above the video */
+  pointer-events: none; /* Allows interactions with the video */
+  background: linear-gradient(
+    to bottom,
+    #020826, /* Matches the content's background */
+    rgba(2, 8, 70, 0) 40%, /* Transparent fade */
+    rgba(2, 8, 70, 0) 60%, /* Transparent middle */
+    #020816 100% /* Matches the content's background */
+  );
+}
+
+.modal {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  z-index: 3;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: slide-up 1s ease forwards;
+}
+
+.modal-filter {
+  background: #020856;
+  -webkit-filter: blur(6px);
+  min-width: 280px;
+  min-height: 150px;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.club-logo {
+  height: 50px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.team-info-box {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0%);
+  width: 100%;
+}
+.separator-style {
+  width: 1px;
+  height: 35px;
+  background-color: #E0E5D5;
+  display: block;
+}
+
+.result-index-box {
+  padding: 20px;
+  height: 50%;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* To ensure pseudo-element positions correctly */
+  z-index: 2; /* Ensures content appears above the overlay */
+}
+
+.result-index-box::before {
+  content: "";
+  position: absolute; /* Overlay positioned over the box */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+  z-index: 1; /* Overlay sits above the background image */
+}
+
+p {
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 100;
+}
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7ED321;
+}
+
+
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateX(-50%) translateY(100%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+@media screen {
+  
+}
