@@ -7,8 +7,10 @@ import HowWorks from '../components/pages/HowWorks';
 import CounterOne from '../components/pages/CounterOne';
 import MultiPlatform from '../components/pages/MultiPlatform';
 import Contact from '../components/pages/Contact';
+import { useTranslation } from 'react-i18next';
 
 const Landing = () => {
+    const { t } = useTranslation();
     return (
         <Fragment>
             <div className="main-page-wrapper">
@@ -22,7 +24,7 @@ const Landing = () => {
                             <div className="col-xl-6 col-lg-5" data-aos="fade-right">
                                 <div className="title-style-three text-lg-start">
                                     <h2 className="main-title">
-                                        <span>探索</span> 我們的<br></br>核心技術和實際應用。</h2>
+                                        <span>{t("探索")}</span> {t("我們的")}<br></br>{t("核心技術和實際應用")}</h2>
                                 </div>
                             </div>
                         </div>
