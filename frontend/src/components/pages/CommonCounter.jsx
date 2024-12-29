@@ -1,6 +1,7 @@
 import React,{Fragment} from 'react'
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
+import { useTranslation } from 'react-i18next';
 
 const CountContent = (t) => [
     {
@@ -22,8 +23,6 @@ const CountContent = (t) => [
         desc: t('幫助用戶提升收益：$10 萬+'),
     }
 ]
-
-import { useTranslation } from 'react-i18next';
 
 const CommonCounter = () => {
     const { t } = useTranslation();
