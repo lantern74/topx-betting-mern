@@ -6,6 +6,9 @@ import ViewMatches from '../components/matches/ViewMatches'
 import MatchResult from '../components/matches/MatchResult'
 import NotFound from "../views/NotFound";
 import DeveloperPage from '../components/developer/DeveloperPage';
+import AdminLogin from '../components/admin/Login';
+import SubAdminLogin from '../components/admin/SubAdminLogin';
+import AdminDashboard from '../components/admin/AdminDashboard';
 
 const AppRouter = () => {
   return (
@@ -16,6 +19,9 @@ const AppRouter = () => {
         <Route path="/view-matches" element={<ViewMatches />} />
         <Route path="/match-result/:id" element={<MatchResult />} />
         <Route path="/developer/language" element={<DeveloperPage />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/subadmin/login" element={<SubAdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Fragment>

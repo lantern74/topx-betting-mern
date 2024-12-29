@@ -18,6 +18,7 @@ const Schema = mongoose.Schema;
  * @property {number} [pbrAway] - The profit-to-bet ratio for the away team.
  * @property {number} [kellyHome] - The Kelly criterion value for the home team.
  * @property {number} [kellyAway] - The Kelly criterion value for the away team.
+ * @property {mongoose.Schema.Types.ObjectId} createdBy - The ID of the admin who created the match.
  */
 const MatchSchema = new Schema({
   id: { type: String, required: true, unique: true },
@@ -35,6 +36,7 @@ const MatchSchema = new Schema({
   pbrAway: { type: Number },
   kellyHome: { type: Number },
   kellyAway: { type: Number },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
 });
 
 /**
