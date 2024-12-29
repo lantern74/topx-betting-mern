@@ -12,6 +12,7 @@ import {
 import 'react-pro-sidebar/dist/css/styles.css';
 
 const MobileMenu = () => {
+  const { t } = useTranslation();
     const [click, setClick] = useState(false);
     const handleClick = () => {
         setClick(!click);

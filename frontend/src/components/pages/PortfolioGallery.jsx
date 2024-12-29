@@ -60,7 +60,7 @@ const settings = {
 };
 
 const PortfolioGallery = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
     
     return (
         <Fragment>

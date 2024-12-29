@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from "react-router-dom";
 import { FaChevronUp } from "react-icons/fa";
 import TeamCompareChart from "./widgets/TeamCompareChart";
@@ -7,6 +8,7 @@ import PlayerMultiProgress from "./widgets/PlayerMultiProgress"
 import './MatchResult.css'
 
 function MatchResult() {
+  const { t } = useTranslation();
   const { id } = useParams(); // Get the match ID from the URL
   const navigate = useNavigate(); // Hook for navigation
   const [match, setMatch] = useState(null);
