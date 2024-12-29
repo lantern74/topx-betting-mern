@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = () => {
 
@@ -42,7 +43,7 @@ const LoginForm = () => {
                 <div className="row">
                     <div className="col-12">
                         <div className="input-group-meta form-group mb-30">
-                            <label>帳號*</label>
+                            <label>{t("用戶名")}*</label>
                             <input type="text" name="email" {...register("email")}
                         className={`${errors.email ? "is-invalid" : ""}`}
                         /> 
@@ -54,7 +55,7 @@ const LoginForm = () => {
                     </div>
                     <div className="col-12">
                         <div className="input-group-meta form-group mb-30">
-                            <label>密碼*</label>
+                            <label>{t("密碼")}*</label>
                             <input type="text"  name="password" {...register("password")}
                         className={`${errors.password ? "is-invalid" : ""}`}
                         /> 
@@ -65,8 +66,8 @@ const LoginForm = () => {
                         </div>
                     </div>
                     <div className="col-12 mt-3 d-flex" style={{justifyContent:"space-between"}}>
-                        <button className="btn-eight ripple-btn">提交</button>
-                        <a className='register-button' href="https://t.me/Systemtopxpro" target='_blank'>註冊帳號</a>
+                        <button className="btn-eight ripple-btn">{t("提交")}</button>
+                        <a className='register-button' href="https://t.me/Systemtopxpro" target='_blank'>{t("註冊帳號")}</a>
                     </div>
                 </div>
             </form>
