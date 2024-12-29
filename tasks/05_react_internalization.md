@@ -55,37 +55,21 @@ This file contains all the translations in JSON format.
 
 Wrap the `App` component with `I18nextProvider` to make translations available throughout the application.
 
-### `frontend/src/components/pages/Landing.jsx`
+### `frontend/src/components/pages/Landing.jsx` - Done
 
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/pages/HeroBanner.jsx` - Done
 
-### `frontend/src/components/pages/HeroBanner.jsx`
+### `frontend/src/components/pages/Explore.jsx` - Done
 
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/pages/Analysis.jsx` - Done
 
-### `frontend/src/components/pages/Explore.jsx`
+### `frontend/src/components/pages/HowWorks.jsx` - Done
 
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/pages/CounterOne.jsx` - Done
 
-### `frontend/src/components/pages/Analysis.jsx`
+### `frontend/src/components/pages/CommonCounter.jsx` - Done
 
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
-
-### `frontend/src/components/pages/HowWorks.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
-
-### `frontend/src/components/pages/CounterOne.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
-
-### `frontend/src/components/pages/CommonCounter.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
-
-### `frontend/src/components/pages/MultiPlatform.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/pages/MultiPlatform.jsx` - Done
 
 ### `frontend/src/components/pages/PortfolioGallery.jsx`
 
