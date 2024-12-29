@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import MatchResultFullCard from './widgets/MatchResultFullCard/index'
 import './ViewMatches.css'
 
 export default function Event() {
+  const { t } = useTranslation();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -154,7 +156,7 @@ export default function Event() {
                     onClick={() => setSelectedDate(date)}
                 >
                     {date === "all" ? (
-                    {t("全部")}
+                    t("全部")
                     ) : (
                     <>
                         <div>{formattedDate}</div>
