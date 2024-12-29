@@ -44,5 +44,15 @@
   "用戶名": "Username",
   "密碼": "Password",
   "記住我": "Remember Me",
-  "忘記密碼": "Forgot Password?"
+  "忘記密碼": "Forgot Password?",
+  "主頁": "Home",
+  "賽事紀錄": "Match Records",
+  "聯絡我們": "Contact Us",
+  "賽事系統": "Match System",
+  "會員登入": "Member Login",
+  "比賽結果": "Match Result",
+  "全部": "All",
+  "EV Rate": "EV Rate",
+  "Kelly Index": "Kelly Index",
+  "P to B Ratio": "P to B Ratio"
 }

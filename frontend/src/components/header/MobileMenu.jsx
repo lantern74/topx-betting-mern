@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import { useTranslation } from 'react-i18next';
 import {Link, useLocation} from 'react-router-dom'
 import {
     ProSidebar,
@@ -59,19 +60,19 @@ const MobileMenu = () => {
                     <SidebarContent>
                         <Menu iconShape="square">
                           <MenuItem>
-                            <Link to='/#homePage'>主頁</Link>
+                            <Link to='/#homePage'>{t("主頁")}</Link>
                           </MenuItem>
                           <MenuItem>
-                            <Link to='/#raceRecords'>賽事紀錄</Link>
+                            <Link to='/#raceRecords'>{t("賽事紀錄")}</Link>
                           </MenuItem>
                           <MenuItem>
-                            <Link to='/#contactUs'>聯絡我們</Link>
+                            <Link to='/#contactUs'>{t("聯絡我們")}</Link>
                           </MenuItem>
                           <MenuItem>
-                            <Link to='/view-matches'>賽事系統</Link>
+                            <Link to='/view-matches'>{t("賽事系統")}</Link>
                           </MenuItem>
                           <MenuItem>
-                            <Link to='/login'>會員登入</Link>
+                            <Link to='/login'>{t("會員登入")}</Link>
                           </MenuItem>
                         </Menu>
                     </SidebarContent>

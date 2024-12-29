@@ -96,7 +96,7 @@ function MatchResult() {
 return (
     <div className="result-container">
       <div className="result-header">
-        <button className="back-button" onClick={() => navigate("/view-matches")}><i class="bi bi-arrow-left fs-2"></i><span>比赛结果</span></button>
+        <button className="back-button" onClick={() => navigate("/view-matches")}><i class="bi bi-arrow-left fs-2"></i><span>{t("比赛结果")}</span></button>
       </div>
 
       <div className="team-info-box">
@@ -130,7 +130,7 @@ return (
       {match.homeWinRate > match.awayWinRate ? (
         <div className="ev-rate-box">
           <div className="ev-details">
-            <h6>{match.evHome}%<p>EV Rate</p></h6>
+            <h6>{match.evHome}%<p>{t("EV Rate")}</p></h6>
             <div style={{ width: '100%', height:"200px"}}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
             </div>
@@ -141,10 +141,10 @@ return (
           </div>
           <div className="index-boxes">
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{match.kellyHome}<p>Kelly Index</p></h6>
+              <h6 className="result-index-box-text">{match.kellyHome}<p>{t("Kelly Index")}</p></h6>
             </div>
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{match.pbrHome}%<p>P to B Ratio</p></h6>
+              <h6 className="result-index-box-text">{match.pbrHome}%<p>{t("P to B Ratio")}</p></h6>
             </div>
           </div>
         </div>

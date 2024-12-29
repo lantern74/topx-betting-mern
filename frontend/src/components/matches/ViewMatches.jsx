@@ -154,7 +154,7 @@ export default function Event() {
                     onClick={() => setSelectedDate(date)}
                 >
                     {date === "all" ? (
-                    "全部"
+                    {t("全部")}
                     ) : (
                     <>
                         <div>{formattedDate}</div>
