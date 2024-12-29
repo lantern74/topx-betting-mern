@@ -71,9 +71,7 @@ Wrap the `App` component with `I18nextProvider` to make translations available t
 
 ### `frontend/src/components/pages/MultiPlatform.jsx` - Done
 
-### `frontend/src/components/pages/PortfolioGallery.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/pages/PortfolioGallery.jsx` - Done
 
 ### `frontend/src/components/pages/Contact.jsx`
 
