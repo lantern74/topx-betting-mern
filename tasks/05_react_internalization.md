@@ -83,13 +83,9 @@ Replace static text with dynamic translations using the `t` function from `useTr
 
 Replace static text with dynamic translations using the `t` function from `useTranslation`.
 
-### `frontend/src/components/header/MobileMenu.jsx`
+### `frontend/src/components/header/MobileMenu.jsx` - Done
 
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
-
-### `frontend/src/components/header/ThemeMainMenu.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/header/ThemeMainMenu.jsx` - Done
 
 ### `frontend/src/components/form/Login.jsx`
 
