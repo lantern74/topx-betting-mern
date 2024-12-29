@@ -18,7 +18,6 @@ i18n
   .init({
     resources,
     fallbackLng: 'en', // Fallback to English
-    lng: 'zh', // Default to Chinese
     interpolation: {
       escapeValue: false,
     },
