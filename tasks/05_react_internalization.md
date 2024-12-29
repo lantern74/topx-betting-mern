@@ -81,11 +81,11 @@ Wrap the `App` component with `I18nextProvider` to make translations available t
 
 ### `frontend/src/components/header/ThemeMainMenu.jsx` - Done
 
-### `frontend/src/components/form/Login.jsx`
+### `frontend/src/components/form/Login.jsx` - Done
 
 Replace static text with dynamic translations using the `t` function from `useTranslation`.
 
-### `frontend/src/components/form/LoginForm.jsx`
+### `frontend/src/components/form/LoginForm.jsx` - Done
 
 Replace static text with dynamic translations using the `t` function from `useTranslation`.
 
@@ -97,11 +97,11 @@ Replace static text with dynamic translations using the `t` function from `useTr
 
 Replace static text with dynamic translations using the `t` function from `useTranslation`.
 
-### `frontend/src/components/developer/DeveloperPage.jsx` (Modified File)
+### `frontend/src/components/developer/DeveloperPage.jsx` (Modified File) - Done
 
 Add the `LanguageSelector` component to this page.
 
-### `frontend/src/components/developer/LanguageSelector.jsx` (New File)
+### `frontend/src/components/developer/LanguageSelector.jsx` (New File) - Done
 
 Create the language selector component.
 
