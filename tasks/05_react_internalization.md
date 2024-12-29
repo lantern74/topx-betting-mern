@@ -99,13 +99,9 @@ Replace static text with dynamic translations using the `t` function from `useTr
 
 Replace static text with dynamic translations using the `t` function from `useTranslation`.
 
-### `frontend/src/components/matches/ViewMatches.jsx`
+### `frontend/src/components/matches/ViewMatches.jsx` - Done
 
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
-
-### `frontend/src/components/matches/MatchResult.jsx`
-
-Replace static text with dynamic translations using the `t` function from `useTranslation`.
+### `frontend/src/components/matches/MatchResult.jsx` - Done
 
 ### `frontend/src/components/matches/MatchResultFullCard/index.jsx`
 
