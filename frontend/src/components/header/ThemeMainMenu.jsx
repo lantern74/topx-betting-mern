@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect } from 'react';
 import {Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -22,6 +23,7 @@ const ScrollToHash = () => {
 
 
 const ThemeMainMenu = () => {
+  const { t } = useTranslation();
     return (
         <>
             <ScrollToHash />
@@ -33,16 +35,16 @@ const ThemeMainMenu = () => {
                         </div>
                     </li>
                     <li className="nav-item">
-                        <Link to="/#homePage" className="nav-link dropdown-toggle" role="button">主頁</Link>
+                        <Link to="/#homePage" className="nav-link dropdown-toggle" role="button">{t("主頁")}</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/#raceRecords" className="nav-link dropdown-toggle" role="button">賽事紀錄</Link>
+                        <Link to="/#raceRecords" className="nav-link dropdown-toggle" role="button">{t("賽事紀錄")}</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/#contactUs" className="nav-link dropdown-toggle" role="button">聯絡我們</Link>
+                        <Link to="/#contactUs" className="nav-link dropdown-toggle" role="button">{t("聯絡我們")}</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/view-matches" className="nav-link dropdown-toggle">賽事系統</Link>
+                        <Link to="/view-matches" className="nav-link dropdown-toggle">{t("賽事系統")}</Link>
                     </li>
                 </ul>
             </Fragment>

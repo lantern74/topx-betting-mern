@@ -13,14 +13,14 @@ const LoginForm = () => {
         .shape({
             name: Yup
                 .string()
-                .required("Name is Required"),
+                .required(t("名稱不能為空")),
             email: Yup
                 .string()
-                .required("Email is Required")
-                .email("Entered value does not match email format"),
+                .required(t("名稱不能為空"))
+                .email(t("請輸入有效的電子郵件")),
             sendMessage: Yup
                 .string()
-                .required("Please, leave us a message.")
+                .required(t("請輸入訊息"))
         });
 
     const formOptions = {
