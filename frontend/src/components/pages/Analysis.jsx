@@ -1,6 +1,8 @@
 import React, {Fragment} from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Analysis = () => {
+    const { t } = useTranslation();
     return (
         <Fragment>
             <div
@@ -11,14 +13,14 @@ const Analysis = () => {
                             <div className="block-style-two" data-aos="fade-left">
                                 <div className="title-style-three">
                                     <div className="sc-title">Over 1000+ Client</div>
-                                    <h2 className="main-title"><span>AI 智能分析</span><br></br>提升投注精準度</h2>
+                                    <h2 className="main-title"><span>{t("AI 智能分析")}</span><br></br>{t("提升投注精準度")}</h2>
                                 </div>
                                 {/* /.title-style-three */}
-                                <p className="pt-20 pb-25 lg-pb-20">TOP X 旨在為用戶提供最專業的分析工具。從龐大的數據庫到實時比賽推薦，我們幫助用戶快速掌握高勝率投注機會，讓勝率最大化。</p>
+                                <p className="pt-20 pb-25 lg-pb-20">{t("TOP X 旨在為用戶提供最專業的分析工具。從龐大的數據庫到實時比賽推薦，我們幫助用戶快速掌握高勝率投注機會，讓勝率最大化。")}</p>
                                 <ul className="style-none list-item color-rev">
-                                    <li>快速處理複雜數據，提供即時分析結果。</li>
-                                    <li>全面覆蓋香港賽馬會的讓球盤市場。</li>
-                                    <li>操作簡單，新手也能輕鬆上手。</li>
+                                    <li>{t("快速處理複雜數據，提供即時分析結果。")}</li>
+                                    <li>{t("全面覆蓋香港賽馬會的讓球盤市場。")}</li>
+                                    <li>{t("操作簡單，新手也能輕鬆上手。")}</li>
                                 </ul>
                                 {/* <a href="about-us2.html" className="btn-eight mt-50 lg-mt-30">More about us</a> */}
                             </div>

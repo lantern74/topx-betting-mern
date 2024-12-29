@@ -2,32 +2,35 @@ import React,{Fragment} from 'react'
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 
-const CountContent = [
+const CountContent = (t) => [
     {
         mark: '',
         num: 200,
         text: 'K',
-        desc: '節省分析時間：20 萬小時+',
+        desc: t('節省分析時間：20 萬小時+'),
     },
     {
         mark: '',
         num: 83.88,
         text: '%',
-        desc: '平均準確率：83.88%',
+        desc: t('平均準確率：83.88%'),
     },
     {
         mark: '',
         num: 100,
         text: 'K',
-        desc: '幫助用戶提升收益：$10 萬+',
+        desc: t('幫助用戶提升收益：$10 萬+'),
     }
 ]
 
+import { useTranslation } from 'react-i18next';
+
 const CommonCounter = () => {
+    const { t } = useTranslation();
     return ( 
     <Fragment> 
         <div className="row justify-content-center">
-            {CountContent.map((val, i)=>(
+            {CountContent(t).map((val, i)=>(
                 <div
                 key={i}
                 className="col-md-4 col-sm-6"
