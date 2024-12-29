@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import AOS from 'aos';
-import "aos/dist/aos.css"
-import { BrowserRouter } from 'react-router-dom';
+import "aos/dist/aos.css";
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import AppRouter from "./router/AppRouter";
 import ScrollToTop from "./components/ScrollToTop";
 import TopNav from './components/header/TopNav';
@@ -27,16 +27,30 @@ function App() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="TOP X" />
       </Helmet>
-      {/* {End Seo Helmet}
-       */}
+      {/* {End Seo Helmet} */}
       <ScrollToTop />
-      <BrowserRouter>
-        <TopNav />
-        <AppRouter />
-        <Footer/>
-      </BrowserRouter>
+      <TopNav />
+      <AppRouter />
     </Fragment>
   );
 }
 
-export default App;
+function MainApp() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login'; // Adjust the path as needed
+
+  return (
+    <Fragment>
+      <App />
+      {!isLoginPage && <Footer />}
+    </Fragment>
+  );
+}
+
+export default function Root() {
+  return (
+    <BrowserRouter>
+      <MainApp />
+    </BrowserRouter>
+  );
+}

@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
-
-import TopNav from '../../components/header/TopNav';
 import LoginForm from './LoginForm';
 
 const Login = () => {
@@ -11,8 +9,7 @@ const Login = () => {
                 <Helmet>
                     <title>TOP X</title>
                 </Helmet>
-                <TopNav/>
-                <div className="contact-section-one mb-170 lg-mb-120">
+                <div className="contact-section-one ">
                     <div className="mt-200 lg-mt-70">
                         <div className="container">
                             <div className="row gx-xxl-5">
@@ -23,7 +20,6 @@ const Login = () => {
                                     </div>
                                     {/* /.form-style-one */}
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

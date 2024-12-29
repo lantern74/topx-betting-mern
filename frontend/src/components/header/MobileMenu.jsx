@@ -75,7 +75,6 @@ const MobileMenu = () => {
                           </MenuItem>
                         </Menu>
                     </SidebarContent>
-
                     <SidebarFooter></SidebarFooter>
                 </ProSidebar>
             </div>
