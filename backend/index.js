@@ -11,7 +11,7 @@ const app = express();
 const port = 5000;
 
 // Connect to MongoDB with authentication
-mongoose.connect('mongodb://username:password@localhost:27017/betting-china?authSource=admin')
+mongoose.connect('mongodb://root:example@localhost:27017/betting-china?authSource=admin')
   .then(() => {
     console.log('MongoDB connected');
     TelemetryService.log('info', 'MongoDB connected');
