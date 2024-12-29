@@ -1,24 +1,25 @@
 import React, {Fragment} from 'react';
+import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const PortfolioContent = [
+const PortfolioContent = (t) => [
     {
         img:'image1',
-        tag: '社群分享',
+        tag: t('社群分享'),
         link:'https://t.me/topxrecords',
         plus: 'bi bi-plus',
     },
     {
         img:'image2',
-        tag: '動態更新',
+        tag: t('動態更新'),
         link:'https://www.instagram.com/topx_pro',
         plus: 'bi bi-plus',
     },
     {
         img:'image3',
-        tag: '分析紀錄',
+        tag: t('分析紀錄'),
         link:'https://www.threads.net/@topx_pro',
         plus: 'bi bi-plus',
     },
@@ -59,11 +60,12 @@ const settings = {
 };
 
 const PortfolioGallery = () => {
+    const { t } = useTranslation();
     
     return (
         <Fragment>
             <Slider {...settings} className="portfolio_slider_one">
-                {PortfolioContent.map((val, i)=>(
+                {PortfolioContent(t).map((val, i)=>(
                     <div key={i} className="item">
                         <a href={val.link} target='_blank' className="portfolio-block-one">
                             <div className="img-meta"><img src={`images/gallery/${val.img}.jpg`} alt="" className="w-100"/></div>
