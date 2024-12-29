@@ -1,6 +1,6 @@
 const { getHKMatches } = require('../getAPIFixtureId.js');
 const { handleResult } = require('../handleResult.js');
-const { Match } = require('../models/MatchModel');
+const { Match } = require('../models/match.model');
 
 /**
  * @class MatchService

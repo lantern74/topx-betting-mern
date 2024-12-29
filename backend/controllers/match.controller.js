@@ -1,4 +1,4 @@
-const MatchService = require('../services/MatchService');
+const MatchService = require('../services/match.service');
 
 /**
  * @class MatchController
