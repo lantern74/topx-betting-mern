@@ -11,10 +11,7 @@ const app = express();
 const port = 5000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/betting-china', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect('mongodb://localhost:27017/betting-china')
   .then(() => {
     console.log('MongoDB connected');
     TelemetryService.log('info', 'MongoDB connected');
