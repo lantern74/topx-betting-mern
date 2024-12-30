@@ -78,14 +78,19 @@ const ManageAdmins = () => {
     setNewAdmin({ ...newAdmin, [e.target.name]: e.target.value });
   };
 
-  const handleAddAdmin = async () => {
-    try {
-      await mutate(newAdmin);
-      fetchAdmins();
+  const addMutation = useMutation({
+    mutationFn: (newAdmin) => api.post('/admin/register-subadmin', newAdmin),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['subadmins']);
       handleCloseDialog();
-    } catch (err) {
-      setDialogError(err.message);
+    },
+    onError: (error) => {
+      setDialogError(error.message);
     }
+  });
+
+  const handleAddAdmin = async () => {
+    addMutation.mutate(newAdmin);
   };
 
   const handleEditOpen = (admin) => {
@@ -265,8 +270,8 @@ const ManageAdmins = () => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseDialog}>{t('取消')}</Button>
-              <Button onClick={handleAddAdmin} color="primary" disabled={isLoading}>
-                {isLoading ? 'Loading...' : t('新增')}
+              <Button onClick={handleAddAdmin} color="primary" disabled={addMutation.isLoading}>
+                {addMutation.isLoading ? 'Loading...' : t('新增')}
               </Button>
             </DialogActions>
           </Dialog>
