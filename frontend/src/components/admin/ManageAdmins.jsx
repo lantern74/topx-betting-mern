@@ -260,7 +260,7 @@ const ManageAdmins = () => {
             <DialogContent>
               <TextField
                 autoFocus
-                margin="dense"
+                
                 label={t('用戶名')}
                 type="text"
                 fullWidth
@@ -270,7 +270,7 @@ const ManageAdmins = () => {
                 autoComplete="off"
               />
               <TextField
-                margin="dense"
+                
                 label={t('密碼')}
                 type="password"
                 fullWidth
@@ -293,7 +293,7 @@ const ManageAdmins = () => {
             <DialogContent>
               <TextField
                 autoFocus
-                margin="dense"
+                
                 label={t('用戶名')}
                 type="text"
                 fullWidth
