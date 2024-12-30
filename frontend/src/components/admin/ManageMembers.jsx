@@ -14,6 +14,7 @@ import {
   DialogActions,
   createTheme,
   ThemeProvider,
+    Paper,
 } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import useGetAllMembers from '../../hooks/useGetAllMembers';
@@ -164,11 +165,13 @@ const ManageMembers = () => {
           <Typography color="error">{error.message}</Typography>
         ) : (
             <ThemeProvider theme={darkTheme}>
-                <MemberTable
-                    members={memberList}
-                    handleBlockMember={handleBlockMember}
-                    handleUnblockMember={handleUnblockMember}
-                />
+                <Paper style={{ backgroundColor: '#333', color: 'white' }}>
+                    <MemberTable
+                        members={memberList}
+                        handleBlockMember={handleBlockMember}
+                        handleUnblockMember={handleUnblockMember}
+                    />
+                </Paper>
             </ThemeProvider>
         )}
       </div>
