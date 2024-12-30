@@ -9,9 +9,11 @@ import DeveloperPage from '../components/developer/DeveloperPage';
 import AdminLogin from '../components/admin/AdminLogin';
 import SubAdminLogin from '../components/admin/SubAdminLogin';
 import AdminDashboard from '../components/admin/AdminDashboard';
-import MainLayout from '../components/layout/MainLayout';
-import PublicLayout from '../components/layout/PublicLayout'; // Import the PublicLayout
+import MainLayout from '../layouts/MainLayout';
+import PublicLayout from '../layouts/PublicLayout'; // Import the PublicLayout
 import AdminLayout from '../layouts/AdminLayout';
+import ManageMembers from '../components/admin/ManageMembers';
+import ManageAdmins from '../components/admin/ManageAdmins';
 
 const AppRouter = () => {
   return (
@@ -46,6 +48,16 @@ const AppRouter = () => {
         <Route path="/admin/dashboard" element={
           <AdminLayout>
             <AdminDashboard />
+          </AdminLayout>
+        } />
+        <Route path="/admin/manage-members" element={
+          <AdminLayout>
+            <ManageMembers />
+          </AdminLayout>
+        } />
+         <Route path="/admin/manage-admins" element={
+          <AdminLayout>
+            <ManageAdmins />
           </AdminLayout>
         } />
       </Routes>

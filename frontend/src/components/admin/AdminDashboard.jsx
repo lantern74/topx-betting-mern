@@ -1,11 +1,16 @@
 import React from 'react';
+import styles from './AdminDashboard.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <div className="bg-red-500 w-48 h-48"></div>
-      {/* Add dashboard content here */}
+    <div className={styles.dashboardContainer}>
+      <h1 className={styles.dashboardTitle}>{t("管理員儀表板")}</h1>
+      <div className={styles.dashboardContent}>
+        <p>{t("歡迎來到管理員儀表板。")}</p>
+        {/* Add dashboard content here */}
+      </div>
     </div>
   );
 };
