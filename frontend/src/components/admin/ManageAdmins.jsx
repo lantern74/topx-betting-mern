@@ -33,6 +33,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import useGetAllSubAdmins from '../../hooks/useGetAllSubAdmins';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const ManageAdmins = () => {
   const { t } = useTranslation();
@@ -46,6 +47,7 @@ const ManageAdmins = () => {
   const [editAdmin, setEditAdmin] = useState({ id: null, username: '' });
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteAdminId, setDeleteAdminId] = useState(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (subAdmins) {
@@ -103,7 +105,7 @@ const ManageAdmins = () => {
   const handleEditAdmin = async () => {
     try {
       await api.put(`/admin/subadmins/${editAdmin.id}`, { username: editAdmin.username });
-      fetchAdmins();
+      queryClient.invalidateQueries(['subadmins']);
       handleEditClose();
     } catch (err) {
       console.error('Error updating admin:', err);
@@ -120,14 +122,19 @@ const ManageAdmins = () => {
     setDeleteAdminId(null);
   };
 
-  const handleDeleteAdmin = async () => {
-    try {
-      await api.delete(`/admin/subadmins/${deleteAdminId}`);
-      fetchAdmins();
+  const deleteMutation = useMutation({
+    mutationFn: (id) => api.delete(`/admin/subadmins/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['subadmins']);
       handleDeleteClose();
-    } catch (err) {
-      console.error('Error deleting admin:', err);
+    },
+    onError: (error) => {
+      console.error('Error deleting admin:', error);
     }
+  });
+
+  const handleDeleteAdmin = async () => {
+    deleteMutation.mutate(deleteAdminId);
   };
 
   const columns = useMemo(
@@ -291,8 +298,8 @@ const ManageAdmins = () => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleDeleteClose}>{t('取消')}</Button>
-              <Button onClick={handleDeleteAdmin} color="error">
-                {t('刪除')}
+              <Button onClick={handleDeleteAdmin} color="error" disabled={deleteMutation.isLoading}>
+                {deleteMutation.isLoading ? 'Deleting...' : t('刪除')}
               </Button>
             </DialogActions>
           </Dialog>
