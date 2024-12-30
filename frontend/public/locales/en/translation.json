@@ -113,5 +113,6 @@
     "會員刪除成功": "Member deleted successfully",
     "刪除會員時出錯": "Error deleting member",
     "刪除會員": "Delete Member",
-    "封鎖": "Block"
+    "封鎖": "Block",
+    "解除封鎖": "Unblock"
 }
