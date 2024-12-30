@@ -34,5 +34,8 @@ router.put('/members/:id/block', authenticateAdmin, authorize(['main', 'sub']), 
 // Route to unblock a member (for main and sub admins)
 router.put('/members/:id/unblock', authenticateAdmin, authorize(['main', 'sub']), AdminController.unblockMember);
 
+// Route to update a member (for main and sub admins)
+router.put('/members/:id', authenticateAdmin, authorize(['main', 'sub']), AdminController.updateMember);
+
 
 module.exports = router;

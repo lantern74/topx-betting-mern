@@ -288,6 +288,47 @@ class AdminController {
             res.status(500).json({ message: 'Error unblocking member', error: error.message });
         }
     }
+
+    /**
+     * Updates a member's username, password, and price.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async updateMember(req, res) {
+        try {
+            const { id } = req.params;
+            const { username, password, price } = req.body;
+
+            const updateFields = {};
+            if (username) {
+                updateFields.username = username;
+            }
+            if (password) {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                updateFields.password = hashedPassword;
+            }
+            if (price) {
+                updateFields.price = price;
+            }
+
+            const updatedMember = await Member.findByIdAndUpdate(
+                id,
+                updateFields,
+                { new: true }
+            );
+
+            if (!updatedMember) {
+                return res.status(404).json({ message: 'Member not found' });
+            }
+
+            res.status(200).json({ message: 'Member updated successfully', updatedMember });
+        } catch (error) {
+            res.status(500).json({ message: 'Error updating member', error: error.message });
+        }
+    }
 }
 
 module.exports = AdminController;

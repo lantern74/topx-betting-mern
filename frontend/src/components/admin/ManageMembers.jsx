@@ -36,6 +36,11 @@ const ManageMembers = () => {
   const passwordRef = React.useRef();
   const priceRef = React.useRef();
   const [dialogError, setDialogError] = useState(null);
+    const [editOpen, setEditOpen] = useState(false);
+    const [editMember, setEditMember] = useState({ id: null, username: '', password: '', price: '' });
+    const editUsernameRef = React.useRef();
+    const editPasswordRef = React.useRef();
+    const editPriceRef = React.useRef();
   const { userRole } = useAuthStore();
 
     const darkTheme = createTheme({
@@ -144,6 +149,45 @@ const ManageMembers = () => {
         addMutation.mutate(newMember);
     };
 
+    const handleEditOpen = (member) => {
+        setEditMember({ id: member._id, username: member.username, password: '', price: member.price });
+        setEditOpen(true);
+        // Set the initial values of the refs when the dialog opens
+        setTimeout(() => {
+            if (editUsernameRef.current) {
+                editUsernameRef.current.value = member.username;
+            }
+            if (editPasswordRef.current) {
+                editPasswordRef.current.value = ''; // Or member.password if you want to show the existing password
+            }
+            if (editPriceRef.current) {
+                editPriceRef.current.value = member.price;
+            }
+        }, 0);
+    };
+
+    const handleEditClose = () => {
+        setEditOpen(false);
+        setEditMember({ id: null, username: '', password: '', price: '' });
+    };
+
+    const handleEditMember = async () => {
+        try {
+            await api.put(`/admin/members/${editMember.id}`, {
+                username: editUsernameRef.current.value,
+                password: editPasswordRef.current.value,
+                price: editPriceRef.current.value,
+            });
+            queryClient.invalidateQueries(['members']);
+            handleEditClose();
+            setSnackbarMessage(t('會員編輯成功'));
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+        } catch (err) {
+            console.error('Error updating member:', err);
+        }
+    };
+
 
   return (
     <div className={styles.manageMembersContainer}>
@@ -169,6 +213,7 @@ const ManageMembers = () => {
                         members={memberList}
                         handleBlockMember={handleBlockMember}
                         handleUnblockMember={handleUnblockMember}
+                        handleEditOpen={handleEditOpen}
                     />
                 </Paper>
             </ThemeProvider>
@@ -208,6 +253,41 @@ const ManageMembers = () => {
                 <Button onClick={handleCloseDialog}>{t('取消')}</Button>
                 <Button onClick={handleAddMember} color="primary" disabled={addMutation.isLoading}>
                     {addMutation.isLoading ? 'Loading...' : t('新增')}
+                </Button>
+            </DialogActions>
+        </Dialog>
+        <Dialog open={editOpen} onClose={handleEditClose} sx={{ marginTop: '20px' }}>
+            <DialogTitle>{t('編輯會員')}</DialogTitle>
+            <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <TextField
+                    inputRef={editUsernameRef}
+                    autoFocus
+                    label={t('用戶名')}
+                    type="text"
+                    fullWidth
+                    name="username"
+                />
+                <TextField
+                    inputRef={editPasswordRef}
+                    label={t('密碼')}
+                    type="password"
+                    fullWidth
+                    name="password"
+                    autoComplete="new-password"
+                />
+                <TextField
+                    inputRef={editPriceRef}
+                    label={t('價格')}
+                    type="number"
+                    fullWidth
+                    name="price"
+                    autoComplete="off"
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleEditClose}>{t('取消')}</Button>
+                <Button onClick={handleEditMember} color="primary">
+                    {t('儲存')}
                 </Button>
             </DialogActions>
         </Dialog>
