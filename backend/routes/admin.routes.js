@@ -37,5 +37,8 @@ router.put('/members/:id/unblock', authenticateAdmin, authorize(['main', 'sub'])
 // Route to update a member (for main and sub admins)
 router.put('/members/:id', authenticateAdmin, authorize(['main', 'sub']), AdminController.updateMember);
 
+// Route to delete a member (for main and sub admins)
+router.delete('/members/:id', authenticateAdmin, authorize(['main', 'sub']), AdminController.deleteMember);
+
 
 module.exports = router;

@@ -329,6 +329,29 @@ class AdminController {
             res.status(500).json({ message: 'Error updating member', error: error.message });
         }
     }
+
+    /**
+     * Deletes a member.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async deleteMember(req, res) {
+        try {
+            const { id } = req.params;
+            const deletedMember = await Member.findByIdAndDelete(id);
+
+            if (!deletedMember) {
+                return res.status(404).json({ message: 'Member not found' });
+            }
+
+            res.status(200).json({ message: 'Member deleted successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error deleting member', error: error.message });
+        }
+    }
 }
 
 module.exports = AdminController;
