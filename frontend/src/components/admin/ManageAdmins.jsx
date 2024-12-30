@@ -31,6 +31,7 @@ import {
   getSortedRowModel,
   flexRender,
 } from '@tanstack/react-table';
+import useGetAllSubAdmins from '../../hooks/useGetAllSubAdmins';
 
 const ManageAdmins = () => {
   const { t } = useTranslation();
@@ -39,10 +40,17 @@ const ManageAdmins = () => {
   const [newAdmin, setNewAdmin] = useState({ username: '', password: '' });
   const { mutate, isLoading, error } = useRegisterSubAdmin();
   const [dialogError, setDialogError] = useState(null);
+  const { data: subAdmins, isLoading: isSubAdminsLoading, error: subAdminsError } = useGetAllSubAdmins();
 
   useEffect(() => {
     fetchAdmins();
   }, []);
+
+  useEffect(() => {
+    if (subAdmins) {
+      setAdmins(subAdmins);
+    }
+  }, [subAdmins]);
 
   const fetchAdmins = async () => {
     try {
@@ -202,6 +210,7 @@ const ManageAdmins = () => {
           </Dialog>
         </CardContent>
       </Card>
+      {subAdminsError && <Typography variant="body2" color="error" mt={2}>{subAdminsError.message}</Typography>}
     </div>
   );
 };
