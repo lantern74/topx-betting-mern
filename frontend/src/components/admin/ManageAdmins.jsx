@@ -19,7 +19,6 @@ import {
   Typography,
   Card,
   CardContent,
-  useTheme,
 } from '@mui/material';
 import { Edit as EditIcon, Add as AddIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
@@ -40,7 +39,6 @@ const ManageAdmins = () => {
   const [newAdmin, setNewAdmin] = useState({ username: '', password: '' });
   const { mutate, isLoading, error } = useRegisterSubAdmin();
   const [dialogError, setDialogError] = useState(null);
-  const theme = useTheme();
 
   useEffect(() => {
     fetchAdmins();
@@ -112,7 +110,7 @@ const ManageAdmins = () => {
   return (
     <div className={styles.manageAdminsContainer}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h4" component="h1" className={styles.manageAdminsTitle} sx={{ color: theme.palette.text.primary }}>{t('管理管理員')}</Typography>
+        <Typography variant="h4" component="h1" className={styles.manageAdminsTitle} style={{ color: 'white' }}>{t('管理管理員')}</Typography>
         <Button
           variant="contained"
           color="primary"
@@ -122,15 +120,15 @@ const ManageAdmins = () => {
           {t('新增管理員')}
         </Button>
       </Box>
-      <Card sx={{ backgroundColor: theme.palette.background.paper, color: theme.palette.text.primary }}>
+      <Card style={{ backgroundColor: '#333', color: 'white' }}>
         <CardContent>
-          <TableContainer component={Paper} sx={{ backgroundColor: theme.palette.background.paper, color: theme.palette.text.primary }}>
+          <TableContainer component={Paper} style={{ backgroundColor: '#333', color: 'white' }}>
             <Table>
               <TableHead>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
-                      <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer', color: theme.palette.text.primary}}>
+                      <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer', color: 'white'}}>
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {{
                           asc: ' ⬆️',
@@ -145,7 +143,7 @@ const ManageAdmins = () => {
                 {table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} sx={{ color: theme.palette.text.primary }}>
+                      <TableCell key={cell.id} style={{ color: 'white' }}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
