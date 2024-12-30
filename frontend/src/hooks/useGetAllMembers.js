@@ -12,6 +12,7 @@ const useGetAllMembers = () => {
         throw new Error(handleApiError(error));
       }
     },
+    staleTime: 60000, // 1 minute
   });
 };
 
