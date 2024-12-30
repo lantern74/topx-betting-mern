@@ -15,10 +15,9 @@ const SubAdminLoginForm = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post('http://localhost:5000/admin/login', {
         username,
         password,
-        role: 'sub',
       });
 
       if (response.status === 200) {

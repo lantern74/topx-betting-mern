@@ -15,10 +15,9 @@ const AdminLoginForm = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("http://localhost:5000/admin/login", {
         username,
         password,
-        role: "admin",
       });
 
       if (response.status === 200) {
