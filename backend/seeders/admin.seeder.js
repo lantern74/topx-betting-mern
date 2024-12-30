@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { Admin } = require('../models/admin.model');
 const TelemetryService = require('../services/telemetry.service');
 
