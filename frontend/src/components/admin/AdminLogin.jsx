@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const SubAdminLogin = () => {
+const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,11 +16,11 @@ const SubAdminLogin = () => {
       const response = await axios.post('http://localhost:5000/login', {
         username,
         password,
-        role: 'sub', // Indicate sub-admin login
+        role: 'admin', // Indicate admin login
       });
 
       if (response.status === 200) {
-        navigate('/admin/dashboard'); // Redirect to admin dashboard (or a different route if needed)
+        navigate('/admin/dashboard'); // Redirect to admin dashboard
       } else {
         setError('Login failed');
       }
@@ -31,7 +31,7 @@ const SubAdminLogin = () => {
 
   return (
     <div>
-      <h1>Sub-Admin Login</h1>
+      <h1>Admin Login</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
@@ -58,4 +58,4 @@ const SubAdminLogin = () => {
   );
 };
 
-export default SubAdminLogin;
+export default AdminLogin;

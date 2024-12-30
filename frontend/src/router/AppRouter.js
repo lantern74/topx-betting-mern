@@ -6,7 +6,7 @@ import ViewMatches from '../components/matches/ViewMatches'
 import MatchResult from '../components/matches/MatchResult'
 import NotFound from "../views/NotFound";
 import DeveloperPage from '../components/developer/DeveloperPage';
-import AdminLogin from '../components/admin/Login';
+import AdminLogin from '../components/admin/AdminLogin';
 import SubAdminLogin from '../components/admin/SubAdminLogin';
 import AdminDashboard from '../components/admin/AdminDashboard';
 
