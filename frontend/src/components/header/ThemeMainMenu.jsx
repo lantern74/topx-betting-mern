@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect } from 'react';
 import {Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import useAuthStore from '../../store/authStore';
 
 const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -24,6 +25,8 @@ const ScrollToHash = () => {
 
 const ThemeMainMenu = () => {
   const { t } = useTranslation();
+  const { isAuthenticated, userRole } = useAuthStore();
+
     return (
         <>
             <ScrollToHash />
@@ -43,9 +46,11 @@ const ThemeMainMenu = () => {
                     <li className="nav-item">
                         <Link to="/#contactUs" className="nav-link dropdown-toggle" role="button">{t("聯絡我們")}</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link to="/view-matches" className="nav-link dropdown-toggle">{t("賽事系統")}</Link>
-                    </li>
+                    {isAuthenticated && userRole !== 'member' && (
+                      <li className="nav-item">
+                          <Link to="/view-matches" className="nav-link dropdown-toggle">{t("賽事系統")}</Link>
+                      </li>
+                    )}
                 </ul>
             </Fragment>
         </>
