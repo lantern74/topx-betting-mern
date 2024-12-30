@@ -46,7 +46,7 @@ const AdminLayout = ({ children }) => {
   const drawer = (
     <div className={styles.sidebarContent}>
       <Typography variant="h6" className={styles.adminTitle} sx={{textAlign: 'center', my: 2}}>
-        Admin Panel
+        <img src="/images/logo/topx-logo.png" alt="Logo" style={{ width: '150px', display: 'block', margin: '0 auto 10px' }} />
       </Typography>
       <List>
         <ListItem disablePadding>
@@ -101,7 +101,7 @@ const AdminLayout = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', display: { xs: 'none', sm: 'block' } }}>
-            Admin Panel
+            <img src="/images/logo/topx-logo.png" alt="Logo" style={{ height: '40px' }} />
           </Typography>
         </Toolbar>
       </AppBar>
