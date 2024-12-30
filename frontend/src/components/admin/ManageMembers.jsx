@@ -262,6 +262,7 @@ const ManageMembers = () => {
                 <TextField
                     inputRef={editUsernameRef}
                     autoFocus
+                    sx={{ mt: 2 }}
                     label={t('用戶名')}
                     type="text"
                     fullWidth
