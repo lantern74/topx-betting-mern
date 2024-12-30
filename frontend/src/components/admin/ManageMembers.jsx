@@ -374,4 +374,22 @@ const ManageMembers = () => {
             <DialogActions>
                 <Button onClick={handleDeleteMemberClose}>{t('取消')}</Button>
                 <Button onClick={handleDeleteMember} color="error" disabled={deleteMutation.isLoading}>
-                    {deleteMutation.isLoading ? 'Deleting...' : t('刪除')}
+                    {deleteMutation.isLoading ? 'Deleting...' : <>{t('刪除')}</>}
+                </Button>
+            </DialogActions>
+        </Dialog>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </div>
+  );
+};
+
+export default ManageMembers;
