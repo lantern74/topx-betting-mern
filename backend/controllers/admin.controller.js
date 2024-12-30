@@ -95,7 +95,7 @@ class AdminController {
       res.status(201).json({ message: 'Member registered successfully' });
     } catch (error) {
       res.status(500).json({ message: 'Error registering member', error: error.message });
-    }
+     }
   }
 
   /**
@@ -108,12 +108,31 @@ class AdminController {
    */
   static async getAllMembers(req, res) {
     try {
+      console.log("AdminController: getAllMembers - fetching members");
       const members = await Member.find().populate('createdBy', 'username');
       res.status(200).json(members);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching members', error: error.message });
     }
   }
+
+    /**
+   * Gets all sub-admins.
+   * @param {object} req - The request object.
+   * @param {object} res - The response object.
+   * @returns {Promise<void>}
+   * @static
+   * @async
+   */
+    static async getAllSubAdmins(req, res) {
+        try {
+            console.log("AdminController: getAllSubAdmins - fetching sub-admins");
+            const subAdmins = await Admin.find({ role: 'sub' });
+            res.status(200).json(subAdmins);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching sub-admins', error: error.message });
+        }
+    }
 }
 
 module.exports = AdminController;
