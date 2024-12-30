@@ -29,7 +29,7 @@ class AdminController {
         return res.status(401).json({ message: 'Invalid password' });
       }
 
-      res.status(200).json({ message: 'Admin login successful', role: admin.role });
+      res.status(200).json({ message: 'Admin login successful', role: admin.role, token: 'admin-token' });
     } catch (error) {
       res.status(500).json({ message: 'Error logging in', error: error.message });
     }

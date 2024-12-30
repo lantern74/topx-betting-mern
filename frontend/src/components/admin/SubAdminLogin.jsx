@@ -1,10 +1,28 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import SubAdminLoginForm from "./SubAdminLoginForm";
+import useSubAdminLogin from "../../hooks/useSubAdminLogin";
+import useAuthStore from "../../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const SubAdminLogin = () => {
   const { t } = useTranslation();
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
+  const { mutate, isLoading, error } = useSubAdminLogin();
+  const [loginError, setLoginError] = useState(null);
+
+  const handleSubAdminLogin = async (credentials) => {
+    try {
+      const data = await mutateAsync(credentials);
+      login(data.role);
+      navigate('/admin/dashboard');
+    } catch (error) {
+      setLoginError(error.message);
+    }
+  };
+
   return (
     <Fragment>
       <div className="main-page-wrapper">
@@ -20,7 +38,7 @@ const SubAdminLogin = () => {
                     <h3 className="form-title pb-40 lg-pb-20">
                       {t("副管理員登入")}
                     </h3>
-                    <SubAdminLoginForm />
+                    <SubAdminLoginForm onSubmit={handleSubAdminLogin} loading={isLoading} error={loginError} />
                   </div>
                 </div>
               </div>
