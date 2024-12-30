@@ -15,7 +15,7 @@ const AdminLogin = () => {
 
   const handleAdminLogin = async (credentials) => {
     try {
-      const data = await mutateAsync(credentials);
+      const data = await mutate(credentials);
       login(data.role);
       navigate('/admin/dashboard');
     } catch (error) {
