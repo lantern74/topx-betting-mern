@@ -205,13 +205,13 @@ const ManageAdmins = () => {
       </Box>
       <Card style={{ backgroundColor: '#333', color: 'white' }}>
         <CardContent>
-          <TableContainer component={Paper} style={{ backgroundColor: '#333', color: 'white' }}>
+          <TableContainer component={Paper} >
             <Table>
               <TableHead>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
-                      <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer', color: 'white'}}>
+                      <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {{
                           asc: ' ⬆️',
@@ -226,7 +226,7 @@ const ManageAdmins = () => {
                 {table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} style={{ color: 'white' }}>
+                      <TableCell key={cell.id} >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
