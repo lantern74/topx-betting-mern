@@ -150,46 +150,14 @@ class AdminController {
   static async updateSubAdmin(req, res) {
     try {
       const { id } = req.params;
-      const { username } = req.body;
+      const { username, password } = req.body;
+
+        const updateFields = { username };
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            updateFields.password = hashedPassword;
+        }
 
       const updatedAdmin = await Admin.findByIdAndUpdate(
         id,
-        { username },
-        { new: true }
-      );
-
-      if (!updatedAdmin) {
-        return res.status(404).json({ message: 'Sub-admin not found' });
-      }
-
-      res.status(200).json({ message: 'Sub-admin updated successfully', updatedAdmin });
-    } catch (error) {
-      res.status(500).json({ message: 'Error updating sub-admin', error: error.message });
-    }
-  }
-
-  /**
-   * Deletes a sub-admin.
-   * @param {object} req - The request object.
-   * @param {object} res - The response object.
-   * @returns {Promise<void>}
-   * @static
-   * @async
-   */
-  static async deleteSubAdmin(req, res) {
-    try {
-      const { id } = req.params;
-      const deletedAdmin = await Admin.findByIdAndDelete(id);
-
-      if (!deletedAdmin) {
-        return res.status(404).json({ message: 'Sub-admin not found' });
-      }
-
-      res.status(200).json({ message: 'Sub-admin deleted successfully' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error deleting sub-admin', error: error.message });
-    }
-  }
-}
-
-module.exports = AdminController;
+        updateFields,

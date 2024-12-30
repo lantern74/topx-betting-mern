@@ -16,6 +16,9 @@ router.get('/subadmins', authenticateAdmin, authorize(['main']), AdminController
 // Route to update a sub-admin (for main admin)
 router.put('/subadmins/:id', authenticateAdmin, authorize(['main']), AdminController.updateSubAdmin);
 
+// Route to update a sub-admin's password (for main admin)
+router.put('/subadmins/:id/password', authenticateAdmin, authorize(['main']), AdminController.updateSubAdminPassword);
+
 // Route to delete a sub-admin (for main admin)
 router.delete('/subadmins/:id', authenticateAdmin, authorize(['main']), AdminController.deleteSubAdmin);
 

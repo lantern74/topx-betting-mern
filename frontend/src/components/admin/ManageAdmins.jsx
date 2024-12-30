@@ -46,7 +46,7 @@ const ManageAdmins = () => {
   const [dialogError, setDialogError] = useState(null);
   const { data: subAdmins, isLoading: isSubAdminsLoading, error: subAdminsError } = useGetAllSubAdmins();
   const [editOpen, setEditOpen] = useState(false);
-  const [editAdmin, setEditAdmin] = useState({ id: null, username: '' });
+  const [editAdmin, setEditAdmin] = useState({ id: null, username: '', password: '' });
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteAdminId, setDeleteAdminId] = useState(null);
   const queryClient = useQueryClient();
@@ -102,22 +102,22 @@ const ManageAdmins = () => {
   };
 
   const handleEditOpen = (admin) => {
-    setEditAdmin({ id: admin._id, username: admin.username });
+    setEditAdmin({ id: admin._id, username: admin.username, password: '' });
     setEditOpen(true);
   };
 
   const handleEditClose = () => {
     setEditOpen(false);
-    setEditAdmin({ id: null, username: '' });
+    setEditAdmin({ id: null, username: '', password: '' });
   };
 
   const handleEditInputChange = (e) => {
-    setEditAdmin({ ...editAdmin, username: e.target.value });
+    setEditAdmin({ ...editAdmin, [e.target.name]: e.target.value });
   };
 
   const handleEditAdmin = async () => {
     try {
-      await api.put(`/admin/subadmins/${editAdmin.id}`, { username: editAdmin.username });
+      await api.put(`/admin/subadmins/${editAdmin.id}`, { username: editAdmin.username, password: editAdmin.password });
       queryClient.invalidateQueries(['subadmins']);
       handleEditClose();
     } catch (err) {
@@ -288,7 +288,7 @@ const ManageAdmins = () => {
               </Button>
             </DialogActions>
           </Dialog>
-          <Dialog open={editOpen} onClose={handleEditClose}>
+          <Dialog open={editOpen} onClose={handleEditClose} sx={{marginTop: '20px'}}>
             <DialogTitle>{t('編輯管理員')}</DialogTitle>
             <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <TextField
@@ -300,6 +300,16 @@ const ManageAdmins = () => {
                 name="username"
                 value={editAdmin.username}
                 onChange={handleEditInputChange}
+              />
+                <TextField
+                
+                label={t('密碼')}
+                type="password"
+                fullWidth
+                name="password"
+                value={editAdmin.password}
+                onChange={handleEditInputChange}
+                autoComplete="off"
               />
             </DialogContent>
             <DialogActions>
