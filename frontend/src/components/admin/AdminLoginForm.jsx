@@ -29,8 +29,22 @@ const AdminLoginForm = () => {
         setError(t("登錄失敗"));
       }
     } catch (err) {
-      handleApiError(err);
-      setError(err.response?.data?.message || t("登錄時出錯"));
+        handleApiError(err);
+        if (err.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            if (err.response.status === 401) {
+              setError(t("用戶名或密碼錯誤"));
+            } else if (err.response.status === 404) {
+              setError(t("管理員未找到"));
+            }
+             else {
+              setError(err.response?.data?.message || t("登錄時出錯"));
+            }
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            setError(t("登錄時出錯"));
+          }
     }
   };
 
