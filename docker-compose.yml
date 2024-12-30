@@ -27,13 +27,20 @@ services:
 
   mongodb:
     image: mongo:latest
-    ports:
-      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongodb_data:/data/db
+
+  mongo-compass:
+    image: mongocompass/compass
+    ports:
+      - "4401:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://root:example@mongodb:27017/betting-china?authSource=admin
 
 volumes:
   mongodb_data:
