@@ -11,13 +11,11 @@ services:
       - backend
 
   backend:
-    image: node:18-alpine
+    image: oven/bun
     working_dir: /app
     volumes:
       - ./:/app
-    command: sh -c "npm install && npm run dev"
-    ports:
-      - "5000:5000"
+    command: bun run backend/index.js
     environment:
       - ATLAS_URI=mongodb://root:example@host.docker.internal:27017/betting-china?authSource=admin
     networks:
