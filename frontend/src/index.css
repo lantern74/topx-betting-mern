@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles can go here */
+.match-card {
+  @apply bg-white rounded-lg shadow-md p-4;
+}
+
+.team-name {
+  @apply text-lg font-semibold;
+}
+
+.score {
+  @apply text-2xl font-bold text-gray-700;
+}
