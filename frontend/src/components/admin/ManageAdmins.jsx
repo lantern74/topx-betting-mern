@@ -93,7 +93,11 @@ const ManageAdmins = () => {
       handleCloseDialog();
     },
     onError: (error) => {
-      setDialogError(error.message);
+        if (error.response && error.response.status === 400) {
+            setDialogError(t('用戶名已存在'));
+        } else {
+            setDialogError(error.message);
+        }
     }
   });
 
