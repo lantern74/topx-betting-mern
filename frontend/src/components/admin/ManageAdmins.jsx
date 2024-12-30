@@ -256,6 +256,7 @@ const ManageAdmins = () => {
                 name="username"
                 value={newAdmin.username}
                 onChange={handleInputChange}
+                autoComplete="off"
               />
               <TextField
                 margin="dense"
@@ -265,6 +266,7 @@ const ManageAdmins = () => {
                 name="password"
                 value={newAdmin.password}
                 onChange={handleInputChange}
+                autoComplete="off"
               />
               {dialogError && <p className="error-message">{dialogError}</p>}
             </DialogContent>
