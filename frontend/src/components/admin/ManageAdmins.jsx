@@ -205,6 +205,7 @@ const ManageAdmins = () => {
       </Box>
       <Card style={{ backgroundColor: '#333', color: 'white' }}>
         <CardContent>
+            <ThemeProvider theme={darkTheme}>
           <TableContainer component={Paper} >
             <Table>
               <TableHead>
@@ -252,7 +253,8 @@ const ManageAdmins = () => {
               {t('下一頁')}
             </Button>
           </Box>
-            <ThemeProvider theme={darkTheme}>
+            </ThemeProvider>
+          <ThemeProvider theme={darkTheme}>
           <Dialog open={openDialog} onClose={handleCloseDialog} >
             <DialogTitle>{t('新增管理員')}</DialogTitle>
             <DialogContent>
