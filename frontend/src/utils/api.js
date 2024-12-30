@@ -19,8 +19,17 @@ const setAuthHeader = (token) => {
 // Function to handle API errors
 const handleApiError = (error) => {
   console.error('API Error:', error);
-  // You can add more sophisticated error handling here, like showing a notification
-  throw error; // Re-throw the error to be caught by the caller
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    return error.response.data.message || 'An error occurred';
+  } else if (error.request) {
+    // The request was made but no response was received
+    return 'No response from server';
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    return error.message || 'An error occurred';
+  }
 };
 
 export { api, setAuthHeader, handleApiError };
