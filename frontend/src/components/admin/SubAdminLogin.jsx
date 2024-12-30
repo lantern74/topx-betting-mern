@@ -10,7 +10,7 @@ const SubAdminLogin = () => {
   const { t } = useTranslation();
   const { login } = useAuthStore();
   const navigate = useNavigate();
-  const { mutate, isLoading, error } = useSubAdminLogin();
+  const { mutateAsync, isLoading, error } = useSubAdminLogin();
   const [loginError, setLoginError] = useState(null);
 
   const handleSubAdminLogin = async (credentials) => {
