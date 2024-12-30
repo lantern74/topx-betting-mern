@@ -22,6 +22,8 @@ import {
   Tooltip,
   createTheme,
   ThemeProvider,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import { Edit as EditIcon, Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
@@ -52,6 +54,9 @@ const ManageAdmins = () => {
   const [editAdmin, setEditAdmin] = useState({ id: null, username: '', password: '' });
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteAdminId, setDeleteAdminId] = useState(null);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
   const queryClient = useQueryClient();
 
     const darkTheme = createTheme({
@@ -96,6 +101,9 @@ const ManageAdmins = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(['subadmins']);
       handleCloseDialog();
+        setSnackbarMessage(t('管理員新增成功'));
+        setSnackbarSeverity('success');
+        setSnackbarOpen(true);
     },
     onError: (error) => {
         if (error.response && error.response.status === 400) {
@@ -141,6 +149,9 @@ const ManageAdmins = () => {
             });
             queryClient.invalidateQueries(['subadmins']);
             handleEditClose();
+            setSnackbarMessage(t('管理員編輯成功'));
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
         } catch (err) {
             console.error('Error updating admin:', err);
         }
@@ -161,6 +172,9 @@ const ManageAdmins = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(['subadmins']);
       handleDeleteClose();
+        setSnackbarMessage(t('管理員刪除成功'));
+        setSnackbarSeverity('success');
+        setSnackbarOpen(true);
     },
     onError: (error) => {
       console.error('Error deleting admin:', error);
@@ -170,6 +184,13 @@ const ManageAdmins = () => {
   const handleDeleteAdmin = async () => {
     deleteMutation.mutate(deleteAdminId);
   };
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
 
   const columns = useMemo(
     () => [
@@ -352,6 +373,16 @@ const ManageAdmins = () => {
     </ThemeProvider>
     </CardContent>
 </Card>
+        <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+            <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                {snackbarMessage}
+            </Alert>
+        </Snackbar>
 {subAdminsError && (
     <Typography variant="body2" color="error" mt={2}>
     {subAdminsError.message}
