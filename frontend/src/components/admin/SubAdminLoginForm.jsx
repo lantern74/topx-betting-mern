@@ -25,12 +25,10 @@ const SubAdminLoginForm = () => {
       if (response.status === 200) {
         login('sub');
         navigate('/admin/dashboard');
-      } else {
-        setError(t('登錄失敗'));
       }
     } catch (err) {
-      handleApiError(err);
-      setError(err.response?.data?.message || t('登錄時出錯'));
+      const message = handleApiError(err);
+      setError(message || t('登錄時出錯'));
     }
   };
 

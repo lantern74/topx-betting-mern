@@ -25,11 +25,9 @@ const AdminLoginForm = () => {
       if (response.status === 200) {
         login('main');
         navigate("/admin/dashboard");
-      } else {
-        setError(t("登錄失敗"));
       }
     } catch (err) {
-        handleApiError(err);
+        const message = handleApiError(err);
         if (err.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
@@ -39,11 +37,11 @@ const AdminLoginForm = () => {
               setError(t("管理員未找到"));
             }
              else {
-              setError(err.response?.data?.message || t("登錄時出錯"));
+              setError(message || t("登錄時出錯"));
             }
           } else {
             // Something happened in setting up the request that triggered an Error
-            setError(t("登錄時出錯"));
+            setError(message || t("登錄時出錯"));
           }
     }
   };

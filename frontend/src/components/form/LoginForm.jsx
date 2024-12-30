@@ -45,12 +45,10 @@ const LoginForm = () => {
         if (response.status === 200) {
           login('member');
           navigate('/');
-        } else {
-          setError(t('登錄失敗'));
         }
       } catch (err) {
-        handleApiError(err);
-        setError(err.response?.data?.message || t('登錄時出錯'));
+        const message = handleApiError(err);
+        setError(message || t('登錄時出錯'));
       }
     };
 
