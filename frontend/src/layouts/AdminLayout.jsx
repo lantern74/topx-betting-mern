@@ -90,7 +90,7 @@ const AdminLayout = ({ children }) => {
               <ListItemIcon>
                 <AdminPanelSettingsIcon sx={{ color: 'white' }} />
               </ListItemIcon>
-              <ListItemText primary={t("管理管理員")} />
+              <ListItemText primary={t("管理副管理員")} />
             </ListItemButton>
           </ListItem>
         )}
