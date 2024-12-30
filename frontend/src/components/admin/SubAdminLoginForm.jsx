@@ -23,7 +23,7 @@ const SubAdminLoginForm = () => {
       });
 
       if (response.status === 200) {
-        login('sub');
+        login('sub', response.data.token);
         navigate('/admin/dashboard');
       }
     } catch (err) {

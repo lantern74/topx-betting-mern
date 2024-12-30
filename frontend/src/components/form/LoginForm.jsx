@@ -42,7 +42,7 @@ const LoginForm = () => {
         });
   
         if (response.status === 200) {
-          login('member');
+          login('member', response.data.token);
           navigate('/');
         }
       } catch (err) {

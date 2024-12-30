@@ -23,7 +23,7 @@ const AdminLoginForm = () => {
       });
 
       if (response.status === 200) {
-        login('main');
+        login('main', response.data.token);
         navigate("/admin/dashboard");
       }
     } catch (err) {
