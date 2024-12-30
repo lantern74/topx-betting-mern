@@ -14,6 +14,8 @@ import {
   createTheme,
   ThemeProvider,
   Button,
+  Card,
+  CardContent,
 } from '@mui/material';
 import { Block as BlockIcon, CheckCircle as CheckCircleIcon } from '@mui/icons-material';
 import {
@@ -81,53 +83,57 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                    {{
-                        asc: ' ⬆️',
-                        desc: ' ⬇️',
-                    }[header.column.getIsSorted() ]}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableHead>
-        <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-        <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
-            <Button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-            >
-                {t('上一頁')}
-            </Button>
-            <span>
-              {t('第')} {table.getState().pagination.pageIndex + 1} {t('頁')} {t('共')} {table.getPageCount()} {t('頁')}
-            </span>
-            <Button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-            >
-                {t('下一頁')}
-            </Button>
-        </Box>
+        <Card style={{ backgroundColor: '#333', color: 'white' }}>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            {table.getHeaderGroups().map((headerGroup) => (
+                                <TableRow key={headerGroup.id}>
+                                    {headerGroup.headers.map((header) => (
+                                        <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
+                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                            {{
+                                                asc: ' ⬆️',
+                                                desc: ' ⬇️',
+                                            }[header.column.getIsSorted() ]}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))}
+                        </TableHead>
+                        <TableBody>
+                            {table.getRowModel().rows.map((row) => (
+                                <TableRow key={row.id}>
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell key={cell.id}>
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
+                    <Button
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {t('上一頁')}
+                    </Button>
+                    <span>
+                      {t('第')} {table.getState().pagination.pageIndex + 1} {t('頁')} {t('共')} {table.getPageCount()} {t('頁')}
+                    </span>
+                    <Button
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {t('下一頁')}
+                    </Button>
+                </Box>
+            </CardContent>
+        </Card>
     </ThemeProvider>
   );
 };
