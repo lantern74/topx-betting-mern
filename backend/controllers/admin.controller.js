@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { Admin } = require('../models/admin.model');
 const { Member } = require('../models/member.model');
 
@@ -29,7 +30,11 @@ class AdminController {
         return res.status(401).json({ message: 'Invalid password' });
       }
 
-      res.status(200).json({ message: 'Admin login successful', role: admin.role, token: 'admin-token' });
+      const token = jwt.sign({ id: admin._id, role: admin.role }, process.env.JWT_SECRET || 'your-secret-key', {
+        expiresIn: '1h',
+      });
+
+      res.status(200).json({ message: 'Admin login successful', role: admin.role, token });
     } catch (error) {
       res.status(500).json({ message: 'Error logging in', error: error.message });
     }
