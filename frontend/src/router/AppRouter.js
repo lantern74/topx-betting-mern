@@ -46,6 +46,6 @@ const AppRouter = () => {
       </Routes>
     </Fragment>
   )
-}
+};
 
 export default AppRouter
