@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const adminRoutes = require('./routes/admin.routes');
 const matchRoutes = require('./routes/match.routes');
 const memberRoutes = require('./routes/member.routes');
-const telemetryRoutes = require('./routes/telemetry.routes');
 const path = require('path');
 
 require('dotenv').config();
@@ -25,7 +24,6 @@ connection.once('open', () => {
 app.use('/admin', adminRoutes);
 app.use('/match', matchRoutes);
 app.use('/member', memberRoutes);
-app.use('/telemetry', telemetryRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
