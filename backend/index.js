@@ -5,6 +5,7 @@ const adminRoutes = require('./routes/admin.routes');
 const matchRoutes = require('./routes/match.routes');
 const memberRoutes = require('./routes/member.routes');
 const path = require('path');
+const TelemetryService = require('./services/telemetry.service');
 
 require('dotenv').config();
 
@@ -32,6 +33,20 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
+// Global error handling middleware
+app.use(async (err, req, res, next) => {
+  await TelemetryService.log('error', 'API Error', {
+    error: err.message,
+    stack: err.stack,
+    method: req.method,
+    url: req.originalUrl,
+    body: req.body,
+    params: req.params,
+  });
+  console.error('Global Error Handler:', err);
+  res.status(500).json({ message: 'Internal Server Error' });
 });
 
 
