@@ -271,7 +271,7 @@ const ManageAdmins = () => {
                 name="username"
                 value={newAdmin.username}
                 onChange={handleInputChange}
-                autoComplete="username"
+                autoComplete="new-password"
               />
               <TextField
                 
@@ -281,7 +281,7 @@ const ManageAdmins = () => {
                 name="password"
                 value={newAdmin.password}
                 onChange={handleInputChange}
-                autoComplete="off"
+                autoComplete="new-password"
               />
               {dialogError && <p className="error-message">{dialogError}</p>}
             </DialogContent>
@@ -305,7 +305,7 @@ const ManageAdmins = () => {
                 value={editAdmin.username}
                 onChange={handleEditInputChange}
               />
-                <TextField
+              <TextField
                 
                 label={t('密碼')}
                 type="password"
@@ -313,7 +313,7 @@ const ManageAdmins = () => {
                 name="password"
                 value={editAdmin.password}
                 onChange={handleEditInputChange}
-                autoComplete="off"
+                autoComplete="new-password"
               />
             </DialogContent>
             <DialogActions>
