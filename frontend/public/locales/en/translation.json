@@ -103,5 +103,9 @@
     "管理員編輯成功": "Sub Admin edited successfully",
     "管理員刪除成功": "Sub Admin deleted successfully",
     "價格": "Price",
-    "新增會員": "Add Member"
+    "新增會員": "Add Member",
+    "會員封鎖成功": "Member blocked successfully",
+    "封鎖會員時出錯": "Error blocking member",
+    "會員解除封鎖成功": "Member unblocked successfully",
+    "解除封鎖會員時出錯": "Error unblocking member"
 }
