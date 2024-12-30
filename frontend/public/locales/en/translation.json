@@ -80,5 +80,13 @@
   "管理會員": "Manage Members",
   "管理管理員": "Manage Admins",
   "登出": "Logout",
-  "管理員儀表板": "Admin Dashboard"
+  "管理員儀表板": "Admin Dashboard",
+  "在這裡您可以管理會員。": "Here you can manage members.",
+  "新增管理員": "Add Admin",
+  "取消": "Cancel",
+    "上一頁": "Previous Page",
+  "下一頁": "Next Page",
+  "第": "Page",
+  "頁": "",
+  "共": "of"
 }

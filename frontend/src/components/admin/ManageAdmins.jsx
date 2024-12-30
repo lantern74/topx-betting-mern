@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Table,
@@ -21,6 +21,13 @@ import { Edit as EditIcon, Add as AddIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
 import styles from './ManageAdmins.module.scss';
 import { api } from '../../utils/api';
+import {
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  flexRender,
+} from '@tanstack/react-table';
 
 const ManageAdmins = () => {
   const { t } = useTranslation();
@@ -67,6 +74,36 @@ const ManageAdmins = () => {
     }
   };
 
+  const columns = useMemo(
+    () => [
+      {
+        header: t('用戶名'),
+        accessorKey: 'username',
+      },
+      {
+        header: t('角色'),
+        accessorKey: 'role',
+      },
+      {
+        header: t('操作'),
+        cell: (props) => (
+          <IconButton aria-label="edit">
+            <EditIcon />
+          </IconButton>
+        ),
+      },
+    ],
+    [t]
+  );
+
+  const table = useReactTable({
+    data: admins,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
+
   return (
     <div className={styles.manageAdminsContainer}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
@@ -84,27 +121,50 @@ const ManageAdmins = () => {
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell>{t('用戶名')}</TableCell>
-                <TableCell>{t('角色')}</TableCell>
-                <TableCell>{t('操作')}</TableCell>
-              </TableRow>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {{
+                        asc: ' ⬆️',
+                        desc: ' ⬇️',
+                      }[header.column.getIsSorted() ]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
             </TableHead>
             <TableBody>
-              {admins.map((admin) => (
-                <TableRow key={admin._id}>
-                  <TableCell>{admin.username}</TableCell>
-                  <TableCell>{admin.role}</TableCell>
-                  <TableCell>
-                    <IconButton aria-label="edit">
-                      <EditIcon />
-                    </IconButton>
-                  </TableCell>
+              {table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
+          <Button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            {t('上一頁')}
+          </Button>
+          <span>
+            {t('第')} {table.getState().pagination.pageIndex + 1} {t('頁')} {t('共')} {table.getPageCount()} {t('頁')}
+          </span>
+          <Button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            {t('下一頁')}
+          </Button>
+        </Box>
         <Dialog open={openDialog} onClose={handleCloseDialog}>
           <DialogTitle>{t('新增管理員')}</DialogTitle>
           <DialogContent>
