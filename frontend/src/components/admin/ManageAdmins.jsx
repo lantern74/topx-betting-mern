@@ -267,7 +267,7 @@ const ManageAdmins = () => {
                 name="username"
                 value={newAdmin.username}
                 onChange={handleInputChange}
-                autoComplete="off"
+                autoComplete="username"
               />
               <TextField
                 
