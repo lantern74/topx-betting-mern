@@ -11,7 +11,7 @@ import {
   Box,
   Tooltip,
 } from '@mui/material';
-import { Block as BlockIcon, CheckCircle as CheckCircleIcon, Edit as EditIcon, AttachMoney as AttachMoneyIcon } from '@mui/icons-material';
+import { Block as BlockIcon, CheckCircle as CheckCircleIcon, Edit as EditIcon, AttachMoney as AttachMoneyIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import {
   useReactTable,
   getCoreRowModel,
@@ -20,7 +20,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 
-const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen }) => {
+const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen, handleDeleteMemberOpen }) => {
   const { t } = useTranslation();
 
   const columns = useMemo(
@@ -47,6 +47,11 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
                       <AttachMoneyIcon sx={{ fontSize: '1rem' }} />
                   </IconButton>
               </Tooltip>
+              <Tooltip title={t('刪除')}>
+                  <IconButton aria-label="delete" onClick={() => handleDeleteMemberOpen(props.row.original)}>
+                      <DeleteIcon sx={{ fontSize: '1rem' }} />
+                  </IconButton>
+              </Tooltip>
             <Tooltip title={props.row.original.blocked ? t('解除封鎖') : t('封鎖')}>
               <IconButton
                 aria-label={props.row.original.blocked ? t('解除封鎖') : t('封鎖')}
@@ -68,7 +73,7 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
         size: 100,
       },
     ],
-    [t, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen]
+    [t, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen, handleDeleteMemberOpen]
   );
 
   const table = useReactTable({

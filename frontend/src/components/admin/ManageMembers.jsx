@@ -42,6 +42,8 @@ const ManageMembers = () => {
     const editUsernameRef = React.useRef();
     const editPasswordRef = React.useRef();
     const editPriceRef = React.useRef();
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const [deleteMemberId, setDeleteMemberId] = useState(null);
   const { userRole } = useAuthStore();
 
     const darkTheme = createTheme({
@@ -216,6 +218,37 @@ const ManageMembers = () => {
         }
     };
 
+    const handleDeleteMemberOpen = (member) => {
+        setDeleteMemberId(member._id);
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteMemberClose = () => {
+        setDeleteOpen(false);
+        setDeleteMemberId(null);
+    };
+
+    const deleteMutation = useMutation({
+        mutationFn: (id) => api.delete(`/admin/members/${id}`),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['members']);
+            handleDeleteMemberClose();
+            setSnackbarMessage(t('會員刪除成功'));
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+        },
+        onError: (error) => {
+            console.error('Error deleting member:', error);
+            setSnackbarMessage(t('刪除會員時出錯'));
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+        }
+    });
+
+    const handleDeleteMember = async () => {
+        deleteMutation.mutate(deleteMemberId);
+    };
+
 
   return (
     <div className={styles.manageMembersContainer}>
@@ -243,6 +276,7 @@ const ManageMembers = () => {
                         handleUnblockMember={handleUnblockMember}
                         handleEditPriceOpen={handleEditPriceOpen}
                         handleEditCredentialOpen={handleEditCredentialOpen}
+                        handleDeleteMemberOpen={handleDeleteMemberOpen}
                     />
                 </Paper>
             </ThemeProvider>
@@ -332,18 +366,12 @@ const ManageMembers = () => {
                 </Button>
             </DialogActions>
         </Dialog>
-        <Snackbar
-            open={snackbarOpen}
-            autoHideDuration={3000}
-            onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-            <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
-                {snackbarMessage}
-            </Alert>
-        </Snackbar>
-    </div>
-  );
-};
-
-export default ManageMembers;
+        <Dialog open={deleteOpen} onClose={handleDeleteMemberClose}>
+            <DialogTitle>{t('刪除會員')}</DialogTitle>
+            <DialogContent>
+                <Typography>{t('確定要刪除此會員嗎？')}</Typography>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleDeleteMemberClose}>{t('取消')}</Button>
+                <Button onClick={handleDeleteMember} color="error" disabled={deleteMutation.isLoading}>
+                    {deleteMutation.isLoading ? 'Deleting...' : t('刪除')}
