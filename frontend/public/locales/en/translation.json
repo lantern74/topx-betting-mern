@@ -71,5 +71,6 @@
   "管理員登入": "Admin Login",
   "副管理員登入": "Sub Admin Login",
   "登錄失敗": "Login failed",
-  "登錄時出錯": "Error during login"
+  "登錄時出錯": "Error during login",
+  "登錄": "Login"
 }
