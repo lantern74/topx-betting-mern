@@ -271,10 +271,10 @@ const ManageAdmins = () => {
                 name="username"
                 value={newAdmin.username}
                 onChange={handleInputChange}
-                autoComplete="new-password"
+                autoComplete="off"
               />
               <TextField
-                
+                autoComplete="new-password"
                 label={t('密碼')}
                 type="password"
                 fullWidth
