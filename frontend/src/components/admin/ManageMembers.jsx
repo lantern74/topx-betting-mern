@@ -36,7 +36,8 @@ const ManageMembers = () => {
   const passwordRef = React.useRef();
   const priceRef = React.useRef();
   const [dialogError, setDialogError] = useState(null);
-    const [editOpen, setEditOpen] = useState(false);
+    const [editPriceOpen, setEditPriceOpen] = useState(false);
+    const [editCredentialOpen, setEditCredentialOpen] = useState(false);
     const [editMember, setEditMember] = useState({ id: null, username: '', password: '', price: '' });
     const editUsernameRef = React.useRef();
     const editPasswordRef = React.useRef();
@@ -149,9 +150,25 @@ const ManageMembers = () => {
         addMutation.mutate(newMember);
     };
 
-    const handleEditOpen = (member) => {
+    const handleEditPriceOpen = (member) => {
         setEditMember({ id: member._id, username: member.username, password: '', price: member.price });
-        setEditOpen(true);
+        setEditPriceOpen(true);
+        // Set the initial values of the refs when the dialog opens
+        setTimeout(() => {
+            if (editPriceRef.current) {
+                editPriceRef.current.value = member.price;
+            }
+        }, 0);
+    };
+
+    const handleEditPriceClose = () => {
+        setEditPriceOpen(false);
+        setEditMember({ id: null, username: '', password: '', price: '' });
+    };
+
+    const handleEditCredentialOpen = (member) => {
+        setEditMember({ id: member._id, username: member.username, password: '', price: member.price });
+        setEditCredentialOpen(true);
         // Set the initial values of the refs when the dialog opens
         setTimeout(() => {
             if (editUsernameRef.current) {
@@ -160,26 +177,37 @@ const ManageMembers = () => {
             if (editPasswordRef.current) {
                 editPasswordRef.current.value = ''; // Or member.password if you want to show the existing password
             }
-            if (editPriceRef.current) {
-                editPriceRef.current.value = member.price;
-            }
         }, 0);
     };
 
-    const handleEditClose = () => {
-        setEditOpen(false);
+    const handleEditCredentialClose = () => {
+        setEditCredentialOpen(false);
         setEditMember({ id: null, username: '', password: '', price: '' });
     };
 
-    const handleEditMember = async () => {
+    const handleEditMemberPrice = async () => {
+        try {
+            await api.put(`/admin/members/${editMember.id}`, {
+                price: editPriceRef.current.value,
+            });
+            queryClient.invalidateQueries(['members']);
+            handleEditPriceClose();
+            setSnackbarMessage(t('會員編輯成功'));
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+        } catch (err) {
+            console.error('Error updating member:', err);
+        }
+    };
+
+    const handleEditMemberCredential = async () => {
         try {
             await api.put(`/admin/members/${editMember.id}`, {
                 username: editUsernameRef.current.value,
                 password: editPasswordRef.current.value,
-                price: editPriceRef.current.value,
             });
             queryClient.invalidateQueries(['members']);
-            handleEditClose();
+            handleEditCredentialClose();
             setSnackbarMessage(t('會員編輯成功'));
             setSnackbarSeverity('success');
             setSnackbarOpen(true);
@@ -213,7 +241,8 @@ const ManageMembers = () => {
                         members={memberList}
                         handleBlockMember={handleBlockMember}
                         handleUnblockMember={handleUnblockMember}
-                        handleEditOpen={handleEditOpen}
+                        handleEditPriceOpen={handleEditPriceOpen}
+                        handleEditCredentialOpen={handleEditCredentialOpen}
                     />
                 </Paper>
             </ThemeProvider>
@@ -256,7 +285,26 @@ const ManageMembers = () => {
                 </Button>
             </DialogActions>
         </Dialog>
-        <Dialog open={editOpen} onClose={handleEditClose} sx={{ marginTop: '20px' }}>
+        <Dialog open={editPriceOpen} onClose={handleEditPriceClose} sx={{ marginTop: '20px' }}>
+            <DialogTitle>{t('編輯會員')}</DialogTitle>
+            <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <TextField
+                    inputRef={editPriceRef}
+                    label={t('價格')}
+                    type="number"
+                    fullWidth
+                    name="price"
+                    autoComplete="off"
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleEditPriceClose}>{t('取消')}</Button>
+                <Button onClick={handleEditMemberPrice} color="primary">
+                    {t('儲存')}
+                </Button>
+            </DialogActions>
+        </Dialog>
+        <Dialog open={editCredentialOpen} onClose={handleEditCredentialClose} sx={{ marginTop: '20px' }}>
             <DialogTitle>{t('編輯會員')}</DialogTitle>
             <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <TextField
@@ -276,18 +324,10 @@ const ManageMembers = () => {
                     name="password"
                     autoComplete="new-password"
                 />
-                <TextField
-                    inputRef={editPriceRef}
-                    label={t('價格')}
-                    type="number"
-                    fullWidth
-                    name="price"
-                    autoComplete="off"
-                />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleEditClose}>{t('取消')}</Button>
-                <Button onClick={handleEditMember} color="primary">
+                <Button onClick={handleEditCredentialClose}>{t('取消')}</Button>
+                <Button onClick={handleEditMemberCredential} color="primary">
                     {t('儲存')}
                 </Button>
             </DialogActions>

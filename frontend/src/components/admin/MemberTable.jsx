@@ -20,7 +20,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 
-const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEditOpen }) => {
+const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen }) => {
   const { t } = useTranslation();
 
   const columns = useMemo(
@@ -38,7 +38,12 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
         cell: (props) => (
           <Box sx={{ display: 'flex', gap: 1 }}>
               <Tooltip title={t('編輯')}>
-                  <IconButton aria-label="edit" onClick={() => handleEditOpen(props.row.original)}>
+                  <IconButton aria-label="edit" onClick={() => handleEditCredentialOpen(props.row.original)}>
+                      <EditIcon sx={{ fontSize: '1rem' }} />
+                  </IconButton>
+              </Tooltip>
+              <Tooltip title={t('編輯')}>
+                  <IconButton aria-label="edit" onClick={() => handleEditPriceOpen(props.row.original)}>
                       <EditIcon sx={{ fontSize: '1rem' }} />
                   </IconButton>
               </Tooltip>
@@ -63,7 +68,7 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
         size: 100,
       },
     ],
-    [t, handleBlockMember, handleUnblockMember, handleEditOpen]
+    [t, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen]
   );
 
   const table = useReactTable({
