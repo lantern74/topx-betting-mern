@@ -17,8 +17,23 @@ services:
       - ./:/app
     command: bun run backend/index.js
     environment:
-      - ATLAS_URI=mongodb://root:example@host.docker.internal:27017/betting-china?authSource=admin
+      - ATLAS_URI=mongodb://root:example@mongodb:27017/betting-china?authSource=admin
     networks:
       default:
         aliases:
           - backend
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
