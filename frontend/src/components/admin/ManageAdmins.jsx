@@ -260,7 +260,7 @@ const ManageAdmins = () => {
             <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <TextField
                 autoFocus
-                
+                sx={{ mt: 2 }}
                 label={t('用戶名')}
                 type="text"
                 fullWidth
