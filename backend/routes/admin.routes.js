@@ -9,11 +9,6 @@ router.post('/login', AdminController.login);
 // Route to handle sub-admin registration (only main admin can access)
 router.post('/register-subadmin', authenticateAdmin, authorize(['main']), AdminController.registerSubAdmin);
 
-// Route to handle member registration (both main and sub admins can access)
-router.post('/register-member', authenticateAdmin, authorize(['main', 'sub']), AdminController.registerMember);
-
-// Route to get all members (for main admin)
-router.get('/members', authenticateAdmin, authorize(['main']), AdminController.getAllMembers);
 
 // Route to get all sub-admins (for main admin)
 router.get('/subadmins', authenticateAdmin, authorize(['main']), AdminController.getAllSubAdmins);
@@ -24,7 +19,10 @@ router.put('/subadmins/:id', authenticateAdmin, authorize(['main']), AdminContro
 // Route to delete a sub-admin (for main admin)
 router.delete('/subadmins/:id', authenticateAdmin, authorize(['main']), AdminController.deleteSubAdmin);
 
-console.log("Admin routes: GET /admin/members defined");
-console.log("Admin routes: GET /admin/subadmins defined");
+// Route to handle member registration (both main and sub admins can access)
+router.post('/register-member', authenticateAdmin, authorize(['main', 'sub']), AdminController.registerMember);
+
+// Route to get all members (for main admin)
+router.get('/members', authenticateAdmin, authorize(['main', 'sub']), AdminController.getAllMembers);
 
 module.exports = router;
