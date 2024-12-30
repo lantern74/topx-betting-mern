@@ -19,8 +19,7 @@ const LoginForm = () => {
         .shape({
             email: Yup
                 .string()
-                .required(t("名稱不能為空"))
-                .email(t("請輸入有效的電子郵件")),
+                .required(t("名稱不能為空")),
             password: Yup
                 .string()
                 .required(t("請輸入訊息"))
