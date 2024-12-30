@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { api, handleApiError } from '../utils/api';
 
 const useSubAdminLogin = () => {
-  return useMutation({
+  const { mutateAsync, isLoading, error } = useMutation({
     mutationFn: async (credentials) => {
       try {
         const response = await api.post('/admin/login', credentials);
@@ -12,6 +12,8 @@ const useSubAdminLogin = () => {
       }
     },
   });
+
+  return { mutateAsync, isLoading, error };
 };
 
 export default useSubAdminLogin;

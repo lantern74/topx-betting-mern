@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { api, handleApiError } from '../utils/api';
 
 const useAdminLogin = () => {
-  return useMutation({
+  const { mutateAsync, isLoading, error } = useMutation({
     mutationFn: async (credentials) => {
       try {
         const response = await api.post('/admin/login', credentials);
@@ -12,6 +12,8 @@ const useAdminLogin = () => {
       }
     },
   });
+
+  return { mutateAsync, isLoading, error };
 };
 
 export default useAdminLogin;
