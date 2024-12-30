@@ -23,12 +23,14 @@ import {
   Logout as LogoutIcon,
   Menu as MenuIcon,
 } from '@mui/icons-material';
+import i18n from '../i18n';
 
 const AdminLayout = ({ children }) => {
   const { isAuthenticated, userRole, logout } = useAuthStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -38,6 +40,15 @@ const AdminLayout = ({ children }) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+        setLanguageDropdownOpen(false);
+    };
+
+    const toggleLanguageDropdown = () => {
+        setLanguageDropdownOpen(!languageDropdownOpen);
+    };
 
   if (!isAuthenticated || userRole === 'member') {
     return <Navigate to="/login" />;
@@ -103,6 +114,21 @@ const AdminLayout = ({ children }) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', display: { xs: 'none', sm: 'block' } }}>
             <img src="/images/logo/topx-logo.png" alt="Logo" style={{ height: '40px' }} />
           </Typography>
+            <div className="language-switcher" onMouseEnter={toggleLanguageDropdown} onMouseLeave={toggleLanguageDropdown}>
+                <div className="current-language">
+                    {i18n.language === 'en' ? <img src="/images/icon/us.svg" alt="English" /> : <img src="/images/icon/china.svg" alt="Chinese" />}
+                </div>
+                {languageDropdownOpen && (
+                    <div className="language-dropdown">
+                        <button onClick={() => changeLanguage('en')}>
+                            <img src="/images/icon/us.svg" alt="English" /> English
+                        </button>
+                        <button onClick={() => changeLanguage('zh')}>
+                            <img src="/images/icon/china.svg" alt="Chinese" /> 中文
+                        </button>
+                    </div>
+                )}
+            </div>
         </Toolbar>
       </AppBar>
       <Box
