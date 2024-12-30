@@ -41,9 +41,12 @@ const ManageAdmins = () => {
   const { t } = useTranslation();
   const [admins, setAdmins] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
-  const [newAdmin, setNewAdmin] = useState({ username: '', password: '' });
+  const usernameRef = React.useRef();
+  const passwordRef = React.useRef();
   const { mutate, isLoading, error } = useRegisterSubAdmin();
   const [dialogError, setDialogError] = useState(null);
+  const editUsernameRef = React.useRef();
+  const editPasswordRef = React.useRef();
   const { data: subAdmins, isLoading: isSubAdminsLoading, error: subAdminsError } = useGetAllSubAdmins();
   const [editOpen, setEditOpen] = useState(false);
   const [editAdmin, setEditAdmin] = useState({ id: null, username: '', password: '' });
@@ -76,15 +79,17 @@ const ManageAdmins = () => {
     setOpenDialog(true);
   };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setNewAdmin({ username: '', password: '' });
-    setDialogError(null);
-  };
-
-  const handleInputChange = (e) => {
-    setNewAdmin({ ...newAdmin, [e.target.name]: e.target.value });
-  };
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        // Clear the input values when closing the dialog
+        if (usernameRef.current) {
+            usernameRef.current.value = '';
+        }
+        if (passwordRef.current) {
+            passwordRef.current.value = '';
+        }
+        setDialogError(null);
+    };
 
   const addMutation = useMutation({
     mutationFn: (newAdmin) => api.post('/admin/register-subadmin', newAdmin),
@@ -101,33 +106,45 @@ const ManageAdmins = () => {
     }
   });
 
-  const handleAddAdmin = async () => {
-    addMutation.mutate(newAdmin);
-  };
+    const handleAddAdmin = async () => {
+        const newAdmin = {
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,
+        };
+        addMutation.mutate(newAdmin);
+    };
 
-  const handleEditOpen = (admin) => {
-    setEditAdmin({ id: admin._id, username: admin.username, password: '' });
-    setEditOpen(true);
-  };
+    const handleEditOpen = (admin) => {
+        setEditAdmin({ id: admin._id, username: admin.username, password: '' });
+        setEditOpen(true);
+        // Set the initial values of the refs when the dialog opens
+        setTimeout(() => {
+            if (editUsernameRef.current) {
+                editUsernameRef.current.value = admin.username;
+            }
+            if (editPasswordRef.current) {
+                editPasswordRef.current.value = ''; // Or admin.password if you want to show the existing password
+            }
+        }, 0);
+    };
 
-  const handleEditClose = () => {
-    setEditOpen(false);
-    setEditAdmin({ id: null, username: '', password: '' });
-  };
+    const handleEditClose = () => {
+        setEditOpen(false);
+        setEditAdmin({ id: null, username: '', password: '' });
+    };
 
-  const handleEditInputChange = (e) => {
-    setEditAdmin({ ...editAdmin, [e.target.name]: e.target.value });
-  };
-
-  const handleEditAdmin = async () => {
-    try {
-      await api.put(`/admin/subadmins/${editAdmin.id}`, { username: editAdmin.username, password: editAdmin.password });
-      queryClient.invalidateQueries(['subadmins']);
-      handleEditClose();
-    } catch (err) {
-      console.error('Error updating admin:', err);
-    }
-  };
+    const handleEditAdmin = async () => {
+        try {
+            await api.put(`/admin/subadmins/${editAdmin.id}`, {
+                username: editUsernameRef.current.value,
+                password: editPasswordRef.current.value,
+            });
+            queryClient.invalidateQueries(['subadmins']);
+            handleEditClose();
+        } catch (err) {
+            console.error('Error updating admin:', err);
+        }
+    };
 
   const handleDeleteOpen = (id) => {
     setDeleteAdminId(id);
@@ -269,78 +286,79 @@ const ManageAdmins = () => {
                 type="text"
                 fullWidth
                 name="username"
-                value={newAdmin.username}
-                onChange={handleInputChange}
-                autoComplete="off"
-              />
-              <TextField
-                autoComplete="new-password"
-                label={t('密碼')}
-                type="password"
-                fullWidth
-                name="password"
-                value={newAdmin.password}
-                onChange={handleInputChange}
-                autoComplete="new-password"
-              />
-              {dialogError && <p className="error-message">{dialogError}</p>}
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog}>{t('取消')}</Button>
-              <Button onClick={handleAddAdmin} color="primary" disabled={addMutation.isLoading}>
-                {addMutation.isLoading ? 'Loading...' : t('新增')}
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog open={editOpen} onClose={handleEditClose} sx={{marginTop: '20px'}}>
-            <DialogTitle>{t('編輯管理員')}</DialogTitle>
-            <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <TextField
-                autoFocus
-                
+                inputRef={usernameRef}
                 label={t('用戶名')}
                 type="text"
                 fullWidth
                 name="username"
-                value={editAdmin.username}
-                onChange={handleEditInputChange}
-              />
-              <TextField
-                
+                autoComplete="off"
+            />
+            <TextField
+                inputRef={passwordRef}
                 label={t('密碼')}
                 type="password"
                 fullWidth
                 name="password"
-                value={editAdmin.password}
-                onChange={handleEditInputChange}
                 autoComplete="new-password"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleEditClose}>{t('取消')}</Button>
-              <Button onClick={handleEditAdmin} color="primary">
-                {t('儲存')}
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog open={deleteOpen} onClose={handleDeleteClose}>
-            <DialogTitle>{t('刪除管理員')}</DialogTitle>
-            <DialogContent>
-              <Typography>{t('確定要刪除此管理員嗎？')}</Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleDeleteClose}>{t('取消')}</Button>
-              <Button onClick={handleDeleteAdmin} color="error" disabled={deleteMutation.isLoading}>
-                {deleteMutation.isLoading ? 'Deleting...' : t('刪除')}
-              </Button>
-            </DialogActions>
-          </Dialog>
-            </ThemeProvider>
-        </CardContent>
-      </Card>
-      {subAdminsError && <Typography variant="body2" color="error" mt={2}>{subAdminsError.message}</Typography>}
-    </div>
-  );
+            />
+            {dialogError && <p className="error-message">{dialogError}</p>}
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={handleCloseDialog}>{t('取消')}</Button>
+            <Button onClick={handleAddAdmin} color="primary" disabled={addMutation.isLoading}>
+            {addMutation.isLoading ? 'Loading...' : t('新增')}
+            </Button>
+        </DialogActions>
+        </Dialog>
+        <Dialog open={editOpen} onClose={handleEditClose} sx={{ marginTop: '20px' }}>
+        <DialogTitle>{t('編輯管理員')}</DialogTitle>
+        <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <TextField
+                inputRef={editUsernameRef}
+                autoFocus
+                label={t('用戶名')}
+                type="text"
+                fullWidth
+                name="username"
+            />
+            <TextField
+                inputRef={editPasswordRef}
+                label={t('密碼')}
+                type="password"
+                fullWidth
+                name="password"
+                autoComplete="new-password"
+            />
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={handleEditClose}>{t('取消')}</Button>
+            <Button onClick={handleEditAdmin} color="primary">
+            {t('儲存')}
+            </Button>
+        </DialogActions>
+        </Dialog>
+        <Dialog open={deleteOpen} onClose={handleDeleteClose}>
+        <DialogTitle>{t('刪除管理員')}</DialogTitle>
+        <DialogContent>
+            <Typography>{t('確定要刪除此管理員嗎？')}</Typography>
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={handleDeleteClose}>{t('取消')}</Button>
+            <Button onClick={handleDeleteAdmin} color="error" disabled={deleteMutation.isLoading}>
+            {deleteMutation.isLoading ? 'Deleting...' : t('刪除')}
+            </Button>
+        </DialogActions>
+        </Dialog>
+    </ThemeProvider>
+    </CardContent>
+</Card>
+{subAdminsError && (
+    <Typography variant="body2" color="error" mt={2}>
+    {subAdminsError.message}
+    </Typography>
+)}
+</div>
+);
 };
 
 export default ManageAdmins;
