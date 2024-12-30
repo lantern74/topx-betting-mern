@@ -112,5 +112,6 @@
     "確定要刪除此會員嗎？": "Are you sure you want to delete this member?",
     "會員刪除成功": "Member deleted successfully",
     "刪除會員時出錯": "Error deleting member",
-    "刪除會員": "Delete Member"
+    "刪除會員": "Delete Member",
+    "封鎖": "Block"
 }
