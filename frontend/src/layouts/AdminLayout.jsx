@@ -15,6 +15,8 @@ import {
   AppBar,
   Box,
   Typography,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -22,6 +24,7 @@ import {
   AdminPanelSettings as AdminPanelSettingsIcon,
   Logout as LogoutIcon,
   Menu as MenuIcon,
+  Language as LanguageIcon,
 } from '@mui/icons-material';
 import i18n from '../i18n';
 
@@ -30,7 +33,8 @@ const AdminLayout = ({ children }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const [languageAnchorEl, setLanguageAnchorEl] = useState(null);
+  const languageMenuOpen = Boolean(languageAnchorEl);
 
   const handleLogout = () => {
     logout();
@@ -43,11 +47,15 @@ const AdminLayout = ({ children }) => {
 
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
-        setLanguageDropdownOpen(false);
+        setLanguageAnchorEl(null);
     };
 
-    const toggleLanguageDropdown = () => {
-        setLanguageDropdownOpen(!languageDropdownOpen);
+    const handleLanguageMenuOpen = (event) => {
+        setLanguageAnchorEl(event.currentTarget);
+    };
+
+    const handleLanguageMenuClose = () => {
+        setLanguageAnchorEl(null);
     };
 
   if (!isAuthenticated || userRole === 'member') {
@@ -114,21 +122,26 @@ const AdminLayout = ({ children }) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', display: { xs: 'none', sm: 'block' } }}>
             <img src="/images/logo/topx-logo.png" alt="Logo" style={{ height: '40px' }} />
           </Typography>
-            <div className="language-switcher" onMouseEnter={toggleLanguageDropdown} onMouseLeave={toggleLanguageDropdown}>
-                <div className="current-language">
-                    {i18n.language === 'en' ? <img src="/images/icon/us.svg" alt="English" /> : <img src="/images/icon/china.svg" alt="Chinese" />}
-                </div>
-                {languageDropdownOpen && (
-                    <div className="language-dropdown">
-                        <button onClick={() => changeLanguage('en')}>
-                            <img src="/images/icon/us.svg" alt="English" /> English
-                        </button>
-                        <button onClick={() => changeLanguage('zh')}>
-                            <img src="/images/icon/china.svg" alt="Chinese" /> 中文
-                        </button>
-                    </div>
-                )}
-            </div>
+            <IconButton
+                color="inherit"
+                onClick={handleLanguageMenuOpen}
+            >
+                <LanguageIcon />
+            </IconButton>
+            <Menu
+                anchorEl={languageAnchorEl}
+                open={languageMenuOpen}
+                onClose={handleLanguageMenuClose}
+            >
+                <MenuItem onClick={() => changeLanguage('en')}>
+                    <img src="/images/icon/us.svg" alt="English" style={{ marginRight: '8px', width: '20px', height: '20px' }} />
+                    English
+                </MenuItem>
+                <MenuItem onClick={() => changeLanguage('zh')}>
+                    <img src="/images/icon/china.svg" alt="Chinese" style={{ marginRight: '8px', width: '20px', height: '20px' }} />
+                    中文
+                </MenuItem>
+            </Menu>
         </Toolbar>
       </AppBar>
       <Box
