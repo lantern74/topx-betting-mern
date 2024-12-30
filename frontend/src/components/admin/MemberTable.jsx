@@ -7,13 +7,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   IconButton,
   Box,
   Tooltip,
-  createTheme,
-  ThemeProvider,
-  Button,
 } from '@mui/material';
 import { Block as BlockIcon, CheckCircle as CheckCircleIcon } from '@mui/icons-material';
 import {
@@ -26,12 +22,6 @@ import {
 
 const MemberTable = ({ members, handleBlockMember, handleUnblockMember }) => {
   const { t } = useTranslation();
-
-    const darkTheme = createTheme({
-        palette: {
-            mode: 'dark',
-        },
-    });
 
   const columns = useMemo(
     () => [
@@ -80,8 +70,7 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember }) => {
   });
 
   return (
-    <ThemeProvider theme={darkTheme}>
-        <TableContainer component={Paper}>
+        <TableContainer >
             <Table>
                 <TableHead>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -111,24 +100,6 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember }) => {
                 </TableBody>
             </Table>
         </TableContainer>
-        <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
-            <Button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-            >
-                {t('上一頁')}
-            </Button>
-            <span>
-              {t('第')} {table.getState().pagination.pageIndex + 1} {t('頁')} {t('共')} {table.getPageCount()} {t('頁')}
-            </span>
-            <Button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-            >
-                {t('下一頁')}
-            </Button>
-        </Box>
-    </ThemeProvider>
   );
 };
 
