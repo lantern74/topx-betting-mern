@@ -161,3 +161,76 @@ class AdminController {
       const updatedAdmin = await Admin.findByIdAndUpdate(
         id,
         updateFields,
+        { new: true }
+      );
+
+      if (!updatedAdmin) {
+        return res.status(404).json({ message: 'Sub-admin not found' });
+      }
+
+      res.status(200).json({ message: 'Sub-admin updated successfully', updatedAdmin });
+    } catch (error) {
+      res.status(500).json({ message: 'Error updating sub-admin', error: error.message });
+    }
+  }
+
+    /**
+   * Updates a sub-admin's password.
+   * @param {object} req - The request object.
+   * @param {object} res - The response object.
+   * @returns {Promise<void>}
+   * @static
+   * @async
+   */
+    static async updateSubAdminPassword(req, res) {
+        try {
+            const { id } = req.params;
+            const { password } = req.body;
+
+            if (!password) {
+                return res.status(400).json({ message: 'Password is required' });
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const updatedAdmin = await Admin.findByIdAndUpdate(
+                id,
+                { password: hashedPassword },
+                { new: true }
+            );
+
+            if (!updatedAdmin) {
+                return res.status(404).json({ message: 'Sub-admin not found' });
+            }
+
+            res.status(200).json({ message: 'Sub-admin password updated successfully', updatedAdmin });
+        } catch (error) {
+            res.status(500).json({ message: 'Error updating sub-admin password', error: error.message });
+        }
+    }
+
+
+  /**
+   * Deletes a sub-admin.
+   * @param {object} req - The request object.
+   * @param {object} res - The response object.
+   * @returns {Promise<void>}
+   * @static
+   * @async
+   */
+  static async deleteSubAdmin(req, res) {
+    try {
+      const { id } = req.params;
+      const deletedAdmin = await Admin.findByIdAndDelete(id);
+
+      if (!deletedAdmin) {
+        return res.status(404).json({ message: 'Sub-admin not found' });
+      }
+
+      res.status(200).json({ message: 'Sub-admin deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error deleting sub-admin', error: error.message });
+    }
+  }
+}
+
+module.exports = AdminController;
