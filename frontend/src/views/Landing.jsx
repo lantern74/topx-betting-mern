@@ -8,6 +8,7 @@ import CounterOne from '../components/pages/CounterOne';
 import MultiPlatform from '../components/pages/MultiPlatform';
 import Contact from '../components/pages/Contact';
 import { useTranslation } from 'react-i18next';
+import Footer from '../components/footer/Footer'; // Import the Footer
 
 const Landing = () => {
     const { t } = useTranslation();
@@ -17,7 +18,7 @@ const Landing = () => {
                 <Helmet>
                     <title>TOP X</title>
                 </Helmet>
-                <HeroBanner/> 
+                <HeroBanner/>
                 <div className="fancy-feature-seventeen position-relative mt-160 xl-mt-50">
                     <div className="container">
                         <div className="row align-items-center">
@@ -74,9 +75,10 @@ const Landing = () => {
                     <div className="shapes oval-two"/>
                 </div>
 
-                <CounterOne/> 
+                <CounterOne/>
                 <MultiPlatform />
                 <Contact/>
+                <Footer /> {/* Add the Footer here */}
             </div>
         </Fragment>
     )
