@@ -158,7 +158,6 @@ const ManageMembers = () => {
               {t('新增')}
           </Button>
       </Box>
-      <div className={styles.manageMembersContent}>
         {isLoading ? (
           <Typography>{t('Loading...')}</Typography>
         ) : error ? (
@@ -174,7 +173,6 @@ const ManageMembers = () => {
                 </Paper>
             </ThemeProvider>
         )}
-      </div>
         <Dialog open={openDialog} onClose={handleCloseDialog}>
             <DialogTitle>{t('新增會員')}</DialogTitle>
             <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
