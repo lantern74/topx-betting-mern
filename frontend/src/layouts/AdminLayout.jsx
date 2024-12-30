@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import styles from './AdminLayout.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -26,14 +26,14 @@ const AdminLayout = ({ children }) => {
           <h2 className={styles.adminTitle}>Admin Panel</h2>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <a href="/admin/dashboard" className={styles.navLink}>{t("儀表板")}</a>
+              <Link to="/admin/dashboard" className={styles.navLink}>{t("儀表板")}</Link>
             </li>
             <li className={styles.navItem}>
-              <a href="/admin/manage-members" className={styles.navLink}>{t("管理會員")}</a>
+              <Link to="/admin/manage-members" className={styles.navLink}>{t("管理會員")}</Link>
             </li>
             {userRole === 'main' && (
               <li className={styles.navItem}>
-                <a href="/admin/manage-admins" className={styles.navLink}>{t("管理管理員")}</a>
+                <Link to="/admin/manage-admins" className={styles.navLink}>{t("管理管理員")}</Link>
               </li>
             )}
           </ul>
