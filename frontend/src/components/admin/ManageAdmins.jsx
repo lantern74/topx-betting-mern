@@ -257,7 +257,7 @@ const ManageAdmins = () => {
           <ThemeProvider theme={darkTheme}>
           <Dialog open={openDialog} onClose={handleCloseDialog} >
             <DialogTitle>{t('新增管理員')}</DialogTitle>
-            <DialogContent>
+            <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <TextField
                 autoFocus
                 
@@ -290,7 +290,7 @@ const ManageAdmins = () => {
           </Dialog>
           <Dialog open={editOpen} onClose={handleEditClose}>
             <DialogTitle>{t('編輯管理員')}</DialogTitle>
-            <DialogContent>
+            <DialogContent sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <TextField
                 autoFocus
                 
