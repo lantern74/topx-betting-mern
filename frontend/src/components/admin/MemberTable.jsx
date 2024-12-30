@@ -11,7 +11,7 @@ import {
   Box,
   Tooltip,
 } from '@mui/material';
-import { Block as BlockIcon, CheckCircle as CheckCircleIcon, Edit as EditIcon } from '@mui/icons-material';
+import { Block as BlockIcon, CheckCircle as CheckCircleIcon, Edit as EditIcon, AttachMoney as AttachMoneyIcon } from '@mui/icons-material';
 import {
   useReactTable,
   getCoreRowModel,
@@ -44,7 +44,7 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
               </Tooltip>
               <Tooltip title={t('編輯')}>
                   <IconButton aria-label="edit" onClick={() => handleEditPriceOpen(props.row.original)}>
-                      <EditIcon sx={{ fontSize: '1rem' }} />
+                      <AttachMoneyIcon sx={{ fontSize: '1rem' }} />
                   </IconButton>
               </Tooltip>
             <Tooltip title={props.row.original.blocked ? t('解除封鎖') : t('封鎖')}>
