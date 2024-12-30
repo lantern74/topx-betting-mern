@@ -23,7 +23,7 @@ import {
   createTheme,
   ThemeProvider,
 } from '@mui/material';
-import { Add as AddIcon } from '@mui/icons-material';
+import { Add as AddIcon, Block as BlockIcon, CheckCircle as CheckCircleIcon } from '@mui/icons-material';
 import useGetAllMembers from '../../hooks/useGetAllMembers';
 import MemberTable from './MemberTable';
 import { api } from '../../utils/api';
