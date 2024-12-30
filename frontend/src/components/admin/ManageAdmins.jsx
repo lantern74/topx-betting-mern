@@ -16,6 +16,9 @@ import {
   DialogActions,
   IconButton,
   Box,
+  Typography,
+  Card,
+  CardContent,
 } from '@mui/material';
 import { Edit as EditIcon, Add as AddIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
@@ -107,7 +110,7 @@ const ManageAdmins = () => {
   return (
     <div className={styles.manageAdminsContainer}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <h1 className={styles.manageAdminsTitle}>{t('管理管理員')}</h1>
+        <Typography variant="h4" component="h1" className={styles.manageAdminsTitle} >{t('管理管理員')}</Typography>
         <Button
           variant="contained"
           color="primary"
@@ -117,86 +120,88 @@ const ManageAdmins = () => {
           {t('新增管理員')}
         </Button>
       </Box>
-      <div className={styles.manageAdminsContent}>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                      {{
-                        asc: ' ⬆️',
-                        desc: ' ⬇️',
-                      }[header.column.getIsSorted() ]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHead>
-            <TableBody>
-              {table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
-          <Button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {t('上一頁')}
-          </Button>
-          <span>
-            {t('第')} {table.getState().pagination.pageIndex + 1} {t('頁')} {t('共')} {table.getPageCount()} {t('頁')}
-          </span>
-          <Button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {t('下一頁')}
-          </Button>
-        </Box>
-        <Dialog open={openDialog} onClose={handleCloseDialog}>
-          <DialogTitle>{t('新增管理員')}</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label={t('用戶名')}
-              type="text"
-              fullWidth
-              name="username"
-              value={newAdmin.username}
-              onChange={handleInputChange}
-            />
-            <TextField
-              margin="dense"
-              label={t('密碼')}
-              type="password"
-              fullWidth
-              name="password"
-              value={newAdmin.password}
-              onChange={handleInputChange}
-            />
-            {dialogError && <p className="error-message">{dialogError}</p>}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog}>{t('取消')}</Button>
-            <Button onClick={handleAddAdmin} color="primary" disabled={isLoading}>
-              {isLoading ? 'Loading...' : t('新增')}
+      <Card>
+        <CardContent>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {{
+                          asc: ' ⬆️',
+                          desc: ' ⬇️',
+                        }[header.column.getIsSorted() ]}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableHead>
+              <TableBody>
+                {table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
+            <Button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {t('上一頁')}
             </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+            <span>
+              {t('第')} {table.getState().pagination.pageIndex + 1} {t('頁')} {t('共')} {table.getPageCount()} {t('頁')}
+            </span>
+            <Button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {t('下一頁')}
+            </Button>
+          </Box>
+          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>{t('新增管理員')}</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                label={t('用戶名')}
+                type="text"
+                fullWidth
+                name="username"
+                value={newAdmin.username}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="dense"
+                label={t('密碼')}
+                type="password"
+                fullWidth
+                name="password"
+                value={newAdmin.password}
+                onChange={handleInputChange}
+              />
+              {dialogError && <p className="error-message">{dialogError}</p>}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog}>{t('取消')}</Button>
+              <Button onClick={handleAddAdmin} color="primary" disabled={isLoading}>
+                {isLoading ? 'Loading...' : t('新增')}
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </CardContent>
+      </Card>
     </div>
   );
 };
