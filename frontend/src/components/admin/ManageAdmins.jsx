@@ -20,6 +20,8 @@ import {
   Card,
   CardContent,
   Tooltip,
+  createTheme,
+  ThemeProvider,
 } from '@mui/material';
 import { Edit as EditIcon, Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
@@ -48,6 +50,12 @@ const ManageAdmins = () => {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteAdminId, setDeleteAdminId] = useState(null);
   const queryClient = useQueryClient();
+
+    const darkTheme = createTheme({
+        palette: {
+            mode: 'dark',
+        },
+    });
 
   useEffect(() => {
     if (subAdmins) {
@@ -244,7 +252,8 @@ const ManageAdmins = () => {
               {t('下一頁')}
             </Button>
           </Box>
-          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <ThemeProvider theme={darkTheme}>
+          <Dialog open={openDialog} onClose={handleCloseDialog} >
             <DialogTitle>{t('新增管理員')}</DialogTitle>
             <DialogContent>
               <TextField
@@ -310,6 +319,7 @@ const ManageAdmins = () => {
               </Button>
             </DialogActions>
           </Dialog>
+            </ThemeProvider>
         </CardContent>
       </Card>
       {subAdminsError && <Typography variant="body2" color="error" mt={2}>{subAdminsError.message}</Typography>}
