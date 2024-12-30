@@ -6,8 +6,9 @@ const useAuthStore = create(
     (set, get) => ({
       isAuthenticated: false,
       userRole: null,
-      login: (role) => set({ isAuthenticated: true, userRole: role }),
-      logout: () => set({ isAuthenticated: false, userRole: null }),
+      token: null,
+      login: (role, token) => set({ isAuthenticated: true, userRole: role, token: token }),
+      logout: () => set({ isAuthenticated: false, userRole: null, token: null }),
       setUserRole: (role) => {
         if (!get().userRole) {
           set({ userRole: role });
