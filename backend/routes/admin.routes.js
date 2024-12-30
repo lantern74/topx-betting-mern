@@ -28,4 +28,11 @@ router.post('/register-member', authenticateAdmin, authorize(['main', 'sub']), A
 // Route to get all members (for main admin)
 router.get('/members', authenticateAdmin, authorize(['main', 'sub']), AdminController.getAllMembers);
 
+// Route to block a member (for main and sub admins)
+router.put('/members/:id/block', authenticateAdmin, authorize(['main', 'sub']), AdminController.blockMember);
+
+// Route to unblock a member (for main and sub admins)
+router.put('/members/:id/unblock', authenticateAdmin, authorize(['main', 'sub']), AdminController.unblockMember);
+
+
 module.exports = router;

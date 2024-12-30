@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Admin } = require('../models/admin.model');
 const { Member } = require('../models/member.model');
+const mongoose = require('mongoose');
 
 /**
  * @class AdminController
@@ -81,7 +82,9 @@ class AdminController {
    */
   static async registerMember(req, res) {
     try {
-      const { username, password, price, createdBy } = req.body;
+      const { username, password, price } = req.body;
+        const admin = req.admin;
+
       const existingMember = await Member.findOne({ username });
 
       if (existingMember) {
@@ -93,7 +96,7 @@ class AdminController {
         username,
         password: hashedPassword,
         price,
-        createdBy,
+        createdBy: admin.id,
       });
 
       await newMember.save();
@@ -231,6 +234,60 @@ class AdminController {
       res.status(500).json({ message: 'Error deleting sub-admin', error: error.message });
     }
   }
+
+    /**
+     * Blocks a member.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async blockMember(req, res) {
+        try {
+            const { id } = req.params;
+            const updatedMember = await Member.findByIdAndUpdate(
+                id,
+                { blocked: true },
+                { new: true }
+            );
+
+            if (!updatedMember) {
+                return res.status(404).json({ message: 'Member not found' });
+            }
+
+            res.status(200).json({ message: 'Member blocked successfully', updatedMember });
+        } catch (error) {
+            res.status(500).json({ message: 'Error blocking member', error: error.message });
+        }
+    }
+
+    /**
+     * Unblocks a member.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async unblockMember(req, res) {
+        try {
+            const { id } = req.params;
+            const updatedMember = await Member.findByIdAndUpdate(
+                id,
+                { blocked: false },
+                { new: true }
+            );
+
+            if (!updatedMember) {
+                return res.status(404).json({ message: 'Member not found' });
+            }
+
+            res.status(200).json({ message: 'Member unblocked successfully', updatedMember });
+        } catch (error) {
+            res.status(500).json({ message: 'Error unblocking member', error: error.message });
+        }
+    }
 }
 
 module.exports = AdminController;
