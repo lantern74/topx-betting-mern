@@ -43,10 +43,6 @@ const ManageAdmins = () => {
   const { data: subAdmins, isLoading: isSubAdminsLoading, error: subAdminsError } = useGetAllSubAdmins();
 
   useEffect(() => {
-    fetchAdmins();
-  }, []);
-
-  useEffect(() => {
     if (subAdmins) {
       setAdmins(subAdmins);
     }
