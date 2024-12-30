@@ -72,5 +72,7 @@
   "副管理員登入": "Sub Admin Login",
   "登錄失敗": "Login failed",
   "登錄時出錯": "Error during login",
-  "登錄": "Login"
+  "登錄": "Login",
+  "用戶名或密碼錯誤": "Incorrect username or password",
+  "管理員未找到": "Admin not found"
 }
