@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { api, handleApiError } from '../../utils/api';
+import useAuthStore from '../../store/authStore';
 
 const SubAdminLoginForm = () => {
   const { t } = useTranslation();
@@ -9,23 +10,26 @@ const SubAdminLoginForm = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/admin/login', {
+      const response = await api.post('/admin/login', {
         username,
         password,
       });
 
       if (response.status === 200) {
+        login('sub');
         navigate('/admin/dashboard');
       } else {
         setError(t('登錄失敗'));
       }
     } catch (err) {
+      handleApiError(err);
       setError(err.response?.data?.message || t('登錄時出錯'));
     }
   };
