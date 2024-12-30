@@ -1,33 +1,33 @@
-import React, { Fragment, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import React, { Fragment, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AdminLogin = () => {
   const { t } = useTranslation();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError('');
+    setError("");
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post("http://localhost:5000/login", {
         username,
         password,
-        role: 'admin',
+        role: "admin",
       });
 
       if (response.status === 200) {
-        navigate('/admin/dashboard');
+        navigate("/admin/dashboard");
       } else {
-        setError(t('登錄失敗'));
+        setError(t("登錄失敗"));
       }
     } catch (err) {
-      setError(err.response?.data?.message || t('登錄時出錯'));
+      setError(err.response?.data?.message || t("登錄時出錯"));
     }
   };
 
@@ -63,7 +63,9 @@ const AdminLogin = () => {
             </div>
           )}
           <div className="col-12 mt-3">
-            <button className="btn-eight ripple-btn" type="submit">{t("登錄")}</button>
+            <button className="btn-eight ripple-btn" type="submit">
+              {t("登錄")}
+            </button>
           </div>
         </div>
       </form>
