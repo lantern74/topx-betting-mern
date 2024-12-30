@@ -37,3 +37,69 @@ html, body {
 @import "./scss/habilidades";
 @import "./scss/style";
 @import "./scss/responsive";
+
+/* Custom styles */
+.logo-text {
+    font-family: 'Gordita', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    display: block;
+    line-height: 1;
+}
+
+.language-switcher {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.language-switcher .current-language {
+    display: flex;
+    align-items: center;
+}
+
+.language-switcher .current-language img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.language-switcher .language-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.language-switcher .language-dropdown button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.language-switcher .language-dropdown button:hover {
+    background-color: #f0f0f0;
+}
+
+.language-switcher .language-dropdown button img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
