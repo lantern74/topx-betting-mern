@@ -10,7 +10,6 @@ import AdminLogin from '../components/admin/AdminLogin';
 import SubAdminLogin from '../components/admin/SubAdminLogin';
 import AdminDashboard from '../components/admin/AdminDashboard';
 import MainLayout from '../layouts/MainLayout';
-import PublicLayout from '../layouts/PublicLayout'; // Import the PublicLayout
 import AdminLayout from '../layouts/AdminLayout';
 import ManageMembers from '../components/admin/ManageMembers';
 import ManageAdmins from '../components/admin/ManageAdmins';
@@ -19,21 +18,9 @@ const AppRouter = () => {
   return (
     <Fragment>
       <Routes>
-        <Route path="/login" element={
-          <PublicLayout>
-            <Login />
-          </PublicLayout>
-        } />
-        <Route path="/admin/login" element={
-          <PublicLayout>
-            <AdminLogin />
-          </PublicLayout>
-        } />
-        <Route path="/subadmin/login" element={
-          <PublicLayout>
-            <SubAdminLogin />
-          </PublicLayout>
-        } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/subadmin/login" element={<SubAdminLogin />} />
         <Route path="*" element={
           <MainLayout>
             <Routes>
