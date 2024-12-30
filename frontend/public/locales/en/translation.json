@@ -114,5 +114,7 @@
     "刪除會員時出錯": "Error deleting member",
     "刪除會員": "Delete Member",
     "封鎖": "Block",
-    "解除封鎖": "Unblock"
+    "解除封鎖": "Unblock",
+    "加載中...": "Loading...",
+    "副管理員數量佔位符": "Sub admin count placeholder"
 }

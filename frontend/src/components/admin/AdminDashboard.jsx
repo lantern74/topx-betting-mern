@@ -35,11 +35,11 @@ const AdminDashboard = () => {
           </Typography>
           <Box mb={2}>
             <Typography variant="body1">
-              {t("管理會員")}: <Typography variant="span" fontWeight="bold" ml={0.5}>{isLoading ? 'Loading...' : memberCount}</Typography>
+              {t("管理會員")}: <Typography variant="span" fontWeight="bold" ml={0.5}>{isLoading ? t('加載中...') : memberCount}</Typography>
             </Typography>
             {userRole === 'main' && (
               <Typography variant="body1">
-                {t("管理管理員")}: <Typography variant="span" fontWeight="bold" ml={0.5}>0</Typography> {/* Placeholder for sub-admin count */}
+                {t("管理管理員")}: <Typography variant="span" fontWeight="bold" ml={0.5}>0</Typography> {/* {t('副管理員數量佔位符')} */}
               </Typography>
             )}
           </Box>
