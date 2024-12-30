@@ -17,6 +17,12 @@ router.get('/members', AdminController.getAllMembers);
 // Route to get all sub-admins (for main admin)
 router.get('/subadmins', AdminController.getAllSubAdmins);
 
+// Route to update a sub-admin
+router.put('/subadmins/:id', AdminController.updateSubAdmin);
+
+// Route to delete a sub-admin
+router.delete('/subadmins/:id', AdminController.deleteSubAdmin);
+
 console.log("Admin routes: GET /admin/members defined");
 console.log("Admin routes: GET /admin/subadmins defined");
 

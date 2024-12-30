@@ -19,8 +19,9 @@ import {
   Typography,
   Card,
   CardContent,
+  Tooltip,
 } from '@mui/material';
-import { Edit as EditIcon, Add as AddIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
 import styles from './ManageAdmins.module.scss';
 import { api } from '../../utils/api';
@@ -41,6 +42,10 @@ const ManageAdmins = () => {
   const { mutate, isLoading, error } = useRegisterSubAdmin();
   const [dialogError, setDialogError] = useState(null);
   const { data: subAdmins, isLoading: isSubAdminsLoading, error: subAdminsError } = useGetAllSubAdmins();
+  const [editOpen, setEditOpen] = useState(false);
+  const [editAdmin, setEditAdmin] = useState({ id: null, username: '' });
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteAdminId, setDeleteAdminId] = useState(null);
 
   useEffect(() => {
     if (subAdmins) {
@@ -81,6 +86,50 @@ const ManageAdmins = () => {
     }
   };
 
+  const handleEditOpen = (admin) => {
+    setEditAdmin({ id: admin._id, username: admin.username });
+    setEditOpen(true);
+  };
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+    setEditAdmin({ id: null, username: '' });
+  };
+
+  const handleEditInputChange = (e) => {
+    setEditAdmin({ ...editAdmin, username: e.target.value });
+  };
+
+  const handleEditAdmin = async () => {
+    try {
+      await api.put(`/admin/subadmins/${editAdmin.id}`, { username: editAdmin.username });
+      fetchAdmins();
+      handleEditClose();
+    } catch (err) {
+      console.error('Error updating admin:', err);
+    }
+  };
+
+  const handleDeleteOpen = (id) => {
+    setDeleteAdminId(id);
+    setDeleteOpen(true);
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteOpen(false);
+    setDeleteAdminId(null);
+  };
+
+  const handleDeleteAdmin = async () => {
+    try {
+      await api.delete(`/admin/subadmins/${deleteAdminId}`);
+      fetchAdmins();
+      handleDeleteClose();
+    } catch (err) {
+      console.error('Error deleting admin:', err);
+    }
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -94,10 +143,20 @@ const ManageAdmins = () => {
       {
         header: t('操作'),
         cell: (props) => (
-          <IconButton aria-label="edit">
-            <EditIcon />
-          </IconButton>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <Tooltip title={t('編輯')}>
+              <IconButton aria-label="edit" onClick={() => handleEditOpen(props.row.original)}>
+                <EditIcon sx={{ fontSize: '1rem' }} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={t('刪除')}>
+              <IconButton aria-label="delete" onClick={() => handleDeleteOpen(props.row.original._id)}>
+                <DeleteIcon sx={{ fontSize: '1rem' }} />
+              </IconButton>
+            </Tooltip>
+          </Box>
         ),
+        size: 100,
       },
     ],
     [t]
@@ -201,6 +260,39 @@ const ManageAdmins = () => {
               <Button onClick={handleCloseDialog}>{t('取消')}</Button>
               <Button onClick={handleAddAdmin} color="primary" disabled={isLoading}>
                 {isLoading ? 'Loading...' : t('新增')}
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog open={editOpen} onClose={handleEditClose}>
+            <DialogTitle>{t('編輯管理員')}</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                label={t('用戶名')}
+                type="text"
+                fullWidth
+                name="username"
+                value={editAdmin.username}
+                onChange={handleEditInputChange}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleEditClose}>{t('取消')}</Button>
+              <Button onClick={handleEditAdmin} color="primary">
+                {t('儲存')}
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog open={deleteOpen} onClose={handleDeleteClose}>
+            <DialogTitle>{t('刪除管理員')}</DialogTitle>
+            <DialogContent>
+              <Typography>{t('確定要刪除此管理員嗎？')}</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDeleteClose}>{t('取消')}</Button>
+              <Button onClick={handleDeleteAdmin} color="error">
+                {t('刪除')}
               </Button>
             </DialogActions>
           </Dialog>
