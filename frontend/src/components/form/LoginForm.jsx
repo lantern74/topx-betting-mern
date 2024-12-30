@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -7,13 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { api, handleApiError } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../store/authStore';
-=======
-import React, { Fragment } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import { useTranslation } from "react-i18next";
->>>>>>> Stashed changes
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -21,7 +13,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
 
-<<<<<<< Updated upstream
     //for validation
     const validationSchema = Yup
         .object()
@@ -34,23 +25,6 @@ const LoginForm = () => {
                 .string()
                 .required(t("請輸入訊息"))
         });
-=======
-  //for validation
-  const validationSchema = Yup
-    .object()
-    .shape({
-      name: Yup
-        .string()
-        .required(t("名稱不能為空")),
-      email: Yup
-        .string()
-        .required(t("名稱不能為空"))
-        .email(t("請輸入有效的電子郵件")),
-      sendMessage: Yup
-        .string()
-        .required(t("請輸入訊息")),
-    });
->>>>>>> Stashed changes
 
   const formOptions = {
     resolver: yupResolver(validationSchema),
@@ -59,7 +33,6 @@ const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-<<<<<<< Updated upstream
     const onSubmit = async (data, e) => {
       e.preventDefault();
       setError('');
@@ -116,73 +89,12 @@ const LoginForm = () => {
                     )}
                     <div className="col-12 mt-3 d-flex" style={{justifyContent:"space-between"}}>
                         <button className="btn-eight ripple-btn">{t("提交")}</button>
-                        <a className='register-button' href="https://t.me/Systemtopxpro" target='_blank'>{t("註冊帳號")}</a>
+                        <a className='register-button' href="https://t.me/Systemtopxpro" target='_blank' rel="noreferrer">{t("註冊帳號")}</a>
                     </div>
-=======
-  function onSubmit(data, e) {
-    //display form data on success
-    console.log("Message submited: " + JSON.stringify(data));
-    e
-      .target
-      .reset();
-  }
-
-  return (
-    <Fragment>
-      <form id="contact-form" action="#" onSubmit={handleSubmit(onSubmit)}>
-        <div className="row">
-          <div className="col-12">
-            <div className="input-group-meta form-group mb-30">
-              <label>{t("用戶名")}*</label>
-              <input
-                type="text"
-                name="email"
-                {...register("email")}
-                className={`${errors.email ? "is-invalid" : ""}`}
-              />
-              {errors.name && (
-                <div className="invalid-feedback">
-                  {errors.email
-                    ?.message}
->>>>>>> Stashed changes
                 </div>
-              )}
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="input-group-meta form-group mb-30">
-              <label>{t("密碼")}*</label>
-              <input
-                type="text"
-                name="password"
-                {...register("password")}
-                className={`${errors.password ? "is-invalid" : ""}`}
-              />
-              {errors.name && (
-                <div className="invalid-feedback">
-                  {errors.email
-                    ?.message}
-                </div>
-              )}
-            </div>
-          </div>
-          <div
-            className="col-12 mt-3 d-flex"
-            style={{ justifyContent: "space-between" }}
-          >
-            <button className="btn-eight ripple-btn">{t("提交")}</button>
-            <a
-              className="register-button"
-              href="https://t.me/Systemtopxpro"
-              target="_blank" rel="noreferrer"
-            >
-              {t("註冊帳號")}
-            </a>
-          </div>
-        </div>
-      </form>
-    </Fragment>
-  );
+            </form>
+        </Fragment>
+    );
 };
 
 export default LoginForm;
