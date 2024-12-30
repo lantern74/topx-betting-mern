@@ -11,6 +11,7 @@ import SubAdminLogin from '../components/admin/SubAdminLogin';
 import AdminDashboard from '../components/admin/AdminDashboard';
 import MainLayout from '../components/layout/MainLayout';
 import PublicLayout from '../components/layout/PublicLayout'; // Import the PublicLayout
+import AdminLayout from '../layouts/AdminLayout';
 
 const AppRouter = () => {
   return (
@@ -38,10 +39,14 @@ const AppRouter = () => {
               <Route path="/view-matches" element={<ViewMatches />} />
               <Route path="/match-result/:id" element={<MatchResult />} />
               <Route path="/developer/language" element={<DeveloperPage />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </MainLayout>
+        } />
+        <Route path="/admin/dashboard" element={
+          <AdminLayout>
+            <AdminDashboard />
+          </AdminLayout>
         } />
       </Routes>
     </Fragment>
