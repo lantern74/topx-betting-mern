@@ -108,25 +108,7 @@ const MemberTable = ({
 
   return (
         <>
-          <Box mb={2} sx={{ 
-            mt: 4,
-            position: 'relative'
-          }}>
-            <Typography 
-              component="legend" 
-              sx={{ 
-                position: 'absolute',
-                top: '-10px',
-                left: '16px',
-                px: 1,
-                backgroundColor: '#333',
-                fontSize: '0.875rem',
-                color: 'rgba(255, 255, 255, 0.7)'
-              }}
-            >
-              <Box component="span" sx={{ mr: 1 }}>🔍</Box>
-              {t("Search Filters")}
-            </Typography>
+          <Box mb={2} sx={{ mt: 4 }}>
             <TextField
               fullWidth
               variant="outlined"
