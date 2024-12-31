@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { Admin } = require('../models/admin.model');
 const { Member } = require('../models/member.model');
+const { SessionService } = require('../services/session.service');
 const mongoose = require('mongoose');
 
 /**
@@ -31,15 +31,50 @@ class AdminController {
         return res.status(401).json({ message: 'Invalid password' });
       }
 
-      const token = jwt.sign({ id: admin._id, role: admin.role }, process.env.JWT_SECRET || 'your-secret-key', {
-        expiresIn: '1h',
+      const sessionId = await SessionService.createSession(admin._id);
+
+      res.cookie('sessionId', sessionId, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
       });
 
-      res.status(200).json({ message: 'Admin login successful', role: admin.role, token });
+      res.status(200).json({ message: 'Admin login successful', role: admin.role });
     } catch (error) {
       res.status(500).json({ message: 'Error logging in', error: error.message });
     }
   }
+
+    /**
+     * Handles admin logout.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async logout(req, res) {
+        try {
+            const sessionId = req.cookies?.sessionId;
+
+            if (!sessionId) {
+                return res.status(400).json({ message: 'No session ID provided' });
+            }
+
+            await SessionService.revokeSession(sessionId);
+
+            res.clearCookie('sessionId', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+            });
+
+            res.status(200).json({ message: 'Admin logout successful' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error logging out', error: error.message });
+        }
+    }
+
 
   /**
    * Registers a new sub-admin.
@@ -255,6 +290,8 @@ class AdminController {
             if (!updatedMember) {
                 return res.status(404).json({ message: 'Member not found' });
             }
+
+            await SessionService.revokeAllSessions(updatedMember._id);
 
             res.status(200).json({ message: 'Member blocked successfully', updatedMember });
         } catch (error) {
