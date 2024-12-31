@@ -2,17 +2,43 @@ import React, { Fragment, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import AOS from 'aos';
 import "aos/dist/aos.css";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
 import AppRouter from "./router/AppRouter";
 import ScrollToTop from "./components/ScrollToTop";
 import TopNav from './components/header/TopNav';
+import { api } from './utils/api';
+import useAuthStore from './store/authStore';
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isAuthenticated, logout, setUserRole } = useAuthStore();
+
   useEffect(() => {
     AOS.init({
       duration: 1200,
     });
   }, []);
+
+  useEffect(() => {
+    const checkBlockedStatus = async () => {
+      if (isAuthenticated && location.pathname !== '/login' && location.pathname !== '/admin/login' && location.pathname !== '/subadmin/login') {
+        try {
+          const response = await api.get('/member/check-auth');
+          if (response.status === 200) {
+            setUserRole('member');
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 403) {
+            logout();
+            navigate('/login');
+          }
+        }
+      }
+    };
+
+    checkBlockedStatus();
+  }, [isAuthenticated, navigate, logout, location, setUserRole]);
 
   return (
     <Fragment>
