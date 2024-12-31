@@ -107,7 +107,27 @@ const MemberTable = ({
 
   return (
         <>
-          <Box mb={2}>
+          <Box mb={2} sx={{ 
+            p: 3, 
+            border: '1px solid rgba(255, 255, 255, 0.12)', 
+            borderRadius: '8px',
+            position: 'relative'
+          }}>
+            <Typography 
+              component="legend" 
+              sx={{ 
+                position: 'absolute',
+                top: '-10px',
+                left: '16px',
+                px: 1,
+                backgroundColor: '#333',
+                fontSize: '0.875rem',
+                color: 'rgba(255, 255, 255, 0.7)'
+              }}
+            >
+              <Box component="span" sx={{ mr: 1 }}>🔍</Box>
+              {t("Search Filters")}
+            </Typography>
             <TextField
               fullWidth
               variant="outlined"
@@ -116,7 +136,6 @@ const MemberTable = ({
               value={globalFilter}
               onChange={(e) => setGlobalFilter(e.target.value)}
               sx={{ 
-                mb: 2,
                 '& .MuiOutlinedInput-root': {
                   borderRadius: '8px',
                 },
