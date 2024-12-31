@@ -45,7 +45,7 @@ const TopNav = () => {
                         </div>
                         <nav className="navbar navbar-expand-lg order-lg-2">
                             <div className="collapse navbar-collapse" id="navbarNav">
-                                {isAuthenticated && <ThemeMainMenu/>}
+                                <ThemeMainMenu/>
                             </div>
                         </nav>
                     </div>

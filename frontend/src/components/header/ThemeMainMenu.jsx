@@ -51,6 +51,11 @@ const ThemeMainMenu = () => {
                           <Link to="/view-matches" className="nav-link dropdown-toggle">{t("賽事系統")}</Link>
                       </li>
                     )}
+                    {!isAuthenticated && (
+                      <li className="nav-item">
+                          <Link to="/login" className="nav-link dropdown-toggle">{t("登入")}</Link>
+                      </li>
+                    )}
                 </ul>
             </Fragment>
         </>
