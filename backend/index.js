@@ -6,6 +6,8 @@ const matchRoutes = require('./routes/match.routes');
 const memberRoutes = require('./routes/member.routes');
 const path = require('path');
 const TelemetryService = require('./services/telemetry.service');
+const cookieParser = require('cookie-parser');
+
 
 require('dotenv').config();
 
@@ -14,6 +16,8 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser()); // Add cookie parsing middleware
+
 
 const uri = process.env.ATLAS_URI || "mongodb://root:example@localhost:27017/betting-china?authSource=admin";
 mongoose.connect(uri);
@@ -22,9 +26,11 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
 
+// Apply session middleware before other routes
 app.use('/admin', adminRoutes);
 app.use('/match', matchRoutes);
 app.use('/member', memberRoutes);
+
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
