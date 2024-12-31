@@ -162,7 +162,8 @@ const AdminLayout = ({ children }) => {
           flexShrink: 0,
           position: 'fixed',
           height: '100vh',
-          zIndex: 1200
+          zIndex: 1200,
+          overflowY: 'auto'
         }}
       >
         <Drawer
@@ -197,7 +198,9 @@ const AdminLayout = ({ children }) => {
           p: 3,
           width: { sm: `calc(100% - 300px)` },
           ml: { sm: '300px' },
-          mt: '64px' // Height of AppBar
+          mt: '64px', // Height of AppBar
+          overflowX: 'auto',
+          minHeight: 'calc(100vh - 64px)'
         }}
       >
         {children}
