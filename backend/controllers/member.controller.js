@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const { Member } = require('../models/member.model');
+const { SessionService } = require('../services/session.service');
 
 /**
  * @class MemberController
@@ -52,11 +53,49 @@ class MemberController {
         }
       }
 
+      const sessionId = await SessionService.createSession(member._id);
+
+      res.cookie('sessionId', sessionId, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+      });
+
       res.status(200).json({ message: 'Member login successful' });
     } catch (error) {
       res.status(500).json({ message: 'Error logging in', error: error.message });
     }
   }
+
+    /**
+     * Handles member logout.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async logout(req, res) {
+        try {
+            const sessionId = req.cookies?.sessionId;
+
+            if (!sessionId) {
+                return res.status(400).json({ message: 'No session ID provided' });
+            }
+
+            await SessionService.revokeSession(sessionId);
+
+            res.clearCookie('sessionId', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+            });
+
+            res.status(200).json({ message: 'Member logout successful' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error logging out', error: error.message });
+        }
+    }
 }
 
 module.exports = MemberController;
