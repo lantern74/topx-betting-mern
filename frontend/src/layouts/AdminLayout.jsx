@@ -113,7 +113,7 @@ const AdminLayout = ({ children }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100dvh', width: '100dvw' }}>
       <AppBar component="nav" sx={{ backgroundColor: '#333' }}>
         <Toolbar>
           <IconButton
@@ -181,7 +181,7 @@ const AdminLayout = ({ children }) => {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 300px)` } }}
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 300px)` }, overflowY: 'auto' }}
       >
         <Toolbar />
         {children}
