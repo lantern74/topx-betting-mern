@@ -111,10 +111,36 @@ const MemberTable = ({
             <TextField
               fullWidth
               variant="outlined"
-              placeholder={t("搜尋會員...")}
+              label={t("Search Members")}
+              placeholder={t("Type to search...")}
               value={globalFilter}
               onChange={(e) => setGlobalFilter(e.target.value)}
-              sx={{ mb: 2 }}
+              sx={{ 
+                mb: 2,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(255, 255, 255, 0.23)',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(255, 255, 255, 0.5)',
+                },
+                '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#90caf9',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#90caf9',
+                },
+              }}
+              InputProps={{
+                sx: {
+                  color: 'white',
+                }
+              }}
             />
           </Box>
           <TableContainer component={Paper}>
