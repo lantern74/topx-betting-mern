@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Table,
@@ -10,6 +10,9 @@ import {
   IconButton,
   Box,
   Tooltip,
+  TextField,
+  Button,
+  Paper,
 } from '@mui/material';
 import { Block as BlockIcon, CheckCircle as CheckCircleIcon, Edit as EditIcon, AttachMoney as AttachMoneyIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import {
@@ -17,10 +20,19 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
   flexRender,
 } from '@tanstack/react-table';
 
-const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen, handleDeleteMemberOpen }) => {
+const MemberTable = ({ 
+  members, 
+  handleBlockMember, 
+  handleUnblockMember, 
+  handleEditPriceOpen, 
+  handleEditCredentialOpen, 
+  handleDeleteMemberOpen 
+}) => {
+  const [globalFilter, setGlobalFilter] = useState('');
   const { t } = useTranslation();
 
   const columns = useMemo(
@@ -83,13 +95,28 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
   const table = useReactTable({
     data: members,
     columns,
+    state: {
+      globalFilter,
+    },
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   return (
-        <TableContainer >
+        <Box mb={2}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder={t("搜尋會員...")}
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+        </Box>
+        <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -119,6 +146,23 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
                 </TableBody>
             </Table>
         </TableContainer>
+        <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
+          <Button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            {t("上一頁")}
+          </Button>
+          <span>
+            {t("第")} {table.getState().pagination.pageIndex + 1} {t("頁")} {t("共")} {table.getPageCount()} {t("頁")}
+          </span>
+          <Button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            {t("下一頁")}
+          </Button>
+        </Box>
   );
 };
 
