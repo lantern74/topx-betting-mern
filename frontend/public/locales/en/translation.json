@@ -119,5 +119,6 @@
   "副管理員數量佔位符": "Sub admin count placeholder",
   "管理管理員": "Manage Admins",
   "副管理員未找到": "Sub-admin not found",
-  "登錄IP過多，帳號已被封鎖": "Too many login IPs, account has been blocked"
+  "登錄IP過多，帳號已被封鎖": "Too many login IPs, account has been blocked",
+  "創建者": "Creator"
 }
