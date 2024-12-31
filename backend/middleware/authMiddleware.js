@@ -1,26 +1,30 @@
-const jwt = require('jsonwebtoken');
+const { SessionService } = require('../services/session.service');
 const { Admin } = require('../models/admin.model');
 
 const authenticateAdmin = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
+  const sessionId = req.cookies?.sessionId;
 
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided' });
+  if (!sessionId) {
+    return res.status(401).json({ message: 'No session ID provided' });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    const admin = await Admin.findById(decoded.id);
+    const session = await SessionService.validateSession(sessionId);
+
+    if (!session) {
+      return res.status(401).json({ message: 'Invalid session' });
+    }
+
+    const admin = await Admin.findById(session.userId);
 
     if (!admin) {
-      return res.status(404).json({ message: 'Admin not found' });
+        return res.status(404).json({ message: 'Admin not found' });
     }
 
     req.admin = admin;
     next();
   } catch (error) {
-    return res.status(403).json({ message: 'Invalid token', error: error.message });
+    return res.status(403).json({ message: 'Error validating session', error: error.message });
   }
 };
 
