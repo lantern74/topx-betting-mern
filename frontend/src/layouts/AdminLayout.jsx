@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import styles from './AdminLayout.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -38,7 +38,13 @@ const AdminLayout = ({ children }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    if (userRole === 'main') {
+      navigate('/admin/login');
+    } else if (userRole === 'sub') {
+      navigate('/subadmin/login');
+    } else {
+        navigate('/login');
+    }
   };
 
   const handleDrawerToggle = () => {
@@ -59,7 +65,7 @@ const AdminLayout = ({ children }) => {
     };
 
   if (!isAuthenticated || userRole === 'member') {
-    return <Navigate to="/login" />;
+    return navigate('/login');
   }
 
   const drawer = (
