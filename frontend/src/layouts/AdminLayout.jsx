@@ -113,8 +113,13 @@ const AdminLayout = ({ children }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100dvh', width: '100dvw' }}>
-      <AppBar component="nav" sx={{ backgroundColor: '#333' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+      <AppBar component="nav" sx={{ 
+        backgroundColor: '#333',
+        position: 'fixed',
+        width: { sm: `calc(100% - 300px)` },
+        ml: { sm: '300px' }
+      }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -152,7 +157,13 @@ const AdminLayout = ({ children }) => {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: 300 }, flexShrink: { sm: 0 } }}
+        sx={{ 
+          width: { sm: 300 },
+          flexShrink: 0,
+          position: 'fixed',
+          height: '100vh',
+          zIndex: 1200
+        }}
       >
         <Drawer
           variant="temporary"
@@ -181,9 +192,14 @@ const AdminLayout = ({ children }) => {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 300px)` }, overflowY: 'auto' }}
+        sx={{ 
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - 300px)` },
+          ml: { sm: '300px' },
+          mt: '64px' // Height of AppBar
+        }}
       >
-        <Toolbar />
         {children}
       </Box>
     </Box>
