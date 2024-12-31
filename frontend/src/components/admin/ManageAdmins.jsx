@@ -24,6 +24,7 @@ import {
   ThemeProvider,
   Snackbar,
   Alert,
+  Grid,
 } from '@mui/material';
 import { Edit as EditIcon, Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import useRegisterSubAdmin from '../../hooks/useRegisterSubAdmin';
@@ -234,8 +235,12 @@ const ManageAdmins = () => {
 
   return (
     <div className={styles.manageAdminsContainer}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h4" component="h1" className={styles.manageAdminsTitle} style={{ color: 'white' }}>{t('管理管理員')}</Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}
+        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
+      >
+        <Typography variant="h4" component="h1" className={styles.manageAdminsTitle} style={{ color: 'white' }}
+          sx={{ mb: { xs: 2, sm: 0 } }}
+        >{t('管理管理員')}</Typography>
         <Button
           variant="contained"
           color="primary"
@@ -278,10 +283,13 @@ const ManageAdmins = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
+          <Box mt={2} display="flex" justifyContent="space-between" alignItems="center"
+            sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}
+          >
             <Button
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
+              sx={{ mb: { xs: 1, sm: 0 } }}
             >
               {t('上一頁')}
             </Button>

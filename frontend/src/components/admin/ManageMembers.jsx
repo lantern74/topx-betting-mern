@@ -15,6 +15,7 @@ import {
   createTheme,
   ThemeProvider,
     Paper,
+    Grid,
 } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import useGetAllMembers from '../../hooks/useGetAllMembers';
@@ -252,8 +253,12 @@ const ManageMembers = () => {
 
   return (
     <div className={styles.manageMembersContainer}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h4" component="h1" className={styles.manageMembersTitle} style={{ color: 'white' }}>{t("管理會員")}</Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}
+        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
+      >
+        <Typography variant="h4" component="h1" className={styles.manageMembersTitle} style={{ color: 'white' }}
+          sx={{ mb: { xs: 2, sm: 0 } }}
+        >{t("管理會員")}</Typography>
           <Button
               variant="contained"
               color="primary"
