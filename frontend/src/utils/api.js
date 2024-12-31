@@ -1,5 +1,5 @@
 import axios from 'axios';
-import useAuthStore from '../store/authStore';
+import Cookies from 'js-cookie';
 
 const api = axios.create({
   baseURL: '/api',
@@ -8,21 +8,13 @@ const api = axios.create({
   },
 });
 
-// Function to set the authorization header
-const setAuthHeader = (token) => {
-  if (token) {
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } else {
-    delete api.defaults.headers.common['Authorization'];
-  }
-};
 
-// Add a request interceptor to include the token
+// Add a request interceptor to include the session cookie
 api.interceptors.request.use(
   (config) => {
-    const token = useAuthStore.getState().token;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const sessionId = Cookies.get('sessionId');
+    if (sessionId) {
+      config.headers.Cookie = `sessionId=${sessionId}`;
     }
     return config;
   },
@@ -48,4 +40,4 @@ const handleApiError = (error) => {
   }
 };
 
-export { api, setAuthHeader, handleApiError };
+export { api, handleApiError };
