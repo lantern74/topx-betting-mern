@@ -106,63 +106,65 @@ const MemberTable = ({
   });
 
   return (
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder={t("搜尋會員...")}
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-        </Box>
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id}>
-                            {headerGroup.headers.map((header) => (
-                                <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
-                                    {flexRender(header.column.columnDef.header, header.getContext())}
-                                    {{
-                                        asc: ' ⬆️',
-                                        desc: ' ⬇️',
-                                    }[header.column.getIsSorted() ]}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    ))}
-                </TableHead>
-                <TableBody>
-                    {table.getRowModel().rows.map((row) => (
-                        <TableRow key={row.id}>
-                            {row.getVisibleCells().map((cell) => (
-                                <TableCell key={cell.id}>
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-        <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
-          <Button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {t("上一頁")}
-          </Button>
-          <span>
-            {t("第")} {table.getState().pagination.pageIndex + 1} {t("頁")} {t("共")} {table.getPageCount()} {t("頁")}
-          </span>
-          <Button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {t("下一頁")}
-          </Button>
-        </Box>
+        <>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder={t("搜尋會員...")}
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              sx={{ mb: 2 }}
+            />
+          </Box>
+          <TableContainer component={Paper}>
+              <Table>
+                  <TableHead>
+                      {table.getHeaderGroups().map((headerGroup) => (
+                          <TableRow key={headerGroup.id}>
+                              {headerGroup.headers.map((header) => (
+                                  <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} style={{cursor: 'pointer'}}>
+                                      {flexRender(header.column.columnDef.header, header.getContext())}
+                                      {{
+                                          asc: ' ⬆️',
+                                          desc: ' ⬇️',
+                                      }[header.column.getIsSorted() ]}
+                                  </TableCell>
+                              ))}
+                          </TableRow>
+                      ))}
+                  </TableHead>
+                  <TableBody>
+                      {table.getRowModel().rows.map((row) => (
+                          <TableRow key={row.id}>
+                              {row.getVisibleCells().map((cell) => (
+                                  <TableCell key={cell.id}>
+                                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                  </TableCell>
+                              ))}
+                          </TableRow>
+                      ))}
+                  </TableBody>
+              </Table>
+          </TableContainer>
+          <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
+            <Button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {t("上一頁")}
+            </Button>
+            <span>
+              {t("第")} {table.getState().pagination.pageIndex + 1} {t("頁")} {t("共")} {table.getPageCount()} {t("頁")}
+            </span>
+            <Button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {t("下一頁")}
+            </Button>
+          </Box>
+        </>
   );
 };
 
