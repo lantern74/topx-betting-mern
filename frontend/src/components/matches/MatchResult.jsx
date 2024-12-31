@@ -6,38 +6,16 @@ import TeamCompareChart from "./widgets/TeamCompareChart";
 import SimpleLineChart from "./widgets/SimpleLineChart";
 import PlayerMultiProgress from "./widgets/PlayerMultiProgress"
 import './MatchResult.css'
+import useGetMatchResult from '../../hooks/useGetMatchResult';
 
 function MatchResult() {
   const { t } = useTranslation();
   const { id } = useParams(); // Get the match ID from the URL
   const navigate = useNavigate(); // Hook for navigation
-  const [match, setMatch] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: match, isLoading, error } = useGetMatchResult(id);
   const [modalVisible, setModalVisible] = useState(false);
   const [homeWinRate, setHomeWinRate] = useState(0);
   const [awayWinRate, setAwayWinRate] = useState(0);
-
-  useEffect(() => {
-    // Fetch match data from the specified API
-    fetch(`http://localhost:5000/match-result/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setMatch(data); // Store the fetched match data
-        setLoading(false);
-        setTimeout(() => setModalVisible(true), 3000); 
-      })
-      .catch((err) => {
-        console.error("Error fetching match data:", err);
-        setError("Error fetching match data");
-        setLoading(false);
-      });
-  }, [id]);
 
   // Increment effect for home and away win rates
   useEffect(() => {
@@ -66,7 +44,13 @@ function MatchResult() {
     }
   }, [modalVisible, match]);
 
-  if (loading) {
+  useEffect(() => {
+    if(match) {
+      setTimeout(() => setModalVisible(true), 3000);
+    }
+  }, [match])
+
+  if (isLoading) {
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", background: "black" }}>
         <div className="spinner"></div>
