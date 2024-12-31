@@ -40,12 +40,12 @@ const TopNav = () => {
                         </div>
                         <div className="right-widget d-flex align-items-center ms-auto order-lg-3">
                             {!isAuthenticated && (
-                                <Link to="/login" className="send-msg-btn tran3s d-none d-lg-block">{t("登入")}</Link>
+                                <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
                             )}
                         </div>
                         <nav className="navbar navbar-expand-lg order-lg-2">
                             <div className="collapse navbar-collapse" id="navbarNav">
-                                <ThemeMainMenu/>
+                                {isAuthenticated && <ThemeMainMenu/>}
                             </div>
                         </nav>
                     </div>
