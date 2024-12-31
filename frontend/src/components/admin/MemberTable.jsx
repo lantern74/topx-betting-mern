@@ -34,6 +34,10 @@ const MemberTable = ({ members, handleBlockMember, handleUnblockMember, handleEd
         accessorKey: 'price',
       },
       {
+        header: t('創建者'),
+        accessorKey: 'createdBy.username',
+      },
+      {
         header: t('操作'),
         cell: (props) => (
           <Box sx={{ display: 'flex', gap: 1 }}>

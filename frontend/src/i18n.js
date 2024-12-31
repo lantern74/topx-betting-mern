@@ -13,6 +13,7 @@ i18n
     },
     lng: 'zh', // Set Chinese as default language
     fallbackLng: 'en', // Fallback to English
+    debug: process.env.NODE_ENV === 'development', // Enable debug only in development
     interpolation: {
       escapeValue: false,
     },

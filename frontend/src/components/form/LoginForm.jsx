@@ -46,7 +46,10 @@ const LoginForm = () => {
           navigate('/');
         }
       } catch (err) {
-        const message = handleApiError(err);
+        let message = handleApiError(err);
+        if (err.response?.data?.code === 'IP_LIMIT_EXCEEDED') {
+          message = t('登錄IP過多，帳號已被封鎖');
+        }
         setError(message || t('登錄時出錯'));
       }
     };

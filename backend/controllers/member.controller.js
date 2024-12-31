@@ -33,15 +33,22 @@ class MemberController {
       }
 
       // Check IP address
-      const clientIp = req.ip; // Assuming Express's req.ip
+      const clientIp = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      console.log(`Login attempt from IP: ${clientIp} for member: ${member.username}`);
+      
       if (!member.ipAddresses.includes(clientIp)) {
         if (member.ipAddresses.length >= 3) {
           member.blocked = true;
           await member.save();
-          return res.status(403).json({ message: 'Too many IP addresses. Account blocked.' });
+          console.log(`Member ${member.username} blocked due to too many IP addresses`);
+          return res.status(403).json({ 
+            message: 'Too many IP addresses. Account blocked.',
+            code: 'IP_LIMIT_EXCEEDED'
+          });
         } else {
           member.ipAddresses.push(clientIp);
           await member.save();
+          console.log(`New IP address added for member ${member.username}: ${clientIp}`);
         }
       }
 
