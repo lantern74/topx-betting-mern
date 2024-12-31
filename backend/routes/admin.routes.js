@@ -6,6 +6,9 @@ const { authenticateAdmin, authorize } = require('../middleware/authMiddleware')
 // Route to handle admin login
 router.post('/login', AdminController.login);
 
+// Route to handle admin logout
+router.post('/logout', AdminController.logout);
+
 // Route to handle sub-admin registration (only main admin can access)
 router.post('/register-subadmin', authenticateAdmin, authorize(['main']), AdminController.registerSubAdmin);
 
