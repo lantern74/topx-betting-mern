@@ -6,7 +6,7 @@ import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
 import AppRouter from "./router/AppRouter";
 import ScrollToTop from "./components/ScrollToTop";
 import TopNav from './components/header/TopNav';
-import { api } from './utils/api';
+import { api, handleApiError } from './utils/api';
 import useAuthStore from './store/authStore';
 
 function App() {
@@ -32,6 +32,8 @@ function App() {
           if (error.response && error.response.status === 403) {
             logout();
             navigate('/login');
+          } else {
+            handleApiError(error, navigate);
           }
         }
       }

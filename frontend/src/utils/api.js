@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import useAuthStore from '../store/authStore';
-import { useNavigate } from 'react-router-dom';
 
 const api = axios.create({
   baseURL: '/api',
@@ -35,11 +34,10 @@ const handleNavigation = (navigate, userRole) => {
 
 
 // Function to handle API errors
-const handleApiError = (error) => {
+const handleApiError = (error, navigate) => {
     console.error('API Error:', error);
     const logout = useAuthStore.getState().logout;
     const userRole = useAuthStore.getState().userRole;
-    const navigate = useNavigate();
     if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
