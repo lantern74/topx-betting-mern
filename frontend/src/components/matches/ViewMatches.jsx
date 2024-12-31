@@ -1,33 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-
+import useGetMatchData from '../../hooks/useGetMatchData';
 import MatchResultFullCard from './widgets/MatchResultFullCard/index'
 import './ViewMatches.css'
 
 export default function Event() {
   const { t } = useTranslation();
-  const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: matches, isLoading, error } = useGetMatchData();
   const [selectedDate, setSelectedDate] = useState("all"); // Default to "All Matches"
   const navigate = useNavigate();
 
   
-  useEffect(() => {
-    fetch("http://localhost:5000/match-data")
-      .then((response) => response.json())
-      .then((data) => {
-        setMatches(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching match data:", err);
-        setError("Error fetching match data");
-        setLoading(false);
-      });
-  }, []);
-
   const formatDateWithDay = (isoString) => {
     const [day, month, year] = isoString.split("/");
     const validDate = `${year}-${month}-${day}`; // Rearrange to ISO format
@@ -108,14 +92,14 @@ export default function Event() {
   };
   
 
-  const groupedMatches = groupMatchesByDate(matches);
+  const groupedMatches = matches ? groupMatchesByDate(matches) : {};
 
   const uniqueDates = ["all", ...Object.keys(groupedMatches)];
 
   const filteredMatches =
-    selectedDate === "all" ? matches : groupedMatches[selectedDate] || [];
+    selectedDate === "all" ? (matches || []) : (groupedMatches[selectedDate] || []);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div
         sx={{
