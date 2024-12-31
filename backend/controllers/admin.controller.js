@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { Admin } = require('../models/admin.model');
 const { Member } = require('../models/member.model');
-const { SessionService } = require('../services/session.service');
+const SessionService = require('../services/session.service');
 const mongoose = require('mongoose');
 
 /**
