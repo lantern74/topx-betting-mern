@@ -11,15 +11,17 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/translation.json'
     },
-    lng: 'zh', // Set Chinese as default language
-    fallbackLng: 'en', // Fallback to English
+    fallbackLng: 'zh', // Default to Chinese if no language is detected
     debug: process.env.NODE_ENV === 'development', // Enable debug only in development
     interpolation: {
       escapeValue: false,
     },
     detection: {
       order: ['localStorage', 'navigator'],
-      caches: ['localStorage']
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng',
+      lookupFromPathIndex: 0,
+      lookupFromSubdomainIndex: 0
     }
   });
 
