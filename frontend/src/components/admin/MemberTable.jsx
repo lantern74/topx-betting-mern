@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import {
   Table,
@@ -34,6 +35,21 @@ const MemberTable = ({
   handleDeleteMemberOpen 
 }) => {
   const [globalFilter, setGlobalFilter] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Debounced search handler
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      setGlobalFilter(value);
+    }, 300),
+    []
+  );
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    debouncedSearch(value);
+  };
   const { t } = useTranslation();
 
   const columns = useMemo(
@@ -114,8 +130,8 @@ const MemberTable = ({
               variant="outlined"
               label={t("Search Members")}
               placeholder={t("Type to search...")}
-              value={globalFilter}
-              onChange={(e) => setGlobalFilter(e.target.value)}
+              value={searchTerm}
+              onChange={handleSearchChange}
               sx={{ 
                 '& .MuiOutlinedInput-root': {
                   borderRadius: '8px',
