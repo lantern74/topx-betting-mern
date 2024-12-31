@@ -275,6 +275,7 @@ const ManageMembers = () => {
         ) : (
             <ThemeProvider theme={darkTheme}>
                 <Paper style={{ backgroundColor: '#333', color: 'white' }}>
+                    <div style={{ overflowX: 'auto' }}>
                     <MemberTable
                         members={memberList}
                         handleBlockMember={handleBlockMember}
@@ -283,6 +284,7 @@ const ManageMembers = () => {
                         handleEditCredentialOpen={handleEditCredentialOpen}
                         handleDeleteMemberOpen={handleDeleteMemberOpen}
                     />
+                    </div>
                 </Paper>
             </ThemeProvider>
         )}

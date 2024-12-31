@@ -253,6 +253,7 @@ const ManageAdmins = () => {
       <Card style={{ backgroundColor: '#333', color: 'white' }}>
         <CardContent>
             <ThemeProvider theme={darkTheme}>
+          <div style={{ overflowX: 'auto' }}>
           <TableContainer component={Paper} >
             <Table>
               <TableHead>
@@ -283,6 +284,7 @@ const ManageAdmins = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          </div>
           <Box mt={2} display="flex" justifyContent="space-between" alignItems="center"
             sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}
           >
