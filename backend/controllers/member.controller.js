@@ -109,6 +109,44 @@ class MemberController {
       });
     }
   }
+
+    /**
+     * Checks if a member is authenticated.
+     * @param {object} req - The request object.
+     * @param {object} res - The response object.
+     * @returns {Promise<void>}
+     * @static
+     * @async
+     */
+    static async checkAuth(req, res) {
+        try {
+            const sessionId = req.cookies?.sessionId;
+
+            if (!sessionId) {
+                return res.status(401).json({ message: 'No session ID provided' });
+            }
+
+            const session = await SessionService.validateSession(sessionId);
+
+            if (!session) {
+                return res.status(401).json({ message: 'Invalid session' });
+            }
+
+            const member = await Member.findById(session.userId);
+
+            if (!member) {
+                return res.status(404).json({ message: 'Member not found' });
+            }
+
+            if (member.blocked) {
+                return res.status(403).json({ message: 'Member is blocked' });
+            }
+
+            res.status(200).json({ message: 'Member is authenticated' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error checking authentication', error: error.message });
+        }
+    }
 }
 
 module.exports = MemberController;
