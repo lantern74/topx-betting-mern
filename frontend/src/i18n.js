@@ -11,6 +11,7 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/translation.json'
     },
+    lng: 'zh', // Set Chinese as default language
     fallbackLng: 'en', // Fallback to English
     interpolation: {
       escapeValue: false,
