@@ -274,7 +274,11 @@ const ManageMembers = () => {
           <Typography color="error">{error.message}</Typography>
         ) : (
             <ThemeProvider theme={darkTheme}>
-                <Paper style={{ backgroundColor: '#333', color: 'white' }}>
+                <Paper style={{ 
+                  backgroundColor: '#333', 
+                  color: 'white',
+                  padding: '16px'
+                }}>
                     <div style={{ overflowX: 'auto' }}>
                     <MemberTable
                         members={memberList}

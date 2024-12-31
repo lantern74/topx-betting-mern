@@ -109,9 +109,7 @@ const MemberTable = ({
   return (
         <>
           <Box mb={2} sx={{ 
-            p: 3, 
-            border: '1px solid rgba(255, 255, 255, 0.12)', 
-            borderRadius: '8px',
+            mt: 4,
             position: 'relative'
           }}>
             <Typography 
