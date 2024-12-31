@@ -27,8 +27,22 @@ const SubAdminLoginForm = () => {
         navigate('/admin/dashboard');
       }
     } catch (err) {
-      const message = handleApiError(err);
-      setError(message || t('登錄時出錯'));
+        const message = handleApiError(err);
+        if (err.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            if (err.response.status === 401) {
+              setError(t("用戶名或密碼錯誤"));
+            } else if (err.response.status === 404) {
+              setError(t("副管理員未找到"));
+            }
+             else {
+              setError(message || t("登錄時出錯"));
+            }
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            setError(message || t("登錄時出錯"));
+          }
     }
   };
 
