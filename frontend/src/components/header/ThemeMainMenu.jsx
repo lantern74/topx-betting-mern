@@ -46,7 +46,7 @@ const ThemeMainMenu = () => {
                     <li className="nav-item">
                         <Link to="/#contactUs" className="nav-link dropdown-toggle" role="button">{t("聯絡我們")}</Link>
                     </li>
-                    {isAuthenticated && userRole !== 'member' && (
+                    {isAuthenticated && (
                       <li className="nav-item">
                           <Link to="/view-matches" className="nav-link dropdown-toggle">{t("賽事系統")}</Link>
                       </li>
