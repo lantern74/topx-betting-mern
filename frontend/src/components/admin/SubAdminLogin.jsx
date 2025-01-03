@@ -17,7 +17,7 @@ const SubAdminLogin = () => {
     try {
       const data = await mutateAsync(credentials);
       login(data.role);
-      navigate('/subadmin'); 
+      navigate('/'); 
     } catch (error) {
       setLoginError(error.message);
     }

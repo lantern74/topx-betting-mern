@@ -24,7 +24,7 @@ const SubAdminLoginForm = () => {
 
       if (response.status === 200) {
         login('sub', response.data.token);
-        navigate('/subadmin');
+        navigate('/');
       }
     } catch (err) {
         const message = handleApiError(err);
