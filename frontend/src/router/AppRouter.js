@@ -25,6 +25,8 @@ const AppRouter = () => {
           <MainLayout>
             <Routes>
               <Route path="/" element={<Landing />} />
+              <Route path="/admin" element={<Landing />} />
+              <Route path="/subadmin" element={<Landing />} />
               <Route path="/view-matches" element={<ViewMatches />} />
               <Route path="/match-result/:id" element={<MatchResult />} />
               <Route path="/developer/language" element={<DeveloperPage />} />
