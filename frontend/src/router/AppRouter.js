@@ -34,7 +34,7 @@ const AppRouter = () => {
             </Routes>
           </MainLayout>
         } />
-        <Route path="/admin/dashboard" element={
+        <Route path="/admin" element={
           <AdminLayout>
             <AdminDashboard />
           </AdminLayout>
@@ -49,7 +49,7 @@ const AppRouter = () => {
             <ManageAdmins />
           </AdminLayout>
         } />
-        <Route path="/subadmin/dashboard" element={
+        <Route path="/subadmin" element={
           <AdminLayout>
             <AdminDashboard />
           </AdminLayout>

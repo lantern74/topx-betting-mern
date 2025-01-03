@@ -24,7 +24,7 @@ const AdminLoginForm = () => {
 
       if (response.status === 200) {
         login('main', response.data.token);
-        navigate("/admin/dashboard");
+        navigate("/admin");
       }
     } catch (err) {
         const message = handleApiError(err);
