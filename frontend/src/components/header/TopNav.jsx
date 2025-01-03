@@ -43,7 +43,7 @@ const TopNav = () => {
                                 <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
                             ) : (
                                 <Link to={userRole === 'main' ? "/admin/dashboard" : "/subadmin/dashboard"} className="send-msg-btn tran3s">
-                                    {userRole === 'main' ? t("管理員儀表板") : t("副管理員儀表板")}
+                                    {t("儀表板")}
                                 </Link>
                             )}
                         </div>
