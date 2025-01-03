@@ -42,7 +42,22 @@ const AppRouter = () => {
             <ManageMembers />
           </AdminLayout>
         } />
-         <Route path="/admin/manage-admins" element={
+        <Route path="/admin/manage-admins" element={
+          <AdminLayout>
+            <ManageAdmins />
+          </AdminLayout>
+        } />
+        <Route path="/subadmin/dashboard" element={
+          <AdminLayout>
+            <AdminDashboard />
+          </AdminLayout>
+        } />
+        <Route path="/subadmin/manage-members" element={
+          <AdminLayout>
+            <ManageMembers />
+          </AdminLayout>
+        } />
+        <Route path="/subadmin/manage-admins" element={
           <AdminLayout>
             <ManageAdmins />
           </AdminLayout>

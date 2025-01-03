@@ -75,7 +75,7 @@ const AdminLayout = ({ children }) => {
       </Typography>
       <List>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/admin/dashboard">
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/dashboard' : '/admin/dashboard'}>
             <ListItemIcon>
               <DashboardIcon sx={{ color: 'white' }} />
             </ListItemIcon>
@@ -83,7 +83,7 @@ const AdminLayout = ({ children }) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/admin/manage-members">
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-members' : '/admin/manage-members'}>
             <ListItemIcon>
               <PeopleIcon sx={{ color: 'white' }} />
             </ListItemIcon>
@@ -92,7 +92,7 @@ const AdminLayout = ({ children }) => {
         </ListItem>
         {userRole === 'main' && (
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/admin/manage-admins">
+            <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-admins' : '/admin/manage-admins'}>
               <ListItemIcon>
                 <AdminPanelSettingsIcon sx={{ color: 'white' }} />
               </ListItemIcon>
