@@ -7,10 +7,11 @@ import {
   Card,
   CardContent,
   Typography,
-  Link,
   Box,
   Grid,
+  Button,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const { t } = useTranslation();
@@ -45,9 +46,9 @@ const AdminDashboard = () => {
             )}
           </Box>
           <Box>
-            <Link href="/admin/manage-members" className={styles.dashboardLink} sx={{ mr: 2 }}>{t("管理會員")}</Link>
+            <Button component={Link} to="/admin/manage-members" variant="contained" color="primary" sx={{ mr: 2 }}>{t("管理會員")}</Button>
             {userRole === 'main' && (
-              <Link href="/admin/manage-admins" className={styles.dashboardLink}>{t("管理管理員")}</Link>
+              <Button component={Link} to="/admin/manage-admins" variant="contained" color="primary">{t("管理管理員")}</Button>
             )}
           </Box>
           {error && <Typography variant="body2" color="error" mt={2}>{error}</Typography>}
