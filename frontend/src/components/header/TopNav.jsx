@@ -40,25 +40,25 @@ const TopNav = () => {
                                 {/* <img className='responsive-logo' src="images/logo/topx-logo.png" alt=""/> */}
                             </Link>
                         </div>
-                        <div className="right-widget d-flex align-items-center ms-auto order-lg-3 d-none d-lg-flex">
-                            {!isAuthenticated ? (
-                                <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
-                            ) : userRole === 'main' || userRole === 'sub' ? (
-                                <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="send-msg-btn tran3s">
-                                    {t("管理")}
-                                </Link>
-                            ) : (
-                                <button onClick={() => {
-                                    logout();
-                                    navigate('/login');
-                                }} className="send-msg-btn tran3s">
-                                    {t("登出")}
-                                </button>
-                            )}
-                        </div>
                         <nav className="navbar navbar-expand-lg order-lg-2">
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ThemeMainMenu/>
+                                <div className="auth-buttons ms-auto">
+                                    {!isAuthenticated ? (
+                                        <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
+                                    ) : userRole === 'main' || userRole === 'sub' ? (
+                                        <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="send-msg-btn tran3s">
+                                            {t("管理")}
+                                        </Link>
+                                    ) : (
+                                        <button onClick={() => {
+                                            logout();
+                                            navigate('/login');
+                                        }} className="send-msg-btn tran3s">
+                                            {t("登出")}
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </nav>
                     </div>
