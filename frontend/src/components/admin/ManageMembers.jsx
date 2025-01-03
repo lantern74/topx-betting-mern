@@ -321,10 +321,13 @@ const ManageMembers = () => {
                 <TextField
                     inputRef={priceRef}
                     label={t('價格')}
-                    type="number"
+                    type="text"
                     fullWidth
                     name="price"
                     autoComplete="off"
+                    inputProps={{
+                        pattern: "[0-9]*",
+                    }}
                 />
                 <TextField
                     inputRef={dateRef}
@@ -352,10 +355,13 @@ const ManageMembers = () => {
                 <TextField
                     inputRef={editPriceRef}
                     label={t('價格')}
-                    type="number"
+                    type="text"
                     fullWidth
                     name="price"
                     autoComplete="off"
+                    inputProps={{
+                        pattern: "[0-9]*",
+                    }}
                 />
             </DialogContent>
             <DialogActions>
