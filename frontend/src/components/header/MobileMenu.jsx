@@ -82,7 +82,7 @@ const MobileMenu = () => {
                             ) : userRole === 'main' || userRole === 'sub' ? (
                                 <MenuItem>
                                     <Link to={userRole === 'main' ? "/admin" : "/subadmin"}>
-                                        {t("儀表板")}
+                                        {t("管理")}
                                     </Link>
                                 </MenuItem>
                             ) : (
