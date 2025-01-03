@@ -25,6 +25,7 @@ import {
   getFilteredRowModel,
   flexRender,
 } from '@tanstack/react-table';
+import useAuthStore from '../../store/authStore';
 
 const MemberTable = ({ 
   members, 
@@ -36,6 +37,7 @@ const MemberTable = ({
 }) => {
   const [globalFilter, setGlobalFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const { userRole } = useAuthStore();
 
   // Debounced search handler
   const debouncedSearch = useCallback(
@@ -53,20 +55,26 @@ const MemberTable = ({
   const { t } = useTranslation();
 
   const columns = useMemo(
-    () => [
-      {
-        header: t('用戶名'),
-        accessorKey: 'username',
-      },
-      {
-        header: t('價格'),
-        accessorKey: 'price',
-      },
-      {
-        header: t('創建者'),
-        accessorKey: 'createdBy.username',
-      },
-      {
+    () => {
+      const baseColumns = [
+        {
+          header: t('用戶名'),
+          accessorKey: 'username',
+        },
+        {
+          header: t('價格'),
+          accessorKey: 'price',
+        },
+      ];
+
+      if (userRole === 'main') {
+        baseColumns.push({
+          header: t('創建者'),
+          accessorKey: 'createdBy.username',
+        });
+      }
+
+      baseColumns.push({
         header: t('操作'),
         cell: (props) => (
           <Box sx={{ display: 'flex', gap: 1 }}>
@@ -104,9 +112,10 @@ const MemberTable = ({
           </Box>
         ),
         size: 100,
-      },
-    ],
-    [t, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen, handleDeleteMemberOpen]
+      });
+      return baseColumns;
+    },
+    [t, handleBlockMember, handleUnblockMember, handleEditPriceOpen, handleEditCredentialOpen, handleDeleteMemberOpen, userRole]
   );
 
   const table = useReactTable({

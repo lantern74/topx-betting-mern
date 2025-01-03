@@ -152,8 +152,18 @@ class AdminController {
   static async getAllMembers(req, res) {
     try {
       console.log("AdminController: getAllMembers - fetching members");
-      const members = await Member.find().populate('createdBy', 'username');
-      res.status(200).json(members);
+      const isAdmin = req.admin.role === 'main';
+      const members = await Member.find().populate('createdBy', isAdmin ? 'username' : null);
+      const formattedMembers = members.map(member => {
+        const formattedMember = {
+          ...member.toObject(),
+        };
+        if (!isAdmin) {
+          delete formattedMember.createdBy;
+        }
+        return formattedMember;
+      });
+      res.status(200).json(formattedMembers);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching members', error: error.message });
     }
