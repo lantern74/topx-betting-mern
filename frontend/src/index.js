@@ -23,6 +23,7 @@ const darkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#111312',
+          color: 'white',
           '&:hover': {
             backgroundColor: '#32cd32',
           },
