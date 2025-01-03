@@ -16,10 +16,10 @@ class MatchService {
   static async getMatchData() {
     const matches = await getHKMatches();
     const matchDatas = matches.map((match) => ({
-      time: match.kickOffTime,
-      id: match.frontEndId,
-      homeTeamName: match.homeTeam.name_ch,
-      awayTeamName: match.awayTeam.name_ch,
+        time: match.kickOffTime,
+        id: match.frontEndId,
+        homeTeamName: match.homeTeam.name_ch,
+        awayTeamName: match.awayTeam.name_ch,
     }));
     return matchDatas;
   }

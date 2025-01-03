@@ -37,6 +37,9 @@ const MatchSchema = new Schema({
   kellyHome: { type: Number },
   kellyAway: { type: Number },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
+  cacheKey: { type: String, index: true },
+  data: { type: mongoose.Schema.Types.Mixed },
+  lastUpdated: { type: Date },
 });
 
 /**
