@@ -53,10 +53,13 @@ function MatchResult() {
   if (isLoading) {
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", background: "black" }}>
-        <div className="spinner"></div>
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p style={{ color: 'white', marginTop: '10px' }}>{t("加載中...")}</p>
+        </div>
       </div>
     );
-}
+  }
 
   if (error) {
     return (

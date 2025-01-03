@@ -102,14 +102,17 @@ export default function Event() {
   if (isLoading) {
     return (
       <div
-        sx={{
+        style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
         }}
       >
-        Loading..
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p style={{ marginTop: '10px' }}>{t("加載中...")}</p>
+        </div>
       </div>
     );
   }
