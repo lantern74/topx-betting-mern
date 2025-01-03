@@ -90,7 +90,7 @@ const MobileMenu = () => {
                                     <button onClick={() => {
                                         logout();
                                         navigate('/login');
-                                    }} style={{background: 'none', border: 'none', padding: 0}}>
+                                    }} style={{background: 'none', border: 'none', padding: 0, color: 'white'}}>
                                         {t("登出")}
                                     </button>
                                 </MenuItem>
