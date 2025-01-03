@@ -70,6 +70,9 @@ const MemberTable = ({
           accessorKey: 'date',
           cell: (props) => {
             const date = new Date(props.getValue());
+            if (isNaN(date)) {
+              return '';
+            }
             return date.toLocaleDateString();
           }
         },
