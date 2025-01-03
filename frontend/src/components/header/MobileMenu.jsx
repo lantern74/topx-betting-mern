@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
-import {Link, useLocation} from 'react-router-dom'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
 import {
     ProSidebar,
     SidebarHeader,
@@ -10,6 +10,7 @@ import {
     MenuItem,
 } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
+import useAuthStore from '../../store/authStore';
 
 const MobileMenu = () => {
   const { t } = useTranslation();
@@ -35,6 +36,8 @@ const MobileMenu = () => {
     
         return null;
     };
+    const { isAuthenticated, userRole, logout } = useAuthStore();
+    const navigate = useNavigate();
 
     return (
       <>
@@ -72,9 +75,26 @@ const MobileMenu = () => {
                           <MenuItem>
                             <Link to='/view-matches'>{t("賽事系統")}</Link>
                           </MenuItem>
-                          <MenuItem>
-                            <Link to='/login'>{t("會員登入")}</Link>
-                          </MenuItem>
+                          {!isAuthenticated ? (
+                                <MenuItem>
+                                    <Link to="/login">{t("會員登入")}</Link>
+                                </MenuItem>
+                            ) : userRole === 'main' || userRole === 'sub' ? (
+                                <MenuItem>
+                                    <Link to={userRole === 'main' ? "/admin/dashboard" : "/subadmin/dashboard"}>
+                                        {t("儀表板")}
+                                    </Link>
+                                </MenuItem>
+                            ) : (
+                                <MenuItem>
+                                    <button onClick={() => {
+                                        logout();
+                                        navigate('/login');
+                                    }} style={{background: 'none', border: 'none', padding: 0}}>
+                                        {t("登出")}
+                                    </button>
+                                </MenuItem>
+                            )}
                         </Menu>
                     </SidebarContent>
                     <SidebarFooter></SidebarFooter>

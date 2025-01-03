@@ -40,7 +40,7 @@ const TopNav = () => {
                                 {/* <img className='responsive-logo' src="images/logo/topx-logo.png" alt=""/> */}
                             </Link>
                         </div>
-                        <div className="right-widget d-flex align-items-center ms-auto order-lg-3">
+                        <div className="right-widget d-flex align-items-center ms-auto order-lg-3 d-none d-lg-flex">
                             {!isAuthenticated ? (
                                 <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
                             ) : userRole === 'main' || userRole === 'sub' ? (
