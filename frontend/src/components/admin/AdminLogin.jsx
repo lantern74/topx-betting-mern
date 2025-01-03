@@ -17,7 +17,7 @@ const AdminLogin = () => {
     try {
       const data = await mutate(credentials);
       login(data.role);
-      navigate('/admin/dashboard');
+      navigate('/admin');
     } catch (error) {
       setLoginError(error.message);
     }
