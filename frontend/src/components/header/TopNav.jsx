@@ -59,9 +59,13 @@ const TopNav = () => {
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ThemeMainMenu/>
                                 {isAuthenticated && (userRole === 'main' || userRole === 'sub') && (
-                                    <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="send-msg-btn tran3s ms-3">
-                                        {t("管理")}
-                                    </Link>
+                                    <ul className="navbar-nav">
+                                        <li className="nav-item">
+                                            <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="nav-link">
+                                                {t("管理")}
+                                            </Link>
+                                        </li>
+                                    </ul>
                                 )}
                             </div>
                         </nav>
