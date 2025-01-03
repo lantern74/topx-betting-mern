@@ -81,7 +81,7 @@ const AdminLayout = ({ children }) => {
       </Typography>
       <List>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/dashboard' : '/admin/dashboard'} onClick={handleDrawerLinkClick}>
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin' : '/admin'} onClick={handleDrawerLinkClick}>
             <ListItemIcon>
               <DashboardIcon sx={{ color: 'white' }} />
             </ListItemIcon>

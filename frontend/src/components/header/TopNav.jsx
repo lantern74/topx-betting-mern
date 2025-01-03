@@ -44,7 +44,7 @@ const TopNav = () => {
                             {!isAuthenticated ? (
                                 <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
                             ) : userRole === 'main' || userRole === 'sub' ? (
-                                <Link to={userRole === 'main' ? "/admin/dashboard" : "/subadmin/dashboard"} className="send-msg-btn tran3s">
+                                <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="send-msg-btn tran3s">
                                     {t("儀表板")}
                                 </Link>
                             ) : (
