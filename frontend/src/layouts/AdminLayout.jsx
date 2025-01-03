@@ -68,6 +68,12 @@ const AdminLayout = ({ children }) => {
     return navigate('/login');
   }
 
+    const handleDrawerLinkClick = () => {
+        if (mobileOpen) {
+            setMobileOpen(false);
+        }
+    };
+
   const drawer = (
     <div className={styles.sidebarContent}>
       <Typography variant="h6" className={styles.adminTitle} sx={{textAlign: 'center', my: 2}}>
@@ -75,7 +81,7 @@ const AdminLayout = ({ children }) => {
       </Typography>
       <List>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/dashboard' : '/admin/dashboard'}>
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/dashboard' : '/admin/dashboard'} onClick={handleDrawerLinkClick}>
             <ListItemIcon>
               <DashboardIcon sx={{ color: 'white' }} />
             </ListItemIcon>
@@ -83,7 +89,7 @@ const AdminLayout = ({ children }) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-members' : '/admin/manage-members'}>
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-members' : '/admin/manage-members'} onClick={handleDrawerLinkClick}>
             <ListItemIcon>
               <PeopleIcon sx={{ color: 'white' }} />
             </ListItemIcon>
@@ -92,7 +98,7 @@ const AdminLayout = ({ children }) => {
         </ListItem>
         {userRole === 'main' && (
           <ListItem disablePadding>
-            <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-admins' : '/admin/manage-admins'}>
+            <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-admins' : '/admin/manage-admins'} onClick={handleDrawerLinkClick}>
               <ListItemIcon>
                 <AdminPanelSettingsIcon sx={{ color: 'white' }} />
               </ListItemIcon>
@@ -175,7 +181,7 @@ const AdminLayout = ({ children }) => {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300, backgroundColor: '#333', color: 'white' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 150, backgroundColor: '#333', color: 'white' },
           }}
         >
           {drawer}
