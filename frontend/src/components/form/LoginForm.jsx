@@ -43,10 +43,10 @@ const LoginForm = () => {
   
         if (response.status === 200) {
           login('member', response.data.token);
-          navigate('/');
+          navigate('/view-matches');
         }
       } catch (err) {
-        let message = handleApiError(err);
+        let message = handleApiError(err, navigate);
         if (err.response?.data?.code === 'IP_LIMIT_EXCEEDED') {
           message = t('登錄IP過多，帳號已被封鎖');
         }
