@@ -1,7 +1,8 @@
-import React, {Fragment, useState, useEffect} from 'react';
-import './MobileMenu.css'; // Add this line
+import React, {Fragment, useState} from 'react';
+import './MobileMenu.css';
 import { useTranslation } from 'react-i18next';
-import {Link, useLocation, useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom';
+import ScrollToHash from '../common/ScrollToHash';
 import {
     ProSidebar,
     SidebarHeader,
