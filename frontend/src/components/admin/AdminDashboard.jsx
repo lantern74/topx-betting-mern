@@ -27,13 +27,13 @@ const AdminDashboard = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      <Typography variant="h4" component="h1" className={styles.dashboardTitle} gutterBottom>
-        {t("管理員儀表板")}
+      <Typography variant="h4" component="h1" className={styles.dashboardTitle} gutterBottom sx={{ color: 'white' }}>
+        {userRole === 'sub' ? t("副管理員儀表板") : t("管理員儀表板")}
       </Typography>
       <Card>
         <CardContent>
           <Typography variant="body1" paragraph>
-            {t("歡迎來到管理員儀表板。")}
+            {userRole === 'sub' ? t("歡迎來到副管理員儀表板。") : t("歡迎來到管理員儀表板。")}
           </Typography>
           <Box mb={2}>
             <Typography variant="body1">
