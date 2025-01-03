@@ -117,7 +117,7 @@ class AdminController {
    */
   static async registerMember(req, res) {
     try {
-      const { username, password, price } = req.body;
+      const { username, password, price, date } = req.body;
         const admin = req.admin;
 
       const existingMember = await Member.findOne({ username });
@@ -131,6 +131,7 @@ class AdminController {
         username,
         password: hashedPassword,
         price,
+          date,
         createdBy: admin.id,
       });
 

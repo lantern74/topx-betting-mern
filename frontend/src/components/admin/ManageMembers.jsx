@@ -36,6 +36,7 @@ const ManageMembers = () => {
   const usernameRef = React.useRef();
   const passwordRef = React.useRef();
   const priceRef = React.useRef();
+    const dateRef = React.useRef();
   const [dialogError, setDialogError] = useState(null);
     const [editPriceOpen, setEditPriceOpen] = useState(false);
     const [editCredentialOpen, setEditCredentialOpen] = useState(false);
@@ -122,6 +123,9 @@ const ManageMembers = () => {
         if (priceRef.current) {
             priceRef.current.value = '';
         }
+        if (dateRef.current) {
+            dateRef.current.value = '';
+        }
         setDialogError(null);
     };
 
@@ -148,6 +152,7 @@ const ManageMembers = () => {
             username: usernameRef.current.value,
             password: passwordRef.current.value,
             price: priceRef.current.value,
+            date: dateRef.current.value,
             createdBy: userRole === 'main' ? 'main' : 'sub',
         };
         addMutation.mutate(newMember);
@@ -320,6 +325,17 @@ const ManageMembers = () => {
                     fullWidth
                     name="price"
                     autoComplete="off"
+                />
+                <TextField
+                    inputRef={dateRef}
+                    label={t('Date')}
+                    type="date"
+                    fullWidth
+                    name="date"
+                    autoComplete="off"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
                 {dialogError && <p className="error-message">{dialogError}</p>}
             </DialogContent>
