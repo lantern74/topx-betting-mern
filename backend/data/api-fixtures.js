@@ -1,5 +1,9 @@
 const axios = require('axios');
 
+// Simple in-memory cache
+const cache = new Map();
+const CACHE_TTL = 1000 * 60 * 5; // 5 minutes
+
 // Function to format a date as 'YYYY-MM-DD'
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -58,10 +62,30 @@ const fetchData = async (date) => {
 
 // Main function to fetch data for all dates
 const fetchAllData = async () => {
+  // Check cache first
+  if (cache.has('fixtures')) {
+    const cached = cache.get('fixtures');
+    if (Date.now() - cached.timestamp < CACHE_TTL) {
+      console.log('Cache hit - using cached fixtures data');
+      return cached.data;
+    }
+  }
+
+  // Clear fixtures array for fresh data
+  fixtures.length = 0;
+
+  // Fetch fresh data
   for (const date of dates) {
     await fetchData(date); // Fetch data for each date
   }
-  // console.log("All fixtures collected:", fixtures); // Log all collected data
+
+  // Update cache
+  cache.set('fixtures', {
+    data: fixtures,
+    timestamp: Date.now()
+  });
+  console.log('Cache miss - fetched fresh fixtures data');
+
   return fixtures;
 };
 
