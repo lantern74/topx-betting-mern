@@ -14,6 +14,21 @@ const queryClient = new QueryClient();
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#32cd32', // Set primary color for other components
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#111312',
+          '&:hover': {
+            backgroundColor: '#32cd32',
+          },
+        },
+      },
+    },
   },
 });
 
