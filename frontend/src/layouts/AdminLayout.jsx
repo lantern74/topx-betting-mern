@@ -181,7 +181,7 @@ const AdminLayout = ({ children }) => {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 150, backgroundColor: '#333', color: 'white' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', backgroundColor: '#333', color: 'white' },
           }}
         >
           {drawer}
