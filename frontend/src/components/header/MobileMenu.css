@@ -1,0 +1,23 @@
+/* Remove border from menu and menu item */
+.no-border-menu {
+    border-top: none !important;
+}
+
+.no-border-item {
+    border-top: none !important;
+}
+
+/* Style the logout button */
+.logout-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: white;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    color: #ccc;
+}

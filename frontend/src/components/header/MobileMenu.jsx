@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import './MobileMenu.css'; // Add this line
 import { useTranslation } from 'react-i18next';
 import {Link, useLocation, useNavigate} from 'react-router-dom'
 import {
@@ -91,12 +92,12 @@ const MobileMenu = () => {
                     </SidebarContent>
                     <SidebarFooter>
                     {isAuthenticated && (
-                        <Menu iconShape="square">
-                            <MenuItem>
+                        <Menu iconShape="square" className="no-border-menu">
+                            <MenuItem className="no-border-item">
                                 <button onClick={() => {
                                     logout();
                                     navigate('/login');
-                                }} style={{background: 'none', border: 'none', padding: 0, color: 'white'}}>
+                                }} className="logout-btn">
                                     {t("登出")}
                                 </button>
                             </MenuItem>
