@@ -7,6 +7,11 @@
     border-top: none !important;
 }
 
+/* Remove border from pro-inner-item */
+.no-border-item .pro-inner-item {
+    border-top: none !important;
+}
+
 /* Style the logout button */
 .logout-btn {
     background: none;
