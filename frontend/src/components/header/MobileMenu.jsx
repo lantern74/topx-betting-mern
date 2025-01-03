@@ -2,7 +2,6 @@ import React, {Fragment, useState} from 'react';
 import './MobileMenu.css';
 import { useTranslation } from 'react-i18next';
 import {Link, useNavigate} from 'react-router-dom';
-import ScrollToHash from '../common/ScrollToHash';
 import {
     ProSidebar,
     SidebarHeader,
@@ -13,6 +12,7 @@ import {
 } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import useAuthStore from '../../store/authStore';
+import ScrollToHash from '../common/ScrollToHash';
 
 const MobileMenu = () => {
   const { t } = useTranslation();
@@ -20,7 +20,6 @@ const MobileMenu = () => {
     const handleClick = () => {
         setClick(!click);
     }
-import ScrollToHash from '../common/ScrollToHash';
     const { isAuthenticated, userRole, logout } = useAuthStore();
     const navigate = useNavigate();
 

@@ -3,24 +3,7 @@ import {Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuthStore from '../../store/authStore';
 
-const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-    }
-};
-const ScrollToHash = () => {
-    const location = useLocation();
-
-    useEffect(() => {
-        if (location.hash) {
-            const id = location.hash.replace('#', '');
-            scrollToSection(id);
-        }
-    }, [location]);
-
-    return null;
-};
+import ScrollToHash from '../common/ScrollToHash';
 
 
 const ThemeMainMenu = () => {
