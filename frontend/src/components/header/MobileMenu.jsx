@@ -97,7 +97,20 @@ const MobileMenu = () => {
                             )}
                         </Menu>
                     </SidebarContent>
-                    <SidebarFooter></SidebarFooter>
+                    <SidebarFooter>
+                    {isAuthenticated && (userRole === 'main' || userRole === 'sub') && (
+                        <Menu iconShape="square">
+                            <MenuItem>
+                                <button onClick={() => {
+                                    logout();
+                                    navigate('/login');
+                                }} style={{background: 'none', border: 'none', padding: 0, color: 'white'}}>
+                                    {t("登出")}
+                                </button>
+                            </MenuItem>
+                        </Menu>
+                    )}
+                    </SidebarFooter>
                 </ProSidebar>
             </div>
         </Fragment>
