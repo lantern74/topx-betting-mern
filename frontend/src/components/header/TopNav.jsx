@@ -41,30 +41,27 @@ const TopNav = () => {
                             </Link>
                         </div>
                         <div className="right-widget d-flex align-items-center ms-auto order-lg-3 d-none d-lg-flex">
-                            {!isAuthenticated && (
+                            {!isAuthenticated ? (
                                 <Link to="/login" className="send-msg-btn tran3s">{t("登入")}</Link>
+                            ) : (
+                                <button 
+                                    onClick={() => {
+                                        logout();
+                                        navigate('/login');
+                                    }} 
+                                    className="send-msg-btn tran3s"
+                                >
+                                    {t("登出")}
+                                </button>
                             )}
                         </div>
                         <nav className="navbar navbar-expand-lg order-lg-2">
                             <div className="collapse navbar-collapse" id="navbarNav">
                                 <ThemeMainMenu/>
-                                {isAuthenticated && (
-                                    <>
-                                        {(userRole === 'main' || userRole === 'sub') && (
-                                            <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="send-msg-btn tran3s ms-3">
-                                                {t("管理")}
-                                            </Link>
-                                        )}
-                                        <button 
-                                            onClick={() => {
-                                                logout();
-                                                navigate('/login');
-                                            }} 
-                                            className="send-msg-btn tran3s ms-3"
-                                        >
-                                            {t("登出")}
-                                        </button>
-                                    </>
+                                {isAuthenticated && (userRole === 'main' || userRole === 'sub') && (
+                                    <Link to={userRole === 'main' ? "/admin" : "/subadmin"} className="send-msg-btn tran3s ms-3">
+                                        {t("管理")}
+                                    </Link>
                                 )}
                             </div>
                         </nav>

@@ -75,30 +75,22 @@ const MobileMenu = () => {
                           <MenuItem>
                             <Link to='/view-matches'>{t("賽事系統")}</Link>
                           </MenuItem>
-                          {!isAuthenticated ? (
+                          {!isAuthenticated && (
                                 <MenuItem>
                                     <Link to="/login">{t("會員登入")}</Link>
                                 </MenuItem>
-                            ) : userRole === 'main' || userRole === 'sub' ? (
+                            )}
+                          {isAuthenticated && (userRole === 'main' || userRole === 'sub') && (
                                 <MenuItem>
                                     <Link to={userRole === 'main' ? "/admin" : "/subadmin"}>
                                         {t("管理")}
                                     </Link>
                                 </MenuItem>
-                            ) : (
-                                <MenuItem>
-                                    <button onClick={() => {
-                                        logout();
-                                        navigate('/login');
-                                    }} style={{background: 'none', border: 'none', padding: 0, color: 'white'}}>
-                                        {t("登出")}
-                                    </button>
-                                </MenuItem>
                             )}
                         </Menu>
                     </SidebarContent>
                     <SidebarFooter>
-                    {isAuthenticated && (userRole === 'main' || userRole === 'sub') && (
+                    {isAuthenticated && (
                         <Menu iconShape="square">
                             <MenuItem>
                                 <button onClick={() => {
