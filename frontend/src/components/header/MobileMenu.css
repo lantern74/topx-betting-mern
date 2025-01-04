@@ -1,3 +1,13 @@
+/* Mobile menu toggler button */
+.moblie-menu-toggler {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: auto;
+    padding-right: 20px;
+    z-index: 9999;
+}
+
 /* Remove border from menu and menu item */
 .no-border-menu {
     border-top: none !important;
