@@ -16,6 +16,8 @@ function MatchResult() {
   const [modalVisible, setModalVisible] = useState(false);
   const [homeWinRate, setHomeWinRate] = useState(0);
   const [awayWinRate, setAwayWinRate] = useState(0);
+  const [evRate, setEvRate] = useState(0);
+  const [pbrRate, setPbrRate] = useState(0);
 
   // Increment effect for home and away win rates
   useEffect(() => {
@@ -24,16 +26,24 @@ function MatchResult() {
       const interval = 20; // Update interval in milliseconds
       const homeIncrement = match.homeWinRate / (duration / interval);
       const awayIncrement = match.awayWinRate / (duration / interval);
+      const evIncrement = (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway) / (duration / interval);
+      const pbrIncrement = (match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway) / (duration / interval);
 
       let currentHome = 0;
       let currentAway = 0;
+      let currentEv = 0;
+      let currentPbr = 0;
 
       const timer = setInterval(() => {
         currentHome = Math.min(currentHome + homeIncrement, match.homeWinRate);
         currentAway = Math.min(currentAway + awayIncrement, match.awayWinRate);
+        currentEv = Math.min(currentEv + evIncrement, (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway));
+        currentPbr = Math.min(currentPbr + pbrIncrement, (match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway));
 
         setHomeWinRate(currentHome);
         setAwayWinRate(currentAway);
+        setEvRate(currentEv);
+        setPbrRate(currentPbr);
 
         if (currentHome >= match.homeWinRate && currentAway >= match.awayWinRate) {
           clearInterval(timer);
@@ -119,7 +129,7 @@ return (
       {match.homeWinRate > match.awayWinRate ? (
         <div className="ev-rate-box">
           <div className="ev-details">
-            <h6>{match.evHome}%<p>{t("EV Rate")}</p></h6>
+            <h6>{Math.round(evRate)}%<p>{t("EV Rate")}</p></h6>
             <div style={{ width: '100%', height:"200px"}}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
             </div>
@@ -133,14 +143,14 @@ return (
               <h6 className="result-index-box-text">{match.kellyHome}<p>{t("Kelly Index")}</p></h6>
             </div>
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{match.pbrHome}%<p>{t("P to B Ratio")}</p></h6>
+              <h6 className="result-index-box-text">{Math.round(pbrRate)}%<p>{t("P to B Ratio")}</p></h6>
             </div>
           </div>
         </div>
       ) : (
         <div className="ev-rate-box">
           <div className="ev-details">
-            <h6>{match.evAway}%<p>EV Rate</p></h6>
+            <h6>{Math.round(evRate)}%<p>EV Rate</p></h6>
             <div style={{ width: '100%', height:"200px"}}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
             </div>
@@ -154,7 +164,7 @@ return (
               <h6 className="result-index-box-text">{match.kellyAway}<p>Kelly Index</p></h6>
             </div>
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{match.pbrAway}%<p>P to B Ratio</p></h6>
+              <h6 className="result-index-box-text">{Math.round(pbrRate)}%<p>P to B Ratio</p></h6>
             </div>
           </div>
         </div>
