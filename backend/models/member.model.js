@@ -18,7 +18,7 @@ const MemberSchema = new Schema({
   price: { type: Number },
   blocked: { type: Boolean, default: false },
   ipAddresses: [{ type: String }],
-    date: { type: Date },
+    date: { type: Date, required: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
 });
 

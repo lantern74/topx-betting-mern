@@ -126,6 +126,10 @@ class AdminController {
         return res.status(400).json({ message: 'Member already exists' });
       }
 
+        if (!date) {
+            return res.status(400).json({ message: 'Date is required' });
+        }
+
       const hashedPassword = await bcrypt.hash(password, 10);
       const newMember = new Member({
         username,
