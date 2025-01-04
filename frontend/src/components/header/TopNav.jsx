@@ -45,8 +45,14 @@ const TopNav = () => {
                             ) : (
                                 <button 
                                     onClick={() => {
+                                        let redirectPath = '/login';
+                                        if (userRole === 'main') {
+                                          redirectPath = '/admin/login';
+                                        } else if (userRole === 'sub') {
+                                          redirectPath = '/subadmin/login';
+                                        }
                                         logout();
-                                        navigate('/login');
+                                        navigate(redirectPath);
                                     }} 
                                     className="send-msg-btn tran3s"
                                 >
