@@ -18,6 +18,7 @@ function MatchResult() {
   const [awayWinRate, setAwayWinRate] = useState(0);
   const [evRate, setEvRate] = useState(0);
   const [pbrRate, setPbrRate] = useState(0);
+  const [kellyRate, setKellyRate] = useState(0);
 
   // Increment effect for home and away win rates
   useEffect(() => {
@@ -28,22 +29,26 @@ function MatchResult() {
       const awayIncrement = match.awayWinRate / (duration / interval);
       const evIncrement = (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway) / (duration / interval);
       const pbrIncrement = (match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway) / (duration / interval);
+      const kellyIncrement = (match.homeWinRate > match.awayWinRate ? match.kellyHome : match.kellyAway) / (duration / interval);
 
       let currentHome = 0;
       let currentAway = 0;
       let currentEv = 0;
       let currentPbr = 0;
+      let currentKelly = 0;
 
       const timer = setInterval(() => {
         currentHome = Math.min(currentHome + homeIncrement, match.homeWinRate);
         currentAway = Math.min(currentAway + awayIncrement, match.awayWinRate);
         currentEv = Math.min(currentEv + evIncrement, (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway));
         currentPbr = Math.min(currentPbr + pbrIncrement, (match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway));
+        currentKelly = Math.min(currentKelly + kellyIncrement, (match.homeWinRate > match.awayWinRate ? match.kellyHome : match.kellyAway));
 
         setHomeWinRate(currentHome);
         setAwayWinRate(currentAway);
         setEvRate(currentEv);
         setPbrRate(currentPbr);
+        setKellyRate(currentKelly);
 
         if (currentHome >= match.homeWinRate && currentAway >= match.awayWinRate) {
           clearInterval(timer);
@@ -140,10 +145,10 @@ return (
           </div>
           <div className="index-boxes">
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{match.kellyHome}<p>{t("Kelly Index")}</p></h6>
+              <h6 className="result-index-box-text">{kellyRate.toFixed(2)}<p>{t("Kelly Index")}</p></h6>
             </div>
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{Math.round(pbrRate)}%<p>{t("P to B Ratio")}</p></h6>
+              <h6 className="result-index-box-text">{pbrRate.toFixed(2)}%<p>{t("P to B Ratio")}</p></h6>
             </div>
           </div>
         </div>
@@ -161,10 +166,10 @@ return (
           </div>
           <div className="index-boxes">
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{match.kellyAway}<p>Kelly Index</p></h6>
+              <h6 className="result-index-box-text">{kellyRate.toFixed(2)}<p>Kelly Index</p></h6>
             </div>
             <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{Math.round(pbrRate)}%<p>P to B Ratio</p></h6>
+              <h6 className="result-index-box-text">{pbrRate.toFixed(2)}%<p>P to B Ratio</p></h6>
             </div>
           </div>
         </div>
