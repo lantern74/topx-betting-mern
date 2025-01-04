@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import styles from './AdminLayout.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -31,10 +31,22 @@ import i18n from '../i18n';
 const AdminLayout = ({ children }) => {
   const { isAuthenticated, userRole, logout } = useAuthStore();
   const navigate = useNavigate();
+    const location = useLocation();
   const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [languageAnchorEl, setLanguageAnchorEl] = useState(null);
   const languageMenuOpen = Boolean(languageAnchorEl);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            if (userRole === 'sub' && location.pathname.startsWith('/admin')) {
+                navigate('/subadmin');
+            } else if (userRole === 'main' && location.pathname.startsWith('/subadmin')) {
+                navigate('/admin');
+            }
+        }
+    }, [isAuthenticated, userRole, location, navigate]);
+
 
   const handleLogout = () => {
     logout();
