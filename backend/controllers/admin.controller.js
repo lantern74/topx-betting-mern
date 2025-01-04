@@ -154,7 +154,11 @@ class AdminController {
     try {
       console.log("AdminController: getAllMembers - fetching members");
       const isAdmin = req.admin.role === 'main';
-      const members = await Member.find().populate('createdBy', isAdmin ? 'username' : null);
+      let query = {};
+      if (!isAdmin) {
+        query = { createdBy: req.admin.id };
+      }
+      const members = await Member.find(query).populate('createdBy', isAdmin ? 'username' : null);
       const formattedMembers = members.map(member => {
         const formattedMember = {
           ...member.toObject(),
