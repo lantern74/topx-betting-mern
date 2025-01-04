@@ -282,7 +282,15 @@ const ManageMembers = () => {
                 <Paper style={{ 
                   backgroundColor: '#333', 
                   color: 'white',
-                  padding: '16px'
+                  padding: '16px',
+                  margin: '0',
+                  width: '100%',
+                  overflowX: 'auto',
+                  '@media (max-width: 600px)': {
+                    padding: '0',
+                    margin: '0',
+                    width: '100%',
+                  },
                 }}>
                     <div style={{ overflowX: 'auto' }}>
                     <MemberTable

@@ -254,7 +254,15 @@ const ManageAdmins = () => {
         <CardContent>
             <ThemeProvider theme={darkTheme}>
           <div style={{ overflowX: 'auto' }}>
-          <TableContainer component={Paper} >
+          <TableContainer component={Paper} sx={{
+            margin: '0',
+            width: '100%',
+            '@media (max-width: 600px)': {
+              padding: '0',
+              margin: '0',
+              width: '100%',
+            },
+          }}>
             <Table>
               <TableHead>
                 {table.getHeaderGroups().map((headerGroup) => (
