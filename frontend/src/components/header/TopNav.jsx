@@ -36,8 +36,7 @@ const TopNav = () => {
                     <div className="d-flex align-items-center">
                         <div className="logo order-lg-0">
                             <Link to="/" className="d-block">
-                                <span className="logo-text">TOPX</span>
-                                {/* <img className='responsive-logo' src="images/logo/topx-logo.png" alt=""/> */}
+                                <img src="/images/logo/topx-logo.png" alt="TOPX Logo" style={{ height: '40px' }} />
                             </Link>
                         </div>
                         <div className="right-widget d-flex align-items-center ms-auto order-lg-3 d-none d-lg-flex">
