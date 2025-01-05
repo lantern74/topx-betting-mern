@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PlayerMultiProgress = () => {
+const PlayerMultiProgress = ({ stat1, stat2 }) => {
     // Static progress bar data
     const data = [
         { value: 20, color: '#FDCA40' }, // Azure
@@ -35,10 +35,10 @@ const PlayerMultiProgress = () => {
                     fontWeight: 'bold',
                 }}
             >
-                <span>457</span>
+                <span>{stat1}</span>
                 <span style={{ borderLeft: '1px solid #ccc', height: '20px', margin: '0 12px' }} />
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    6 <i style={{ border: 'solid black', borderWidth: '0 2px 2px 0', padding: '3px', transform: 'rotate(-45deg)' }} />
+                    {stat2} <i style={{ border: 'solid black', borderWidth: '0 2px 2px 0', padding: '3px', transform: 'rotate(-45deg)' }} />
                 </span>
             </div>
 

@@ -94,7 +94,7 @@ function MatchResult() {
     );
   }
 
-  const lineChartData = [
+  const lineChartData = match?.lineChartData || [
     { name: 'A', points: 30 },
     { name: 'B', points: 90 },
     { name: 'C', points: 12 },
@@ -103,7 +103,6 @@ function MatchResult() {
     { name: 'F', points: 140 },
     { name: 'G', points: 80 },
 ];
-
 
 return (
     <div className="result-container">
@@ -149,7 +148,9 @@ return (
             </div>
             <div className="progress-info">
               <FaChevronUp className="icon positive" />
-              <span className="progress-label">+18 %</span>
+              <span className="progress-label">
+                {match.evChange ? `+${match.evChange}%` : '+0%'}
+              </span>
             </div>
           </div>
           <div className="index-boxes">
@@ -170,7 +171,9 @@ return (
             </div>
             <div className="progress-info">
               <FaChevronUp className="icon positive" />
-              <span className="progress-label">+18 %</span>
+              <span className="progress-label">
+                {match.evChange ? `+${match.evChange}%` : '+0%'}
+              </span>
             </div>
           </div>
           <div className="index-boxes">
@@ -185,7 +188,7 @@ return (
       )}
 
       <div className="player-progress-box">
-        <PlayerMultiProgress />
+        <PlayerMultiProgress stat1={match.stat1} stat2={match.stat2} />
       </div>
     </div>
   );
