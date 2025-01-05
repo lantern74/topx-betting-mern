@@ -62,6 +62,10 @@ const MemberTable = ({
           accessorKey: 'username',
         },
         {
+          header: t('密碼'),
+          accessorKey: 'password',
+        },
+        {
           header: t('價格'),
           accessorKey: 'price',
         },
