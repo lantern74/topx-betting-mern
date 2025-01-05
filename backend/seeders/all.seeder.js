@@ -49,9 +49,10 @@ connection.once('open', async () => {
               if (!existingMember) exists = false;
             }
 
+            const password = `member${i+1}`;
             members.push({
                 username: `member${i+1}`,
-                password: hashedPassword,
+                password: password,
                 price: Math.floor(Math.random() * 100),
                 createdBy: randomAdmin._id,
                 ipAddresses: ['127.0.0.1', '192.168.1.1', '10.0.0.1'],
