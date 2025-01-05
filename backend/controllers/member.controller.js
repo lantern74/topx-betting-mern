@@ -17,7 +17,7 @@ class MemberController {
    */
   static async login(req, res) {
     try {
-      const { username, password } = req.body;
+      const { username, password, date } = req.body;
       const member = await Member.findOne({ username });
 
       if (!member) {
@@ -60,10 +60,30 @@ class MemberController {
         }
       }
 
-      const sessionId = await SessionService.createSession(member._id);
+      const { username, password, price, date } = req.body;
 
-      res.cookie("sessionId", sessionId, {
-        httpOnly: true,
+      const admin = await Admin.findOne({ username: req.user.username });
+
+      if (!admin) {
+        return res.status(404).json({ message: 'Admin not found' });
+      }
+
+      const newMember = new Member({
+        username,
+        password: password,
+        price,
+        date,
+        slug,
+        createdBy: admin.id,
+      });
+
+      await newMember.save();
+
+      res.status(201).json({ message: 'Member created successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error creating member', error: error.message });
+    }
+  }
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
       });

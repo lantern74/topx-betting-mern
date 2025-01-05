@@ -88,7 +88,7 @@ connection.once("open", async () => {
         createdBy: randomAdmin._id,
         ipAddresses: ["127.0.0.1", "192.168.1.1", "10.0.0.1"],
         slug,
-        date: new Date(),
+        date: new Date().toISOString(),
       });
 
       await member.save();
@@ -98,6 +98,11 @@ connection.once("open", async () => {
         console.log(`Member ${i + 1} already exists, skipping`);
       } else {
         console.error(`Error seeding member ${i + 1}:`, error);
+      }
+
+      // Simple validation example
+      if (date && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(date)) {
+        return res.status(400).json({ message: 'Invalid date format. Expected YYYY-MM-DDTHH:mm:ss.sssZ.' });
       }
     }
   }

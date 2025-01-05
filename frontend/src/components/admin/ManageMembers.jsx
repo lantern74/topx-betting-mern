@@ -152,7 +152,7 @@ const ManageMembers = () => {
             username: usernameRef.current.value,
             password: passwordRef.current.value,
             price: priceRef.current.value,
-            date: dateRef.current.value,
+            date: new Date(dateRef.current.value).toISOString(),
             createdBy: userRole === 'main' ? 'main' : 'sub',
         };
         if (!newMember.date) {

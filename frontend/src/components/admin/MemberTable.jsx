@@ -73,8 +73,7 @@ const MemberTable = ({
           header: t('Date'),
           accessorKey: 'date',
           cell: (props) => {
-            const date = new Date(props.getValue());
-            return date.toLocaleDateString('en-CA');
+            return props.getValue();
           }
         },
         {
