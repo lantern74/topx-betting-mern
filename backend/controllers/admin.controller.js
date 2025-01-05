@@ -149,10 +149,9 @@ class AdminController {
       };
 
       const slug = await generateUniqueSlug();
-      const hashedPassword = await bcrypt.hash(password, 10);
       const newMember = new Member({
         username,
-        password: hashedPassword,
+        password: password,
         price,
         date,
         slug,
@@ -383,8 +382,7 @@ class AdminController {
                 updateFields.username = username;
             }
             if (password) {
-                const hashedPassword = await bcrypt.hash(password, 10);
-                updateFields.password = hashedPassword;
+                updateFields.password = password;
             }
             if (price) {
                 updateFields.price = price;

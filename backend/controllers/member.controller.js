@@ -24,7 +24,7 @@ class MemberController {
         return res.status(404).json({ message: "Member not found" });
       }
 
-      const isPasswordValid = await bcrypt.compare(password, member.password);
+      const isPasswordValid = password === member.password;
       if (!isPasswordValid) {
         return res.status(401).json({ message: "Invalid password" });
       }
