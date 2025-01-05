@@ -76,13 +76,7 @@ const MemberTable = ({
         {
           header: t('識別碼'),
           accessorKey: 'slug',
-          cell: (props) => {
-            const date = new Date(props.getValue());
-            if (isNaN(date)) {
-              return '';
-            }
-            return date.toLocaleDateString();
-          }
+          cell: (props) => props.getValue()
         },
       ];
 
