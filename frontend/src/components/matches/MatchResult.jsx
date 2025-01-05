@@ -12,7 +12,8 @@ function MatchResult() {
   const { t } = useTranslation();
   const { id } = useParams(); // Get the match ID from the URL
   const navigate = useNavigate(); // Hook for navigation
-  const { data: match, isLoading, error } = useGetMatchResult(id);
+  const { data: matchData, isLoading, error } = useGetMatchResult(id);
+  const match = { ...matchData, slug: localStorage.getItem('userSlug') }; // Attach slug to match
   const [modalVisible, setModalVisible] = useState(false);
   const [homeWinRate, setHomeWinRate] = useState(0);
   const [awayWinRate, setAwayWinRate] = useState(0);
@@ -119,6 +120,7 @@ return (
               <h6>{match.awayTeamName}</h6>
             </div>
           </div>
+          <div className="match-slug">{match.slug}</div>
         </div>
       </div>
 

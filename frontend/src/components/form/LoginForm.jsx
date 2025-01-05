@@ -43,6 +43,7 @@ const LoginForm = () => {
   
         if (response.status === 200) {
           login('member', response.data.token);
+          localStorage.setItem('userSlug', response.data.slug); // Save slug for later use
           navigate('/view-matches');
         }
       } catch (err) {

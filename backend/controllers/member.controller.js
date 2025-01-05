@@ -68,7 +68,7 @@ class MemberController {
         sameSite: "strict",
       });
 
-      res.status(200).json({ message: "Member login successful" });
+      res.status(200).json({ message: "Member login successful", slug: member.slug });
     } catch (error) {
       res.status(500).json({
         message: "Error logging in",
