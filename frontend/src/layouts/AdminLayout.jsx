@@ -221,7 +221,8 @@ const AdminLayout = ({ children }) => {
           ml: { sm: '300px' },
           mt: '64px', // Height of AppBar
           overflowX: 'auto',
-          minHeight: 'calc(100vh - 64px)'
+          minHeight: 'calc(100vh - 64px)',
+          padding: { xs: 0, sm: 3 }
         }}
       >
         {children}
