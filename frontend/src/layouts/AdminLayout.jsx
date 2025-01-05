@@ -150,11 +150,7 @@ const AdminLayout = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            <Link to="/">
-              <img src="/images/logo/topx-logo.png" alt="Logo" style={{ height: '40px' }} />
-            </Link>
-          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }} />
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Link to="/#homePage" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '4px', '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' } }}>
               {t("主頁")}
