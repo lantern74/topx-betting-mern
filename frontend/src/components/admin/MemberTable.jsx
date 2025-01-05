@@ -150,6 +150,7 @@ const MemberTable = ({
     columns,
     state: {
       globalFilter,
+      sorting: [{ id: 'date', desc: true }],
     },
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
