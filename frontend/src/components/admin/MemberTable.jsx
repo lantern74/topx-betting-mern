@@ -84,6 +84,17 @@ const MemberTable = ({
         baseColumns.push({
           header: t('創建者'),
           accessorKey: 'createdBy.username',
+          cell: (props) => {
+            const username = props.row.original.createdBy?.username;
+            if (username === 'admin') {
+              return '大管理員';
+            } else if (username === 'newSubadmin') {
+              return '小管理員';
+            } else if (username === 'sub1') {
+              return '小管理員';
+            }
+            return username;
+          },
         });
       }
 
