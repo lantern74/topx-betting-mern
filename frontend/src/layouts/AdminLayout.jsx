@@ -101,7 +101,7 @@ const AdminLayout = ({ children }) => {
       {/* Admin Links */}
       <List>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin' : '/admin'} onClick={handleDrawerLinkClick}>
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin' : '/admin'} onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
             <ListItemIcon>
               <DashboardIcon sx={{ color: 'white' }} />
             </ListItemIcon>
@@ -109,7 +109,7 @@ const AdminLayout = ({ children }) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-members' : '/admin/manage-members'} onClick={handleDrawerLinkClick}>
+          <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-members' : '/admin/manage-members'} onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
             <ListItemIcon>
               <PeopleIcon sx={{ color: 'white' }} />
             </ListItemIcon>
@@ -118,7 +118,7 @@ const AdminLayout = ({ children }) => {
         </ListItem>
         {userRole === 'main' && (
           <ListItem disablePadding>
-            <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-admins' : '/admin/manage-admins'} onClick={handleDrawerLinkClick}>
+            <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin/manage-admins' : '/admin/manage-admins'} onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
               <ListItemIcon>
                 <AdminPanelSettingsIcon sx={{ color: 'white' }} />
               </ListItemIcon>
@@ -135,7 +135,7 @@ const AdminLayout = ({ children }) => {
       <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/#homePage" onClick={handleDrawerLinkClick}>
+            <ListItemButton component={Link} to="/#homePage" onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
               <ListItemIcon>
                 <HomeIcon sx={{ color: 'white' }} />
               </ListItemIcon>
@@ -143,7 +143,7 @@ const AdminLayout = ({ children }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/#raceRecords" onClick={handleDrawerLinkClick}>
+            <ListItemButton component={Link} to="/#raceRecords" onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
               <ListItemIcon>
                 <SportsSoccerIcon sx={{ color: 'white' }} />
               </ListItemIcon>
@@ -151,7 +151,7 @@ const AdminLayout = ({ children }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/#contactUs" onClick={handleDrawerLinkClick}>
+            <ListItemButton component={Link} to="/#contactUs" onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
               <ListItemIcon>
                 <ContactMailIcon sx={{ color: 'white' }} />
               </ListItemIcon>
@@ -160,7 +160,7 @@ const AdminLayout = ({ children }) => {
           </ListItem>
           {isAuthenticated && (
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/view-matches" onClick={handleDrawerLinkClick}>
+              <ListItemButton component={Link} to="/view-matches" onClick={handleDrawerLinkClick} sx={{ '&:hover': { backgroundColor: '#32CD32' } }}>
                 <ListItemIcon>
                   <EventNoteIcon sx={{ color: 'white' }} />
                 </ListItemIcon>
