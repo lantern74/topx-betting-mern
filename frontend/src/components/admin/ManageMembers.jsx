@@ -291,13 +291,13 @@ const ManageMembers = () => {
                   width: '100%',
                   overflowX: 'auto',
                   '@media (max-width: 600px)': {
-                    padding: '0',
-                    margin: '0',
+                    padding: '0px',
+                    margin: '0px',
                     width: '100%',
                   },
                 }}
                 >
-                    <div style={{ overflowX: 'auto' }} >
+                    <div style={{ overflowX: 'auto', margin: '-16px' }} >
                     <MemberTable
                         members={memberList}
                         handleBlockMember={handleBlockMember}
