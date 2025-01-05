@@ -128,8 +128,8 @@ const AdminLayout = ({ children }) => {
         )}
       </List>
 
-      {/* Divider between Admin Links and Topnav Links */}
-      <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', my: 2 }} />
+      {/* Divider between Admin Links and Topnav Links - Only visible on mobile */}
+      <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', my: 2, display: { xs: 'block', sm: 'none' } }} />
 
       {/* Top Navigation Links - Only visible on mobile */}
       <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
