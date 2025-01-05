@@ -25,7 +25,12 @@ import {
   Logout as LogoutIcon,
   Menu as MenuIcon,
   Language as LanguageIcon,
+  Home as HomeIcon,
+  SportsSoccer as SportsSoccerIcon,
+  ContactMail as ContactMailIcon,
+  EventNote as EventNoteIcon,
 } from '@mui/icons-material';
+import { Divider } from '@mui/material';
 import i18n from '../i18n';
 
 const AdminLayout = ({ children }) => {
@@ -93,6 +98,7 @@ const AdminLayout = ({ children }) => {
           <img src="/images/logo/topx-logo.png" alt="Logo" style={{ width: '150px', display: 'block', margin: '0 auto 10px' }} />
         </Link>
       </Typography>
+      {/* Admin Links */}
       <List>
         <ListItem disablePadding>
           <ListItemButton component={Link} to={userRole === 'sub' ? '/subadmin' : '/admin'} onClick={handleDrawerLinkClick}>
@@ -117,6 +123,47 @@ const AdminLayout = ({ children }) => {
                 <AdminPanelSettingsIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary={t("管理副管理員")} />
+            </ListItemButton>
+          </ListItem>
+        )}
+      </List>
+
+      {/* Divider between Admin Links and Topnav Links */}
+      <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', my: 2 }} />
+
+      {/* Top Navigation Links */}
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/#homePage" onClick={handleDrawerLinkClick}>
+            <ListItemIcon>
+              <HomeIcon sx={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary={t("主頁")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/#raceRecords" onClick={handleDrawerLinkClick}>
+            <ListItemIcon>
+              <SportsSoccerIcon sx={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary={t("賽事紀錄")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/#contactUs" onClick={handleDrawerLinkClick}>
+            <ListItemIcon>
+              <ContactMailIcon sx={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary={t("聯絡我們")} />
+          </ListItemButton>
+        </ListItem>
+        {isAuthenticated && (
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/view-matches" onClick={handleDrawerLinkClick}>
+              <ListItemIcon>
+                <EventNoteIcon sx={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary={t("賽事系統")} />
             </ListItemButton>
           </ListItem>
         )}
@@ -151,7 +198,7 @@ const AdminLayout = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }} />
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 2 }}>
             <Link to="/#homePage" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '4px', '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' } }}>
               {t("主頁")}
             </Link>
