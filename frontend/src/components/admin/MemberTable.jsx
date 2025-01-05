@@ -66,10 +66,6 @@ const MemberTable = ({
           accessorKey: 'price',
         },
         {
-          header: t('密碼'),
-          accessorKey: 'password',
-        },
-        {
           header: t('Date'),
           accessorKey: 'date',
           cell: (props) => {
