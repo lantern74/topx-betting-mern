@@ -349,7 +349,7 @@
     }
 }
 .theme-main-menu .moblie-menu-toggler {
-    position: fixed;
+    /* position: fixed; */
     right: 15px;
     margin-left: 0;
     top: 35px;
@@ -371,7 +371,7 @@
     -o-transform: translateX(0);
 }
 .theme-menu-two .moblie-menu-toggler {
-    position: fixed;
+    /* position: fixed; */
     right: 36px;
     margin-left: 0;
     top: 68px;
@@ -401,4 +401,7 @@
     .theme-menu-two .moblie-menu-toggler {
         right: 16px;
     }
+  .mobile-seperator {
+    flex: 1;
+  }
 }
