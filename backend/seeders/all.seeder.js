@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
 const { Admin } = require('../models/admin.model');
 const { Member } = require('../models/member.model');
 const { Match } = require('../models/match.model');
@@ -34,12 +35,27 @@ connection.once('open', async () => {
         for (let i = 0; i < 200; i++) {
             const hashedPassword = await bcrypt.hash(`member${i+1}`, 10);
             const randomAdmin = createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
+            // Generate unique slug
+            let slug;
+            let exists = true;
+            while (exists) {
+              slug = uniqueNamesGenerator({
+                dictionaries: [adjectives, colors, animals],
+                separator: '-',
+                length: 2,
+                style: 'lowerCase',
+              });
+              const existingMember = await Member.findOne({ slug });
+              if (!existingMember) exists = false;
+            }
+
             members.push({
                 username: `member${i+1}`,
                 password: hashedPassword,
                 price: Math.floor(Math.random() * 100),
                 createdBy: randomAdmin._id,
-                ipAddresses: ['127.0.0.1', '192.168.1.1', '10.0.0.1']
+                ipAddresses: ['127.0.0.1', '192.168.1.1', '10.0.0.1'],
+                slug
             });
         }
         await Member.insertMany(members);
