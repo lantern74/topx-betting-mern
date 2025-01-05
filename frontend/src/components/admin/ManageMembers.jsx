@@ -283,8 +283,8 @@ const ManageMembers = () => {
           <Typography color="error">{error.message}</Typography>
         ) : (
             <ThemeProvider theme={darkTheme}>
-                <Paper style={{ 
-                  backgroundColor: '#333', 
+                <Paper style={{
+                  backgroundColor: '#333',
                   color: 'white',
                   padding: '16px',
                   margin: '0',
@@ -297,7 +297,7 @@ const ManageMembers = () => {
                   },
                 }}
                 >
-                    <div style={{ overflowX: 'auto', margin: '-16px' }} >
+                  <div style={{ overflowX: 'auto', margin: '-16px' }} >
                     <MemberTable
                         members={memberList}
                         handleBlockMember={handleBlockMember}
