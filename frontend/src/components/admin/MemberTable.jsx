@@ -140,9 +140,11 @@ const MemberTable = ({
   const table = useReactTable({
     data: members,
     columns,
+    initialState: {
+      sorting: [{ id: 'date', desc: true }],
+    },
     state: {
       globalFilter,
-      sorting: [{ id: 'date', desc: true }],
     },
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
