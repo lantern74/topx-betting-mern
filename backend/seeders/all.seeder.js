@@ -81,6 +81,12 @@ connection.once("open", async () => {
         if (!existingMember) exists = false;
       }
 
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      const dateString = `${year}-${month}-${day}`;
+
       const member = new Member({
         username: `member${i + 1}`,
         password: hashedPassword,
@@ -88,7 +94,7 @@ connection.once("open", async () => {
         createdBy: randomAdmin._id,
         ipAddresses: ["127.0.0.1", "192.168.1.1", "10.0.0.1"],
         slug,
-        date: new Date().toISOString(),
+        date: dateString,
       });
 
       await member.save();
@@ -98,11 +104,6 @@ connection.once("open", async () => {
         console.log(`Member ${i + 1} already exists, skipping`);
       } else {
         console.error(`Error seeding member ${i + 1}:`, error);
-      }
-
-      // Simple validation example
-      if (date && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(date)) {
-        return res.status(400).json({ message: 'Invalid date format. Expected YYYY-MM-DDTHH:mm:ss.sssZ.' });
       }
     }
   }

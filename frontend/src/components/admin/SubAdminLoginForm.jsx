@@ -27,7 +27,7 @@ const SubAdminLoginForm = () => {
         navigate('/');
       }
     } catch (err) {
-        const message = handleApiError(err);
+        const message = handleApiError(err, navigate);
         if (err.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx

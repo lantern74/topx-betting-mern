@@ -44,7 +44,9 @@ const handleApiError = (error, navigate) => {
         if (error.response.status === 401) {
             // Handle unauthorized error (e.g., session expired)
             logout();
-            handleNavigation(navigate, userRole);
+            if (userRole !== 'sub') {
+              handleNavigation(navigate, userRole);
+            }
             return 'Session expired, please log in again.';
         }
         return error.response.data.message || 'An error occurred';
