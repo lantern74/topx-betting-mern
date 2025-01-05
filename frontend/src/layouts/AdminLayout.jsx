@@ -225,6 +225,7 @@ const AdminLayout = ({ children }) => {
                     中文
                 </MenuItem>
             </Menu>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
