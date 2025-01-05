@@ -217,12 +217,12 @@ const AdminLayout = ({ children }) => {
         component="main"
         sx={{ 
           flexGrow: 1,
-          p: 3,
           width: { sm: `calc(100% - 300px)` },
           ml: { sm: '300px' },
           mt: '64px', // Height of AppBar
           overflowX: 'auto',
-          minHeight: 'calc(100vh - 64px)'
+          minHeight: 'calc(100vh - 64px)',
+          padding: { xs: 0, sm: 3 }
         }}
       >
         {children}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useGetAllSubAdmins from '../../hooks/useGetAllSubAdmins';
 import styles from './AdminDashboard.module.scss';
 import { useTranslation } from 'react-i18next';
 import useAuthStore from '../../store/authStore';
@@ -18,12 +19,20 @@ const AdminDashboard = () => {
   const { userRole } = useAuthStore();
   const { data: members, isLoading, error } = useGetAllMembers();
   const [memberCount, setMemberCount] = useState(0);
+  const { data: subAdmins, isLoading: isSubAdminsLoading, error: subAdminsError } = useGetAllSubAdmins();
+  const [adminCount, setAdminCount] = useState(1);
 
   useEffect(() => {
     if (members) {
       setMemberCount(members.length);
     }
   }, [members]);
+
+  useEffect(() => {
+    if (userRole === 'main' && subAdmins) {
+      setAdminCount(subAdmins.length + 1);
+    }
+  }, [userRole, subAdmins]);
 
   return (
     <div className={styles.dashboardContainer}>
@@ -41,7 +50,14 @@ const AdminDashboard = () => {
             </Typography>
             {userRole === 'main' && (
               <Typography variant="body1">
-                {t("管理管理員")}: <Typography variant="span" fontWeight="bold" ml={0.5}>0</Typography> {/* {t('副管理員數量佔位符')} */}
+                {t("管理管理員")}:{' '}
+                <Typography variant="span" fontWeight="bold" ml={0.5}>
+                  {isSubAdminsLoading
+                    ? t('加載中...')
+                    : subAdminsError
+                    ? t('加載失敗')
+                    : adminCount}
+                </Typography>
               </Typography>
             )}
           </Box>
