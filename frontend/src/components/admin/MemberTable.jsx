@@ -84,15 +84,11 @@ const MemberTable = ({
           header: t('創建者'),
           accessorKey: 'createdBy.username',
           cell: (props) => {
-            const username = props.row.original.createdBy?.username;
-            if (username === 'admin') {
-              return '大管理員';
-            } else if (username === 'newSubadmin') {
-              return '小管理員';
-            } else if (username === 'sub1') {
-              return '小管理員';
-            }
-            return username;
+            const createdBy = props.row.original.createdBy;
+            const role = createdBy?.role;
+            const username = createdBy?.username;
+            const translatedRole = role === 'main' ? t('大管理員') : t('小管理員');
+            return `${translatedRole} (${username})`;
           },
         });
       }
