@@ -13,13 +13,20 @@ function MatchResult() {
   const { id } = useParams(); // Get the match ID from the URL
   const navigate = useNavigate(); // Hook for navigation
   const { data: matchData, isLoading, error } = useGetMatchResult(id);
-  const match = { ...matchData, slug: localStorage.getItem('userSlug') }; // Attach slug to match
+  const [match, setMatch] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [homeWinRate, setHomeWinRate] = useState(0);
   const [awayWinRate, setAwayWinRate] = useState(0);
   const [evRate, setEvRate] = useState(0);
   const [pbrRate, setPbrRate] = useState(0);
   const [kellyRate, setKellyRate] = useState(0);
+
+  useEffect(() => {
+    if (matchData && !match) {
+      const userSlug = localStorage.getItem('userSlug');
+      setMatch({ ...matchData, slug: userSlug });
+    }
+  }, [matchData, match]);
 
   // Increment effect for home and away win rates
   useEffect(() => {
@@ -66,7 +73,7 @@ function MatchResult() {
     }
   }, [match])
 
-  if (isLoading) {
+  if (isLoading || !match) {
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", background: "black" }}>
         <div className="loading-container">
