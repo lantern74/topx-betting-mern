@@ -43,93 +43,48 @@ connection.once("open", async () => {
   const createdAdmins = await Admin.find();
 
   // Seed Members
-  const members = [];
+  // Seed Members individually
   for (let i = 0; i < 200; i++) {
-    const hashedPassword = await bcrypt.hash(`member${i + 1}`, 10);
-    const randomAdmin =
-      createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
-    // Generate unique slug
-    let slug;
-    let exists = true;
-    while (exists) {
-      slug = uniqueNamesGenerator({
-        dictionaries: [adjectives, colors, animals],
-        separator: "-",
-        length: 2,
-        style: "lowerCase",
-      });
-      const existingMember = await Member.findOne({ slug });
-      if (!existingMember) exists = false;
-    }
-
-    const password = `member${i + 1}`;
-    members.push({
-      username: `member${i + 1}`,
-      password: password,
-      price: Math.floor(Math.random() * 100),
-      createdBy: randomAdmin._id,
-      ipAddresses: ["127.0.0.1", "192.168.1.1", "10.0.0.1"],
-      slug,
-      date: new Date(),
-    });
-  }
-  try {
-    await Member.insertMany(members, { ordered: false });
-    console.log("Members seeded");
-  } catch (error) {
-    if (error.code === 11000) { // Duplicate key error
-      console.log("Some members already exist, skipping duplicates");
-    } else {
-      console.error("Error seeding members:", error);
-    }
-  }
-
-  // Seed Matches
-  // const matches = [];
-  // for (let i = 0; i < 200; i++) {
-  //     const randomAdmin = createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
-  //     matches.push({
-  //         id: `match${i+1}`,
-  //         time: new Date(),
-  //         homeTeamName: `Home Team ${i+1}`,
-  //         awayTeamName: `Away Team ${i+1}`,
-  //         homeWinRate: `${Math.floor(Math.random() * 100)}%`,
-  //         awayWinRate: `${Math.floor(Math.random() * 100)}%`,
-  //         overRound: Math.random() * 10,
-  //         evHome: Math.random() * 5,
-  //         evAway: Math.random() * 5,
-  //         pbrHome: Math.random() * 2,
-  //         pbrAway: Math.random() * 2,
-  //         kellyHome: Math.random() * 1,
-  //         kellyAway: Math.random() * 1,
-  //         createdBy: randomAdmin._id,
-  //     });
-  // }
-  // await Match.insertMany(matches, { ordered: false });
-  // console.log('Matches seeded');
-
-  // Seed Sessions
-  const createdMembers = await Member.find();
-  const sessions = [];
-  for (let i = 0; i < 200; i++) {
-    const randomMember =
-      createdMembers[Math.floor(Math.random() * createdMembers.length)];
-    sessions.push({
-      sessionId: uuidv4(),
-      userId: randomMember._id,
-      expiresAt: new Date(Date.now() + 60 * 60 * 1000),
-    });
     try {
-      await Session.insertMany(sessions, { ordered: false });
-      console.log("Sessions seeded");
+      const hashedPassword = await bcrypt.hash(`member${i + 1}`, 10);
+      const randomAdmin =
+        createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
+      
+      // Generate unique slug
+      let slug;
+      let exists = true;
+      while (exists) {
+        slug = uniqueNamesGenerator({
+          dictionaries: [adjectives, colors, animals],
+          separator: "-",
+          length: 2,
+          style: "lowerCase",
+        });
+        const existingMember = await Member.findOne({ slug });
+        if (!existingMember) exists = false;
+      }
+
+      const member = new Member({
+        username: `member${i + 1}`,
+        password: hashedPassword,
+        price: Math.floor(Math.random() * 100),
+        createdBy: randomAdmin._id,
+        ipAddresses: ["127.0.0.1", "192.168.1.1", "10.0.0.1"],
+        slug,
+        date: new Date(),
+      });
+
+      await member.save();
+      console.log(`Member ${i + 1} seeded`);
     } catch (error) {
       if (error.code === 11000) { // Duplicate key error
-        console.log("Some sessions already exist, skipping duplicates");
+        console.log(`Member ${i + 1} already exists, skipping`);
       } else {
-        console.error("Error seeding sessions:", error);
+        console.error(`Error seeding member ${i + 1}:`, error);
       }
     }
+  }
 
-    console.log("All seeders completed successfully");
+  console.log("All seeders completed successfully");
   }
 });
