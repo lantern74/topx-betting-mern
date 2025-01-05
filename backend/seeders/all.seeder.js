@@ -24,21 +24,44 @@ connection.once("open", async () => {
   // Seed Admins
   const hashedPasswordMain = await bcrypt.hash("mainadmin", 10);
   const hashedPasswordSub = await bcrypt.hash("subadmin", 10);
-  const admins = [
-    { username: "mainAdmin", password: hashedPasswordMain, role: "main" },
-    { username: "subAdmin1", password: hashedPasswordSub, role: "sub" },
-    { username: "subAdmin2", password: hashedPasswordSub, role: "sub" },
-  ];
-  try {
-    await Admin.insertMany(admins, { ordered: false });
-    console.log("Admins seeded");
-  } catch (error) {
-    if (error.code === 11000) { // Duplicate key error
-      console.log("Admins already exist, skipping seeding");
-    } else {
-      console.error("Error seeding admins:", error);
-    }
+  // Create array of admin promises
+  const adminPromises = [];
+  
+  // Add main admin
+  adminPromises.push(
+    Admin.create({
+      username: "mainAdmin",
+      password: hashedPasswordMain,
+      role: "main"
+    }).catch(error => {
+      if (error.code === 11000) {
+        console.log("mainAdmin already exists, skipping");
+      } else {
+        console.error("Error creating mainAdmin:", error);
+      }
+    })
+  );
+
+  // Add 10 sub admins
+  for (let i = 1; i <= 10; i++) {
+    adminPromises.push(
+      Admin.create({
+        username: `subAdmin${i}`,
+        password: hashedPasswordSub,
+        role: "sub"
+      }).catch(error => {
+        if (error.code === 11000) {
+          console.log(`subAdmin${i} already exists, skipping`);
+        } else {
+          console.error(`Error creating subAdmin${i}:`, error);
+        }
+      })
+    );
   }
+
+  // Run all admin creations concurrently
+  await Promise.all(adminPromises);
+  console.log("Admin seeding completed");
 
   const createdAdmins = await Admin.find();
 
