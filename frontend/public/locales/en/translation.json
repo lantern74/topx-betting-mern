@@ -129,5 +129,7 @@
   "Search Members": "Search Members",
   "Type to search...": "Type to search...",
   "儀表板": "Dashboard",
-  "加載中...": "Loading..."
+  "加載中...": "Loading...",
+  "識別碼": "Identifier",
+  "日期是必填欄位": "Date is a required field"
 }
