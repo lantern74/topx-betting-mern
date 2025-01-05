@@ -295,8 +295,9 @@ const ManageMembers = () => {
                     margin: '0',
                     width: '100%',
                   },
-                }}>
-                    <div style={{ overflowX: 'auto' }}>
+                }}
+                >
+                    <div style={{ overflowX: 'auto' }} >
                     <MemberTable
                         members={memberList}
                         handleBlockMember={handleBlockMember}

@@ -262,7 +262,8 @@ const ManageAdmins = () => {
               margin: '0',
               width: '100%',
             },
-          }}>
+          }}
+          >
             <Table>
               <TableHead>
                 {table.getHeaderGroups().map((headerGroup) => (
