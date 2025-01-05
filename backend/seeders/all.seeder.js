@@ -86,5 +86,4 @@ connection.once("open", async () => {
   }
 
   console.log("All seeders completed successfully");
-  }
 });
