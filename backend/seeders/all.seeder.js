@@ -25,14 +25,7 @@ connection.once('open', async () => {
             { username: 'subAdmin1', password: hashedPasswordSub, role: 'sub' },
             { username: 'subAdmin2', password: hashedPasswordSub, role: 'sub' },
         ];
-        for (const adminData of admins) {
-            const existingAdmin = await Admin.findOne({ username: adminData.username });
-            if (!existingAdmin) {
-                await Admin.insertMany([adminData], { ordered: false });
-            } else {
-                console.log(`Admin with username ${adminData.username} already exists, skipping.`);
-            }
-        }
+        await Admin.insertMany(admins, { ordered: false });
         console.log('Admins seeded');
 
         const createdAdmins = await Admin.find();
@@ -66,7 +59,6 @@ connection.once('open', async () => {
                 slug,
                 date: new Date(),
             });
-        }
         await Member.insertMany(members, { ordered: false });
         console.log('Members seeded');
 
@@ -104,7 +96,6 @@ connection.once('open', async () => {
                 userId: randomMember._id,
                 expiresAt: new Date(Date.now() + 60 * 60 * 1000),
             });
-        }
         await Session.insertMany(sessions, { ordered: false });
         console.log('Sessions seeded');
 
