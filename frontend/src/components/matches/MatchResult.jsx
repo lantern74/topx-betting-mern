@@ -99,11 +99,6 @@ function MatchResult() {
 
 return (
     <div className="result-container">
-      {match?.slug && (
-        <div className="match-slug">
-          <span>Match ID: {match.slug}</span>
-        </div>
-      )}
       <div className="result-header">
         <button className="back-button" onClick={() => navigate("/view-matches")}><i class="bi bi-arrow-left fs-2"></i><span>{t("比賽預測")}</span></button>
       </div>
