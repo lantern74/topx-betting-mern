@@ -22,44 +22,38 @@ connection.once("open", async () => {
   );
 
   // Seed Admins
-  const hashedPasswordMain = await bcrypt.hash("mainadmin", 10);
-  const hashedPasswordSub = await bcrypt.hash("subadmin", 10);
-  // Create array of admin promises
-  const adminPromises = [];
+  const hashedPassword = await bcrypt.hash("adminpassword", 10);
   
-  // Add main admin
-  adminPromises.push(
-    Admin.create({
-      username: "mainAdmin",
-      password: hashedPasswordMain,
-      role: "main"
+  // Create 200 admins with random names
+  const adminPromises = Array.from({ length: 200 }).map(async (_, i) => {
+    let username;
+    let exists = true;
+    
+    // Generate unique username
+    while (exists) {
+      username = uniqueNamesGenerator({
+        dictionaries: [adjectives, colors, animals],
+        separator: "-",
+        length: 2,
+        style: "lowerCase",
+      });
+      const existingAdmin = await Admin.findOne({ username });
+      if (!existingAdmin) exists = false;
+    }
+
+    return Admin.create({
+      username,
+      password: hashedPassword,
+      role: i === 0 ? "main" : "sub" // First admin is main, rest are sub
     }).catch(error => {
       if (error.code === 11000) {
-        console.log("mainAdmin already exists, skipping");
+        console.log(`Admin ${username} already exists, skipping`);
       } else {
-        console.error("Error creating mainAdmin:", error);
+        console.error(`Error creating admin ${username}:`, error);
       }
-    })
-  );
+    });
+  });
 
-  // Add 10 sub admins
-  for (let i = 1; i <= 10; i++) {
-    adminPromises.push(
-      Admin.create({
-        username: `subAdmin${i}`,
-        password: hashedPasswordSub,
-        role: "sub"
-      }).catch(error => {
-        if (error.code === 11000) {
-          console.log(`subAdmin${i} already exists, skipping`);
-        } else {
-          console.error(`Error creating subAdmin${i}:`, error);
-        }
-      })
-    );
-  }
-
-  // Run all admin creations concurrently
   await Promise.all(adminPromises);
   console.log("Admin seeding completed");
 
