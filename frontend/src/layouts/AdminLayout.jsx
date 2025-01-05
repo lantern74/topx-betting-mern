@@ -131,43 +131,45 @@ const AdminLayout = ({ children }) => {
       {/* Divider between Admin Links and Topnav Links */}
       <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', my: 2 }} />
 
-      {/* Top Navigation Links */}
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/#homePage" onClick={handleDrawerLinkClick}>
-            <ListItemIcon>
-              <HomeIcon sx={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary={t("主頁")} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/#raceRecords" onClick={handleDrawerLinkClick}>
-            <ListItemIcon>
-              <SportsSoccerIcon sx={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary={t("賽事紀錄")} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/#contactUs" onClick={handleDrawerLinkClick}>
-            <ListItemIcon>
-              <ContactMailIcon sx={{ color: 'white' }} />
-            </ListItemIcon>
-            <ListItemText primary={t("聯絡我們")} />
-          </ListItemButton>
-        </ListItem>
-        {isAuthenticated && (
+      {/* Top Navigation Links - Only visible on mobile */}
+      <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+        <List>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/view-matches" onClick={handleDrawerLinkClick}>
+            <ListItemButton component={Link} to="/#homePage" onClick={handleDrawerLinkClick}>
               <ListItemIcon>
-                <EventNoteIcon sx={{ color: 'white' }} />
+                <HomeIcon sx={{ color: 'white' }} />
               </ListItemIcon>
-              <ListItemText primary={t("賽事系統")} />
+              <ListItemText primary={t("主頁")} />
             </ListItemButton>
           </ListItem>
-        )}
-      </List>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/#raceRecords" onClick={handleDrawerLinkClick}>
+              <ListItemIcon>
+                <SportsSoccerIcon sx={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary={t("賽事紀錄")} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/#contactUs" onClick={handleDrawerLinkClick}>
+              <ListItemIcon>
+                <ContactMailIcon sx={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary={t("聯絡我們")} />
+            </ListItemButton>
+          </ListItem>
+          {isAuthenticated && (
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to="/view-matches" onClick={handleDrawerLinkClick}>
+                <ListItemIcon>
+                  <EventNoteIcon sx={{ color: 'white' }} />
+                </ListItemIcon>
+                <ListItemText primary={t("賽事系統")} />
+              </ListItemButton>
+            </ListItem>
+          )}
+        </List>
+      </Box>
       <Box sx={{ mt: 'auto', mx: 2, mb: 2 }}>
         <ListItemButton onClick={handleLogout} sx={{ justifyContent: 'center' }}>
           <ListItemIcon sx={{ justifyContent: 'center' }}>
