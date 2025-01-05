@@ -25,7 +25,14 @@ connection.once('open', async () => {
             { username: 'subAdmin1', password: hashedPasswordSub, role: 'sub' },
             { username: 'subAdmin2', password: hashedPasswordSub, role: 'sub' },
         ];
-        await Admin.insertMany(admins, { ordered: false });
+        for (const adminData of admins) {
+            const existingAdmin = await Admin.findOne({ username: adminData.username });
+            if (!existingAdmin) {
+                await Admin.insertMany([adminData], { ordered: false });
+            } else {
+                console.log(`Admin with username ${adminData.username} already exists, skipping.`);
+            }
+        }
         console.log('Admins seeded');
 
         const createdAdmins = await Admin.find();
