@@ -29,8 +29,16 @@ connection.once("open", async () => {
     { username: "subAdmin1", password: hashedPasswordSub, role: "sub" },
     { username: "subAdmin2", password: hashedPasswordSub, role: "sub" },
   ];
-  await Admin.insertMany(admins, { ordered: false });
-  console.log("Admins seeded");
+  try {
+    await Admin.insertMany(admins, { ordered: false });
+    console.log("Admins seeded");
+  } catch (error) {
+    if (error.code === 11000) { // Duplicate key error
+      console.log("Admins already exist, skipping seeding");
+    } else {
+      console.error("Error seeding admins:", error);
+    }
+  }
 
   const createdAdmins = await Admin.find();
 
@@ -65,8 +73,16 @@ connection.once("open", async () => {
       date: new Date(),
     });
   }
-  await Member.insertMany(members, { ordered: false });
-  console.log("Members seeded");
+  try {
+    await Member.insertMany(members, { ordered: false });
+    console.log("Members seeded");
+  } catch (error) {
+    if (error.code === 11000) { // Duplicate key error
+      console.log("Some members already exist, skipping duplicates");
+    } else {
+      console.error("Error seeding members:", error);
+    }
+  }
 
   // Seed Matches
   // const matches = [];
@@ -103,8 +119,16 @@ connection.once("open", async () => {
       userId: randomMember._id,
       expiresAt: new Date(Date.now() + 60 * 60 * 1000),
     });
-    await Session.insertMany(sessions, { ordered: false });
-    console.log("Sessions seeded");
+    try {
+      await Session.insertMany(sessions, { ordered: false });
+      console.log("Sessions seeded");
+    } catch (error) {
+      if (error.code === 11000) { // Duplicate key error
+        console.log("Some sessions already exist, skipping duplicates");
+      } else {
+        console.error("Error seeding sessions:", error);
+      }
+    }
 
     console.log("All seeders completed successfully");
   }
