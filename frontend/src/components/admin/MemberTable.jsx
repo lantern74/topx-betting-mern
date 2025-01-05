@@ -68,6 +68,10 @@ const MemberTable = ({
         {
           header: t('Date'),
           accessorKey: 'date',
+        },
+        {
+          header: t('識別碼'),
+          accessorKey: 'slug',
           cell: (props) => {
             const date = new Date(props.getValue());
             if (isNaN(date)) {

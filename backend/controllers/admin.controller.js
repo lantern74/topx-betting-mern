@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { Admin } = require('../models/admin.model');
 const { Member } = require('../models/member.model');
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
 const SessionService = require('../services/session.service');
 const mongoose = require('mongoose');
 
@@ -130,12 +131,31 @@ class AdminController {
             return res.status(400).json({ message: 'Date is required' });
         }
 
+      // Generate unique slug
+      const generateUniqueSlug = async () => {
+        let slug;
+        let exists = true;
+        while (exists) {
+          slug = uniqueNamesGenerator({
+            dictionaries: [adjectives, colors, animals],
+            separator: '-',
+            length: 2,
+            style: 'lowerCase',
+          });
+          const member = await Member.findOne({ slug });
+          if (!member) exists = false;
+        }
+        return slug;
+      };
+
+      const slug = await generateUniqueSlug();
       const hashedPassword = await bcrypt.hash(password, 10);
       const newMember = new Member({
         username,
         password: hashedPassword,
         price,
-          date,
+        date,
+        slug,
         createdBy: admin.id,
       });
 
