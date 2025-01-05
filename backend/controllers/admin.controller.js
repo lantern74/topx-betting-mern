@@ -158,6 +158,7 @@ class AdminController {
         createdBy: admin.id,
       });
 
+      console.log("New member:", newMember.toJSON());
       await newMember.save();
       res.status(201).json({ message: 'Member registered successfully' });
     } catch (error) {
