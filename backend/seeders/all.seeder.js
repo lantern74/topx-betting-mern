@@ -71,28 +71,28 @@ connection.once('open', async () => {
         console.log('Members seeded');
 
         // Seed Matches
-        const matches = [];
-        for (let i = 0; i < 200; i++) {
-            const randomAdmin = createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
-            matches.push({
-                id: `match${i+1}`,
-                time: new Date(),
-                homeTeamName: `Home Team ${i+1}`,
-                awayTeamName: `Away Team ${i+1}`,
-                homeWinRate: `${Math.floor(Math.random() * 100)}%`,
-                awayWinRate: `${Math.floor(Math.random() * 100)}%`,
-                overRound: Math.random() * 10,
-                evHome: Math.random() * 5,
-                evAway: Math.random() * 5,
-                pbrHome: Math.random() * 2,
-                pbrAway: Math.random() * 2,
-                kellyHome: Math.random() * 1,
-                kellyAway: Math.random() * 1,
-                createdBy: randomAdmin._id,
-            });
-        }
-        await Match.insertMany(matches, { ordered: false });
-        console.log('Matches seeded');
+        // const matches = [];
+        // for (let i = 0; i < 200; i++) {
+        //     const randomAdmin = createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
+        //     matches.push({
+        //         id: `match${i+1}`,
+        //         time: new Date(),
+        //         homeTeamName: `Home Team ${i+1}`,
+        //         awayTeamName: `Away Team ${i+1}`,
+        //         homeWinRate: `${Math.floor(Math.random() * 100)}%`,
+        //         awayWinRate: `${Math.floor(Math.random() * 100)}%`,
+        //         overRound: Math.random() * 10,
+        //         evHome: Math.random() * 5,
+        //         evAway: Math.random() * 5,
+        //         pbrHome: Math.random() * 2,
+        //         pbrAway: Math.random() * 2,
+        //         kellyHome: Math.random() * 1,
+        //         kellyAway: Math.random() * 1,
+        //         createdBy: randomAdmin._id,
+        //     });
+        // }
+        // await Match.insertMany(matches, { ordered: false });
+        // console.log('Matches seeded');
 
         // Seed Sessions
         const createdMembers = await Member.find();
