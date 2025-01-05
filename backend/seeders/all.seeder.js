@@ -56,7 +56,8 @@ connection.once('open', async () => {
                 price: Math.floor(Math.random() * 100),
                 createdBy: randomAdmin._id,
                 ipAddresses: ['127.0.0.1', '192.168.1.1', '10.0.0.1'],
-                slug
+                slug,
+                date: new Date(),
             });
         }
         await Member.insertMany(members);
