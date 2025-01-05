@@ -25,7 +25,7 @@ connection.once('open', async () => {
             { username: 'subAdmin1', password: hashedPasswordSub, role: 'sub' },
             { username: 'subAdmin2', password: hashedPasswordSub, role: 'sub' },
         ];
-        await Admin.insertMany(admins);
+        await Admin.insertMany(admins, { ordered: false });
         console.log('Admins seeded');
 
         const createdAdmins = await Admin.find();
@@ -60,7 +60,7 @@ connection.once('open', async () => {
                 date: new Date(),
             });
         }
-        await Member.insertMany(members);
+        await Member.insertMany(members, { ordered: false });
         console.log('Members seeded');
 
         // Seed Matches
@@ -84,7 +84,7 @@ connection.once('open', async () => {
                 createdBy: randomAdmin._id,
             });
         }
-        await Match.insertMany(matches);
+        await Match.insertMany(matches, { ordered: false });
         console.log('Matches seeded');
 
         // Seed Sessions
@@ -98,7 +98,7 @@ connection.once('open', async () => {
                 expiresAt: new Date(Date.now() + 60 * 60 * 1000),
             });
         }
-        await Session.insertMany(sessions);
+        await Session.insertMany(sessions, { ordered: false });
         console.log('Sessions seeded');
 
         console.log('All seeders completed successfully');
