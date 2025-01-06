@@ -34,7 +34,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (userRole === "main" && subAdmins) {
-      setAdminCount(subAdmins.length + 1);
+      setAdminCount(subAdmins.length);
     }
   }, [userRole, subAdmins]);
 
