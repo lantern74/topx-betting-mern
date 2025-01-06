@@ -36,7 +36,7 @@ const PlayerMultiProgress = ({ matchId }) => {
           fontWeight: "bold",
         }}
       >
-        <span>{getRandomInt(Number(matchId), 400, 500)}</span>
+        <span>{getRandomInt(parseInt(matchId, 10), 400, 500)}</span>
         <span
           style={{
             borderLeft: "1px solid #ccc",
@@ -45,7 +45,7 @@ const PlayerMultiProgress = ({ matchId }) => {
           }}
         />
         <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          {getRandomInt(Number(matchId), 0, 10)}{" "}
+          {getRandomInt(parseInt(matchId, 10), 0, 10)}{" "}
           <i
             style={{
               border: "solid black",

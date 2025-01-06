@@ -198,7 +198,7 @@ function MatchResult() {
               </div>
               <div className="progress-info">
                 <FaChevronUp className="icon positive" />
-                <span className="progress-label">+{getRandomInt(Number(match.id), 10, 20)} %</span>
+                <span className="progress-label">+{getRandomInt(parseInt(match.id, 10), 10, 20)} %</span>
               </div>
             </div>
             <div className="index-boxes">
@@ -237,7 +237,7 @@ function MatchResult() {
               </div>
               <div className="progress-info">
                 <FaChevronUp className="icon positive" />
-                <span className="progress-label">+{getRandomInt(Number(match.id), 10, 20)} %</span>
+                <span className="progress-label">+{getRandomInt(parseInt(match.id, 10), 10, 20)} %</span>
               </div>
             </div>
             <div className="index-boxes">
