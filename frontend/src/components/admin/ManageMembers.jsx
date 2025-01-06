@@ -274,6 +274,12 @@ const ManageMembers = () => {
     deleteMutation.mutate(deleteMemberId);
   };
 
+  const handlePriceChange = (event) => {
+    const { value } = event.target;
+    const numericValue = value.replace(/[^0-9]/g, "");
+    priceRef.current.value = numericValue;
+  };
+
   return (
     <div className={styles.manageMembersContainer}>
       <Box
@@ -366,10 +372,11 @@ const ManageMembers = () => {
           <TextField
             inputRef={priceRef}
             label={t("價格")}
-            type="number"
+            type="text"
             fullWidth
             name="price"
             autoComplete="off"
+            onChange={handlePriceChange}
           />
           <TextField
             inputRef={dateRef}
