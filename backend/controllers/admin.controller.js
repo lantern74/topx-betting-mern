@@ -181,13 +181,18 @@ class AdminController {
       if (!isAdmin) {
         query = { createdBy: req.admin.id };
       }
-      const members = await Member.find(query).populate('createdBy', isAdmin ? 'username' : null);
+      const members = await Member.find(query).populate('createdBy', 'username role');
       const formattedMembers = members.map(member => {
         const formattedMember = {
           ...member.toObject(),
         };
-        if (!isAdmin) {
-          delete formattedMember.createdBy;
+        if (member.createdBy) {
+            formattedMember.createdBy = {
+                username: member.createdBy.username,
+                role: member.createdBy.role
+            };
+        } else {
+            delete formattedMember.createdBy;
         }
         return formattedMember;
       });
