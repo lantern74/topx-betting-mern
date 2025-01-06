@@ -7,6 +7,8 @@ const memberRoutes = require("./routes/member.routes");
 const path = require("path");
 const TelemetryService = require("./services/telemetry.service");
 const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const { Admin } = require("./models/admin.model");
 
 require("dotenv").config();
 
@@ -21,8 +23,24 @@ const uri = process.env.ATLAS_URI ||
   "mongodb://root:example@localhost:27017/betting-china?authSource=admin";
 mongoose.connect(uri);
 const connection = mongoose.connection;
-connection.once("open", () => {
+connection.once("open", async () => {
   console.log("MongoDB database connection established successfully");
+
+  // Check if an admin user exists, and create one if not
+  const existingAdmin = await Admin.findOne({ username: "admin" });
+  if (!existingAdmin) {
+    const hashedPassword = await bcrypt.hash("aK8vxWKqw35inw==", 10);
+    const newAdmin = new Admin({
+      username: "admin",
+      password: hashedPassword,
+      role: "main",
+    });
+    await newAdmin.save();
+    await TelemetryService.log("info", "Default admin user created.");
+    console.log("Default admin user created.");
+  } else {
+      console.log("Default admin user already exists.");
+  }
 });
 
 // Apply session middleware before other routes
