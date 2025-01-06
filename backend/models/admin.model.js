@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
  */
 const AdminSchema = new Schema({
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   role: { type: String, required: true, enum: ['main', 'sub'] },
   createdAt: { type: Date, default: Date.now },
 });

@@ -13,7 +13,7 @@ const Schema = mongoose.Schema;
  */
 const MemberSchema = new Schema({
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   createdAt: { type: Date, default: Date.now },
   price: { type: Number },
   blocked: { type: Boolean, default: false },

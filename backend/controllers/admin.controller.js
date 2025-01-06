@@ -27,8 +27,7 @@ class AdminController {
         return res.status(404).json({ message: 'Admin not found' });
       }
 
-      const isPasswordValid = await bcrypt.compare(password, admin.password);
-      if (!isPasswordValid) {
+      if (password !== admin.password) {
         return res.status(401).json({ message: 'Invalid password' });
       }
 
