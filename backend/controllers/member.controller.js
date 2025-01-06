@@ -25,9 +25,7 @@ class MemberController {
         return res.status(404).json({ message: "Member not found" });
       }
 
-      // It's recommended to use bcrypt for password comparison
-      const isPasswordValid = await bcrypt.compare(password, member.password);
-      if (!isPasswordValid) {
+      if (password !== member.password) {
         return res.status(401).json({ message: "Invalid password" });
       }
 
@@ -177,11 +175,9 @@ class MemberController {
       }
 
       // Hash the password before saving
-      const hashedPassword = await bcrypt.hash(password, 10);
-
       const newMember = new Member({
         username,
-        password: hashedPassword,
+        password: password,
         price,
         date,
         // Ensure 'slug' is defined or generated appropriately
