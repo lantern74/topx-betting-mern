@@ -87,7 +87,7 @@ const MemberTable = ({
             const createdBy = props.row.original.createdBy;
             const role = createdBy?.role;
             const username = createdBy?.username;
-            const translatedRole = role === 'main' ? t('大管理員') : t('小管理員');
+            const translatedRole = role === 'main' ? t('main_admin') : t('sub_admin');
             return `${translatedRole} (${username})`;
           },
         });

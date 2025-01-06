@@ -131,5 +131,7 @@
   "儀表板": "Dashboard",
   "加載中...": "Loading...",
   "識別碼": "Identifier",
-  "日期是必填欄位": "Date is a required field"
+  "日期是必填欄位": "Date is a required field",
+  "main_admin": "Main Admin",
+  "sub_admin": "Sub Admin"
 }
