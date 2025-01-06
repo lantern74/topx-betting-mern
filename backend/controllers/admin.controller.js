@@ -30,7 +30,10 @@ class AdminController {
       }
 
       if (password !== admin.password) {
-        return res.status(401).json({ message: "Invalid password" });
+        return res.status(401).json({ 
+          message: "Invalid password",
+          code: "INVALID_CREDENTIALS" 
+        });
       }
 
       const sessionId = await SessionService.createSession(admin._id);

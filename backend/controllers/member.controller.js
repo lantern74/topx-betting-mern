@@ -26,7 +26,10 @@ class MemberController {
       }
 
       if (password !== member.password) {
-        return res.status(401).json({ message: "Invalid password" });
+        return res.status(401).json({ 
+          message: "Invalid password",
+          code: "INVALID_CREDENTIALS" 
+        });
       }
 
       if (member.blocked) {
