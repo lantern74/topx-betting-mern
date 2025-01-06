@@ -269,7 +269,7 @@ function MatchResult() {
         )}
 
       <div className="player-progress-box">
-        <PlayerMultiProgress matchId={match.id} />
+        <PlayerMultiProgress />
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { getRandomInt } from "../../../../utils/random";
 
-const PlayerMultiProgress = ({ matchId }) => {
+const PlayerMultiProgress = () => {
+  const { id: matchId } = useParams();
   // Static progress bar data
   const data = [
     { value: 20, color: "#FDCA40" }, // Azure
