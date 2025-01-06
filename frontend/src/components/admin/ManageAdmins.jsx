@@ -321,7 +321,10 @@ const ManageAdmins = () => {
                     {table.getRowModel().rows.map((row) => (
                       <TableRow key={row.id}>
                         {row.getVisibleCells().map((cell) => (
-                          <TableCell key={cell.id} style={{ whiteSpace: 'nowrap' }}>
+                          <TableCell
+                            key={cell.id}
+                            style={{ whiteSpace: "nowrap" }}
+                          >
                             {flexRender(
                               cell.column.columnDef.cell,
                               cell.getContext(),
@@ -339,15 +342,10 @@ const ManageAdmins = () => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              sx={{
-                flexDirection: { xs: "column", sm: "row" },
-                gap: { xs: 1, sm: 0 },
-              }}
             >
               <Button
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
-                sx={{ mb: { xs: 1, sm: 0 } }}
               >
                 {t("上一頁")}
               </Button>
