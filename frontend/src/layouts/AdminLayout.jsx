@@ -323,42 +323,6 @@ const AdminLayout = ({ children }) => {
               </Link>
             )}
 
-            {!isAuthenticated
-              ? (
-                <Link
-                  to="/login"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  {t("登入")}
-                </Link>
-              )
-              : (
-                <button
-                  onClick={() => {
-                    let redirectPath = "/login";
-                    if (userRole === "main") {
-                      redirectPath = "/admin/login";
-                    } else if (userRole === "sub") {
-                      redirectPath = "/subadmin/login";
-                    }
-                    logout();
-                    navigate(redirectPath);
-                  }}
-                  style={{
-                    color: "white",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "8px 12px",
-                    borderRadius: "4px",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.1)",
-                    },
-                  }}
-                >
-                  {t("登出")}
-                </button>
-              )}
             {(userRole === "main" || userRole === "sub") && (
               <Link
                 to={userRole === "main" ? "/admin" : "/subadmin"}
