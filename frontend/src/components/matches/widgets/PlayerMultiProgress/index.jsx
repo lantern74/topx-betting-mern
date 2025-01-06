@@ -37,6 +37,7 @@ const PlayerMultiProgress = ({ matchId }) => {
         }}
       >
         <span>{getRandomInt(matchId?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123, 400, 500)}</span>
+        {console.log("PlayerMultiProgress/index.jsx: matchId =", matchId)}
         <span
           style={{
             borderLeft: "1px solid #ccc",

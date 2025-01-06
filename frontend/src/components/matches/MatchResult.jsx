@@ -200,6 +200,7 @@ function MatchResult() {
                 <FaChevronUp className="icon positive" />
                 <span className="progress-label">+{getRandomInt(match.id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123, 10, 20)} %</span>
               </div>
+              {console.log("MatchResult.jsx: match.id =", match.id)}
             </div>
             <div className="index-boxes">
               <div
@@ -239,6 +240,7 @@ function MatchResult() {
                 <FaChevronUp className="icon positive" />
                 <span className="progress-label">+{getRandomInt(match.id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123, 10, 20)} %</span>
               </div>
+              {console.log("MatchResult.jsx: match.id =", match.id)}
             </div>
             <div className="index-boxes">
               <div
