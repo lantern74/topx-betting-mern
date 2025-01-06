@@ -41,10 +41,13 @@ const handleApiError = (error, navigate) => {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     if (error.response.status === 401) {
-      // Handle unauthorized error (e.g., session expired)
-      logout();
-      handleNavigation(navigate, userRole);
-      return "Session expired, please log in again.";
+      // Only redirect if this is a session expiration error
+      if (error.response.data?.code !== "INVALID_CREDENTIALS") {
+        logout();
+        handleNavigation(navigate, userRole);
+        return "Session expired, please log in again.";
+      }
+      return error.response.data.message || "Invalid credentials";
     }
     return error.response.data.message || "An error occurred";
   } else if (error.request) {
