@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import TopNav from '../header/TopNav';
+import React, { Fragment } from "react";
+import TopNav from "../header/TopNav";
 
 const MainLayout = ({ children }) => {
   return (

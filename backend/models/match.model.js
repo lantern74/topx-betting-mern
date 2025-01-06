@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 /**
@@ -36,7 +36,7 @@ const MatchSchema = new Schema({
   pbrAway: { type: Number },
   kellyHome: { type: Number },
   kellyAway: { type: Number },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" },
   cacheKey: { type: String, index: true },
   data: { type: mongoose.Schema.Types.Mixed },
   lastUpdated: { type: Date },
@@ -59,6 +59,6 @@ class MatchModel {
   }
 }
 
-const Match = mongoose.model('Match', MatchSchema);
+const Match = mongoose.model("Match", MatchSchema);
 
 module.exports = { Match, MatchModel };

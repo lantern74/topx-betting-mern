@@ -76,20 +76,20 @@ const TopNav = () => {
                 <ThemeMainMenu />
                 {isAuthenticated &&
                   (userRole === "main" || userRole === "sub") && (
-                    <ul className="navbar-nav">
-                      <li className="nav-item">
-                        <Link
-                          to={userRole === "main" ? "/admin" : "/subadmin"}
-                          className="nav-link"
-                        >
-                          {t("管理")}
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <Link
+                        to={userRole === "main" ? "/admin" : "/subadmin"}
+                        className="nav-link"
+                      >
+                        {t("管理")}
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </div>
             </nav>
-          <span className="mobile-seperator"></span>
+            <span className="mobile-seperator"></span>
             <MobileMenu />
           </div>
         </div>

@@ -17,7 +17,7 @@ const AdminLogin = () => {
     try {
       const data = await mutate(credentials);
       login(data.role);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       setLoginError(error.message);
     }
@@ -38,7 +38,11 @@ const AdminLogin = () => {
                     <h3 className="form-title pb-40 lg-pb-20">
                       {t("管理員登入")}
                     </h3>
-                    <AdminLoginForm onSubmit={handleAdminLogin} loading={isLoading} error={loginError} />
+                    <AdminLoginForm
+                      onSubmit={handleAdminLogin}
+                      loading={isLoading}
+                      error={loginError}
+                    />
                   </div>
                 </div>
               </div>

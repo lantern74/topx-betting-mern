@@ -23,12 +23,12 @@ connection.once("open", async () => {
 
   // Seed Admins
   const hashedPassword = await bcrypt.hash("adminpassword", 10);
-  
+
   // Create 200 admins with random names
   const adminPromises = Array.from({ length: 200 }).map(async (_, i) => {
     let username;
     let exists = true;
-    
+
     // Generate unique username
     while (exists) {
       username = uniqueNamesGenerator({
@@ -44,8 +44,8 @@ connection.once("open", async () => {
     return Admin.create({
       username,
       password: hashedPassword,
-      role: i === 0 ? "main" : "sub" // First admin is main, rest are sub
-    }).catch(error => {
+      role: i === 0 ? "main" : "sub", // First admin is main, rest are sub
+    }).catch((error) => {
       if (error.code === 11000) {
         console.log(`Admin ${username} already exists, skipping`);
       } else {
@@ -66,7 +66,7 @@ connection.once("open", async () => {
       const hashedPassword = await bcrypt.hash(`member${i + 1}`, 10);
       const randomAdmin =
         createdAdmins[Math.floor(Math.random() * createdAdmins.length)];
-      
+
       // Generate unique slug
       let slug;
       let exists = true;
@@ -102,7 +102,9 @@ connection.once("open", async () => {
 
       // Simple validation example
       if (date && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(date)) {
-        return res.status(400).json({ message: 'Invalid date format. Expected YYYY-MM-DDTHH:mm:ss.sssZ.' });
+        return res.status(400).json({
+          message: "Invalid date format. Expected YYYY-MM-DDTHH:mm:ss.sssZ.",
+        });
       }
     }
   }

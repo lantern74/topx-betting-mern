@@ -1,70 +1,70 @@
 .adminLayout {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #333;
+  color: white;
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.adminTitle {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: auto;
+}
+
+.navItem {
+  margin-bottom: 10px;
+}
+
+.navLink {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #555;
   }
-  
-  .sidebar {
-    background-color: #333;
-    color: white;
-    width: 300px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+}
+
+.logoutButton {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  align-self: flex-start;
+
+  &:hover {
+    background-color: #c9302c;
   }
-  
-  .sidebarContent {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  .adminTitle {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .navList {
-    list-style: none;
-    padding: 0;
-    margin-bottom: auto;
-  }
-  
-  .navItem {
-    margin-bottom: 10px;
-  }
-  
-  .navLink {
-    display: block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #555;
-    }
-  }
-  
-  .logoutButton {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-    align-self: flex-start;
-  
-    &:hover {
-      background-color: #c9302c;
-    }
-  }
-  
-  .mainContent {
-    flex: 1;
-    padding: 20px;
-    background-color: #f4f4f4;
-  }
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+}

@@ -1,54 +1,54 @@
 .match-card-container {
-    border-left: 4px solid #ED0423;
-    border-right: 4px solid #0496FF;
-    background: #24292B;
-    border-radius: 4px;
-    color: white;
+  border-left: 4px solid #ed0423;
+  border-right: 4px solid #0496ff;
+  background: #24292b;
+  border-radius: 4px;
+  color: white;
 }
 
 .match-card-header {
-    padding:15px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .match-card-header > div {
-    flex: 1; /* Each side takes equal width */
+  flex: 1; /* Each side takes equal width */
 }
 
 .match-card-header > div:nth-child(2) {
-    flex: 0; /* "VS" stays fixed in size */
-    margin: 0 auto; /* Center "VS" between the two team containers */
+  flex: 0; /* "VS" stays fixed in size */
+  margin: 0 auto; /* Center "VS" between the two team containers */
 }
 .match-card-teamname {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 /* iPhone XR */
 @media screen and (min-width: 414px) {
-    .match-card-header {
-        padding: 30px 30px 24px;
-    }
+  .match-card-header {
+    padding: 30px 30px 24px;
+  }
 }
 
 .field {
-    margin: 0 14px 20px;
-    flex: 1;
+  margin: 0 14px 20px;
+  flex: 1;
 }
 
 .field_content {
-    height: 320px;
-    max-width: 340px;
+  height: 320px;
+  max-width: 340px;
 }
 
 /* Tablet Portrait */
 @media screen and (min-width: 768px) {
-    .field {
-        display: flex;
-        align-items: center;
-    }
+  .field {
+    display: flex;
+    align-items: center;
+  }
 
-    .field_content {
-        height: 370px;
-    }
+  .field_content {
+    height: 370px;
+  }
 }

@@ -1,12 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
-import { api, handleApiError } from '../utils/api';
+import { useQuery } from "@tanstack/react-query";
+import { api, handleApiError } from "../utils/api";
 
 const useGetAllMembers = () => {
   return useQuery({
-    queryKey: ['members'],
+    queryKey: ["members"],
     queryFn: async () => {
       try {
-        const response = await api.get('/admin/members');
+        const response = await api.get("/admin/members");
         return response.data;
       } catch (error) {
         throw new Error(handleApiError(error));

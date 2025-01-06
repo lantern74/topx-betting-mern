@@ -17,7 +17,7 @@ const SubAdminLogin = () => {
     try {
       const data = await mutateAsync(credentials);
       login(data.role);
-      navigate('/'); 
+      navigate("/");
     } catch (error) {
       setLoginError(error.message);
     }
@@ -38,7 +38,11 @@ const SubAdminLogin = () => {
                     <h3 className="form-title pb-40 lg-pb-20">
                       {t("副管理員登入")}
                     </h3>
-                    <SubAdminLoginForm onSubmit={handleSubAdminLogin} loading={isLoading} error={loginError} />
+                    <SubAdminLoginForm
+                      onSubmit={handleSubAdminLogin}
+                      loading={isLoading}
+                      error={loginError}
+                    />
                   </div>
                 </div>
               </div>

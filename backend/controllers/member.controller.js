@@ -34,12 +34,11 @@ class MemberController {
       }
 
       // Check IP address
-      const clientIp =
-        req.ip ||
+      const clientIp = req.ip ||
         req.headers["x-forwarded-for"] ||
         req.connection.remoteAddress;
       console.log(
-        `Login attempt from IP: ${clientIp} for member: ${member.username}`
+        `Login attempt from IP: ${clientIp} for member: ${member.username}`,
       );
 
       if (!member.ipAddresses.includes(clientIp)) {
@@ -47,7 +46,7 @@ class MemberController {
           member.blocked = true;
           await member.save();
           console.log(
-            `Member ${member.username} blocked due to too many IP addresses`
+            `Member ${member.username} blocked due to too many IP addresses`,
           );
           return res.status(403).json({
             message: "Too many IP addresses. Account blocked.",
@@ -57,7 +56,7 @@ class MemberController {
           member.ipAddresses.push(clientIp);
           await member.save();
           console.log(
-            `New IP address added for member ${member.username}: ${clientIp}`
+            `New IP address added for member ${member.username}: ${clientIp}`,
           );
         }
       }
@@ -72,7 +71,10 @@ class MemberController {
         sameSite: "strict",
       });
 
-      res.status(200).json({ message: "Member login successful", slug: member.slug });
+      res.status(200).json({
+        message: "Member login successful",
+        slug: member.slug,
+      });
     } catch (error) {
       res.status(500).json({
         message: "Error logging in",
@@ -189,7 +191,10 @@ class MemberController {
 
       res.status(201).json({ message: "Member created successfully" });
     } catch (error) {
-      res.status(500).json({ message: "Error creating member", error: error.message });
+      res.status(500).json({
+        message: "Error creating member",
+        error: error.message,
+      });
     }
   }
 }

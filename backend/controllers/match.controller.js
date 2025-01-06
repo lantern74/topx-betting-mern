@@ -1,4 +1,4 @@
-const MatchService = require('../services/match.service');
+const MatchService = require("../services/match.service");
 
 /**
  * @class MatchController
@@ -18,8 +18,8 @@ class MatchController {
       const matchData = await MatchService.getMatchData();
       res.json(matchData);
     } catch (error) {
-      console.error('Error fetching match data:', error.message);
-      res.status(500).json({ error: 'Error fetching match data' });
+      console.error("Error fetching match data:", error.message);
+      res.status(500).json({ error: "Error fetching match data" });
     }
   }
 
@@ -38,7 +38,7 @@ class MatchController {
       res.json(resultData);
     } catch (error) {
       console.error(`Error fetching match result for ID ${id}:`, error.message);
-      res.status(500).json({ error: 'Error fetching match result' });
+      res.status(500).json({ error: "Error fetching match result" });
     }
   }
 }

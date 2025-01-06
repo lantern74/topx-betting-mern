@@ -1,209 +1,209 @@
 .spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3); /* White border */
-    border-top: 4px solid #3498db; /* Blue color */
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite; /* Animation for the spinning effect */
-  }
+  border: 4px solid rgba(255, 255, 255, 0.3); /* White border */
+  border-top: 4px solid #3498db; /* Blue color */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Animation for the spinning effect */
+}
 /* General Container Styling */
 .result-container {
-    max-width: 800px;
-    padding: 120px 15px 15px 15px;
-    margin: 0 auto;
-    color: white;
-    min-height: 100vh;
-    background: #000;
-    position: relative;
-  }
+  max-width: 800px;
+  padding: 120px 15px 15px 15px;
+  margin: 0 auto;
+  color: white;
+  min-height: 100vh;
+  background: #000;
+  position: relative;
+}
 
 .match-slug {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: gray;
-    font-size: 12px;
-    opacity: 0.7;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: gray;
+  font-size: 12px;
+  opacity: 0.7;
 }
-  
-  /* Header Section */
-  .result-header {
-    margin-bottom: 20px;
-  }
 
-  .result-header span{
-    margin-left: 10px;
-  }
-  
-  .back-button {
-    background: none;
-    color: white;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-  }
-  
-  /* Team Info Box */
-  .team-info-box {
-    position: relative;
-    background-color: #FDCA40;
-    color: black;
-    border-radius: 4px;
-    height: 200px;
-    margin-bottom: 15px;
-  }
-  
-  .background-image {
-    width: 100%;
-    height: 200px;
-    display: block;
-    opacity: 0.45;
-    mix-blend-mode: screen;
-  }
-  
-  .team-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .team {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+/* Header Section */
+.result-header {
+  margin-bottom: 20px;
+}
 
-  .team h6 {
-    color: black;
-    font-weight: 600;
-  }
-  
-  .club-logo {
-    max-width: 50px;
-    max-height: 50px;
-    margin-bottom: 5px;
-  }
-  
-  .vs-text {
-    text-align: center;
-    flex-shrink: 0;
-    color: #000;
-  }
-  
-  /* Comparison Box */
-  .comparison-box {
-    padding: 20px;
-    background: #111312;
-    border-radius: 4px;
-    margin-bottom: 15px;
-  }
-  
-  .win-rate {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.result-header span {
+  margin-left: 10px;
+}
 
-  .win-rate h4 {
-    font-weight: bold;
-  }
-  
-  .home-rate {
-    color: #ED0423;
-  }
-  
-  .away-rate {
-    color: #6665DD;
-  }
-  
-  .separator {
-    width: 1px;
-    height: 35px;
-    background-color: #E0E5D5;
-    display: block;
-  }
-  
-  /* EV Rate Box */
-  .ev-rate-box {
-    margin-top: 15px;
-    display: flex;
-    gap: 15px;
-  }
-  .ev-rate-box h6 {
-    color: white;
-    font-size: 24px;
-  }
-  .ev-rate-box p {
-    color: #32cd32;
-    font-size: 18px;
-  }
-  .ev-details {
-    width: 50% !important;
-    padding: 20px;
-    background: #111312;
-    border-radius: 4px;
-  }
-  
-  .progress-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .icon.positive {
-    color: green;
-  }
-  
-  .progress-label {
-    font-size: 14px;
-    color: white;
-  }
-  
-  .index-boxes {
-    width: 50% !important;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .result-index-box {
-    padding: 20px;
-    height: 50%;
-    background-size: cover;
-    background-position: center;
-    position: relative; /* To ensure pseudo-element positions correctly */
-    z-index: 2; /* Ensures content appears above the overlay */
-  }
-  
-  .result-index-box::before {
-    content: "";
-    position: absolute; /* Overlay positioned over the box */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-    z-index: 1; /* Overlay sits above the background image */
-  }
-  .result-index-box-text {
-    position: relative;
-    z-index: 5;
-  }
-  
-  /* Player Progress Box */
-  .player-progress-box {
-    margin-top: 15px;
-    background: #111312;
-    border-radius: 4px;
-    padding: 15px;
-  }
+.back-button {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+}
+
+/* Team Info Box */
+.team-info-box {
+  position: relative;
+  background-color: #fdca40;
+  color: black;
+  border-radius: 4px;
+  height: 200px;
+  margin-bottom: 15px;
+}
+
+.background-image {
+  width: 100%;
+  height: 200px;
+  display: block;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+}
+
+.team-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.team h6 {
+  color: black;
+  font-weight: 600;
+}
+
+.club-logo {
+  max-width: 50px;
+  max-height: 50px;
+  margin-bottom: 5px;
+}
+
+.vs-text {
+  text-align: center;
+  flex-shrink: 0;
+  color: #000;
+}
+
+/* Comparison Box */
+.comparison-box {
+  padding: 20px;
+  background: #111312;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.win-rate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.win-rate h4 {
+  font-weight: bold;
+}
+
+.home-rate {
+  color: #ed0423;
+}
+
+.away-rate {
+  color: #6665dd;
+}
+
+.separator {
+  width: 1px;
+  height: 35px;
+  background-color: #e0e5d5;
+  display: block;
+}
+
+/* EV Rate Box */
+.ev-rate-box {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+.ev-rate-box h6 {
+  color: white;
+  font-size: 24px;
+}
+.ev-rate-box p {
+  color: #32cd32;
+  font-size: 18px;
+}
+.ev-details {
+  width: 50% !important;
+  padding: 20px;
+  background: #111312;
+  border-radius: 4px;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.icon.positive {
+  color: green;
+}
+
+.progress-label {
+  font-size: 14px;
+  color: white;
+}
+
+.index-boxes {
+  width: 50% !important;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-index-box {
+  padding: 20px;
+  height: 50%;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* To ensure pseudo-element positions correctly */
+  z-index: 2; /* Ensures content appears above the overlay */
+}
+
+.result-index-box::before {
+  content: "";
+  position: absolute; /* Overlay positioned over the box */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+  z-index: 1; /* Overlay sits above the background image */
+}
+.result-index-box-text {
+  position: relative;
+  z-index: 5;
+}
+
+/* Player Progress Box */
+.player-progress-box {
+  margin-top: 15px;
+  background: #111312;
+  border-radius: 4px;
+  padding: 15px;
+}

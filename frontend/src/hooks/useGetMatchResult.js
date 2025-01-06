@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { api, handleApiError } from '../utils/api';
+import { useQuery } from "@tanstack/react-query";
+import { api, handleApiError } from "../utils/api";
 
 const useGetMatchResult = (id) => {
-  const userSlug = localStorage.getItem('userSlug'); // Fetch slug once
+  const userSlug = localStorage.getItem("userSlug"); // Fetch slug once
   const result = useQuery({
-    queryKey: ['matchResult', id],
+    queryKey: ["matchResult", id],
     queryFn: async () => {
       try {
         const response = await api.get(`/match/match-result/${id}`);

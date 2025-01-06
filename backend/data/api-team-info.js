@@ -1,18 +1,18 @@
 var request = require("request");
 var fs = require("fs");
-var { getCountries } = require('./api-countries');
+var { getCountries } = require("./api-countries");
 
 // Function to get teams for a given country
 function getTeamsByCountry(countryName) {
   return new Promise((resolve, reject) => {
     var options = {
-      method: 'GET',
-      url: 'https://v3.football.api-sports.io/teams',
+      method: "GET",
+      url: "https://v3.football.api-sports.io/teams",
       qs: { country: countryName },
       headers: {
-        'x-rapidapi-host': 'v3.football.api-sports.io',
-        'x-rapidapi-key': '43984110ca9979e5fbc3d812d6808265'
-      }
+        "x-rapidapi-host": "v3.football.api-sports.io",
+        "x-rapidapi-key": "43984110ca9979e5fbc3d812d6808265",
+      },
     };
 
     request(options, function (error, response, body) {
@@ -20,7 +20,7 @@ function getTeamsByCountry(countryName) {
 
       try {
         var data = JSON.parse(body);
-        var teams = data.response.map(team => ({
+        var teams = data.response.map((team) => ({
           country: countryName,
           id: team.team.id,
           name: team.team.name,
@@ -52,7 +52,7 @@ async function saveAllTeamsToCSV() {
         const teams = await getTeamsByCountry(country.name);
 
         // Write teams to the CSV file
-        teams.forEach(team => {
+        teams.forEach((team) => {
           writeStream.write(`${team.country},${team.id},${team.name}\n`);
         });
       } catch (error) {
@@ -64,7 +64,6 @@ async function saveAllTeamsToCSV() {
     writeStream.end(() => {
       console.log("All teams saved to CSV successfully!");
     });
-
   } catch (error) {
     console.error("Error:", error);
   }
@@ -72,7 +71,6 @@ async function saveAllTeamsToCSV() {
 
 // Run the function
 saveAllTeamsToCSV();
-
 
 // var request = require("request");
 
@@ -91,4 +89,3 @@ saveAllTeamsToCSV();
 //   var data = JSON.parse(body);
 //       console.log(data.response);
 // });
-

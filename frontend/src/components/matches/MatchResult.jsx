@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useTranslation } from 'react-i18next';
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaChevronUp } from "react-icons/fa";
 import TeamCompareChart from "./widgets/TeamCompareChart";
 import SimpleLineChart from "./widgets/SimpleLineChart";
-import PlayerMultiProgress from "./widgets/PlayerMultiProgress"
-import './MatchResult.css'
-import useGetMatchResult from '../../hooks/useGetMatchResult';
+import PlayerMultiProgress from "./widgets/PlayerMultiProgress";
+import "./MatchResult.css";
+import useGetMatchResult from "../../hooks/useGetMatchResult";
 
 function MatchResult() {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ function MatchResult() {
 
   useEffect(() => {
     if (matchData && !match) {
-      const userSlug = localStorage.getItem('userSlug');
+      const userSlug = localStorage.getItem("userSlug");
       setMatch({ ...matchData, slug: userSlug });
     }
   }, [matchData, match]);
@@ -35,9 +35,15 @@ function MatchResult() {
       const interval = 20; // Update interval in milliseconds
       const homeIncrement = match.homeWinRate / (duration / interval);
       const awayIncrement = match.awayWinRate / (duration / interval);
-      const evIncrement = (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway) / (duration / interval);
-      const pbrIncrement = (match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway) / (duration / interval);
-      const kellyIncrement = (match.homeWinRate > match.awayWinRate ? match.kellyHome : match.kellyAway) / (duration / interval);
+      const evIncrement =
+        (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway) /
+        (duration / interval);
+      const pbrIncrement = (match.homeWinRate > match.awayWinRate
+        ? match.pbrHome
+        : match.pbrAway) / (duration / interval);
+      const kellyIncrement = (match.homeWinRate > match.awayWinRate
+        ? match.kellyHome
+        : match.kellyAway) / (duration / interval);
 
       let currentHome = 0;
       let currentAway = 0;
@@ -48,9 +54,20 @@ function MatchResult() {
       const timer = setInterval(() => {
         currentHome = Math.min(currentHome + homeIncrement, match.homeWinRate);
         currentAway = Math.min(currentAway + awayIncrement, match.awayWinRate);
-        currentEv = Math.min(currentEv + evIncrement, (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway));
-        currentPbr = Math.min(currentPbr + pbrIncrement, (match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway));
-        currentKelly = Math.min(currentKelly + kellyIncrement, (match.homeWinRate > match.awayWinRate ? match.kellyHome : match.kellyAway));
+        currentEv = Math.min(
+          currentEv + evIncrement,
+          match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway,
+        );
+        currentPbr = Math.min(
+          currentPbr + pbrIncrement,
+          match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway,
+        );
+        currentKelly = Math.min(
+          currentKelly + kellyIncrement,
+          match.homeWinRate > match.awayWinRate
+            ? match.kellyHome
+            : match.kellyAway,
+        );
 
         setHomeWinRate(currentHome);
         setAwayWinRate(currentAway);
@@ -58,27 +75,38 @@ function MatchResult() {
         setPbrRate(currentPbr);
         setKellyRate(currentKelly);
 
-        if (currentHome >= match.homeWinRate && currentAway >= match.awayWinRate) {
+        if (
+          currentHome >= match.homeWinRate && currentAway >= match.awayWinRate
+        ) {
           clearInterval(timer);
         }
       }, interval);
 
-      return () => clearInterval(timer); // Cleanup on unmount
+      return () =>
+        clearInterval(timer); // Cleanup on unmount
     }
   }, [modalVisible, match]);
 
   useEffect(() => {
-    if(match) {
+    if (match) {
       setTimeout(() => setModalVisible(true), 3000);
     }
-  }, [match])
+  }, [match]);
 
   if (isLoading || !match) {
     return (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", background: "black" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          background: "black",
+        }}
+      >
         <div className="loading-container">
           <div className="spinner"></div>
-          <p style={{ color: 'white', marginTop: '10px' }}>{t("加載中...")}</p>
+          <p style={{ color: "white", marginTop: "10px" }}>{t("加載中...")}</p>
         </div>
       </div>
     );
@@ -95,35 +123,52 @@ function MatchResult() {
   }
 
   const lineChartData = [
-    { name: 'A', points: 30 },
-    { name: 'B', points: 90 },
-    { name: 'C', points: 12 },
-    { name: 'D', points: 138 },
-    { name: 'E', points: 40 },
-    { name: 'F', points: 140 },
-    { name: 'G', points: 80 },
-];
+    { name: "A", points: 30 },
+    { name: "B", points: 90 },
+    { name: "C", points: 12 },
+    { name: "D", points: 138 },
+    { name: "E", points: 40 },
+    { name: "F", points: 140 },
+    { name: "G", points: 80 },
+  ];
 
-
-return (
+  return (
     <div className="result-container">
       <div className="result-header">
-        <button className="back-button" onClick={() => navigate("/view-matches")}><i class="bi bi-arrow-left fs-2"></i><span>{t("比賽預測")}</span></button>
+        <button
+          className="back-button"
+          onClick={() => navigate("/view-matches")}
+        >
+          <i class="bi bi-arrow-left fs-2"></i>
+          <span>{t("比賽預測")}</span>
+        </button>
       </div>
 
       <div className="team-info-box">
-        <img src="/images/match/team_stats.webp" alt="media" className="background-image" />
+        <img
+          src="/images/match/team_stats.webp"
+          alt="media"
+          className="background-image"
+        />
         <div className="team-info">
-          <div style={{flex:"1"}}>
+          <div style={{ flex: "1" }}>
             <div className="team">
-              <img src={match.homeTeamLogo} alt="home team" className="club-logo" />
+              <img
+                src={match.homeTeamLogo}
+                alt="home team"
+                className="club-logo"
+              />
               <h6>{match.homeTeamName}</h6>
             </div>
           </div>
           <h6 className="vs-text">VS</h6>
-          <div style={{flex:"1"}}>
+          <div style={{ flex: "1" }}>
             <div className="team">
-              <img src={match.awayTeamLogo} alt="away team" className="club-logo" />
+              <img
+                src={match.awayTeamLogo}
+                alt="away team"
+                className="club-logo"
+              />
               <h6>{match.awayTeamName}</h6>
             </div>
           </div>
@@ -140,49 +185,85 @@ return (
         <TeamCompareChart />
       </div>
 
-      {match.homeWinRate > match.awayWinRate ? (
-        <div className="ev-rate-box">
-          <div className="ev-details">
-            <h6>{Math.round(evRate)}%<p>{t("EV Rate")}</p></h6>
-            <div style={{ width: '100%', height:"200px"}}>
+      {match.homeWinRate > match.awayWinRate
+        ? (
+          <div className="ev-rate-box">
+            <div className="ev-details">
+              <h6>
+                {Math.round(evRate)}%<p>{t("EV Rate")}</p>
+              </h6>
+              <div style={{ width: "100%", height: "200px" }}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
+              </div>
+              <div className="progress-info">
+                <FaChevronUp className="icon positive" />
+                <span className="progress-label">+18 %</span>
+              </div>
             </div>
-            <div className="progress-info">
-              <FaChevronUp className="icon positive" />
-              <span className="progress-label">+18 %</span>
+            <div className="index-boxes">
+              <div
+                className="result-index-box"
+                style={{
+                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                }}
+              >
+                <h6 className="result-index-box-text">
+                  {kellyRate.toFixed(2)}
+                  <p>{t("Kelly Index")}</p>
+                </h6>
+              </div>
+              <div
+                className="result-index-box"
+                style={{
+                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                }}
+              >
+                <h6 className="result-index-box-text">
+                  {pbrRate.toFixed(2)}%<p>{t("P to B Ratio")}</p>
+                </h6>
+              </div>
             </div>
           </div>
-          <div className="index-boxes">
-            <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{kellyRate.toFixed(2)}<p>{t("Kelly Index")}</p></h6>
-            </div>
-            <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{pbrRate.toFixed(2)}%<p>{t("P to B Ratio")}</p></h6>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="ev-rate-box">
-          <div className="ev-details">
-            <h6>{Math.round(evRate)}%<p>EV Rate</p></h6>
-            <div style={{ width: '100%', height:"200px"}}>
+        )
+        : (
+          <div className="ev-rate-box">
+            <div className="ev-details">
+              <h6>
+                {Math.round(evRate)}%<p>EV Rate</p>
+              </h6>
+              <div style={{ width: "100%", height: "200px" }}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
+              </div>
+              <div className="progress-info">
+                <FaChevronUp className="icon positive" />
+                <span className="progress-label">+18 %</span>
+              </div>
             </div>
-            <div className="progress-info">
-              <FaChevronUp className="icon positive" />
-              <span className="progress-label">+18 %</span>
+            <div className="index-boxes">
+              <div
+                className="result-index-box"
+                style={{
+                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                }}
+              >
+                <h6 className="result-index-box-text">
+                  {kellyRate.toFixed(2)}
+                  <p>Kelly Index</p>
+                </h6>
+              </div>
+              <div
+                className="result-index-box"
+                style={{
+                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                }}
+              >
+                <h6 className="result-index-box-text">
+                  {pbrRate.toFixed(2)}%<p>P to B Ratio</p>
+                </h6>
+              </div>
             </div>
           </div>
-          <div className="index-boxes">
-            <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{kellyRate.toFixed(2)}<p>Kelly Index</p></h6>
-            </div>
-            <div className="result-index-box" style={{ backgroundImage: "url('/images/match/kelly_index.webp')" }}>
-              <h6 className="result-index-box-text">{pbrRate.toFixed(2)}%<p>P to B Ratio</p></h6>
-            </div>
-          </div>
-        </div>
-      )}
+        )}
 
       <div className="player-progress-box">
         <PlayerMultiProgress />

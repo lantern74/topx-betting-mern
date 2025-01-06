@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 /**
  * @typedef {object} TelemetryLog
@@ -14,7 +14,7 @@ const TelemetryLogSchema = new mongoose.Schema({
   metadata: { type: mongoose.Schema.Types.Mixed },
 });
 
-const TelemetryLog = mongoose.model('TelemetryLog', TelemetryLogSchema);
+const TelemetryLog = mongoose.model("TelemetryLog", TelemetryLogSchema);
 
 /**
  * @class TelemetryService
@@ -36,7 +36,7 @@ class TelemetryService {
       await logEntry.save();
       console.log(`[${level}] ${message}`, metadata);
     } catch (error) {
-      console.error('Error logging to database:', error);
+      console.error("Error logging to database:", error);
     }
   }
 }

@@ -77,12 +77,12 @@ const MobileMenu = () => {
                 )}
                 {isAuthenticated &&
                   (userRole === "main" || userRole === "sub") && (
-                    <MenuItem>
-                      <Link to={userRole === "main" ? "/admin" : "/subadmin"}>
-                        {t("管理")}
-                      </Link>
-                    </MenuItem>
-                  )}
+                  <MenuItem>
+                    <Link to={userRole === "main" ? "/admin" : "/subadmin"}>
+                      {t("管理")}
+                    </Link>
+                  </MenuItem>
+                )}
               </Menu>
             </SidebarContent>
             <SidebarFooter>

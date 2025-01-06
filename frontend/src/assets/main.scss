@@ -9,16 +9,16 @@
 */
 
 html, body {
-    height: 100dvh;
-    min-height: 100dvh;
+  height: 100dvh;
+  min-height: 100dvh;
 }
 
 #root {
-    height: 100%;
+  height: 100%;
 }
 /**
-* Importing necessary  Styles.
-**/
+ * Importing necessary  Styles.
+ **/
 /*----- Fonts ----*/
 @import url("./fonts/gordita/stylesheet.css");
 /*---- Navbar Css------*/
@@ -40,12 +40,12 @@ html, body {
 
 /* Custom styles */
 .logo-text {
-    font-family: 'Gordita', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    display: block;
-    line-height: 1;
+  font-family: "Gordita", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: block;
+  line-height: 1;
 }

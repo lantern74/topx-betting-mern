@@ -1,19 +1,19 @@
 .manageMembersContainer {
-    padding: 0px;
-    @media (max-width: 600px) {
-      padding: 0;
-    }
+  padding: 0px;
+  @media (max-width: 600px) {
+    padding: 0;
   }
-  
-  .manageMembersTitle {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .manageMembersContent {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
+
+.manageMembersTitle {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.manageMembersContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

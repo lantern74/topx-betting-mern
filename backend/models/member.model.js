@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 /**
@@ -20,9 +20,13 @@ const MemberSchema = new Schema({
   ipAddresses: [{ type: String }],
   date: { type: String, required: true },
   slug: { type: String, required: true, unique: true, index: true },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Admin",
+    required: true,
+  },
 });
 
-const Member = mongoose.model('Member', MemberSchema);
+const Member = mongoose.model("Member", MemberSchema);
 
 module.exports = { Member };

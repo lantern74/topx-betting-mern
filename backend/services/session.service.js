@@ -1,5 +1,5 @@
-const { Session } = require('../models/session.model');
-const { v4: uuidv4 } = require('uuid');
+const { Session } = require("../models/session.model");
+const { v4: uuidv4 } = require("uuid");
 
 /**
  * @class SessionService

@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { api, handleApiError } from '../../utils/api';
-import useAuthStore from '../../store/authStore';
+import { api, handleApiError } from "../../utils/api";
+import useAuthStore from "../../store/authStore";
 
 const AdminLoginForm = () => {
   const { t } = useTranslation();
@@ -23,26 +23,25 @@ const AdminLoginForm = () => {
       });
 
       if (response.status === 200) {
-        login('main', response.data.token);
+        login("main", response.data.token);
         navigate("/");
       }
     } catch (err) {
-        const message = handleApiError(err);
-        if (err.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            if (err.response.status === 401) {
-              setError(t("用戶名或密碼錯誤"));
-            } else if (err.response.status === 404) {
-              setError(t("管理員未找到"));
-            }
-             else {
-              setError(message || t("登錄時出錯"));
-            }
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            setError(message || t("登錄時出錯"));
-          }
+      const message = handleApiError(err);
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        if (err.response.status === 401) {
+          setError(t("用戶名或密碼錯誤"));
+        } else if (err.response.status === 404) {
+          setError(t("管理員未找到"));
+        } else {
+          setError(message || t("登錄時出錯"));
+        }
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setError(message || t("登錄時出錯"));
+      }
     }
   };
 

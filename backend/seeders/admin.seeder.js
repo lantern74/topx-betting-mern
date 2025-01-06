@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const { Admin } = require('../models/admin.model');
-const TelemetryService = require('../services/telemetry.service');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const { Admin } = require("../models/admin.model");
+const TelemetryService = require("../services/telemetry.service");
 
 /**
  * @function seedAdmins
@@ -13,19 +13,19 @@ async function seedAdmins() {
   try {
     const admins = [
       {
-        username: 'admin',
-        password: 'adminpassword',
-        role: 'main',
+        username: "admin",
+        password: "adminpassword",
+        role: "main",
       },
       {
-        username: 'subadmin1',
-        password: 'subadmin1password',
-        role: 'sub',
+        username: "subadmin1",
+        password: "subadmin1password",
+        role: "sub",
       },
       {
-        username: 'subadmin2',
-        password: 'subadmin2password',
-        role: 'sub',
+        username: "subadmin2",
+        password: "subadmin2password",
+        role: "sub",
       },
     ];
 
@@ -40,13 +40,21 @@ async function seedAdmins() {
           role: adminData.role,
         });
         await admin.save();
-        await TelemetryService.log('info', `Admin created: ${adminData.username}`);
+        await TelemetryService.log(
+          "info",
+          `Admin created: ${adminData.username}`,
+        );
       } else {
-        await TelemetryService.log('info', `Admin already exists: ${adminData.username}`);
+        await TelemetryService.log(
+          "info",
+          `Admin already exists: ${adminData.username}`,
+        );
       }
     }
   } catch (error) {
-    await TelemetryService.log('error', 'Error seeding admins', { error: error.message });
+    await TelemetryService.log("error", "Error seeding admins", {
+      error: error.message,
+    });
   }
 }
 

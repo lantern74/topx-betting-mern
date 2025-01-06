@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 /**
@@ -11,10 +11,10 @@ const Schema = mongoose.Schema;
 const AdminSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true, select: false },
-  role: { type: String, required: true, enum: ['main', 'sub'] },
+  role: { type: String, required: true, enum: ["main", "sub"] },
   createdAt: { type: Date, default: Date.now },
 });
 
-const Admin = mongoose.model('Admin', AdminSchema);
+const Admin = mongoose.model("Admin", AdminSchema);
 
 module.exports = { Admin };

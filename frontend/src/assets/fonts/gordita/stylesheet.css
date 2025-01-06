@@ -1,36 +1,26 @@
-
-
-
-
 @font-face {
-    font-family: 'gorditabold';
-    src: url('gordita-bold-webfont.woff2') format('woff2'),
-         url('gordita-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "gorditabold";
+  src:
+    url("gordita-bold-webfont.woff2") format("woff2"),
+    url("gordita-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
-
-
-
 @font-face {
-    font-family: 'gorditamedium';
-    src: url('gordita-medium-webfont.woff2') format('woff2'),
-         url('gordita-medium-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "gorditamedium";
+  src:
+    url("gordita-medium-webfont.woff2") format("woff2"),
+    url("gordita-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
-
-
-
 @font-face {
-    font-family: 'gorditaregular';
-    src: url('gordita-regular-webfont.woff2') format('woff2'),
-         url('gordita-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "gorditaregular";
+  src:
+    url("gordita-regular-webfont.woff2") format("woff2"),
+    url("gordita-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
