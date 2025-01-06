@@ -23,7 +23,7 @@ class AdminController {
   static async login(req, res) {
     try {
       const { username, password } = req.body;
-      const admin = await Admin.findOne({ username });
+      const admin = await Admin.findOne({ username }).select('+password');
 
       if (!admin) {
         return res.status(404).json({ message: "Admin not found" });
