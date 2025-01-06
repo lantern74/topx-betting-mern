@@ -32,6 +32,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import useAuthStore from "../../store/authStore";
+import { format } from "date-fns";
+import { zhCN } from "date-fns/locale";
 
 const MemberTable = ({
   members,
@@ -76,16 +78,13 @@ const MemberTable = ({
           accessorKey: "date",
           cell: (props) => {
             const date = props.getValue();
-            const formattedDate = new Date(date).toLocaleDateString("zh-TW", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-              weekday: "short",
-            }).replace("星期", "(周");
+            const formattedDate = format(new Date(date), "yyyy年M月d日(E)", {
+              locale: zhCN,
+            });
             return formattedDate;
           },
         },
-         {
+        {
           header: t("識別碼"),
           accessorKey: "slug",
           cell: (props) => props.getValue(),
