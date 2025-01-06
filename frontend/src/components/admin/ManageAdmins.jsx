@@ -342,14 +342,13 @@ const ManageAdmins = () => {
               sx={{
                 flexDirection: { xs: "column", sm: "row" },
                 gap: { xs: 1, sm: 0 },
-                whiteSpace: 'nowrap',
               }}
             >
               <Button
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
-                sx={{ mb: { xs: 1, sm: 0 } }
-              }>
+                sx={{ mb: { xs: 1, sm: 0 } }}
+              >
                 {t("上一頁")}
               </Button>
               <span>
