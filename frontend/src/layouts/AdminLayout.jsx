@@ -103,7 +103,7 @@ const AdminLayout = ({ children }) => {
           <img
             src="/images/logo/topx-logo.png"
             alt="Logo"
-            style={{ width: "150px", display: "block", margin: "0 auto 10px" }}
+            style={{ width: "150px", display: "block" }}
           />
         </Link>
       </Typography>
