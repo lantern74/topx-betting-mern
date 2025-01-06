@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaChevronUp } from "react-icons/fa";
+import { getRandomInt } from "../../utils/random";
 import TeamCompareChart from "./widgets/TeamCompareChart";
 import SimpleLineChart from "./widgets/SimpleLineChart";
 import PlayerMultiProgress from "./widgets/PlayerMultiProgress";
@@ -143,7 +144,7 @@ function MatchResult() {
           <span>{t("比賽預測")}</span>
         </button>
       </div>
-
+      
       <div className="team-info-box">
         <img
           src="/images/match/team_stats.webp"
@@ -197,7 +198,7 @@ function MatchResult() {
               </div>
               <div className="progress-info">
                 <FaChevronUp className="icon positive" />
-                <span className="progress-label">+18 %</span>
+                <span className="progress-label">+{getRandomInt(match.id, 10, 20)} %</span>
               </div>
             </div>
             <div className="index-boxes">
@@ -236,7 +237,7 @@ function MatchResult() {
               </div>
               <div className="progress-info">
                 <FaChevronUp className="icon positive" />
-                <span className="progress-label">+18 %</span>
+                <span className="progress-label">+{getRandomInt(match.id, 10, 20)} %</span>
               </div>
             </div>
             <div className="index-boxes">
@@ -266,7 +267,7 @@ function MatchResult() {
         )}
 
       <div className="player-progress-box">
-        <PlayerMultiProgress />
+        <PlayerMultiProgress matchId={match.id} />
       </div>
     </div>
   );

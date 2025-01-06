@@ -1,6 +1,7 @@
 import React from "react";
+import { getRandomInt } from "../../../../utils/random";
 
-const PlayerMultiProgress = () => {
+const PlayerMultiProgress = ({ matchId }) => {
   // Static progress bar data
   const data = [
     { value: 20, color: "#FDCA40" }, // Azure
@@ -35,7 +36,7 @@ const PlayerMultiProgress = () => {
           fontWeight: "bold",
         }}
       >
-        <span>457</span>
+        <span>{getRandomInt(matchId, 400, 500)}</span>
         <span
           style={{
             borderLeft: "1px solid #ccc",
@@ -44,7 +45,7 @@ const PlayerMultiProgress = () => {
           }}
         />
         <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          6{" "}
+          {getRandomInt(matchId, 0, 10)}{" "}
           <i
             style={{
               border: "solid black",
