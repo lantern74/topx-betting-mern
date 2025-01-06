@@ -29,13 +29,19 @@ class AdminController {
         return res.status(404).json({ message: "Admin not found" });
       }
 
+      console.log("Comparing password for admin:", admin.username);
+      console.log("Input password:", password);
+      console.log("Stored password hash:", admin.password);
+      
       const isPasswordValid = await bcrypt.compare(password, admin.password);
       if (!isPasswordValid) {
+        console.log("Password comparison failed for admin:", admin.username);
         return res.status(401).json({ 
           message: "Invalid password",
           code: "INVALID_CREDENTIALS" 
         });
       }
+      console.log("Password comparison succeeded for admin:", admin.username);
 
       const sessionId = await SessionService.createSession(admin._id);
 
