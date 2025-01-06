@@ -36,7 +36,7 @@ const PlayerMultiProgress = ({ matchId }) => {
           fontWeight: "bold",
         }}
       >
-        <span>{getRandomInt(parseInt(matchId, 10), 400, 500)}</span>
+        <span>{getRandomInt(matchId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0), 400, 500)}</span>
         <span
           style={{
             borderLeft: "1px solid #ccc",
@@ -45,7 +45,7 @@ const PlayerMultiProgress = ({ matchId }) => {
           }}
         />
         <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          {getRandomInt(parseInt(matchId, 10), 0, 10)}{" "}
+          {getRandomInt(matchId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0), 0, 10)}{" "}
           <i
             style={{
               border: "solid black",
