@@ -4,17 +4,22 @@ import { getRandomInt } from "../../../../utils/random";
 
 const PlayerMultiProgress = () => {
   const { id: matchId } = useParams();
+  const baseSeed = matchId?.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0) || 123;
+
   // Static progress bar data
   const data = [
-    { value: 20, color: "#FDCA40" }, // Azure
-    { value: 50, color: "#6665DD" }, // Purple
-    { value: 10, color: "#7ED321" }, // Grass
-    { value: 20, color: "#0496FF" }, // Accent
-  ];
+    { color: "#FDCA40" }, // Azure
+    { color: "#6665DD" }, // Purple
+    { color: "#7ED321" }, // Grass
+    { color: "#0496FF" }, // Accent
+  ].map(item => ({
+    ...item,
+    value: getRandomInt(baseSeed + item.color.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0), 10, 50)
+  }));
 
   // Total value for calculating percentages
   const total = data.reduce((acc, item) => acc + item.value, 0);
-  const baseSeed = matchId?.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0) || 123;
+
 
   return (
     <div
