@@ -42,7 +42,7 @@ const TopNav = () => {
                 <img
                   src="/images/logo/topx-logo.png"
                   alt="TOPX Logo"
-                  style={{ height: "40px" }}
+                  style={{ height: "50px" }}
                 />
               </Link>
             </div>
