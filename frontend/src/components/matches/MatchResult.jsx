@@ -123,14 +123,15 @@ function MatchResult() {
     );
   }
 
+  const seed = id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123;
   const lineChartData = [
-    { name: "A", points: 30 },
-    { name: "B", points: 90 },
-    { name: "C", points: 12 },
-    { name: "D", points: 138 },
-    { name: "E", points: 40 },
-    { name: "F", points: 140 },
-    { name: "G", points: 80 },
+    { name: "A", points: getRandomInt(seed, 10, 150) },
+    { name: "B", points: getRandomInt(seed, 10, 150) },
+    { name: "C", points: getRandomInt(seed, 10, 150) },
+    { name: "D", points: getRandomInt(seed, 10, 150) },
+    { name: "E", points: getRandomInt(seed, 10, 150) },
+    { name: "F", points: getRandomInt(seed, 10, 150) },
+    { name: "G", points: getRandomInt(seed, 10, 150) },
   ];
 
   return (
@@ -239,7 +240,6 @@ function MatchResult() {
                 <FaChevronUp className="icon positive" />
                 <span className="progress-label">+{getRandomInt(id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 125, 10, 20)} %</span>
               </div>
-              {console.log("MatchResult.jsx: match.id =", match.id)}
             </div>
             <div className="index-boxes">
               <div
