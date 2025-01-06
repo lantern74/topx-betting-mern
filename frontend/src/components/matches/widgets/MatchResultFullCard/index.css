@@ -22,12 +22,13 @@
 }
 .match-card-teamname {
   font-weight: normal;
+  white-space: nowrap;
 }
 
 /* Mobile devices (up to 414px width) */
 @media screen and (max-width: 414px) {
   .match-card-teamname {
-    font-size: 14px; /* Reduced font size for team names on mobile */
+    font-size: 12px; /* Reduced font size for team names on mobile */
   }
   .match-card-header {
     padding: 15px 10px;
@@ -36,6 +37,9 @@
 
 /* iPhone XR */
 @media screen and (min-width: 414px) {
+  .match-card-teamname {
+    font-size: 14px; /* Reduced font size for team names on mobile */
+  }
   .match-card-header {
     padding: 30px 30px 24px;
   }
