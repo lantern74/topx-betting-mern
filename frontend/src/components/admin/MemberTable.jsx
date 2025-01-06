@@ -268,6 +268,7 @@ const MemberTable = ({
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        sx={{ whiteSpace: 'nowrap' }}
       >
         <Button
           onClick={() => table.previousPage()}
