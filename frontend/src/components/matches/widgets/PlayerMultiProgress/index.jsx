@@ -83,7 +83,7 @@ const PlayerMultiProgress = () => {
               style={{
                 width: `${percentage}%`,
                 backgroundColor: item.color,
-                transition: "width 0.5s ease",
+                transition: "width 2.5s ease",
               }}
             />
           );
