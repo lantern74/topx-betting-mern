@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 const { Member } = require("../models/member.model");
 const { Admin } = require("../models/admin.model"); // Ensure Admin model is imported
 const SessionService = require("../services/session.service");
@@ -19,16 +19,18 @@ class MemberController {
   static async login(req, res) {
     try {
       const { username, password } = req.body;
-      const member = await Member.findOne({ username });
+      const member = await Member.findOne({ username }).select("+password");
+      console.log("Comparing password for member:", member.username);
 
       if (!member) {
         return res.status(404).json({ message: "Member not found" });
       }
 
       if (password !== member.password) {
-        return res.status(401).json({ 
+        console.log("Comparing password for member:", member.username);
+        return res.status(401).json({
           message: "Invalid password",
-          code: "INVALID_CREDENTIALS" 
+          code: "INVALID_CREDENTIALS",
         });
       }
 
@@ -37,9 +39,8 @@ class MemberController {
       }
 
       // Check IP address
-      const clientIp = req.ip ||
-        req.headers["x-forwarded-for"] ||
-        req.connection.remoteAddress;
+      const clientIp = req.headers["x-forwarded-for"] || req.headers["x-real-ip"] ||
+        req.connection.remoteAddress || req.ip;
       console.log(
         `Login attempt from IP: ${clientIp} for member: ${member.username}`,
       );
