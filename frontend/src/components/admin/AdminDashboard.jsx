@@ -77,15 +77,17 @@ const AdminDashboard = () => {
             )}
           </Box>
           <Box>
-            <Button
-              component={Link}
-              to="/admin/manage-members"
-              variant="contained"
-              color="primary"
-              sx={{ mr: 2 }}
-            >
-              {t("管理會員")}
-            </Button>
+            {(userRole === "main" || userRole === "sub") && (
+              <Button
+                component={Link}
+                to="/admin/manage-members"
+                variant="contained"
+                color="primary"
+                sx={{ mr: 2 }}
+              >
+                {t("管理會員")}
+              </Button>
+            )}
             {userRole === "main" && (
               <Button
                 component={Link}
