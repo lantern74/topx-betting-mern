@@ -75,7 +75,14 @@ const MemberTable = ({
           header: t("Date"),
           accessorKey: "date",
           cell: (props) => {
-            return props.getValue();
+            const date = new Date(props.getValue());
+            const formattedDate = date.toLocaleDateString("zh-TW", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              weekday: "short",
+            }).replace("星期", "(周");
+            return formattedDate;
           },
         },
         {
