@@ -24,6 +24,16 @@
   font-weight: normal;
 }
 
+/* Mobile devices (up to 414px width) */
+@media screen and (max-width: 414px) {
+  .match-card-teamname {
+    font-size: 14px; /* Reduced font size for team names on mobile */
+  }
+  .match-card-header {
+    padding: 15px 10px;
+  }
+}
+
 /* iPhone XR */
 @media screen and (min-width: 414px) {
   .match-card-header {
