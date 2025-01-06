@@ -54,17 +54,11 @@ function App() {
           name="keywords"
           content="Data Science, Analytics, Data, sass, software company"
         />
-        <meta
-          name="description"
-          content="Sinco - Data Science & Analytics React Template is designed especially for the agency, multipurpose and business and those who offer business-related services."
-        />
-        <meta property="og:site_name" content="Sinco" />
-        <meta
-          property="og:url"
-          content="https://themeforest.net/user/creativegigs"
-        />
+        <meta name="description" content="TopX - China Betting Website" />
+        <meta property="og:site_name" content="TopX" />
+        <meta property="og:url" content="https://www.topx.com" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="TOP X" />
+        <meta property="og:title" content="TopX" />
       </Helmet>
       {/* {End Seo Helmet} */}
       <ScrollToTop />
