@@ -23,6 +23,8 @@ import MemberTable from "./MemberTable";
 import { api } from "../../utils/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAuthStore from "../../store/authStore";
+import { format } from "date-fns";
+import { zhCN } from "date-fns/locale";
 
 const ManageMembers = () => {
   const { t } = useTranslation();
@@ -157,7 +159,11 @@ const ManageMembers = () => {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
       price: priceRef.current.value,
-      date: new Date(dateRef.current.value).toISOString().split("T")[0],
+      date: dateRef.current.value
+        ? format(new Date(dateRef.current.value), "yyyy年M月d日(E)", {
+            locale: zhCN,
+          })
+        : null,
       createdBy: userRole === "main" ? "main" : "sub",
     };
     if (!newMember.date) {
