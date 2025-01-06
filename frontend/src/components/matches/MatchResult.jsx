@@ -123,15 +123,15 @@ function MatchResult() {
     );
   }
 
-  const seed = id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123;
+  const baseSeed = id?.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0) || 123;
   const lineChartData = [
-    { name: "A", points: getRandomInt(seed, 10, 150) },
-    { name: "B", points: getRandomInt(seed, 10, 150) },
-    { name: "C", points: getRandomInt(seed, 10, 150) },
-    { name: "D", points: getRandomInt(seed, 10, 150) },
-    { name: "E", points: getRandomInt(seed, 10, 150) },
-    { name: "F", points: getRandomInt(seed, 10, 150) },
-    { name: "G", points: getRandomInt(seed, 10, 150) },
+    { name: "A", points: getRandomInt(baseSeed + "A".charCodeAt(0), 10, 150) },
+    { name: "B", points: getRandomInt(baseSeed + "B".charCodeAt(0), 10, 150) },
+    { name: "C", points: getRandomInt(baseSeed + "C".charCodeAt(0), 10, 150) },
+    { name: "D", points: getRandomInt(baseSeed + "D".charCodeAt(0), 10, 150) },
+    { name: "E", points: getRandomInt(baseSeed + "E".charCodeAt(0), 10, 150) },
+    { name: "F", points: getRandomInt(baseSeed + "F".charCodeAt(0), 10, 150) },
+    { name: "G", points: getRandomInt(baseSeed + "G".charCodeAt(0), 10, 150) },
   ];
 
   return (
@@ -199,7 +199,7 @@ function MatchResult() {
               </div>
               <div className="progress-info">
                 <FaChevronUp className="icon positive" />
-                <span className="progress-label">+{getRandomInt(id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123, 10, 20)} %</span>
+                <span className="progress-label">+{getRandomInt(baseSeed + "p".charCodeAt(0), 10, 20)} %</span>
               </div>
             </div>
             <div className="index-boxes">
@@ -238,7 +238,7 @@ function MatchResult() {
               </div>
               <div className="progress-info">
                 <FaChevronUp className="icon positive" />
-                <span className="progress-label">+{getRandomInt(id?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 125, 10, 20)} %</span>
+                <span className="progress-label">+{getRandomInt(baseSeed + "p".charCodeAt(0), 10, 20)} %</span>
               </div>
             </div>
             <div className="index-boxes">

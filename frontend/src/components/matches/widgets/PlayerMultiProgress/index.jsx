@@ -14,6 +14,7 @@ const PlayerMultiProgress = () => {
 
   // Total value for calculating percentages
   const total = data.reduce((acc, item) => acc + item.value, 0);
+  const baseSeed = matchId?.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0) || 123;
 
   return (
     <div
@@ -38,8 +39,7 @@ const PlayerMultiProgress = () => {
           fontWeight: "bold",
         }}
       >
-        <span>{getRandomInt(matchId?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123, 400, 500)}</span>
-        {console.log("PlayerMultiProgress/index.jsx: matchId =", matchId)}
+        <span>{getRandomInt(baseSeed + "a".charCodeAt(0), 400, 500)}</span>
         <span
           style={{
             borderLeft: "1px solid #ccc",
@@ -48,7 +48,7 @@ const PlayerMultiProgress = () => {
           }}
         />
         <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          {getRandomInt(matchId?.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) || 123, 0, 10)}{" "}
+          {getRandomInt(baseSeed + "b".charCodeAt(0), 0, 10)}{" "}
           <i
             style={{
               border: "solid black",
