@@ -159,17 +159,13 @@ const ManageMembers = () => {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
       price: priceRef.current.value,
-      date: dateRef.current.value
-        ? format(new Date(dateRef.current.value), "yyyy年M月d日(E)", {
-            locale: zhCN,
-          })
-        : null,
+      date: dateRef.current.value ? new Date(dateRef.current.value) : null,
       createdBy: userRole === "main" ? "main" : "sub",
     };
-    if (!newMember.date) {
-      setDialogError(t("日期是必填欄位"));
-      return;
-    }
+     if (!newMember.date) {
+       setDialogError(t("日期是必填欄位"));
+       return;
+     }
     addMutation.mutate(newMember);
   };
 

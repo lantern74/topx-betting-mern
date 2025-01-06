@@ -75,8 +75,8 @@ const MemberTable = ({
           header: t("Date"),
           accessorKey: "date",
           cell: (props) => {
-            const date = new Date(props.getValue());
-            const formattedDate = date.toLocaleDateString("zh-TW", {
+            const date = props.getValue();
+            const formattedDate = new Date(date).toLocaleDateString("zh-TW", {
               year: "numeric",
               month: "numeric",
               day: "numeric",
@@ -85,7 +85,7 @@ const MemberTable = ({
             return formattedDate;
           },
         },
-        {
+         {
           header: t("識別碼"),
           accessorKey: "slug",
           cell: (props) => props.getValue(),

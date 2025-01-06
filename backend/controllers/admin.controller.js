@@ -152,9 +152,8 @@ class AdminController {
       if (!date) {
         return res.status(400).json({ message: "Date is required" });
       }
-
-      // Generate unique slug
-      const generateUniqueSlug = async () => {
+        // Generate unique slug
+        const generateUniqueSlug = async () => {
         let slug;
         let exists = true;
         while (exists) {
