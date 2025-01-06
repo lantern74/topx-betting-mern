@@ -56,7 +56,7 @@ function App() {
         />
         <meta name="description" content="TopX - China Betting Website" />
         <meta property="og:site_name" content="TopX" />
-        <meta property="og:url" content="https://www.topx.com" />
+        <meta property="og:url" content="https://topxhk.ai/" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="TopX" />
       </Helmet>
