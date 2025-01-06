@@ -80,7 +80,7 @@ const AdminDashboard = () => {
             {(userRole === "main" || userRole === "sub") && (
               <Button
                 component={Link}
-                to="/admin/manage-members"
+                to={userRole === "sub" ? "/subadmin/manage-members" : "/admin/manage-members"}
                 variant="contained"
                 color="primary"
                 sx={{ mr: 2 }}
