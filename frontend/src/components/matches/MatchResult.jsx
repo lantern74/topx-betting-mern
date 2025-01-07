@@ -237,9 +237,9 @@ function MatchResult() {
 
       <div className="comparison-box">
         <div className="win-rate">
-          <h4 className="home-rate" ref={homeWinRef}>{Math.round(homeWinRate)}%</h4>
+          <h4 className="home-rate" ref={homeWinRef} style={{ width: '60px', display: 'inline-block', textAlign: 'center' }}>{Math.round(homeWinRate)}%</h4>
           <span className="separator"></span>
-          <h4 className="away-rate" ref={awayWinRef}>{Math.round(awayWinRate)}%</h4>
+          <h4 className="away-rate" ref={awayWinRef} style={{ width: '60px', display: 'inline-block', textAlign: 'center' }}>{Math.round(awayWinRate)}%</h4>
         </div>
         <TeamCompareChart matchId={id} />
       </div>
