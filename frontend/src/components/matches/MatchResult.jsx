@@ -184,7 +184,7 @@ function MatchResult() {
           <span className="separator"></span>
           <h4 className="away-rate">{Math.round(awayWinRate)}%</h4>
         </div>
-        <TeamCompareChart />
+        <TeamCompareChart matchId={id} />
       </div>
 
       {match.homeWinRate > match.awayWinRate
