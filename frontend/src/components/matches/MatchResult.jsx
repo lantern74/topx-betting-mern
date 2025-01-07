@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaChevronUp } from "react-icons/fa";
@@ -30,8 +31,19 @@ function MatchResult() {
   }, [matchData, match]);
 
   // Increment effect for home and away win rates
+  const comparisonRef = useRef(null);
+  const evRateRef = useRef(null);
+  
+  const isComparisonVisible = useIntersectionObserver(comparisonRef, {
+    threshold: 0.2
+  });
+  
+  const isEvRateVisible = useIntersectionObserver(evRateRef, {
+    threshold: 0.2
+  });
+
   useEffect(() => {
-    if (modalVisible && match) {
+    if (isComparisonVisible && match) {
       const duration = 2000; // Animation duration in milliseconds
       const interval = 20; // Update interval in milliseconds
       const homeIncrement = match.homeWinRate / (duration / interval);
@@ -88,11 +100,6 @@ function MatchResult() {
     }
   }, [modalVisible, match]);
 
-  useEffect(() => {
-    if (match) {
-      setTimeout(() => setModalVisible(true), 3000);
-    }
-  }, [match]);
 
   if (isLoading || !match) {
     return (
@@ -178,7 +185,7 @@ function MatchResult() {
         </div>
       </div>
 
-      <div className="comparison-box">
+      <div className="comparison-box" ref={comparisonRef}>
         <div className="win-rate">
           <h4 className="home-rate">{Math.round(homeWinRate)}%</h4>
           <span className="separator"></span>
@@ -189,7 +196,7 @@ function MatchResult() {
 
       {match.homeWinRate > match.awayWinRate
         ? (
-          <div className="ev-rate-box">
+          <div className="ev-rate-box" ref={evRateRef}>
             <div className="ev-details">
               <h6>
                 {Math.round(evRate)}%<p>{t("EV Rate")}</p>
