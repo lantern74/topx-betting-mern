@@ -313,7 +313,7 @@ function MatchResult() {
               <div
                 className="result-index-box"
                 style={{
-                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                  backgroundImage: "url('/images/match/b_to_p.webp')",
                 }}
               >
                 <h6 className="result-index-box-text">
