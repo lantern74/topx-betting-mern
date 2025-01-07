@@ -30,74 +30,125 @@ function MatchResult() {
   }, [matchData, match]);
 
   // Increment effect for home and away win rates
-  const comparisonRef = useRef(null);
+  const homeWinRef = useRef(null);
+  const awayWinRef = useRef(null);
   const evRateRef = useRef(null);
+  const pbrRateRef = useRef(null);
+  const kellyRateRef = useRef(null);
   
-  const isComparisonVisible = useIntersectionObserver(comparisonRef, {
-    threshold: 0.2
-  });
-  
-  const isEvRateVisible = useIntersectionObserver(evRateRef, {
-    threshold: 0.2
-  });
+  const isHomeWinVisible = useIntersectionObserver(homeWinRef, { threshold: 0.2 });
+  const isAwayWinVisible = useIntersectionObserver(awayWinRef, { threshold: 0.2 });
+  const isEvRateVisible = useIntersectionObserver(evRateRef, { threshold: 0.2 });
+  const isPbrRateVisible = useIntersectionObserver(pbrRateRef, { threshold: 0.2 });
+  const isKellyRateVisible = useIntersectionObserver(kellyRateRef, { threshold: 0.2 });
 
+  // Home win rate animation
   useEffect(() => {
-    if ((isComparisonVisible || isEvRateVisible) && match) {
-      const duration = 2000; // Animation duration in milliseconds
-      const interval = 20; // Update interval in milliseconds
-      const homeIncrement = match.homeWinRate / (duration / interval);
-      const awayIncrement = match.awayWinRate / (duration / interval);
-      const evIncrement =
-        (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway) /
-        (duration / interval);
-      const pbrIncrement = (match.homeWinRate > match.awayWinRate
-        ? match.pbrHome
-        : match.pbrAway) / (duration / interval);
-      const kellyIncrement = (match.homeWinRate > match.awayWinRate
-        ? match.kellyHome
-        : match.kellyAway) / (duration / interval);
-
-      let currentHome = 0;
-      let currentAway = 0;
-      let currentEv = 0;
-      let currentPbr = 0;
-      let currentKelly = 0;
+    if (isHomeWinVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const increment = match.homeWinRate / (duration / interval);
+      let current = 0;
 
       const timer = setInterval(() => {
-        currentHome = Math.min(currentHome + homeIncrement, match.homeWinRate);
-        currentAway = Math.min(currentAway + awayIncrement, match.awayWinRate);
-        currentEv = Math.min(
-          currentEv + evIncrement,
-          match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway,
-        );
-        currentPbr = Math.min(
-          currentPbr + pbrIncrement,
-          match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway,
-        );
-        currentKelly = Math.min(
-          currentKelly + kellyIncrement,
-          match.homeWinRate > match.awayWinRate
-            ? match.kellyHome
-            : match.kellyAway,
-        );
-
-        setHomeWinRate(currentHome);
-        setAwayWinRate(currentAway);
-        setEvRate(currentEv);
-        setPbrRate(currentPbr);
-        setKellyRate(currentKelly);
-
-        if (
-          currentHome >= match.homeWinRate && currentAway >= match.awayWinRate
-        ) {
+        current = Math.min(current + increment, match.homeWinRate);
+        setHomeWinRate(current);
+        
+        if (current >= match.homeWinRate) {
           clearInterval(timer);
         }
       }, interval);
 
-      return () =>
-        clearInterval(timer); // Cleanup on unmount
+      return () => clearInterval(timer);
     }
-  }, [isComparisonVisible, isEvRateVisible, match]);
+  }, [isHomeWinVisible, match]);
+
+  // Away win rate animation
+  useEffect(() => {
+    if (isAwayWinVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const increment = match.awayWinRate / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, match.awayWinRate);
+        setAwayWinRate(current);
+        
+        if (current >= match.awayWinRate) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isAwayWinVisible, match]);
+
+  // EV rate animation
+  useEffect(() => {
+    if (isEvRateVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const targetEv = match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway;
+      const increment = targetEv / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, targetEv);
+        setEvRate(current);
+        
+        if (current >= targetEv) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isEvRateVisible, match]);
+
+  // PBR rate animation
+  useEffect(() => {
+    if (isPbrRateVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const targetPbr = match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway;
+      const increment = targetPbr / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, targetPbr);
+        setPbrRate(current);
+        
+        if (current >= targetPbr) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isPbrRateVisible, match]);
+
+  // Kelly rate animation
+  useEffect(() => {
+    if (isKellyRateVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const targetKelly = match.homeWinRate > match.awayWinRate ? match.kellyHome : match.kellyAway;
+      const increment = targetKelly / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, targetKelly);
+        setKellyRate(current);
+        
+        if (current >= targetKelly) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isKellyRateVisible, match]);
 
 
   if (isLoading || !match) {
@@ -184,11 +235,11 @@ function MatchResult() {
         </div>
       </div>
 
-      <div className="comparison-box" ref={comparisonRef}>
+      <div className="comparison-box">
         <div className="win-rate">
-          <h4 className="home-rate">{Math.round(homeWinRate)}%</h4>
+          <h4 className="home-rate" ref={homeWinRef}>{Math.round(homeWinRate)}%</h4>
           <span className="separator"></span>
-          <h4 className="away-rate">{Math.round(awayWinRate)}%</h4>
+          <h4 className="away-rate" ref={awayWinRef}>{Math.round(awayWinRate)}%</h4>
         </div>
         <TeamCompareChart matchId={id} />
       </div>
@@ -216,7 +267,7 @@ function MatchResult() {
                 }}
               >
                 <h6 className="result-index-box-text">
-                  {kellyRate.toFixed(2)}
+                  <span ref={kellyRateRef}>{kellyRate.toFixed(2)}</span>
                   <p>{t("Kelly Index")}</p>
                 </h6>
               </div>
