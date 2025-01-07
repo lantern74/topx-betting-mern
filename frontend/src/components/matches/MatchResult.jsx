@@ -249,7 +249,7 @@ function MatchResult() {
           <div className="ev-rate-box" ref={evRateRef}>
             <div className="ev-details">
               <h6>
-                {Math.round(evRate)}%<p>{t("EV Rate")}</p>
+                {Math.round(evRate)}%<p>EV Rate</p>
               </h6>
               <div style={{ width: "100%", height: "200px" }}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
@@ -268,7 +268,7 @@ function MatchResult() {
               >
                 <h6 className="result-index-box-text">
                   <span ref={kellyRateRef}>{kellyRate.toFixed(2)}</span>
-                  <p>{t("Kelly Index")}</p>
+                  <p>Kelly Index</p>
                 </h6>
               </div>
               <div
@@ -278,7 +278,7 @@ function MatchResult() {
                 }}
               >
                 <h6 className="result-index-box-text">
-                  <span ref={pbrRateRef}>{pbrRate.toFixed(2)}%</span><p>{t("P to B Ratio")}</p>
+                  <span ref={pbrRateRef}>{pbrRate.toFixed(2)}%</span><p>P to B Ratio</p>
                 </h6>
               </div>
             </div>
