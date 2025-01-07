@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MobileMenu from "./MobileMenu";
@@ -11,6 +11,8 @@ const TopNav = () => {
   const { isAuthenticated, userRole, logout } = useAuthStore();
   const [navbar, setNavbar] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
 
   const closeModal = () => {
@@ -25,15 +27,35 @@ const TopNav = () => {
     }
   };
 
-  window.addEventListener("scroll", toggleMenu);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) { // Scrolling down
+        setVisible(false);
+      } else if (currentScrollY < lastScrollY) { // Scrolling up
+        setVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+      toggleMenu();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
     <Fragment>
       {/* <SearchModal isOpen={modalIsOpen} onClick={closeModal} bgColor="bg-three" /> */}
       <header
-        className={navbar
-          ? "theme-main-menu sticky-menu theme-menu-four fixed"
-          : "theme-main-menu sticky-menu theme-menu-four"}
+        className={`theme-main-menu sticky-menu theme-menu-four ${
+          navbar ? "fixed" : ""
+        } ${visible ? "" : "hidden"}`}
+        style={{
+          transition: "transform 0.3s ease",
+          transform: visible ? "translateY(0)" : "translateY(-100%)"
+        }}
       >
         <div className="inner-content">
           <div className="d-flex align-items-center">
