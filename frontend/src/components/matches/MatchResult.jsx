@@ -285,10 +285,10 @@ function MatchResult() {
           </div>
         )
         : (
-          <div className="ev-rate-box">
+          <div className="ev-rate-box" ref={evRateRef}>
             <div className="ev-details">
               <h6>
-                {Math.round(evRate)}%<p>EV Rate</p>
+                <span ref={evRateRef}>{Math.round(evRate)}%</span><p>EV Rate</p>
               </h6>
               <div style={{ width: "100%", height: "200px" }}>
                 <SimpleLineChart data={lineChartData} dataKey="points" />
@@ -306,7 +306,7 @@ function MatchResult() {
                 }}
               >
                 <h6 className="result-index-box-text">
-                  {kellyRate.toFixed(2)}
+                  <span ref={kellyRateRef}>{kellyRate.toFixed(2)}</span>
                   <p>Kelly Index</p>
                 </h6>
               </div>
@@ -317,7 +317,7 @@ function MatchResult() {
                 }}
               >
                 <h6 className="result-index-box-text">
-                  {pbrRate.toFixed(2)}%<p>P to B Ratio</p>
+                  <span ref={pbrRateRef}>{pbrRate.toFixed(2)}%</span><p>P to B Ratio</p>
                 </h6>
               </div>
             </div>
