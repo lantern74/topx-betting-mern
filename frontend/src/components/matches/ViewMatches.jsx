@@ -110,7 +110,7 @@ export default function Event() {
       >
         <div className="loading-container">
           <div className="spinner"></div>
-          <p style={{ marginTop: "10px" }}>{t("加載中...")}</p>
+          <p style={{ marginTop: "10px" }}>{t("分析中...")}</p>
         </div>
       </div>
     );

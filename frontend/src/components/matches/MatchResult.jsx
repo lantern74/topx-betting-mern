@@ -107,7 +107,7 @@ function MatchResult() {
       >
         <div className="loading-container">
           <div className="spinner"></div>
-          <p style={{ color: "white", marginTop: "10px" }}>{t("加載中...")}</p>
+          <p style={{ color: "white", marginTop: "10px" }}>{t("分析中...")}</p>
         </div>
       </div>
     );
