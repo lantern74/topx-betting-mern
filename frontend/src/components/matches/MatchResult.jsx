@@ -16,7 +16,6 @@ function MatchResult() {
   const navigate = useNavigate(); // Hook for navigation
   const { data: matchData, isLoading, error } = useGetMatchResult(id);
   const [match, setMatch] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const [homeWinRate, setHomeWinRate] = useState(0);
   const [awayWinRate, setAwayWinRate] = useState(0);
   const [evRate, setEvRate] = useState(0);
@@ -43,7 +42,7 @@ function MatchResult() {
   });
 
   useEffect(() => {
-    if (isComparisonVisible && match) {
+    if ((isComparisonVisible || isEvRateVisible) && match) {
       const duration = 2000; // Animation duration in milliseconds
       const interval = 20; // Update interval in milliseconds
       const homeIncrement = match.homeWinRate / (duration / interval);
@@ -98,7 +97,7 @@ function MatchResult() {
       return () =>
         clearInterval(timer); // Cleanup on unmount
     }
-  }, [modalVisible, match]);
+  }, [isComparisonVisible, isEvRateVisible, match]);
 
 
   if (isLoading || !match) {
