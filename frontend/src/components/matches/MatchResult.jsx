@@ -278,7 +278,7 @@ function MatchResult() {
                 }}
               >
                 <h6 className="result-index-box-text">
-                  {pbrRate.toFixed(2)}%<p>{t("P to B Ratio")}</p>
+                  <span ref={pbrRateRef}>{pbrRate.toFixed(2)}%</span><p>{t("P to B Ratio")}</p>
                 </h6>
               </div>
             </div>
