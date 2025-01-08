@@ -43,13 +43,6 @@ const MobileMenu = () => {
       <ScrollToHash />
       <Fragment>
         <div className="mobile-menu-wrapper">
-          <button
-            className="navbar-toggler d-block d-lg-none"
-            type="button"
-            onClick={toggle}
-          >
-            <span />
-          </button>
           <ProSidebar
             ref={menuRef}
             className={isOpen ? "mobile-menu menu-open" : "mobile-menu"}

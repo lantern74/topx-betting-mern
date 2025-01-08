@@ -14,10 +14,18 @@
 }
 
 /* Mobile menu toggler button */
+.mobile-menu-toggler {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: auto;
+  padding-right: 20px;
+  z-index: 9999;
+}
+
 .navbar-toggler {
   border: none;
   padding: 0.5rem;
-  margin-left: auto;
 }
 
 .navbar-toggler span {

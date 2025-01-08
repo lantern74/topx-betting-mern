@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import useMobileMenuStore from "../../store/mobileMenuStore";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MobileMenu from "./MobileMenu";
@@ -113,6 +114,15 @@ const TopNav = () => {
                 )}
               </div>
             </nav>
+            <div className="mobile-menu-toggler d-block d-lg-none">
+              <button
+                className="navbar-toggler"
+                type="button"
+                onClick={useMobileMenuStore.getState().toggle}
+              >
+                <span />
+              </button>
+            </div>
             <span className="mobile-seperator"></span>
           </div>
         </div>
