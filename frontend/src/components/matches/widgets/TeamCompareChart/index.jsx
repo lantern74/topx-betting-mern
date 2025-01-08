@@ -59,7 +59,7 @@ const TeamCompareChart = ({ matchId }) => {
 
     .to(".purple-circle", {
       duration: 1,
-      y: (i) => -teamData[i].purple,
+      y: (i) => -(teamData[i].purple + 15), // Add 15px to account for spacing
       ease: (i) => i === lastIndex
         ? "cubic-bezier(0.7, 0, 0.3, 1)"
         : "cubic-bezier(0.25, 0.1, 0.25, 1)",
@@ -89,17 +89,18 @@ const TeamCompareChart = ({ matchId }) => {
             bottom: 0,
           }}
         >
-          {/* trailing line */}
+          {/* trailing line with gradient */}
           <div
             className="red-line"
             style={{
               width: "2px",
               height: 0,
               margin: "auto",
-              backgroundColor: "#ED0423",
+              background: "linear-gradient(to top, #ED0423, rgba(237,4,35,0))",
             }}
           />
-          {/* circle */}
+          {/* circle with spacing */}
+          <div style={{ height: "15px" }} />
           <div
             className="red-circle"
             style={{
@@ -124,15 +125,18 @@ const TeamCompareChart = ({ matchId }) => {
             bottom: 0,
           }}
         >
+          {/* trailing line with gradient */}
           <div
             className="purple-line"
             style={{
               width: "2px",
               height: 0,
               margin: "auto",
-              backgroundColor: "#6665DD",
+              background: "linear-gradient(to top, #6665DD, rgba(102,101,221,0))",
             }}
           />
+          {/* circle with spacing */}
+          <div style={{ height: "15px" }} />
           <div
             className="purple-circle"
             style={{
