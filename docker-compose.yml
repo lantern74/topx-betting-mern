@@ -17,6 +17,7 @@ services:
     volumes:
       - ./:/app
     command: bun run backend/index.js
+    restart: unless-stopped
     environment:
       - ATLAS_URI=mongodb://root:example@mongodb:27017/betting-china?authSource=admin
     networks:
