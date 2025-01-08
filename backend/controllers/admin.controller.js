@@ -415,12 +415,20 @@ class AdminController {
       if (!updatedMember) {
         return res.status(404).json({ message: "Member not found" });
       }
+      
+      // Check if the member was blocked due to too many IPs
+      if (updatedMember.ipAddresses.length >= 3) {
+        updatedMember.ipAddresses = [];
+        await updatedMember.save();
+        console.log(`IP addresses cleared for member ${updatedMember.username} after unblocking.`);
+      }
 
       res.status(200).json({
         message: "Member unblocked successfully",
         updatedMember,
       });
     } catch (error) {
+      console.error("Error unblocking member:", error);
       res.status(500).json({
         message: "Error unblocking member",
         error: error.message,
