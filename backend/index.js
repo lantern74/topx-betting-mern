@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser()); // Add cookie parsing middleware
 
 const uri = process.env.ATLAS_URI ||
-  "mongodb://root:example@localhost:27017/betting-china?authSource=admin";
+  "mongodb://127.0.0.1:27017/betting-china";
 mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once("open", async () => {
