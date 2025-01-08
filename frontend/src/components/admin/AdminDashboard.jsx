@@ -60,7 +60,7 @@ const AdminDashboard = () => {
             <Typography variant="body1">
               {t("管理會員")}:{" "}
               <Typography variant="span" fontWeight="bold" ml={0.5}>
-                {isLoading ? t("加載中...") : memberCount}
+                {isLoading ? t("分析中...") : memberCount}
               </Typography>
             </Typography>
             {userRole === "main" && (
@@ -68,7 +68,7 @@ const AdminDashboard = () => {
                 {t("管理管理員")}:{" "}
                 <Typography variant="span" fontWeight="bold" ml={0.5}>
                   {isSubAdminsLoading
-                    ? t("加載中...")
+                    ? t("分析中...")
                     : subAdminsError
                     ? t("加載失敗")
                     : adminCount}

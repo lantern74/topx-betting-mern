@@ -1,4 +1,6 @@
 import React from "react";
+import { getRandomInt } from "../../../../utils/random";
+import PropTypes from "prop-types";
 import {
   Cell,
   ResponsiveContainer,
@@ -8,24 +10,20 @@ import {
   YAxis,
 } from "recharts";
 
-// Static Data
-const team_compare = [
-  { a: 55, b: 62 },
-  { a: 78, b: 99 },
-  { a: 123, b: 67 },
-  { a: 70, b: 133 },
-  { a: 88, b: 102 },
-  { a: 92, b: 58 },
-  { a: 148, b: 71 },
-  { a: 54, b: 136 },
-  { a: 85, b: 107 },
-  { a: 81, b: 111 },
-  { a: 65, b: 97 },
-  { a: 121, b: 106 },
-  { a: 68, b: 75 },
-  { a: 126, b: 110 },
-  { a: 91, b: 114 },
-];
+// Generate random data based on matchId
+const generateTeamCompareData = (matchId) => {
+  const baseSeed = matchId?.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0) || 123;
+  const data = [];
+  
+  for (let i = 0; i < 15; i++) {
+    data.push({
+      a: getRandomInt(baseSeed + i + "a".charCodeAt(0), 50, 150),
+      b: getRandomInt(baseSeed + i + "b".charCodeAt(0), 50, 150)
+    });
+  }
+  
+  return data;
+};
 
 // Custom Scatter Shape
 const CustomScatterShape = ({ cx, cy, fill }) => {
@@ -87,7 +85,8 @@ const CustomScatterShape = ({ cx, cy, fill }) => {
   );
 };
 
-const TeamCompareChart = () => {
+const TeamCompareChart = ({ matchId }) => {
+  const team_compare = generateTeamCompareData(matchId);
   return (
     <div style={{ background: "#111312", height: "300px" }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -111,6 +110,10 @@ const TeamCompareChart = () => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+TeamCompareChart.propTypes = {
+  matchId: PropTypes.string.isRequired,
 };
 
 export default TeamCompareChart;

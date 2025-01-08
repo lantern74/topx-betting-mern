@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaChevronUp } from "react-icons/fa";
@@ -15,7 +16,6 @@ function MatchResult() {
   const navigate = useNavigate(); // Hook for navigation
   const { data: matchData, isLoading, error } = useGetMatchResult(id);
   const [match, setMatch] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const [homeWinRate, setHomeWinRate] = useState(0);
   const [awayWinRate, setAwayWinRate] = useState(0);
   const [evRate, setEvRate] = useState(0);
@@ -30,69 +30,126 @@ function MatchResult() {
   }, [matchData, match]);
 
   // Increment effect for home and away win rates
-  useEffect(() => {
-    if (modalVisible && match) {
-      const duration = 2000; // Animation duration in milliseconds
-      const interval = 20; // Update interval in milliseconds
-      const homeIncrement = match.homeWinRate / (duration / interval);
-      const awayIncrement = match.awayWinRate / (duration / interval);
-      const evIncrement =
-        (match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway) /
-        (duration / interval);
-      const pbrIncrement = (match.homeWinRate > match.awayWinRate
-        ? match.pbrHome
-        : match.pbrAway) / (duration / interval);
-      const kellyIncrement = (match.homeWinRate > match.awayWinRate
-        ? match.kellyHome
-        : match.kellyAway) / (duration / interval);
+  const homeWinRef = useRef(null);
+  const awayWinRef = useRef(null);
+  const evRateRef = useRef(null);
+  const pbrRateRef = useRef(null);
+  const kellyRateRef = useRef(null);
+  
+  const isHomeWinVisible = useIntersectionObserver(homeWinRef, { threshold: 0.2 });
+  const isAwayWinVisible = useIntersectionObserver(awayWinRef, { threshold: 0.2 });
+  const isEvRateVisible = useIntersectionObserver(evRateRef, { threshold: 0.2 });
+  const isPbrRateVisible = useIntersectionObserver(pbrRateRef, { threshold: 0.2 });
+  const isKellyRateVisible = useIntersectionObserver(kellyRateRef, { threshold: 0.2 });
 
-      let currentHome = 0;
-      let currentAway = 0;
-      let currentEv = 0;
-      let currentPbr = 0;
-      let currentKelly = 0;
+  // Home win rate animation
+  useEffect(() => {
+    if (isHomeWinVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const increment = match.homeWinRate / (duration / interval);
+      let current = 0;
 
       const timer = setInterval(() => {
-        currentHome = Math.min(currentHome + homeIncrement, match.homeWinRate);
-        currentAway = Math.min(currentAway + awayIncrement, match.awayWinRate);
-        currentEv = Math.min(
-          currentEv + evIncrement,
-          match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway,
-        );
-        currentPbr = Math.min(
-          currentPbr + pbrIncrement,
-          match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway,
-        );
-        currentKelly = Math.min(
-          currentKelly + kellyIncrement,
-          match.homeWinRate > match.awayWinRate
-            ? match.kellyHome
-            : match.kellyAway,
-        );
-
-        setHomeWinRate(currentHome);
-        setAwayWinRate(currentAway);
-        setEvRate(currentEv);
-        setPbrRate(currentPbr);
-        setKellyRate(currentKelly);
-
-        if (
-          currentHome >= match.homeWinRate && currentAway >= match.awayWinRate
-        ) {
+        current = Math.min(current + increment, match.homeWinRate);
+        setHomeWinRate(current);
+        
+        if (current >= match.homeWinRate) {
           clearInterval(timer);
         }
       }, interval);
 
-      return () =>
-        clearInterval(timer); // Cleanup on unmount
+      return () => clearInterval(timer);
     }
-  }, [modalVisible, match]);
+  }, [isHomeWinVisible, match]);
 
+  // Away win rate animation
   useEffect(() => {
-    if (match) {
-      setTimeout(() => setModalVisible(true), 3000);
+    if (isAwayWinVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const increment = match.awayWinRate / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, match.awayWinRate);
+        setAwayWinRate(current);
+        
+        if (current >= match.awayWinRate) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
     }
-  }, [match]);
+  }, [isAwayWinVisible, match]);
+
+  // EV rate animation
+  useEffect(() => {
+    if (isEvRateVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const targetEv = match.homeWinRate > match.awayWinRate ? match.evHome : match.evAway;
+      const increment = targetEv / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, targetEv);
+        setEvRate(current);
+        
+        if (current >= targetEv) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isEvRateVisible, match]);
+
+  // PBR rate animation
+  useEffect(() => {
+    if (isPbrRateVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const targetPbr = match.homeWinRate > match.awayWinRate ? match.pbrHome : match.pbrAway;
+      const increment = targetPbr / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, targetPbr);
+        setPbrRate(current);
+        
+        if (current >= targetPbr) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isPbrRateVisible, match]);
+
+  // Kelly rate animation
+  useEffect(() => {
+    if (isKellyRateVisible && match) {
+      const duration = 2000;
+      const interval = 20;
+      const targetKelly = match.homeWinRate > match.awayWinRate ? match.kellyHome : match.kellyAway;
+      const increment = targetKelly / (duration / interval);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, targetKelly);
+        setKellyRate(current);
+        
+        if (current >= targetKelly) {
+          clearInterval(timer);
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isKellyRateVisible, match]);
+
 
   if (isLoading || !match) {
     return (
@@ -107,7 +164,7 @@ function MatchResult() {
       >
         <div className="loading-container">
           <div className="spinner"></div>
-          <p style={{ color: "white", marginTop: "10px" }}>{t("加載中...")}</p>
+          <p style={{ color: "white", marginTop: "10px" }}>{t("分析中...")}</p>
         </div>
       </div>
     );
@@ -180,55 +237,16 @@ function MatchResult() {
 
       <div className="comparison-box">
         <div className="win-rate">
-          <h4 className="home-rate">{Math.round(homeWinRate)}%</h4>
+          <h4 className="home-rate" ref={homeWinRef} style={{ width: '60px', display: 'inline-block', textAlign: 'center' }}>{Math.round(homeWinRate)}%</h4>
           <span className="separator"></span>
-          <h4 className="away-rate">{Math.round(awayWinRate)}%</h4>
+          <h4 className="away-rate" ref={awayWinRef} style={{ width: '60px', display: 'inline-block', textAlign: 'center' }}>{Math.round(awayWinRate)}%</h4>
         </div>
-        <TeamCompareChart />
+        <TeamCompareChart matchId={id} />
       </div>
 
       {match.homeWinRate > match.awayWinRate
         ? (
-          <div className="ev-rate-box">
-            <div className="ev-details">
-              <h6>
-                {Math.round(evRate)}%<p>{t("EV Rate")}</p>
-              </h6>
-              <div style={{ width: "100%", height: "200px" }}>
-                <SimpleLineChart data={lineChartData} dataKey="points" />
-              </div>
-              <div className="progress-info">
-                <FaChevronUp className="icon positive" />
-                <span className="progress-label">+{getRandomInt(baseSeed + "p".charCodeAt(0), 10, 20)} %</span>
-              </div>
-            </div>
-            <div className="index-boxes">
-              <div
-                className="result-index-box"
-                style={{
-                  backgroundImage: "url('/images/match/kelly_index.webp')",
-                }}
-              >
-                <h6 className="result-index-box-text">
-                  {kellyRate.toFixed(2)}
-                  <p>{t("Kelly Index")}</p>
-                </h6>
-              </div>
-              <div
-                className="result-index-box"
-                style={{
-                  backgroundImage: "url('/images/match/kelly_index.webp')",
-                }}
-              >
-                <h6 className="result-index-box-text">
-                  {pbrRate.toFixed(2)}%<p>{t("P to B Ratio")}</p>
-                </h6>
-              </div>
-            </div>
-          </div>
-        )
-        : (
-          <div className="ev-rate-box">
+          <div className="ev-rate-box" ref={evRateRef}>
             <div className="ev-details">
               <h6>
                 {Math.round(evRate)}%<p>EV Rate</p>
@@ -245,11 +263,11 @@ function MatchResult() {
               <div
                 className="result-index-box"
                 style={{
-                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                  backgroundImage: "url('/images/match/p_to_b.webp')",
                 }}
               >
                 <h6 className="result-index-box-text">
-                  {kellyRate.toFixed(2)}
+                  <span ref={kellyRateRef}>{kellyRate.toFixed(2)}</span>
                   <p>Kelly Index</p>
                 </h6>
               </div>
@@ -260,7 +278,46 @@ function MatchResult() {
                 }}
               >
                 <h6 className="result-index-box-text">
-                  {pbrRate.toFixed(2)}%<p>P to B Ratio</p>
+                  <span ref={pbrRateRef}>{pbrRate.toFixed(2)}%</span><p>P to B Ratio</p>
+                </h6>
+              </div>
+            </div>
+          </div>
+        )
+        : (
+          <div className="ev-rate-box" ref={evRateRef}>
+            <div className="ev-details">
+              <h6>
+                <span ref={evRateRef}>{Math.round(evRate)}%</span><p>EV Rate</p>
+              </h6>
+              <div style={{ width: "100%", height: "200px" }}>
+                <SimpleLineChart data={lineChartData} dataKey="points" />
+              </div>
+              <div className="progress-info">
+                <FaChevronUp className="icon positive" />
+                <span className="progress-label">+{getRandomInt(baseSeed + "p".charCodeAt(0), 10, 20)} %</span>
+              </div>
+            </div>
+            <div className="index-boxes">
+              <div
+                className="result-index-box"
+                style={{
+                  backgroundImage: "url('/images/match/kelly_index.webp')",
+                }}
+              >
+                <h6 className="result-index-box-text">
+                  <span ref={kellyRateRef}>{kellyRate.toFixed(2)}</span>
+                  <p>Kelly Index</p>
+                </h6>
+              </div>
+              <div
+                className="result-index-box"
+                style={{
+                  backgroundImage: "url('/images/match/b_to_p.webp')",
+                }}
+              >
+                <h6 className="result-index-box-text">
+                  <span ref={pbrRateRef}>{pbrRate.toFixed(2)}%</span><p>P to B Ratio</p>
                 </h6>
               </div>
             </div>
