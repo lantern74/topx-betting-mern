@@ -10,10 +10,18 @@ const generateTeamCompareData = (matchId) => {
   const xStep = 90 / 15; // Evenly distribute across 90% width
     
   for (let i = 0; i < 15; i++) {
+    // Add more variation by using different multipliers and ranges
+    const redBase = getRandomInt(baseSeed + i + "a".charCodeAt(0), 30, 180);
+    const purpleBase = getRandomInt(baseSeed + i + "b".charCodeAt(0), 30, 180);
+    
+    // Add some random spikes and dips
+    const redVariation = getRandomInt(baseSeed + i + "c".charCodeAt(0), -40, 40);
+    const purpleVariation = getRandomInt(baseSeed + i + "d".charCodeAt(0), -40, 40);
+    
     data.push({
       x: xStep * i + 5, // Start at 5% and space evenly
-      red: getRandomInt(baseSeed + i + "a".charCodeAt(0), 50, 150),
-      purple: getRandomInt(baseSeed + i + "b".charCodeAt(0), 50, 150),
+      red: Math.min(Math.max(redBase + redVariation, 30), 200), // Clamp between 30-200
+      purple: Math.min(Math.max(purpleBase + purpleVariation, 30), 200), // Clamp between 30-200
     });
   }
     
