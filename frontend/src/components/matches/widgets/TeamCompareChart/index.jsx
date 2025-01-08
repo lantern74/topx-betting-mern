@@ -7,15 +7,16 @@ import { gsap } from "gsap";
 const generateTeamCompareData = (matchId) => {
   const baseSeed = matchId?.split('').reduce((acc, char, index) => acc + char.charCodeAt(0) + index + 1, 0) || 123;
   const data = [];
-  
+  const xStep = 90 / 15; // Evenly distribute across 90% width
+    
   for (let i = 0; i < 15; i++) {
     data.push({
-      x: getRandomInt(baseSeed + i + 999, 0, 90),
+      x: xStep * i + 5, // Start at 5% and space evenly
       red: getRandomInt(baseSeed + i + "a".charCodeAt(0), 50, 150),
       purple: getRandomInt(baseSeed + i + "b".charCodeAt(0), 50, 150),
     });
   }
-  
+    
   return data;
 };
 
@@ -36,31 +37,31 @@ const TeamCompareChart = ({ matchId }) => {
     // Animate both red and purple simultaneously but with different durations
     // Red animations
     tl.to(".red-line", {
-      duration: 1,
+      duration: 0.6,
       height: (i) => teamData[i].red,
-      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-      stagger: 0.2,
+      ease: "power2.out",
+      stagger: 0.1,
     }, 0)
     .to(".red-circle", {
-      duration: 1,
+      duration: 0.6,
       y: (i) => -teamData[i].red - 30,
-      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-      stagger: 0.2,
+      ease: "power2.out",
+      stagger: 0.1,
     }, 0);
 
-    // Purple animations (longer duration)
+    // Purple animations
     tl.to(".purple-line", {
-      duration: 1.5, // longer duration
+      duration: 0.8,
       height: (i) => teamData[i].purple,
-      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-      stagger: 0.2,
-    }, 0) // start at the same time as red
+      ease: "power2.out",
+      stagger: 0.1,
+    }, 0)
     .to(".purple-circle", {
-      duration: 1.5, // longer duration
-      y: (i) => -teamData[i].purple - 30, // added the -30 offset like red circles
-      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-      stagger: 0.2,
-    }, 0); // start at the same time as red
+      duration: 0.8,
+      y: (i) => -teamData[i].purple - 30,
+      ease: "power2.out",
+      stagger: 0.1,
+    }, 0);
   }, [teamData]);
 
   return (
@@ -117,7 +118,7 @@ const TeamCompareChart = ({ matchId }) => {
           className="purple-item"
           style={{
             position: "absolute",
-            left: (point.x + 5) + "%", // small horizontal offset
+            left: (point.x + 2) + "%", // smaller offset to prevent overlap
             bottom: 0,
           }}
         >
