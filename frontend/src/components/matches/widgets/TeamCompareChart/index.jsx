@@ -43,7 +43,7 @@ const TeamCompareChart = ({ matchId }) => {
     // Simultaneously move the red circles upward
     .to(".red-circle", {
       duration: 1,
-      y: (i) => -teamData[i].red,
+      y: (i) => -teamData[i].red - 30,
       ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
       stagger: 0.2,
     }, 0);
@@ -59,12 +59,12 @@ const TeamCompareChart = ({ matchId }) => {
 
     .to(".purple-circle", {
       duration: 1,
-      y: (i) => -(teamData[i].purple + 15), // Add 15px to account for spacing
+      y: (i) => -(teamData[i].purple),
       ease: (i) => i === lastIndex
         ? "cubic-bezier(0.7, 0, 0.3, 1)"
         : "cubic-bezier(0.25, 0.1, 0.25, 1)",
       stagger: 0.2,
-    }, "<");
+    }, 0);
   }, [teamData]);
 
   return (
