@@ -82,6 +82,11 @@
   border-top: none !important;
 }
 
+/* Mobile separator */
+.mobile-seperator {
+  flex: 1;
+}
+
 /* Style the logout button */
 .logout-btn {
   background: none;
