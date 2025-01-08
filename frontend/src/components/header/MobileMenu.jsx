@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import useMobileMenuStore from "../../store/mobileMenuStore";
+import useMobileMenuStore from "../../store/mobileMenuStore.js";
 import "./MobileMenu.css";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
