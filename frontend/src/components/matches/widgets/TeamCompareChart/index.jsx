@@ -96,7 +96,7 @@ const TeamCompareChart = ({ matchId }) => {
               width: "2px",
               height: 0,
               margin: "auto",
-              background: "linear-gradient(to top, #ED0423, rgba(237,4,35,0))",
+              background: "linear-gradient(to bottom, #ED0423, rgba(237,4,35,0))",
             }}
           />
           {/* circle with spacing */}
@@ -132,7 +132,7 @@ const TeamCompareChart = ({ matchId }) => {
               width: "2px",
               height: 0,
               margin: "auto",
-              background: "linear-gradient(to top, #6665DD, rgba(102,101,221,0))",
+              background: "linear-gradient(to bottom, #6665DD, rgba(102,101,221,0))",
             }}
           />
           {/* circle with spacing */}
