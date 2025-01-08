@@ -71,7 +71,7 @@ const TopNav = () => {
                 />
               </Link>
             </div>
-            <span className="flex-1 d-block d-lg-none"></span>
+            <span className="d-block d-lg-none" style={{ flex: 1 }}></span>
             <div className="right-widget d-flex align-items-center ms-auto order-lg-3 d-none d-lg-flex">
               {!isAuthenticated
                 ? (
