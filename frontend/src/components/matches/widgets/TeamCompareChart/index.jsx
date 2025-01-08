@@ -10,8 +10,9 @@ const generateTeamCompareData = (matchId) => {
   
   for (let i = 0; i < 15; i++) {
     data.push({
-      a: getRandomInt(baseSeed + i + "a".charCodeAt(0), 50, 150),
-      b: getRandomInt(baseSeed + i + "b".charCodeAt(0), 50, 150)
+      x: getRandomInt(baseSeed + i + 999, 0, 90),
+      red: getRandomInt(baseSeed + i + "a".charCodeAt(0), 50, 150),
+      purple: getRandomInt(baseSeed + i + "b".charCodeAt(0), 50, 150),
     });
   }
   
@@ -20,35 +21,55 @@ const generateTeamCompareData = (matchId) => {
 
 
 const TeamCompareChart = ({ matchId }) => {
-  const [teamCompare, setTeamCompare] = useState([]);
-  const containerRef = useRef(null);
+  const [teamData, setTeamData] = useState([]);
+  const chartRef = useRef(null);
 
   useEffect(() => {
-    setTeamCompare(generateTeamCompareData(matchId));
+    setTeamData(generateTeamCompareData(matchId));
   }, [matchId]);
-  useEffect(() => {
-    if (teamCompare.length === 0) return;
-    
-    // Animate all circles except last
-    gsap.to(".compare-circle:not(:last-child)", {
-      duration: 0.8,
-      y: -220,
-      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-      stagger: 0.1,
-    });
 
-    // Animate last circle with different easing
-    gsap.to(".compare-circle:last-child", {
-      duration: 0.8,
-      y: -220,
-      ease: "cubic-bezier(0.7, 0, 0.3, 1)",
-      delay: 0.6, // Start after most circles have begun
-    });
-  }, [teamCompare]);
+  useEffect(() => {
+    if (!chartRef.current || teamData.length === 0) return;
+
+    const tl = gsap.timeline();
+
+    // Animate the red lines first
+    tl.to(".red-line", {
+      duration: 1,
+      height: (i) => teamData[i].red,
+      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      stagger: 0.2,
+    })
+    // Simultaneously move the red circles upward
+    .to(".red-circle", {
+      duration: 1,
+      y: (i) => -teamData[i].red,
+      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      stagger: 0.2,
+    }, 0);
+
+    // Then animate the purple set
+    const lastIndex = teamData.length - 1;
+    tl.to(".purple-line", {
+      duration: 1,
+      height: (i) => teamData[i].purple,
+      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      stagger: 0.2,
+    }, ">-0.5") // overlap the start slightly
+
+    .to(".purple-circle", {
+      duration: 1,
+      y: (i) => -teamData[i].purple,
+      ease: (i) => i === lastIndex
+        ? "cubic-bezier(0.7, 0, 0.3, 1)"
+        : "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      stagger: 0.2,
+    }, "<");
+  }, [teamData]);
 
   return (
     <div
-      ref={containerRef}
+      ref={chartRef}
       style={{
         position: "relative",
         width: "100%",
@@ -57,20 +78,72 @@ const TeamCompareChart = ({ matchId }) => {
         overflow: "hidden",
       }}
     >
-      {teamCompare.map((point, i) => (
+      {/* RED items */}
+      {teamData.map((point, i) => (
         <div
-          key={i}
-          className="compare-circle"
+          key={`red-${i}`}
+          className="red-item"
           style={{
             position: "absolute",
-            width: "10px",
-            height: "10px",
-            borderRadius: "50%",
-            backgroundColor: i % 2 === 0 ? "#ED0423" : "#6665DD",
-            left: `${(i / (teamCompare.length - 1)) * 95}%`,
-            bottom: "-50px",
+            left: point.x + "%",
+            bottom: 0,
           }}
-        />
+        >
+          {/* trailing line */}
+          <div
+            className="red-line"
+            style={{
+              width: "2px",
+              height: 0,
+              margin: "auto",
+              backgroundColor: "#ED0423",
+            }}
+          />
+          {/* circle */}
+          <div
+            className="red-circle"
+            style={{
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              backgroundColor: "#ED0423",
+              transform: "translateY(0)",
+            }}
+          />
+        </div>
+      ))}
+
+      {/* PURPLE items */}
+      {teamData.map((point, i) => (
+        <div
+          key={`purple-${i}`}
+          className="purple-item"
+          style={{
+            position: "absolute",
+            left: (point.x + 5) + "%", // small horizontal offset
+            bottom: 0,
+          }}
+        >
+          <div
+            className="purple-line"
+            style={{
+              width: "2px",
+              height: 0,
+              margin: "auto",
+              backgroundColor: "#6665DD",
+            }}
+          />
+          <div
+            className="purple-circle"
+            style={{
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              backgroundColor: "#6665DD",
+              transform: "translateY(0)",
+            }}
+          />
+        </div>
       ))}
     </div>
   );
