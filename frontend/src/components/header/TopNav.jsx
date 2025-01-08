@@ -114,10 +114,10 @@ const TopNav = () => {
               </div>
             </nav>
             <span className="mobile-seperator"></span>
-            <MobileMenu />
           </div>
         </div>
       </header>
+      <MobileMenu />
     </Fragment>
   );
 };

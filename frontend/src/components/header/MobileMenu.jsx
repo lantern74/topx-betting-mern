@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
+import useMobileMenuStore from "../../store/mobileMenuStore";
 import "./MobileMenu.css";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,10 +17,7 @@ import ScrollToHash from "../common/ScrollToHash";
 
 const MobileMenu = () => {
   const { t } = useTranslation();
-  const [click, setClick] = useState(false);
-  const handleClick = () => {
-    setClick(!click);
-  };
+  const { isOpen, toggle, close } = useMobileMenuStore();
   const { isAuthenticated, userRole, logout } = useAuthStore();
   const navigate = useNavigate();
 
@@ -30,17 +28,17 @@ const MobileMenu = () => {
         <div className="mobile-menu-wrapper">
           <div className="moblie-menu-toggler">
             <button
-              className={click
+              className={isOpen
                 ? "navbar-toggler active d-block d-lg-none"
                 : "navbar-toggler d-block d-lg-none"}
               type="button"
-              onClick={handleClick}
+              onClick={toggle}
             >
               <span />
             </button>
           </div>
           <ProSidebar
-            className={click ? "mobile-menu menu-open" : "mobile-menu"}
+            className={isOpen ? "mobile-menu menu-open" : "mobile-menu"}
           >
             <SidebarHeader>
               <div className="mobile-logo">
@@ -52,7 +50,7 @@ const MobileMenu = () => {
                   />
                 </Link>
               </div>
-              <div className="close-menu" onClick={handleClick}>
+              <div className="close-menu" onClick={close}>
                 <i class="bi bi-x-lg"></i>
               </div>
             </SidebarHeader>
