@@ -124,7 +124,6 @@ const TopNav = () => {
                 <span />
               </button>
             </div>
-            <span className="mobile-seperator"></span>
           </div>
         </div>
       </header>
