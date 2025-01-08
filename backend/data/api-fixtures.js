@@ -88,5 +88,4 @@ const fetchAllData = async () => {
 
   return fixtures;
 };
-
 module.exports = { fetchAllData };
