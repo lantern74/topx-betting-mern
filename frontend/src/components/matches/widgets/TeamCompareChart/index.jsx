@@ -33,14 +33,14 @@ const TeamCompareChart = ({ matchId }) => {
 
     const tl = gsap.timeline();
 
-    // Animate the red lines first
+    // Animate both red and purple simultaneously but with different durations
+    // Red animations
     tl.to(".red-line", {
       duration: 1,
       height: (i) => teamData[i].red,
       ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
       stagger: 0.2,
-    })
-    // Simultaneously move the red circles upward
+    }, 0)
     .to(".red-circle", {
       duration: 1,
       y: (i) => -teamData[i].red - 30,
@@ -48,23 +48,19 @@ const TeamCompareChart = ({ matchId }) => {
       stagger: 0.2,
     }, 0);
 
-    // Then animate the purple set
-    const lastIndex = teamData.length - 1;
+    // Purple animations (longer duration)
     tl.to(".purple-line", {
-      duration: 1,
+      duration: 1.5, // longer duration
       height: (i) => teamData[i].purple,
       ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
       stagger: 0.2,
-    }, ">-0.5") // overlap the start slightly
-
+    }, 0) // start at the same time as red
     .to(".purple-circle", {
-      duration: 1,
-      y: (i) => -(teamData[i].purple),
-      ease: (i) => i === lastIndex
-        ? "cubic-bezier(0.7, 0, 0.3, 1)"
-        : "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      duration: 1.5, // longer duration
+      y: (i) => -teamData[i].purple - 30, // added the -30 offset like red circles
+      ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
       stagger: 0.2,
-    }, 0);
+    }, 0); // start at the same time as red
   }, [teamData]);
 
   return (
