@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import useMobileMenuStore from "../../store/mobileMenuStore.js";
 import "./MobileMenu.css";
 import { useTranslation } from "react-i18next";
@@ -18,6 +18,23 @@ import ScrollToHash from "../common/ScrollToHash";
 const MobileMenu = () => {
   const { t } = useTranslation();
   const { isOpen, toggle, close } = useMobileMenuStore();
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        close();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, close]);
   const { isAuthenticated, userRole, logout } = useAuthStore();
   const navigate = useNavigate();
 
@@ -26,18 +43,15 @@ const MobileMenu = () => {
       <ScrollToHash />
       <Fragment>
         <div className="mobile-menu-wrapper">
-          <div className="moblie-menu-toggler">
-            <button
-              className={isOpen
-                ? "navbar-toggler active d-block d-lg-none"
-                : "navbar-toggler d-block d-lg-none"}
-              type="button"
-              onClick={toggle}
-            >
-              <span />
-            </button>
-          </div>
+          <button
+            className="navbar-toggler d-block d-lg-none"
+            type="button"
+            onClick={toggle}
+          >
+            <span />
+          </button>
           <ProSidebar
+            ref={menuRef}
             className={isOpen ? "mobile-menu menu-open" : "mobile-menu"}
           >
             <SidebarHeader>

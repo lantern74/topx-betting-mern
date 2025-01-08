@@ -14,13 +14,50 @@
 }
 
 /* Mobile menu toggler button */
-.moblie-menu-toggler {
-  display: flex;
-  align-items: center;
-  height: 100%;
+.navbar-toggler {
+  border: none;
+  padding: 0.5rem;
   margin-left: auto;
-  padding-right: 20px;
-  z-index: 9999;
+}
+
+.navbar-toggler span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  position: relative;
+}
+
+.navbar-toggler span::before,
+.navbar-toggler span::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  left: 0;
+}
+
+.navbar-toggler span::before {
+  top: -6px;
+}
+
+.navbar-toggler span::after {
+  top: 6px;
+}
+
+.navbar-toggler.active span {
+  background-color: transparent;
+}
+
+.navbar-toggler.active span::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.navbar-toggler.active span::after {
+  transform: rotate(-45deg);
+  top: 0;
 }
 
 /* Remove border from menu and menu item */
