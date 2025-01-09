@@ -32,13 +32,17 @@ class MatchController {
    * @async
    */
   static async getMatchResult(req, res) {
+    const { id } = req.params;
     try {
-      const { id } = req.params;
       const resultData = await MatchService.getMatchResult(id);
       res.json(resultData);
     } catch (error) {
       console.error(`Error fetching match result for ID ${id}:`, error.message);
-      res.status(500).json({ error: "Error fetching match result" });
+      res.status(500).json({ 
+        error: "Error fetching match result",
+        id,
+        details: error.message 
+      });
     }
   }
 }
