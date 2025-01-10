@@ -19,7 +19,7 @@ services:
     command: bun run backend/index.js
     restart: unless-stopped
     environment:
-      - ATLAS_URI=mongodb://root:example@mongodb:27017/betting-china?authSource=admin
+      - ATLAS_URI=mongodb+srv://doadmin:Dz5i9o78B026W1cZ@dbaas-db-4179785-80978475.mongo.ondigitalocean.com/admin?authSource=admin
     networks:
       default:
         aliases:
@@ -43,7 +43,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb:27017/
+      ME_CONFIG_MONGODB_URL: mongodb+srv://doadmin:Dz5i9o78B026W1cZ@dbaas-db-4179785-80978475.mongo.ondigitalocean.com/admin?authSource=admin
       ME_CONFIG_BASICAUTH: false
     depends_on:
       - mongodb
