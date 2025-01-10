@@ -39,7 +39,7 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - "127.0.0.1:4646:8081"  # Bind to localhost
+      - "127.0.0.1:4647:8081"  # Bind to localhost
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
