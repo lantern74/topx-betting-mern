@@ -117,5 +117,5 @@ function scalePercentages(home, away) {
   }
 }
 
-handleResult("FB6429")
-// module.exports = { handleResult };
+// handleResult("FB6429")
+module.exports = { handleResult };
