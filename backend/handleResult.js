@@ -40,11 +40,12 @@ async function handleResult(id) {
 
   const overRound = parseFloat((homeWinProb + awayWinProb).toFixed(1));
 
+  const bet_funds = 100;
   const evHome = parseFloat(
-    (homeWinProb * (homeOdd - 1) - (1 - homeWinProb) * 1).toFixed(2),
+    (homeValueRate * homeOdd * bet_funds - awayValueRate * bet_funds).toFixed(2),
   );
   const evAway = parseFloat(
-    (awayWinProb * (awayOdd - 1) - (1 - awayWinProb) * 1).toFixed(2),
+    (awayValueRate * awayOdd * bet_funds - homeValueRate * bet_funds).toFixed(2),
   );
 
   const pbrHome = parseFloat((homeOdd / homeWinProb).toFixed(2));
@@ -116,5 +117,5 @@ function scalePercentages(home, away) {
   }
 }
 
-// handleResult("FB5263")
-module.exports = { handleResult };
+handleResult("FB6429")
+// module.exports = { handleResult };
