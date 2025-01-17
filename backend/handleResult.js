@@ -42,10 +42,10 @@ async function handleResult(id) {
 
   const bet_funds = 100;
   const evHome = parseFloat(
-    (homeValueRate * homeOdd * bet_funds - awayValueRate * bet_funds).toFixed(2),
+    ((homeValueRate / 100) * homeOdd * bet_funds - (awayValueRate / 100) * bet_funds).toFixed(2),
   );
   const evAway = parseFloat(
-    (awayValueRate * awayOdd * bet_funds - homeValueRate * bet_funds).toFixed(2),
+    ((awayValueRate / 100) * awayOdd * bet_funds - (homeValueRate / 100) * bet_funds).toFixed(2),
   );
 
   const pbrHome = parseFloat((homeOdd / homeWinProb).toFixed(2));
