@@ -417,7 +417,7 @@ class AdminController {
       }
       
       // Check if the member was blocked due to too many IPs
-      if (updatedMember.ipAddresses.length >= 5) {
+      if (updatedMember.ipAddresses.length >= 3) {
         updatedMember.ipAddresses = [];
         await updatedMember.save();
         console.log(`IP addresses cleared for member ${updatedMember.username} after unblocking.`);
