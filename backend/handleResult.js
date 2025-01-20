@@ -1,9 +1,11 @@
 const { getPredictions } = require("./data/api-predictions.js");
 const { getHKMatches } = require("./getAPIFixtureId.js");
+const { getLogo } = require("./data/api-logo.js");
 
 async function handleResult(id) {
   const winRate = await getPredictions(id);
-  console.log(winRate);
+  const teamLogo = await getLogo(id);
+
   const matches = await getHKMatches();
   const hkTeam = matches.find((match) => match.frontEndId === id);
   let homeOdd;
@@ -53,8 +55,8 @@ async function handleResult(id) {
     ),
   );
 
-  const homeTeamLogo = winRate.homeTeamLogo ? winRate.homeTeamLogo : "";
-  const awayTeamLogo = winRate.awayTeamLogo ? winRate.awayTeamLogo : "";
+  const homeTeamLogo = teamLogo.homeLogo ? teamLogo.homeLogo : "";
+  const awayTeamLogo = teamLogo.awayLogo ? teamLogo.awayLogo : "";
 
   const matchResult = {
     homeTeamName,
