@@ -26,8 +26,8 @@ async function handleResult(id) {
   const homeWinProb = parseFloat((100 / homeOdd).toFixed(1));
   const awayWinProb = parseFloat((100 / awayOdd).toFixed(1));
 
-  const homeWinRate = homeWinProb;
-  const awayWinRate = awayWinProb;
+  const homeWinRate = homeWinProb / (homeWinProb + awayWinProb);
+  const awayWinRate = awayWinProb / (homeWinProb + awayWinProb);
 
   const overRound = parseFloat((homeWinProb + awayWinProb - 100).toFixed(1));
 
