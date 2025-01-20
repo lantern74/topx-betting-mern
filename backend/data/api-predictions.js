@@ -81,6 +81,7 @@ const { processTeams } = require("../getAPIFixtureId"); // Adjust the path as ne
 async function getPredictions(id) {
   try {
     const matchedTeam = await processTeams(id);
+    console.log(matchedTeam)
     const options = {
       method: "GET",
       url: "https://v3.football.api-sports.io/odds", // Corrected URL
@@ -98,7 +99,7 @@ async function getPredictions(id) {
     if (data.response) {
       const bet365Bookmarker = data.response[0].bookmakers.find(bookmaker => bookmaker.id === 8);
       const odds = bet365Bookmarker.bets.find(bet => bet.name === "Home/Away");
-      // console.log(odds);
+      // console.log(bet365Bookmarker);
       return {
         homeOdds: odds.values.find(value => value.value === "Home").odd,
         awayOdds: odds.values.find(value => value.value === "Away").odd
@@ -111,6 +112,6 @@ async function getPredictions(id) {
   }
 }
 
-// getPredictions("FB6264");
+getPredictions("FB6264");
 module.exports = { getPredictions };
 
