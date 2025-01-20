@@ -7,7 +7,7 @@ const fixtures = [];
 const fetchData = async () => {
   const options = {
     method: "GET",
-    url: `https://v3.football.api-sports.io/fixtures?date=2025-01-08`,
+    url: `https://v3.football.api-sports.io/fixtures?date=2025-01-21`,
     headers: {
       "x-rapidapi-host": "v3.football.api-sports.io",
       "x-rapidapi-key": "43984110ca9979e5fbc3d812d6808265",
