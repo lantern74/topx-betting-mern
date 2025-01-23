@@ -18,6 +18,7 @@ const MemberSchema = new Schema({
   price: { type: Number },
   blocked: { type: Boolean, default: false },
   ipAddresses: [{ type: String }],
+  immuneToIPBan: { type: Boolean, default: false },
   date: { type: Date, required: true },
   slug: { type: String, required: true, unique: true, index: true },
     createdBy: {

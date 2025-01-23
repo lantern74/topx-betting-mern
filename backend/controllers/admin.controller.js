@@ -507,6 +507,39 @@ class AdminController {
       });
     }
   }
+
+  /**
+   * Toggles member's IP ban immunity status
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {Promise<void>}
+   * @static
+   * @async
+   */
+  static async toggleImmuneStatus(req, res) {
+    try {
+      const { id } = req.params;
+      const member = await Member.findById(id);
+
+      if (!member) {
+        return res.status(404).json({ message: "Member not found" });
+      }
+
+      member.immuneToIPBan = !member.immuneToIPBan;
+      await member.save();
+
+      res.status(200).json({
+        message: `IP ban immunity ${member.immuneToIPBan ? "enabled" : "disabled"}`,
+        immuneToIPBan: member.immuneToIPBan
+      });
+    } catch (error) {
+      console.error("Error toggling immunity status:", error);
+      res.status(500).json({
+        message: "Error updating immunity status",
+        error: error.message,
+      });
+    }
+  }
 }
 
 module.exports = AdminController;
