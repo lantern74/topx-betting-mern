@@ -13,7 +13,7 @@
   justify-content: space-between;
 }
 .match-card-header > div {
-  flex: 1; /* Each side takes equal width */
+  flex: 1; /* Each side takes equal width*/
 }
 
 .match-card-header > div:nth-child(2) {
