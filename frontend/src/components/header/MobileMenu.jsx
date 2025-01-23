@@ -72,9 +72,11 @@ const MobileMenu = () => {
                 <MenuItem>
                   <Link to="/#contactUs">{t("聯絡我們")}</Link>
                 </MenuItem>
-                <MenuItem>
-                  <Link to="/view-matches">{t("賽事系統")}</Link>
-                </MenuItem>
+                {isAuthenticated && (
+                  <MenuItem>
+                    <Link to="/view-matches">{t("賽事系統")}</Link>
+                  </MenuItem>
+                )}
                 {!isAuthenticated && (
                   <MenuItem>
                     <Link to="/login">{t("會員登入")}</Link>

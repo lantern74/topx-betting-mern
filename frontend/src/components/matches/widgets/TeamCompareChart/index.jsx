@@ -78,7 +78,7 @@ const TeamCompareChart = ({ matchId }) => {
       style={{
         position: "relative",
         width: "100%",
-        height: "300px",
+        height: "250px",
         background: "#111312",
         overflow: "hidden",
       }}

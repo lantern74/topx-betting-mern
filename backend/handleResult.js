@@ -1,51 +1,53 @@
 const { getPredictions } = require("./data/api-predictions.js");
 const { getHKMatches } = require("./getAPIFixtureId.js");
+const { getLogo } = require("./data/api-logo.js");
 
 async function handleResult(id) {
   const winRate = await getPredictions(id);
-  console.log(winRate);
+// <<<<<<< HEAD
+//   console.log(winRate);
+//   const matches = await getHKMatches();
+//   console.log(matches);
+//   let homeOdd = 2;
+//   let awayOdd = 2;
+//   const hkTeam = matches.find((match) => match.frontEndId === id);
+// =======
+  const teamLogo = await getLogo(id);
+// >>>>>>> e2b24ba9c06f22560001471dc2cd650cf0ac360a
+//
   const matches = await getHKMatches();
-  console.log(matches);
-  let homeOdd = 2;
-  let awayOdd = 2;
   const hkTeam = matches.find((match) => match.frontEndId === id);
-
-  homeTeamName = hkTeam.homeTeam.name_ch;
-  awayTeamName = hkTeam.awayTeam.name_ch;
-  if (hkTeam && hkTeam.foPools && hkTeam.foPools[0]) {
-    const combinations = hkTeam.foPools[0].lines[0]?.combinations || [];
-    if (combinations[0]) {
-      homeOdd = combinations[0].currentOdds || homeOdd;
-      awayOdd = combinations[1]?.currentOdds || awayOdd; // If combinations[1] exists
+  let homeOdd;
+  let awayOdd;
+  if(winRate.homeOdds) {
+    homeOdd = winRate.homeOdds;
+    awayOdd = winRate.awayOdds;
+  } else {
+    if (hkTeam && hkTeam.foPools && hkTeam.foPools[0]) {
+      const combinations = hkTeam.foPools[0].lines[0]?.combinations || [];
+      if (combinations[0]) {
+        homeOdd = combinations[0].currentOdds || homeOdd;
+        awayOdd = combinations[1]?.currentOdds || awayOdd; // If combinations[1] exists
+      }
     }
   }
-  let homePercent;
-  let awayPercent;
-  if (winRate.homeWinPercent != "") {
-    homePercent = winRate.homeWinPercent;
-    awayPercent = winRate.awayWinPercent;
-  } else {
-    homePercent = "33%";
-    awayPercent = "33%";
-  }
-  let homeValueRate = (100 / homeOdd * 3 + parseInt(homePercent, 10) * 7) / 10;
-  let awayValueRate = (100 / awayOdd * 3 + parseInt(awayPercent, 10) * 7) / 10;
-
-  const [homeWinRate, awayWinRate] = scalePercentages(
-    homeValueRate,
-    awayValueRate,
-  );
-
+  homeTeamName = hkTeam.homeTeam.name_ch;
+  awayTeamName = hkTeam.awayTeam.name_ch;
+  
   const homeWinProb = parseFloat((100 / homeOdd).toFixed(1));
   const awayWinProb = parseFloat((100 / awayOdd).toFixed(1));
 
-  const overRound = parseFloat((homeWinProb + awayWinProb).toFixed(1));
+  const homeWinRate = homeWinProb * 100 / (homeWinProb + awayWinProb);
+  const awayWinRate = awayWinProb * 100 / (homeWinProb + awayWinProb);
 
+  const overRound = parseFloat((homeWinProb + awayWinProb - 100).toFixed(1));
+
+  const bet_funds = 100;
   const evHome = parseFloat(
-    (homeWinProb * (homeOdd - 1) - (1 - homeWinProb) * 1).toFixed(2),
+    ((homeWinProb / 100) * homeOdd * bet_funds - (awayWinProb / 100) * bet_funds).toFixed(2),
   );
   const evAway = parseFloat(
-    (awayWinProb * (awayOdd - 1) - (1 - awayWinProb) * 1).toFixed(2),
+    ((awayWinProb / 100) * awayOdd * bet_funds - (homeWinProb / 100) * bet_funds).toFixed(2),
   );
 
   const pbrHome = parseFloat((homeOdd / homeWinProb).toFixed(2));
@@ -62,8 +64,8 @@ async function handleResult(id) {
     ),
   );
 
-  const homeTeamLogo = winRate.homeTeamLogo ? winRate.homeTeamLogo : "";
-  const awayTeamLogo = winRate.awayTeamLogo ? winRate.awayTeamLogo : "";
+  const homeTeamLogo = teamLogo.homeLogo ? teamLogo.homeLogo : "";
+  const awayTeamLogo = teamLogo.awayLogo ? teamLogo.awayLogo : "";
 
   const matchResult = {
     homeTeamName,
@@ -83,39 +85,6 @@ async function handleResult(id) {
   console.log(matchResult);
   return matchResult;
 }
-function scalePercentages(home, away) {
-  let isHomeHigher = home > away; // Determine if home is the higher value
 
-  // Ensure "higher" is always the larger value for scaling
-  let higher = Math.max(home, away);
-  let lower = Math.min(home, away);
-
-  // Define the target ranges
-  const highMin = 75;
-  const highMax = 95;
-  const lowMin = 5;
-  const lowMax = 25;
-
-  // Scale the higher value to the target range
-  const rangeHigh = highMax - highMin;
-  const rangeLow = lowMax - lowMin;
-
-  // Normalize higher and lower to sum to 100 before scaling
-  const total = higher + lower;
-  const normalizedHigher = (higher / total) * 100;
-  const normalizedLower = (lower / total) * 100;
-
-  // Apply scaling
-  const scaledHigher = highMin + ((normalizedHigher - 50) / 50) * rangeHigh;
-  const scaledLower = lowMax - ((50 - normalizedLower) / 50) * rangeLow;
-
-  // Assign scaled values back to the appropriate variables
-  if (isHomeHigher) {
-    return [scaledHigher.toFixed(1), scaledLower.toFixed(1)];
-  } else {
-    return [scaledLower.toFixed(1), scaledHigher.toFixed(1)];
-  }
-}
-
-// handleResult("FB5263")
+// handleResult("FB6264");
 module.exports = { handleResult };

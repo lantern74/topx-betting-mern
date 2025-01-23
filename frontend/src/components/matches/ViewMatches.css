@@ -10,14 +10,15 @@
 /* Date Tabs */
 .date-tabs {
   width: 100%;
-  padding: 20px 0;
+  padding: 10px;
   margin-bottom: 20px;
   text-align: center;
   background: rgb(27, 31, 35);
+  overflow-x: auto;
 }
 
 .date-tabs-inner {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -34,6 +35,7 @@
   font-size: 16px;
   height: 60px;
   line-height: 1.2;
+  min-width: 50px;
 }
 
 .date-button.selected {
