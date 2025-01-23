@@ -40,6 +40,11 @@ const MatchSchema = new Schema({
   cacheKey: { type: String, index: true },
   data: { type: mongoose.Schema.Types.Mixed },
   lastUpdated: { type: Date },
+  cachedData: {
+    homeWinRate: { type: String },
+    awayWinRate: { type: String },
+    expiresAt: { type: Date }
+  }
 });
 
 /**

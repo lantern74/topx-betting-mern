@@ -26,6 +26,12 @@ const connection = mongoose.connection;
 connection.once("open", async () => {
   console.log("MongoDB database connection established successfully");
 
+  // Create TTL index for cache expiration
+  await mongoose.connection.db.collection('matches').createIndex(
+    { "cachedData.expiresAt": 1 },
+    { expireAfterSeconds: 0 }
+  );
+
   // Check if an admin user exists, and create one if not
   const existingAdmin = await Admin.findOne({ username: "admin" });
   if (!existingAdmin) {
