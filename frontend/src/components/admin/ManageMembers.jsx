@@ -255,6 +255,26 @@ const ManageMembers = () => {
     setDeleteMemberId(null);
   };
 
+  const immuneMutation = useMutation({
+    mutationFn: (id) => api.put(`/admin/members/${id}/toggle-immune`),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["members"]);
+      setSnackbarMessage(t("會員免疫狀態更新成功"));
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
+    },
+    onError: (error) => {
+      console.error("Error updating immunity:", error);
+      setSnackbarMessage(t("更新免疫狀態時出錯"));
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
+    },
+  });
+
+  const handleToggleImmune = (id) => {
+    immuneMutation.mutate(id);
+  };
+
   const deleteMutation = useMutation({
     mutationFn: (id) => api.delete(`/admin/members/${id}`),
     onSuccess: () => {
@@ -338,6 +358,7 @@ const ManageMembers = () => {
                   handleEditPriceOpen={handleEditPriceOpen}
                   handleEditCredentialOpen={handleEditCredentialOpen}
                   handleDeleteMemberOpen={handleDeleteMemberOpen}
+                  handleToggleImmune={handleToggleImmune}
                 />
               </div>
             </Paper>

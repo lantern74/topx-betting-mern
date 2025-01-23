@@ -22,6 +22,7 @@ import {
   CheckCircle as CheckCircleIcon,
   Delete as DeleteIcon,
   Edit as EditIcon,
+  Verified as VerifiedIcon,
 } from "@mui/icons-material";
 import {
   flexRender,
@@ -42,6 +43,7 @@ const MemberTable = ({
   handleEditPriceOpen,
   handleEditCredentialOpen,
   handleDeleteMemberOpen,
+  handleToggleImmune,
 }) => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
