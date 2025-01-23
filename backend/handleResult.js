@@ -5,6 +5,7 @@ async function handleResult(id) {
   const winRate = await getPredictions(id);
   console.log(winRate);
   const matches = await getHKMatches();
+  console.log(matches);
   let homeOdd = 2;
   let awayOdd = 2;
   const hkTeam = matches.find((match) => match.frontEndId === id);
