@@ -99,4 +99,12 @@ router.delete(
   AdminController.deleteMember,
 );
 
+// Route to toggle member immune status (for main and sub admins)
+router.put(
+  "/members/:id/toggle-immune",
+  authenticateAdmin,
+  authorize(["main", "sub"]),
+  AdminController.toggleImmuneStatus,
+);
+
 module.exports = router;
