@@ -51,7 +51,7 @@ class MatchService {
             cachedData: {
               homeWinRate: resultData.homeWinRate,
               awayWinRate: resultData.awayWinRate,
-              expiresAt: new Date(Date.now() + 300000) // 5 minutes
+              expiresAt: new Date(Date.now() + 3600000) // 1 hour
             }
           }
         },
