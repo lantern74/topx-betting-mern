@@ -16,58 +16,69 @@ class MatchService {
   static async getMatchData() {
     const matches = await getHKMatches();
     
-    const matchDatas = await Promise.all(matches.map(async (match) => {
-      // Check MongoDB cache first
-      const cachedMatch = await Match.findOne({ 
+    // Parallel check for cached matches
+    const cacheCheckPromises = matches.map(match => 
+      Match.findOne({ 
         id: match.frontEndId,
         "cachedData.expiresAt": { $gt: new Date() }
-      });
-      
-      if (cachedMatch?.cachedData) {
+      })
+    );
+    
+    const cachedMatches = await Promise.all(cacheCheckPromises);
+
+    // Parallel processing for all matches
+    const matchDatas = await Promise.all(matches.map(async (match, index) => {
+      if (cachedMatches[index]?.cachedData) {
         return {
           time: match.kickOffTime,
           id: match.frontEndId,
           homeTeamName: match.homeTeam.name_ch,
           awayTeamName: match.awayTeam.name_ch,
-          homeWinRate: cachedMatch.cachedData.homeWinRate,
-          awayWinRate: cachedMatch.cachedData.awayWinRate
+          homeWinRate: cachedMatches[index].cachedData.homeWinRate,
+          awayWinRate: cachedMatches[index].cachedData.awayWinRate
         };
       }
 
-      // Cache miss - fetch fresh data
-      let resultData;
       try {
-        resultData = await handleResult(match.frontEndId);
+        // Process uncached matches in parallel
+        const [resultData] = await Promise.all([
+          handleResult(match.frontEndId),
+          Match.findOneAndUpdate(
+            { id: match.frontEndId },
+            {
+              $set: {
+                cachedData: {
+                  homeWinRate: resultData.homeWinRate,
+                  awayWinRate: resultData.awayWinRate,
+                  expiresAt: new Date(Date.now() + 3600000) // 1 hour
+                }
+              }
+            },
+            { upsert: true, new: true }
+          )
+        ]);
+
+        return {
+          time: match.kickOffTime,
+          id: match.frontEndId,
+          homeTeamName: match.homeTeam.name_ch,
+          awayTeamName: match.awayTeam.name_ch,
+          homeWinRate: resultData.homeWinRate,
+          awayWinRate: resultData.awayWinRate
+        };
       } catch (error) {
-        console.error(`Error getting result for match ${match.frontEndId}:`, error);
-        resultData = { homeWinRate: 'N/A', awayWinRate: 'N/A' };
+        console.error(`Error processing match ${match.frontEndId}:`, error);
+        return {
+          time: match.kickOffTime,
+          id: match.frontEndId,
+          homeTeamName: match.homeTeam.name_ch,
+          awayTeamName: match.awayTeam.name_ch,
+          homeWinRate: 'N/A',
+          awayWinRate: 'N/A'
+        };
       }
-
-      // Update cache in MongoDB
-      await Match.findOneAndUpdate(
-        { id: match.frontEndId },
-        {
-          $set: {
-            cachedData: {
-              homeWinRate: resultData.homeWinRate,
-              awayWinRate: resultData.awayWinRate,
-              expiresAt: new Date(Date.now() + 3600000) // 1 hour
-            }
-          }
-        },
-        { upsert: true, new: true }
-      );
-
-      return {
-        time: match.kickOffTime,
-        id: match.frontEndId,
-        homeTeamName: match.homeTeam.name_ch,
-        awayTeamName: match.awayTeam.name_ch,
-        homeWinRate: resultData.homeWinRate,
-        awayWinRate: resultData.awayWinRate
-      };
     }));
-    
+
     return matchDatas;
   }
 
