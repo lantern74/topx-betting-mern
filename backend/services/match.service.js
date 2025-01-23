@@ -2,6 +2,9 @@ const { getHKMatches } = require("../getAPIFixtureId.js");
 const { handleResult } = require("../handleResult.js");
 const { Match } = require("../models/match.model");
 
+// Cache results for 5 minutes
+const matchCache = new Map();
+
 /**
  * @class MatchService
  * @classdesc Service class for handling match-related operations.
@@ -15,12 +18,38 @@ class MatchService {
    */
   static async getMatchData() {
     const matches = await getHKMatches();
-    const matchDatas = matches.map((match) => ({
-      time: match.kickOffTime,
-      id: match.frontEndId,
-      homeTeamName: match.homeTeam.name_ch,
-      awayTeamName: match.awayTeam.name_ch,
+    
+    const matchDatas = await Promise.all(matches.map(async (match) => {
+      // Check cache first
+      if (matchCache.has(match.frontEndId)) {
+        return matchCache.get(match.frontEndId);
+      }
+      
+      let resultData;
+      try {
+        resultData = await handleResult(match.frontEndId);
+      } catch (error) {
+        console.error(`Error getting result for match ${match.frontEndId}:`, error);
+        resultData = { homeWinRate: 'N/A', awayWinRate: 'N/A' };
+      }
+      
+      const data = {
+        time: match.kickOffTime,
+        id: match.frontEndId,
+        homeTeamName: match.homeTeam.name_ch,
+        awayTeamName: match.awayTeam.name_ch,
+        homeWinRate: resultData.homeWinRate,
+        awayWinRate: resultData.awayWinRate
+      };
+      
+      // Cache the result
+      matchCache.set(match.frontEndId, data);
+      // Set timeout to clear cache after 5 minutes
+      setTimeout(() => matchCache.delete(match.frontEndId), 300000);
+      
+      return data;
     }));
+    
     return matchDatas;
   }
 

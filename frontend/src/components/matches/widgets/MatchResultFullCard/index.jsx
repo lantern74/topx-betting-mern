@@ -16,8 +16,20 @@ const MatchResultFullCard = ({ match }) => {
   return (
     <div className="match-card-container">
       <div className="match-card-header">
-        <div className="match-card-teamname" style={{ textAlign: "left" }}>
+        <div className="match-card-teamname" style={{ textAlign: "left", position: 'relative' }}>
           {match.homeTeamName}
+          {match.homeWinRate && parseFloat(match.homeWinRate) > 90 && (
+            <div style={{ 
+              position: 'absolute',
+              top: '-8px',
+              right: '-8px',
+              fontSize: '16px',
+              color: '#FFD700',
+              filter: 'drop-shadow(0 0 2px rgba(255,215,0,0.5))'
+            }}>
+              ★
+            </div>
+          )}
         </div>
         <div style={{ lineHeight: "1.2" }}>
           <div style={{ color: "#FDCA40", fontSize: "12px" }}>
@@ -26,8 +38,20 @@ const MatchResultFullCard = ({ match }) => {
           <div>VS</div>
           <div style={{ color: "#34d1bf", fontSize: "12px" }}>{match.id}</div>
         </div>
-        <div className="match-card-teamname" style={{ textAlign: "right" }}>
+        <div className="match-card-teamname" style={{ textAlign: "right", position: 'relative' }}>
           {match.awayTeamName}
+          {match.awayWinRate && parseFloat(match.awayWinRate) > 90 && (
+            <div style={{ 
+              position: 'absolute',
+              top: '-8px',
+              left: '-8px',
+              fontSize: '16px',
+              color: '#FFD700',
+              filter: 'drop-shadow(0 0 2px rgba(255,215,0,0.5))'
+            }}>
+              ★
+            </div>
+          )}
         </div>
       </div>
     </div>
