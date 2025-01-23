@@ -18,7 +18,27 @@ const MatchResultFullCard = ({ match }) => {
       <div className="match-card-header">
         <div className="match-card-teamname" style={{ textAlign: "left", position: 'relative' }}>
           {match.homeTeamName}
-          {match.homeWinRate && parseFloat(match.homeWinRate) > 90 && (
+          {match.homeWinRate && parseFloat(match.homeWinRate) >= 90 && (
+            {/* Debug output */}
+            <div style={{ 
+              position: 'absolute',
+              top: '-8px',
+              right: '-8px',
+              fontSize: '10px',
+              color: '#FF0000',
+            }}>
+              {match.homeWinRate}
+            </div>
+            <div style={{ 
+              position: 'absolute',
+              top: '-8px',
+              right: '-8px',
+              fontSize: '16px',
+              color: '#FFD700',
+              filter: 'drop-shadow(0 0 2px rgba(255,215,0,0.5))'
+            }}>
+              ★
+            </div>
             <div style={{ 
               position: 'absolute',
               top: '-8px',
@@ -40,7 +60,27 @@ const MatchResultFullCard = ({ match }) => {
         </div>
         <div className="match-card-teamname" style={{ textAlign: "right", position: 'relative' }}>
           {match.awayTeamName}
-          {match.awayWinRate && parseFloat(match.awayWinRate) > 90 && (
+          {match.awayWinRate && parseFloat(match.awayWinRate) >= 90 && (
+            {/* Debug output */}
+            <div style={{ 
+              position: 'absolute',
+              top: '-8px',
+              left: '-8px',
+              fontSize: '10px',
+              color: '#FF0000',
+            }}>
+              {match.awayWinRate}
+            </div>
+            <div style={{ 
+              position: 'absolute',
+              top: '-8px',
+              left: '-8px',
+              fontSize: '16px',
+              color: '#FFD700',
+              filter: 'drop-shadow(0 0 2px rgba(255,215,0,0.5))'
+            }}>
+              ★
+            </div>
             <div style={{ 
               position: 'absolute',
               top: '-8px',
