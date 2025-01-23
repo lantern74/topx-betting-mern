@@ -113,6 +113,17 @@ const MemberTable = ({
         header: t("操作"),
         cell: (props) => (
           <Box sx={{ display: "flex", gap: 1 }}>
+            <Tooltip title={props.row.original.immuneToIPBan ? t("撤銷IP封鎖免疫") : t("授予IP封鎖免疫")}>
+              <IconButton
+                aria-label="toggle-immune"
+                onClick={() => handleToggleImmune(props.row.original._id)}
+              >
+                <VerifiedIcon sx={{ 
+                  fontSize: "1rem",
+                  color: props.row.original.immuneToIPBan ? "#4caf50" : "rgba(255,255,255,0.5)"
+                }} />
+              </IconButton>
+            </Tooltip>
             <Tooltip title={t("編輯")}>
               <IconButton
                 aria-label="edit"
