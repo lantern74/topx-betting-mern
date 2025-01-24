@@ -55,7 +55,8 @@ class MemberController {
           return res.status(403).json({
             message: "Too many IP addresses. Account blocked.",
             code: "IP_LIMIT_EXCEEDED",
-          });
+          }); 
+           
         } else {
           member.ipAddresses.push(clientIp);
           await member.save();
