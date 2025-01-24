@@ -8,7 +8,7 @@ import TeamCompareChart from "./widgets/TeamCompareChart";
 import SimpleLineChart from "./widgets/SimpleLineChart";
 import PlayerMultiProgress from "./widgets/PlayerMultiProgress";
 import "./MatchResult.css";
-import useGetMatchResult from "../../hooks/useGetMatchResult";
+import useGetMatchResult from "../.l./hooks/useGetMatchResult";
 
 function MatchResult() {
   const { t } = useTranslation();

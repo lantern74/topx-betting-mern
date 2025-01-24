@@ -41,30 +41,30 @@ class MatchService {
 
       try {
         // Process uncached matches in parallel
-        const [resultData] = await Promise.all([
-          handleResult(match.frontEndId),
-          Match.findOneAndUpdate(
-            { id: match.frontEndId },
-            {
-              $set: {
-                cachedData: {
-                  homeWinRate: resultData.homeWinRate,
-                  awayWinRate: resultData.awayWinRate,
-                  expiresAt: new Date(Date.now() + 3600000) // 1 hour
-                }
-              }
-            },
-            { upsert: true, new: true }
-          )
-        ]);
+        // const [resultData] = await Promise.all([
+        //   handleResult(match.frontEndId),
+        //   Match.findOneAndUpdate(
+        //     { id: match.frontEndId },
+        //     {
+        //       $set: {
+        //         cachedData: {
+        //           homeWinRate: resultData.homeWinRate,
+        //           awayWinRate: resultData.awayWinRate,
+        //           expiresAt: new Date(Date.now() + 3600000) // 1 hour
+        //         }
+        //       }
+        //     },
+        //     { upsert: true, new: true }
+        //   )
+        // ]);
 
         return {
           time: match.kickOffTime,
           id: match.frontEndId,
           homeTeamName: match.homeTeam.name_ch,
           awayTeamName: match.awayTeam.name_ch,
-          homeWinRate: resultData.homeWinRate,
-          awayWinRate: resultData.awayWinRate
+          // homeWinRate: resultData.homeWinRate,
+          // awayWinRate: resultData.awayWinRate
         };
       } catch (error) {
         console.error(`Error processing match ${match.frontEndId}:`, error);
