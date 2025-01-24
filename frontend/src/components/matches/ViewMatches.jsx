@@ -66,17 +66,6 @@ export default function Event() {
     return new Intl.DateTimeFormat("zh-CN", options).format(date);
   };
 
-  const formatTimeOnly = (isoString) => {
-    const date = new Date(isoString);
-    const options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: "Asia/Singapore",
-    };
-    return new Intl.DateTimeFormat("en-GB", options).format(date);
-  };
-
   const groupMatchesByDate = (matches) => {
     if (!matches || !matches.length) return {}; // Handle empty or undefined input
 
