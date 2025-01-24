@@ -21,6 +21,7 @@ app.use(cookieParser()); // Add cookie parsing middleware
 
 const uri = process.env.ATLAS_URI ||
   "mongodb://root:example@localhost:27017/betting-china?authSource=admin";
+console.log("Connecting to MongoDB database...", uri);
 mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once("open", async () => {

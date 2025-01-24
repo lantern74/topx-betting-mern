@@ -34,7 +34,7 @@ class MemberController {
         });
       }
 
-      if (member.blocked) {
+      if (member.blocked && !member.immuneToIPBan) {
         return res.status(403).json({ message: "Member is blocked" });
       }
 
@@ -46,7 +46,7 @@ class MemberController {
       );
 
       if (!member.ipAddresses.includes(clientIp)) {
-        if (member.ipAddresses.length >= 5) {
+        if (member.ipAddresses.length >= 5 && !member.immuneToIPBan) {
           member.blocked = true;
           await member.save();
           console.log(
