@@ -46,7 +46,7 @@ class MemberController {
       );
 
       if (!member.ipAddresses.includes(clientIp)) {
-        if (member.ipAddresses.length >= 5 && !member.immuneToIPBan) {
+        if (member.ipAddresses.length >= 3 && !member.immuneToIPBan) {
           member.blocked = true;
           await member.save();
           console.log(
@@ -55,7 +55,8 @@ class MemberController {
           return res.status(403).json({
             message: "Too many IP addresses. Account blocked.",
             code: "IP_LIMIT_EXCEEDED",
-          });
+          }); 
+           
         } else {
           member.ipAddresses.push(clientIp);
           await member.save();
