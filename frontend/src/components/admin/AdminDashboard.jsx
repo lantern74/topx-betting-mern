@@ -49,7 +49,7 @@ const AdminDashboard = () => {
       >
         {userRole === "sub" ? t("副管理員儀表板") : t("管理員儀表板")}
       </Typography>
-      <Card>
+      <Card className="p-[10px]">
         <CardContent>
           <Typography variant="body1" paragraph>
             {userRole === "sub"

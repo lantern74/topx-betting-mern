@@ -339,7 +339,7 @@ const ManageMembers = () => {
               style={{
                 backgroundColor: "#333",
                 color: "white",
-                padding: "16px",
+                padding: "10px",
                 margin: "0",
                 width: "100%",
                 overflowX: "auto",
