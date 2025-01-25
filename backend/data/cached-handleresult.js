@@ -5,9 +5,9 @@ const TelemetryService = require('../services/telemetry.service'); // Add teleme
 
 // Initialize rate limiter: 10/minute with fixed clientId
 const resultLimiter = new MongoRateLimiter({
-  limit: 10, // Reduced from 200 to 10
-  windowMs: 60 * 1000, // 1 minute (same)
-  clientId: "global_results" // Fixed clientId for all rate limit checks
+  limit: 10,
+  windowMs: 60 * 1000,
+  clientId: "global" // This should match the default value in schema
 });
 
 async function cachedHandleResult(id) {

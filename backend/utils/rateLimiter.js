@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const RateLimitSchema = new mongoose.Schema({
-  clientId: { type: String, required: true, unique: true },
+  clientId: { 
+    type: String, 
+    required: true, 
+    unique: true,
+    default: "global" // Add default value
+  },
   count: { type: Number, required: true, default: 0 },
   lastReset: { type: Date, required: true, default: Date.now }
 });
@@ -16,14 +21,14 @@ class MongoRateLimiter {
     this.windowMs = windowMs;
   }
 
-  async checkRateLimit(clientId) {
+  async checkRateLimit(clientId = "global") { // Add default value
     const now = Date.now();
     const windowStart = new Date(now - this.windowMs);
 
     const entry = await RateLimit.findOneAndUpdate(
       { clientId, lastReset: { $gte: windowStart } },
       { $inc: { count: 1 } },
-      { new: true, upsert: true }
+      { new: true, upsert: true, setDefaultsOnInsert: true } // Add upsert options
     ).exec();
 
     if (entry.count > this.limit) {
