@@ -1,6 +1,7 @@
 const { getHKMatches } = require("../getAPIFixtureId.js");
 const { cachedHandleResult } = require("../data/cached-handleresult");
 const { Match } = require("../models/match.model");
+const { handleResult } = require("../handleResult.js");
 
 /**
  * @class MatchService
@@ -15,15 +16,15 @@ class MatchService {
    */
   static async getMatchData() {
     const matches = await getHKMatches();
-    
+
     // Parallel check for cached matches
-    const cacheCheckPromises = matches.map(match => 
-      Match.findOne({ 
+    const cacheCheckPromises = matches.map((match) =>
+      Match.findOne({
         id: match.frontEndId,
-        "cachedData.expiresAt": { $gt: new Date() }
+        "cachedData.expiresAt": { $gt: new Date() },
       })
     );
-    
+
     const cachedMatches = await Promise.all(cacheCheckPromises);
 
     // Parallel processing for all matches
@@ -35,26 +36,26 @@ class MatchService {
           homeTeamName: match.homeTeam.name_ch,
           awayTeamName: match.awayTeam.name_ch,
           homeWinRate: cachedMatches[index].cachedData.homeWinRate,
-          awayWinRate: cachedMatches[index].cachedData.awayWinRate
+          awayWinRate: cachedMatches[index].cachedData.awayWinRate,
         };
       }
 
       try {
         // Process uncached matches in parallel
         const resultData = await cachedHandleResult(match.frontEndId);
-        await Match.findOneAndUpdate(
-          { id: match.frontEndId },
-          {
-            $set: {
-              cachedData: {
-                homeWinRate: resultData.homeWinRate,
-                awayWinRate: resultData.awayWinRate,
-                expiresAt: new Date(Date.now() + 3600000) // 1 hour
-              }
-            }
-          },
-          { upsert: true, new: true }
-        );
+        // await Match.findOneAndUpdate(
+        //   { id: match.frontEndId },
+        //   {
+        //     $set: {
+        //       cachedData: {
+        //         homeWinRate: resultData.homeWinRate,
+        //         awayWinRate: resultData.awayWinRate,
+        //         expiresAt: new Date(Date.now() + 3600000) // 1 hour
+        //       }
+        //     }
+        //   },
+        //   { upsert: true, new: true }
+        // );
 
         return {
           time: match.kickOffTime,
@@ -62,7 +63,7 @@ class MatchService {
           homeTeamName: match.homeTeam.name_ch,
           awayTeamName: match.awayTeam.name_ch,
           homeWinRate: resultData.homeWinRate,
-          awayWinRate: resultData.awayWinRate
+          awayWinRate: resultData.awayWinRate,
         };
       } catch (error) {
         console.error(`Error processing match ${match.frontEndId}:`, error);
@@ -71,8 +72,8 @@ class MatchService {
           id: match.frontEndId,
           homeTeamName: match.homeTeam.name_ch,
           awayTeamName: match.awayTeam.name_ch,
-          homeWinRate: 'N/A',
-          awayWinRate: 'N/A'
+          homeWinRate: "N/A",
+          awayWinRate: "N/A",
         };
       }
     }));
@@ -92,6 +93,7 @@ class MatchService {
     let match = await Match.findOne({ id: id });
 
     if (!match) {
+      console.log("Creating new match");
       match = new Match({
         id: id,
         time: new Date(), // Placeholder, adjust as needed
@@ -100,7 +102,11 @@ class MatchService {
       await match.save();
     } else {
       // Update existing match data
-      Object.assign(match, resultData);
+      console.log("Updating existing match");
+      Object.assign(match, {
+        ...resultData,
+        time: resultData.time ?? match.time ?? new Date(),
+      });
       await match.save();
     }
 

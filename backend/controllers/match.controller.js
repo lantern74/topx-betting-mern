@@ -38,6 +38,7 @@ class MatchController {
       res.json(resultData);
     } catch (error) {
       console.error(`Error fetching match result for ID ${id}:`, error.message);
+      console.error(error)
       res.status(500).json({ 
         error: "Error fetching match result",
         id,
