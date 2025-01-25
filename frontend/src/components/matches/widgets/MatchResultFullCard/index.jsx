@@ -43,12 +43,23 @@ const MatchResultFullCard = ({ match }) => {
             gap: '8px',
             marginBottom: '4px'
           }}>
-            {(parseFloat(match.homeWinRate) >= 60 || parseFloat(match.awayWinRate) >= 60) && (
-              <>
-                {parseFloat(match.homeWinRate) >= 60 && <GoldenStar />}
-                {parseFloat(match.awayWinRate) >= 60 && <GoldenStar />}
-              </>
-            )}
+            {(() => {
+              const getStarCount = (winRate) => {
+                const rate = parseFloat(winRate);
+                if (rate >= 90) return 3;
+                if (rate >= 80) return 2;
+                if (rate >= 70) return 1;
+                return 0;
+              };
+
+              const homeStars = getStarCount(match.homeWinRate);
+              const awayStars = getStarCount(match.awayWinRate);
+              const totalStars = homeStars + awayStars;
+
+              return totalStars > 0 && Array.from({ length: totalStars }).map((_, i) => (
+                <GoldenStar key={`star-${i}`} />
+              ));
+            })()}
           </div>
           
           <div style={{ color: "#FDCA40", fontSize: "12px" }}>
