@@ -278,8 +278,10 @@ const ManageAdmins = () => {
           {t("新增管理員")}
         </Button>
       </Box>
-      <Card style={{ backgroundColor: "#333", color: "white", padding="10px"}}>
-        <CardContent>
+      <Card
+        style={{ backgroundColor: "#333", color: "white", }}
+      >
+        <CardContent className="p-[10px]">
           <ThemeProvider theme={darkTheme}>
             <div style={{ overflowX: "auto" }}>
               <TableContainer
