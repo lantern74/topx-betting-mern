@@ -3,10 +3,11 @@ const { Match } = require('../models/match.model');
 const { MongoRateLimiter } = require('../utils/rateLimiter');
 const TelemetryService = require('../services/telemetry.service'); // Add telemetry import
 
-// Initialize rate limiter: 10/minute
+// Initialize rate limiter: 10/minute with fixed clientId
 const resultLimiter = new MongoRateLimiter({
   limit: 10, // Reduced from 200 to 10
-  windowMs: 60 * 1000 // 1 minute (same)
+  windowMs: 60 * 1000, // 1 minute (same)
+  clientId: "global_results" // Fixed clientId for all rate limit checks
 });
 
 async function cachedHandleResult(id) {
@@ -33,7 +34,7 @@ async function cachedHandleResult(id) {
     await TelemetryService.log('debug', 'Cache miss', { matchId: id });
 
     // Apply rate limiting
-    const limitCheck = await resultLimiter.checkRateLimit('global_results');
+    const limitCheck = await resultLimiter.checkRateLimit();
     if (!limitCheck.allowed) {
       await TelemetryService.log('warn', 'Rate limit exceeded', {
         matchId: id,
