@@ -66,4 +66,7 @@ class MatchModel {
 
 const Match = mongoose.model("Match", MatchSchema);
 
+// Add TTL index for cached data
+MatchSchema.index({ 'cachedData.expiresAt': 1 }, { expireAfterSeconds: 0 });
+
 module.exports = { Match, MatchModel };
