@@ -281,7 +281,7 @@ const ManageAdmins = () => {
       <Card
         style={{ backgroundColor: "#333", color: "white", }}
       >
-        <CardContent className="p-[10px]">
+        <CardContent style={{ padding: "10px" }}>
           <ThemeProvider theme={darkTheme}>
             <div style={{ overflowX: "auto" }}>
               <TableContainer
