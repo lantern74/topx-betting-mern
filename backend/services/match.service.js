@@ -41,22 +41,20 @@ class MatchService {
 
       try {
         // Process uncached matches in parallel
-        const [resultData] = await Promise.all([
-          cachedHandleResult(match.frontEndId),
-          Match.findOneAndUpdate(
-            { id: match.frontEndId },
-            {
-              $set: {
-                cachedData: {
-                  homeWinRate: resultData.homeWinRate,
-                  awayWinRate: resultData.awayWinRate,
-                  expiresAt: new Date(Date.now() + 3600000) // 1 hour
-                }
+        const resultData = await cachedHandleResult(match.frontEndId);
+        await Match.findOneAndUpdate(
+          { id: match.frontEndId },
+          {
+            $set: {
+              cachedData: {
+                homeWinRate: resultData.homeWinRate,
+                awayWinRate: resultData.awayWinRate,
+                expiresAt: new Date(Date.now() + 3600000) // 1 hour
               }
-            },
-            { upsert: true, new: true }
-          )
-        ]);
+            }
+          },
+          { upsert: true, new: true }
+        );
 
         return {
           time: match.kickOffTime,
