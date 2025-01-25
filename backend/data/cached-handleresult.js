@@ -3,10 +3,10 @@ const { Match } = require('../models/match.model');
 const { MongoRateLimiter } = require('../utils/rateLimiter');
 const TelemetryService = require('../services/telemetry.service'); // Add telemetry import
 
-// Initialize rate limiter: 200/minute
+// Initialize rate limiter: 10/minute
 const resultLimiter = new MongoRateLimiter({
-  limit: 200,
-  windowMs: 60 * 1000 // 1 minute
+  limit: 10, // Reduced from 200 to 10
+  windowMs: 60 * 1000 // 1 minute (same)
 });
 
 async function cachedHandleResult(id) {
