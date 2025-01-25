@@ -32,13 +32,25 @@ const MatchResultFullCard = ({ match }) => {
               width: "fit-content",
             }}
           >
-            {match.homeWinRate && parseFloat(match.homeWinRate) >= 60 && (
-              <GoldenStar />
-            )}
             {match.homeTeamName}
           </div>
         </div>
         <div style={{ lineHeight: "1.2" }}>
+          {/* Star container above time */}
+          <div style={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '8px',
+            marginBottom: '4px'
+          }}>
+            {(parseFloat(match.homeWinRate) >= 60 || parseFloat(match.awayWinRate) >= 60) && (
+              <>
+                {parseFloat(match.homeWinRate) >= 60 && <GoldenStar />}
+                {parseFloat(match.awayWinRate) >= 60 && <GoldenStar />}
+              </>
+            )}
+          </div>
+          
           <div style={{ color: "#FDCA40", fontSize: "12px" }}>
             {formatTimeOnly(match.time)}
           </div>
@@ -61,9 +73,6 @@ const MatchResultFullCard = ({ match }) => {
               float: "right",
             }}
           >
-            {match.awayWinRate && parseFloat(match.awayWinRate) >= 60 && (
-              <GoldenStar />
-            )}
             {match.awayTeamName}
           </div>
         </div>
@@ -78,7 +87,6 @@ const GoldenStar = () => (
       fontSize: "16px",
       color: "#FFD700",
       filter: "drop-shadow(0 0 2px rgba(255,215,0,0.5))",
-      marginBottom: "4px",
     }}
   >
     ★
