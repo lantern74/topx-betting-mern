@@ -55,6 +55,7 @@ const MatchResultFullCard = ({ match }) => {
               const homeStars = getStarCount(match.homeWinRate);
               const awayStars = getStarCount(match.awayWinRate);
               const totalStars = homeStars + awayStars;
+              console.log(totalStars, 'total Stars')
 
               return totalStars > 0 && Array.from({ length: totalStars }).map((_, i) => (
                 <GoldenStar key={`star-${i}`} />
