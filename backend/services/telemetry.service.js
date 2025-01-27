@@ -34,7 +34,7 @@ class TelemetryService {
     try {
       const logEntry = new TelemetryLog({ level, message, metadata });
       await logEntry.save();
-      console.log(`[${level}] ${message}`, metadata);
+      // console.log(`[${level}] ${message}`, metadata);
     } catch (error) {
       console.error("Error logging to database:", error);
     }

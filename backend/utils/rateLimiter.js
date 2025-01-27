@@ -5,13 +5,13 @@ const RateLimitSchema = new mongoose.Schema({
     type: String, 
     required: true, 
     unique: true,
-    default: "global" // Add default value
+    default: "global"
   },
   count: { type: Number, required: true, default: 0 },
   lastReset: { type: Date, required: true, default: Date.now }
 });
 
-RateLimitSchema.index({ lastReset: 1 }, { expireAfterSeconds: 86400 }); // Cleanup after 24h
+RateLimitSchema.index({ lastReset: 1 }, { expireAfterSeconds: 86400 });
 
 const RateLimit = mongoose.model('RateLimit', RateLimitSchema);
 
@@ -21,14 +21,31 @@ class MongoRateLimiter {
     this.windowMs = windowMs;
   }
 
-  async checkRateLimit(clientId = "global") { // Add default value
+  async checkRateLimit(clientId = "global") {
     const now = Date.now();
     const windowStart = new Date(now - this.windowMs);
 
     const entry = await RateLimit.findOneAndUpdate(
-      { clientId, lastReset: { $gte: windowStart } },
-      { $inc: { count: 1 } },
-      { new: true, upsert: true, setDefaultsOnInsert: true } // Add upsert options
+      { clientId },
+      [{
+        $set: {
+          count: {
+            $cond: {
+              if: { $gte: ["$lastReset", windowStart] },
+              then: { $add: ["$count", 1] },
+              else: 1
+            }
+          },
+          lastReset: {
+            $cond: {
+              if: { $gte: ["$lastReset", windowStart] },
+              then: "$lastReset",
+              else: now
+            }
+          }
+        }
+      }],
+      { new: true, upsert: true }
     ).exec();
 
     if (entry.count > this.limit) {
