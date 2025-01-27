@@ -2,7 +2,6 @@
 import "./index.css";
 
 const MatchResultFullCard = ({ match }) => {
-  console.log(match, 'match data')
   const formatTimeOnly = (isoString) => {
     const date = new Date(isoString);
     const options = {
