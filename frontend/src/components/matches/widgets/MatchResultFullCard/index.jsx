@@ -2,7 +2,6 @@
 import "./index.css";
 
 const MatchResultFullCard = ({ match }) => {
-  console.log(match, 'match data')
   const formatTimeOnly = (isoString) => {
     const date = new Date(isoString);
     const options = {
@@ -45,7 +44,6 @@ const MatchResultFullCard = ({ match }) => {
           }}>
             {(() => {
               const getStarCount = (winRate) => {
-                console.log(winRate, 'WinRate')
                 const rate = parseFloat(winRate);
                 if (rate >= 90) return 3;
                 if (rate >= 80) return 2;
@@ -56,7 +54,6 @@ const MatchResultFullCard = ({ match }) => {
               const homeStars = getStarCount(match.homeWinRate);
               const awayStars = getStarCount(match.awayWinRate);
               const totalStars = homeStars + awayStars;
-              console.log(totalStars, 'total Stars')
 
               return totalStars > 0 && Array.from({ length: totalStars }).map((_, i) => (
                 <GoldenStar key={`star-${i}`} />
