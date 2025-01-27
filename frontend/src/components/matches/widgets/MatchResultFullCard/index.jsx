@@ -45,6 +45,7 @@ const MatchResultFullCard = ({ match }) => {
           }}>
             {(() => {
               const getStarCount = (winRate) => {
+                console.log(winRate, 'WinRate')
                 const rate = parseFloat(winRate);
                 if (rate >= 90) return 3;
                 if (rate >= 80) return 2;
