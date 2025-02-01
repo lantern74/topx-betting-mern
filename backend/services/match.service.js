@@ -1,6 +1,7 @@
 const { getHKMatches } = require("../getAPIFixtureId.js");
 const { cachedHandleResult } = require("../data/cached-handleresult");
 const { Match } = require("../models/match.model");
+const { Cache } = require("../models/cache.model");
 const { handleResult } = require("../handleResult.js");
 
 /**

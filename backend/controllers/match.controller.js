@@ -15,7 +15,6 @@ class MatchController {
    */
   static async getMatchData(req, res) {
     try {
-      const Cache = require("../models/cache.model");
       const cache = await Cache.findOne({ key: "matchData" });
       if (cache && cache.data) {
         res.json(cache.data);
