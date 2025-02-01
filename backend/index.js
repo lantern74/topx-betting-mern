@@ -85,23 +85,25 @@ const MatchService = require("./services/match.service");
 const Cache = require("./models/cache.model");
 
 // Update cached match data every 60 seconds
-const updateCache = async () => {
-  try {
-    console.log("Updating cached match data...");
-    const data = await MatchService.getMatchData();
-    if (data.length > 0) {
-      await Cache.findOneAndUpdate(
-        { key: "matchData" },
-        { data, updatedAt: new Date() },
-        { upsert: true, new: true },
-      );
+if (process.env.FETCHER) {
+  const updateCache = async () => {
+    try {
+      console.log("Updating cached match data...");
+      const data = await MatchService.getMatchData();
+      if (data.length > 0) {
+        await Cache.findOneAndUpdate(
+          { key: "matchData" },
+          { data, updatedAt: new Date() },
+          { upsert: true, new: true },
+        );
+      }
+    } catch (err) {
+      console.error("Error updating cached match data:", err);
     }
-  } catch (err) {
-    console.error("Error updating cached match data:", err);
-  }
-};
-updateCache();
-setInterval(updateCache, 60000);
+  };
+  updateCache();
+  setInterval(updateCache, 60000);
+}
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
