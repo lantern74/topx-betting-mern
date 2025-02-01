@@ -9,13 +9,13 @@ const TelemetryService = require("./services/telemetry.service");
 // Function to get scraped HK team names
 async function getHKMatches() {
   // Get latest cached data from database
-  const cachedMatch = await Match.findOne({ 
-    cacheKey: "hkMatches",
-    lastUpdated: { $gt: new Date(Date.now() - 120 * 1000) } // 2 minutes TTL
-  }).sort({ lastUpdated: -1 });
+  const cache = await Cache.findOne({ 
+    key: "hkMatches",
+    updatedAt: { $gt: new Date(Date.now() - 120 * 1000) } // 2 minutes TTL
+  }).sort({ updatedAt: -1 });
 
-  if (cachedMatch) {
-    return cachedMatch.data;
+  if (cache) {
+    return cache.data;
   }
 
   // If no valid cache, return empty array (the periodic updater will populate it)
@@ -168,12 +168,12 @@ async function updateHKMatches() {
     TelemetryService.log("info", "Updated HK matches cache");
 
     // Update cache in database
-    await Match.findOneAndUpdate(
-      { cacheKey: "hkMatches" },
+    await Cache.findOneAndUpdate(
+      { key: "hkMatches" },
       {
         $set: {
           data: matches,
-          lastUpdated: new Date()
+          updatedAt: new Date()
         }
       },
       { upsert: true }
