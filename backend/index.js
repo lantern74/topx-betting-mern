@@ -89,7 +89,7 @@ const updateCache = async () => {
   try {
     console.log("Updating cached match data...");
     const data = await MatchService.getMatchData();
-    if (data) {
+    if (data.length > 0) {
       await Cache.findOneAndUpdate(
         { key: "matchData" },
         { data, updatedAt: new Date() },
