@@ -82,13 +82,18 @@ app.use(async (err, req, res, next) => {
 });
 
 const MatchService = require("./services/match.service");
+const Cache = require("./models/cache.model");
 
 // Update cached match data every 60 seconds
 setInterval(async () => {
   try {
     console.log("Updating cached match data...");
     const data = await MatchService.getMatchData();
-    global.cachedMatchData = data;
+    await Cache.findOneAndUpdate(
+      { key: "matchData" },
+      { data, updatedAt: new Date() },
+      { upsert: true, new: true }
+    );
   } catch (err) {
     console.error("Error updating cached match data:", err);
   }

@@ -15,7 +15,13 @@ class MatchController {
    */
   static async getMatchData(req, res) {
     try {
-      res.json(global.cachedMatchData);
+      const Cache = require("../models/cache.model");
+      const cache = await Cache.findOne({ key: "matchData" });
+      if (cache && cache.data) {
+        res.json(cache.data);
+      } else {
+        res.json([]);
+      }
     } catch (error) {
       console.error("Error fetching match data:", error.message);
       res.status(500).json({ error: "Error fetching match data" });
