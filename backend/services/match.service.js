@@ -89,7 +89,7 @@ class MatchService {
    * @async
    */
   static async getMatchResult(id) {
-    const resultData = await handleResult(id);
+    const resultData = handleResult(id);
     let match = await Match.findOne({ id: id });
 
     if (!match) {
@@ -97,17 +97,24 @@ class MatchService {
       match = new Match({
         id: id,
         time: new Date(), // Placeholder, adjust as needed
-        ...resultData,
+        ...(await resultData),
       });
       await match.save();
     } else {
       // Update existing match data
-      console.log("Updating existing match");
-      Object.assign(match, {
-        ...resultData,
-        time: resultData.time ?? match.time ?? new Date(),
+      new Promise(async (resolve, reject) => {
+        try {
+          console.log("Updating existing match");
+          Object.assign(match, {
+            ...resultData,
+            time: resultData.time ?? match.time ?? new Date(),
+          });
+          await match.save();
+          resolve(resultData);
+        } catch (error) {
+          reject(error);
+        }
       });
-      await match.save();
     }
 
     return resultData;
