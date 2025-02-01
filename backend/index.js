@@ -83,6 +83,7 @@ app.use(async (err, req, res, next) => {
 
 const MatchService = require("./services/match.service");
 const Cache = require("./models/cache.model");
+const { updateHKMatches } = require("./getAPIFixtureId");
 
 // Update cached match data every 60 seconds
 if (process.env.FETCHER) {
@@ -101,8 +102,21 @@ if (process.env.FETCHER) {
       console.error("Error updating cached match data:", err);
     }
   };
+
+  // Update HK matches every 2 minutes
+  const updateHKCache = async () => {
+    try {
+      console.log("Updating HK matches cache...");
+      await updateHKMatches();
+    } catch (err) {
+      console.error("Error updating HK matches cache:", err);
+    }
+  };
+
   updateCache();
+  updateHKCache();
   setInterval(updateCache, 60000);
+  setInterval(updateHKCache, 120000);
 }
 
 app.listen(port, () => {

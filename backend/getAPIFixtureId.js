@@ -3,20 +3,26 @@ const Fuse = require("fuse.js");
 const axios = require("axios");
 const { fetchAllData } = require("./data/api-fixtures");
 
-// Cache for HK matches with 1 minute TTL
-let hkMatchesCache = {
-  data: null,
-  lastUpdated: 0
-};
-const CACHE_TTL = 60 * 1000; // 1 minute
+const { Match } = require("./models/match.model");
 
 // Function to get scraped HK team names
 async function getHKMatches() {
-  // Return cached data if still valid
-  if (hkMatchesCache.data && Date.now() - hkMatchesCache.lastUpdated < CACHE_TTL) {
-    return hkMatchesCache.data;
+  // Get latest cached data from database
+  const cachedMatch = await Match.findOne({ 
+    cacheKey: "hkMatches",
+    lastUpdated: { $gt: new Date(Date.now() - 120 * 1000) } // 2 minutes TTL
+  }).sort({ lastUpdated: -1 });
+
+  if (cachedMatch) {
+    return cachedMatch.data;
   }
 
+  // If no valid cache, return empty array (the periodic updater will populate it)
+  return [];
+}
+
+// Function to fetch and update HK matches
+async function updateHKMatches() {
   const url = "https://info.cld.hkjc.com/graphql/base/";
   const data = {
     "query":
@@ -158,13 +164,19 @@ async function getHKMatches() {
   try {
     const response = await axios.post(url, data);
     const matches = response.data.data.matches;
-    
-    // Update cache
-    hkMatchesCache = {
-      data: matches,
-      lastUpdated: Date.now()
-    };
-    
+
+    // Update cache in database
+    await Match.findOneAndUpdate(
+      { cacheKey: "hkMatches" },
+      {
+        $set: {
+          data: matches,
+          lastUpdated: new Date()
+        }
+      },
+      { upsert: true }
+    );
+
     return matches;
   } catch (error) {
     console.error("Error fetching HK teams:", error.message);
