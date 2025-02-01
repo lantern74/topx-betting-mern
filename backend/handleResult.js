@@ -19,7 +19,7 @@ async function handleResult(id) {
   const hkTeam = matches.find((match) => match.frontEndId === id);
   let homeOdd;
   let awayOdd;
-  if(winRate.homeOdds) {
+  if(winRate?.homeOdds) {
     homeOdd = winRate.homeOdds;
     awayOdd = winRate.awayOdds;
   } else {
@@ -64,8 +64,8 @@ async function handleResult(id) {
     ),
   );
 
-  const homeTeamLogo = teamLogo.homeLogo ? teamLogo.homeLogo : "";
-  const awayTeamLogo = teamLogo.awayLogo ? teamLogo.awayLogo : "";
+  const homeTeamLogo = teamLogo?.homeLogo ? teamLogo?.homeLogo : "";
+  const awayTeamLogo = teamLogo?.awayLogo ? teamLogo?.awayLogo : "";
 
   const matchResult = {
     homeTeamName,

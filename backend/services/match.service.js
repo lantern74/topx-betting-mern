@@ -106,7 +106,7 @@ class MatchService {
         try {
           console.log("Updating existing match");
           Object.assign(match, {
-            ...resultData,
+            ...(await resultData),
             time: resultData.time ?? match.time ?? new Date(),
           });
           await match.save();

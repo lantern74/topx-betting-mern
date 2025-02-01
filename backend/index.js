@@ -31,9 +31,9 @@ connection.once("open", async () => {
   console.log("MongoDB database connection established successfully");
 
   // Create TTL index for cache expiration
-  await mongoose.connection.db.collection('matches').createIndex(
+  await mongoose.connection.db.collection("matches").createIndex(
     { "cachedData.expiresAt": 1 },
-    { expireAfterSeconds: 0 }
+    { expireAfterSeconds: 0 },
   );
 
   // Check if an admin user exists, and create one if not
@@ -49,7 +49,7 @@ connection.once("open", async () => {
     await TelemetryService.log("info", "Default admin user created.");
     console.log("Default admin user created.");
   } else {
-      console.log("Default admin user already exists.");
+    console.log("Default admin user already exists.");
   }
 });
 
@@ -89,15 +89,17 @@ const updateCache = async () => {
   try {
     console.log("Updating cached match data...");
     const data = await MatchService.getMatchData();
-    await Cache.findOneAndUpdate(
-      { key: "matchData" },
-      { data, updatedAt: new Date() },
-      { upsert: true, new: true }
-    );
+    if (data) {
+      await Cache.findOneAndUpdate(
+        { key: "matchData" },
+        { data, updatedAt: new Date() },
+        { upsert: true, new: true },
+      );
+    }
   } catch (err) {
     console.error("Error updating cached match data:", err);
   }
-}
+};
 updateCache();
 setInterval(updateCache, 60000);
 
