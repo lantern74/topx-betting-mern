@@ -19,8 +19,8 @@ async function getLogo(id) {
 
     // Check if response data exists and log it
     if (data.response) {
-      const homeTeamLogo = data.response[0].teams.home.logo;
-      const awayTeamLogo = data.response[0].teams.away.logo;
+      const homeTeamLogo = data.response[0].teams?.home?.logo;
+      const awayTeamLogo = data.response[0].teams?.away?.logo;
       return {
         homeLogo: homeTeamLogo,
         awayLogo: awayTeamLogo,

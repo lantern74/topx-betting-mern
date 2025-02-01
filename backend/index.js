@@ -113,8 +113,8 @@ if (process.env.FETCHER) {
     }
   };
 
-  updateCache();
-  updateHKCache();
+  // updateCache();
+  // updateHKCache();
   console.log("Fetcher mode enabled");
   setInterval(updateCache, 160000);
   setInterval(updateHKCache, 120000);

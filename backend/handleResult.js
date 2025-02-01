@@ -8,7 +8,10 @@ async function handleResult(id) {
     const teamLogo = await getLogo(id);
 
     const matches = await getHKMatches();
+    // console.log("[MATCHES] CACHED MATCHES", matches);
     const hkTeam = matches.find((match) => match.frontEndId === id);
+    console.log("[MATCHES] HK TEAM", hkTeam);
+    // return null;
     let homeOdd;
     let awayOdd;
     if (winRate?.homeOdds) {
@@ -60,8 +63,8 @@ async function handleResult(id) {
         ),
     );
 
-    const homeTeamLogo = teamLogo?.homeLogo ? teamLogo?.homeLogo : "";
-    const awayTeamLogo = teamLogo?.awayLogo ? teamLogo?.awayLogo : "";
+    const homeTeamLogo = teamLogo?.homeLogo ? teamLogo.homeLogo : "";
+    const awayTeamLogo = teamLogo?.awayLogo ? teamLogo.awayLogo : "";
 
     const matchResult = {
       homeTeamName,
@@ -78,6 +81,7 @@ async function handleResult(id) {
       kellyHome,
       kellyAway,
     };
+    console.log("[MATCHES] MATCH RESULT", matchResult);
     console.log(matchResult);
     return matchResult;
   } catch (error) {

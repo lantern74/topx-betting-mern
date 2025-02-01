@@ -26,6 +26,7 @@ async function getPredictions(id) {
       }
     } else {
       console.log("No predictions found.");
+      return null;
     }
   } catch (error) {
     console.error("Error fetching predictions:", error.message);

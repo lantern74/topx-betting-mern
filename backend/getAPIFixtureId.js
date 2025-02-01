@@ -2,9 +2,9 @@ const fs = require("fs");
 const Fuse = require("fuse.js");
 const axios = require("axios");
 const { fetchAllData } = require("./data/api-fixtures");
-const Cache = require("./models/cache.model").Cache;
 
 const { Match } = require("./models/match.model");
+const { Cache } = require("./models/cache.model");
 const TelemetryService = require("./services/telemetry.service");
 
 // Function to get scraped HK team names
@@ -12,7 +12,7 @@ async function getHKMatches() {
   // Get latest cached data from database
   const cache = await Cache.findOne({ 
     key: "hkMatches",
-    updatedAt: { $gt: new Date(Date.now() - 120 * 1000) } // 2 minutes TTL
+    // updatedAt: { $gt: new Date(Date.now() - 120 * 1000) } // 2 minutes TTL
   }).sort({ updatedAt: -1 });
 
   if (cache) {
