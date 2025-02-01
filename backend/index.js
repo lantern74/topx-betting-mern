@@ -85,7 +85,7 @@ const MatchService = require("./services/match.service");
 const Cache = require("./models/cache.model");
 
 // Update cached match data every 60 seconds
-setInterval(async () => {
+const updateCache = async () => {
   try {
     console.log("Updating cached match data...");
     const data = await MatchService.getMatchData();
@@ -97,7 +97,9 @@ setInterval(async () => {
   } catch (err) {
     console.error("Error updating cached match data:", err);
   }
-}, 60000);
+}
+updateCache();
+setInterval(updateCache, 60000);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
