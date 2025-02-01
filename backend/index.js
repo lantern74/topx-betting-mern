@@ -115,9 +115,11 @@ if (process.env.FETCHER) {
 
   updateCache();
   updateHKCache();
-  setInterval(updateCache, 60000);
+  console.log("Fetcher mode enabled");
+  setInterval(updateCache, 160000);
   setInterval(updateHKCache, 120000);
 }
+
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
