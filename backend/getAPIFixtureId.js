@@ -231,4 +231,4 @@ async function processTeams(id) {
   }
 }
 
-module.exports = { processTeams, getHKMatches };
+module.exports = { processTeams, getHKMatches, updateHKMatches };
