@@ -4,6 +4,7 @@ const axios = require("axios");
 const { fetchAllData } = require("./data/api-fixtures");
 
 const { Match } = require("./models/match.model");
+const TelemetryService = require("./services/telemetry.service");
 
 // Function to get scraped HK team names
 async function getHKMatches() {
@@ -164,6 +165,7 @@ async function updateHKMatches() {
   try {
     const response = await axios.post(url, data);
     const matches = response.data.data.matches;
+    TelemetryService.log("info", "Updated HK matches cache");
 
     // Update cache in database
     await Match.findOneAndUpdate(
