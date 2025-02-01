@@ -15,8 +15,7 @@ class MatchController {
    */
   static async getMatchData(req, res) {
     try {
-      const matchData = await MatchService.getMatchData();
-      res.json(matchData);
+      res.json(global.cachedMatchData);
     } catch (error) {
       console.error("Error fetching match data:", error.message);
       res.status(500).json({ error: "Error fetching match data" });

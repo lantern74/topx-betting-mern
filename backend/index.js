@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+
+// Global cache for match data
+global.cachedMatchData = [];
 const adminRoutes = require("./routes/admin.routes");
 const matchRoutes = require("./routes/match.routes");
 const memberRoutes = require("./routes/member.routes");
@@ -77,6 +80,19 @@ app.use(async (err, req, res, next) => {
   console.error("Global Error Handler:", err);
   res.status(500).json({ message: "Internal Server Error" });
 });
+
+const MatchService = require("./services/match.service");
+
+// Update cached match data every 60 seconds
+setInterval(async () => {
+  try {
+    console.log("Updating cached match data...");
+    const data = await MatchService.getMatchData();
+    global.cachedMatchData = data;
+  } catch (err) {
+    console.error("Error updating cached match data:", err);
+  }
+}, 60000);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
