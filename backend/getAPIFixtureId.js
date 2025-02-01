@@ -2,7 +2,7 @@ const fs = require("fs");
 const Fuse = require("fuse.js");
 const axios = require("axios");
 const { fetchAllData } = require("./data/api-fixtures");
-const { Cache } = require("./models/cache.model");
+const Cache = require("./models/cache.model").Cache;
 
 const { Match } = require("./models/match.model");
 const TelemetryService = require("./services/telemetry.service");
