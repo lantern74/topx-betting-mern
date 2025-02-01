@@ -1,4 +1,5 @@
 const MatchService = require("../services/match.service");
+const { Cache } = require("../models/cache.model");
 
 /**
  * @class MatchController
