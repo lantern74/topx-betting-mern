@@ -54,7 +54,7 @@ function App() {
           name="keywords"
           content="Data Science, Analytics, Data, sass, software company"
         />
-        <meta name="description" content="TopX - China Betting Website" />
+        <meta name="description" content="TopX" />
         <meta property="og:site_name" content="TopX" />
         <meta property="og:url" content="https://topxhk.ai/" />
         <meta property="og:type" content="website" />
