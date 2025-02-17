@@ -25,6 +25,7 @@ async function getHKMatches() {
 
 // Function to fetch and update HK matches
 async function updateHKMatches() {
+  console.time("updateHKMatches"); // Start timing 전체 updateHKMatches 함수
   const url = "https://info.cld.hkjc.com/graphql/base/";
   const data = {
     "query":
@@ -164,35 +165,44 @@ async function updateHKMatches() {
   };
 
   try {
+    console.time("axios.post-HKJC-API"); // Start timing API call
     const response = await axios.post(url, data);
+    console.timeEnd("axios.post-HKJC-API"); // End timing API call
     const matches = response.data.data.matches;
     TelemetryService.log("info", "Updated HK matches cache");
 
-    // Update cache in database
+    console.time("Cache.findOneAndUpdate-hkMatches"); // Start timing cache update
     await Cache.findOneAndUpdate(
       { key: "hkMatches" },
       {
         $set: {
-          data: matches,
+           matches,
           updatedAt: new Date()
         }
       },
       { upsert: true }
     );
+    console.timeEnd("Cache.findOneAndUpdate-hkMatches"); // End timing cache update
 
+    console.timeEnd("updateHKMatches"); // End timing 전체 updateHKMatches 함수
     return matches;
   } catch (error) {
     console.error("Error fetching HK teams:", error.message);
+    console.timeEnd("updateHKMatches"); // End timing 전체 updateHKMatches 함수 (error case)
     return [];
   }
 }
 
 // Match teams using Fuse.js
 function matchTeams(apiTeams, hkTeam) {
+  console.time("matchTeams"); // Start timing 전체 matchTeams 함수
   const fuse = new Fuse(apiTeams, { keys: ["team"], threshold: 0.4 });
-  let matchedTeam;
 
+  console.time("fuse.search"); // Start timing fuse.search
   const result = fuse.search(hkTeam[0].team);
+  console.timeEnd("fuse.search"); // End timing fuse.search
+
+  let matchedTeam;
   if (result && result.length > 0) {
     const item = result[0].item; // Get the first match from the search result
     matchedTeam = {
@@ -207,6 +217,7 @@ function matchTeams(apiTeams, hkTeam) {
       fixtureTeam: "Null",
     };
   }
+  console.timeEnd("matchTeams"); // End timing 전체 matchTeams 함수
   return matchedTeam;
 }
 
