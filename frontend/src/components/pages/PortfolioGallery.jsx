@@ -14,13 +14,13 @@ const PortfolioContent = (t) => [
   {
     img: "image2",
     tag: t("動態更新"),
-    link: "https://www.instagram.com/topx_pro",
+    link: "https://www.instagram.com/topxhk_ai/",
     plus: "bi bi-plus",
   },
   {
     img: "image3",
     tag: t("分析紀錄"),
-    link: "https://www.threads.net/@topx_pro",
+    link: "https://www.threads.net/@topxhk_ai",
     plus: "bi bi-plus",
   },
 ];

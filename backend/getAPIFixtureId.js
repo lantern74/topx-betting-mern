@@ -244,5 +244,4 @@ async function processTeams(id) {
     console.error("Error processing teams:", error.message);
   }
 }
-
 module.exports = { processTeams, getHKMatches, updateHKMatches };
