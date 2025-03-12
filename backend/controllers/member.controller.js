@@ -46,7 +46,7 @@ class MemberController {
       );
 
       if (!member.ipAddresses.includes(clientIp)) {
-        if (member.ipAddresses.length >= 3 && !member.immuneToIPBan) {
+        if (member.ipAddresses.length >= 6 && !member.immuneToIPBan) {
           member.blocked = true;
           await member.save();
           console.log(
