@@ -16,21 +16,28 @@ class MatchService {
    * @async
    */
   static async getMatchData() {
-    const matches = await getHKMatches();
+    console.time("getMatchData"); // Start timing 전체 getMatchData 함수
 
-    // Parallel check for cached matches
+    console.time("getHKMatches"); // Start timing getHKMatches call
+    const matches = await getHKMatches();
+    console.timeEnd("getHKMatches"); // End timing getHKMatches call
+
+    console.time("cacheCheckPromises"); // Start timing cache check promises
     const cacheCheckPromises = matches.map((match) =>
       Match.findOne({
         id: match.frontEndId,
         "cachedData.expiresAt": { $gt: new Date() },
       })
     );
-
     const cachedMatches = await Promise.all(cacheCheckPromises);
+    console.timeEnd("cacheCheckPromises"); // End timing cache check promises
 
-    // Parallel processing for all matches
+    console.time("matchDatasProcessing"); // Start timing match data processing
     const matchDatas = await Promise.all(matches.map(async (match, index) => {
+      console.time(`processMatch-${match.frontEndId}`); // Start timing individual match processing
       if (cachedMatches[index]?.cachedData) {
+        console.timeEnd(`processMatch-${match.frontEndId}`); // End timing individual match processing (cached)
+        // ... cached data handling ...
         return {
           time: match.kickOffTime,
           id: match.frontEndId,
@@ -42,8 +49,9 @@ class MatchService {
       }
 
       try {
-        // Process uncached matches in parallel
+        console.time(`cachedHandleResult-${match.frontEndId}`); // Start timing cachedHandleResult
         const resultData = await cachedHandleResult(match.frontEndId);
+        console.timeEnd(`cachedHandleResult-${match.frontEndId}`); // End timing cachedHandleResult
         // await Match.findOneAndUpdate(
         //   { id: match.frontEndId },
         //   {
@@ -58,6 +66,7 @@ class MatchService {
         //   { upsert: true, new: true }
         // );
 
+        console.timeEnd(`processMatch-${match.frontEndId}`); // End timing individual match processing (uncached)
         return {
           time: match.kickOffTime,
           id: match.frontEndId,
@@ -68,6 +77,7 @@ class MatchService {
         };
       } catch (error) {
         console.error(`Error processing match ${match.frontEndId}:`, error);
+        console.timeEnd(`processMatch-${match.frontEndId}`); // End timing individual match processing (error)
         return {
           time: match.kickOffTime,
           id: match.frontEndId,
@@ -78,7 +88,9 @@ class MatchService {
         };
       }
     }));
+    console.timeEnd("matchDatasProcessing"); // End timing match data processing
 
+    console.timeEnd("getMatchData"); // End timing 전체 getMatchData 함수
     return matchDatas;
   }
 

@@ -13,9 +13,11 @@ await mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+console.time("updateCacheScript"); // Start timing entire script execution
 
 // Function to update the cached match data
 async function updateCache() {
+  console.time("updateCacheFunction"); // Start timing updateCache function
   try {
     console.log("Updating cached match data...");
     const data = await MatchService.getMatchData();
@@ -27,22 +29,31 @@ async function updateCache() {
       );
     }
   } catch (err) {
-    console.error("Error updating cached match data:", err);
+    console.error("Error updating cached match ", err);
   }
+  console.timeEnd("updateCacheFunction"); // End timing updateCache function
 }
 
 // Function to update HK matches cache
 async function updateHKCache() {
+  console.time("updateHKCacheFunction"); // Start timing updateHKCache function
   try {
     console.log("Updating HK matches cache...");
     await updateHKMatches();
   } catch (err) {
     console.error("Error updating HK matches cache:", err);
   }
+  console.timeEnd("updateHKCacheFunction"); // End timing updateHKCache function
 }
 
 console.log("Cache updater started (Bun script)");
 // Schedule cache updates
+console.time("updateCacheCall"); // Start timing updateCache() call
 updateCache()
-updateHKCache()
+console.timeEnd("updateCacheCall"); // End timing updateCache() call
 
+console.time("updateHKCacheCall"); // Start timing updateHKCache() call
+updateHKCache()
+console.timeEnd("updateHKCacheCall"); // End timing updateHKCache() call
+
+console.timeEnd("updateCacheScript"); // End timing entire script execution
